@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout}">
+<head>
+  <title>GreenBridge</title>
+</head>
+<body>
+  <section layout:fragment="content">
+    <h1>Modifica credenziali al nostro sito!</h1>
+    <form action="#"  method="post">
+        <label for="email">email</label>
+        <input type="text" id="email">
+        <label for="password">password</label>
+        <input type="password" id="password">
+        <button type="button" onclick="submitForm()">submit!</button>
+    </form>
+    <script th:inline="javascript">
+        function submitForm() {
+            var email = document.getElementById("email").value
+            var password = document.getElementById("password").value
+            let data = {email: email, psw: password}
+
+            $.ajax({
+                type: 'POST',
+                url: '/api/modifica-utente', // Update the URL to match your REST endpoint
+                contentType: 'application/json',
+                data: JSON.stringify(data), //in formato stringa
+                success: function (response) {
+                    // Handle success response
+                    console.log(response);
+                },
+                error: function (error) {
+                    // Handle error response
+                    console.error(error);
+                }
+            });
+        }
+
+    </script>
+  </section>
+</body>
+</html>

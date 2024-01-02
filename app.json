@@ -1,0 +1,7 @@
+{
+    "name": "GreenBridge",
+    "description": "Piattaforma di condivisione esperienze di viaggio",
+    "repository": "https://github.com/VincentMilione/GreenBridge",
+    "logo": "https://repository-images.githubusercontent.com/225654534/d5b86d00-346b-11ea-9585-6be2749e99b6",
+    "keywords": ["java", "spring", "travell"]
+  }
