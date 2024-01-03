@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+    <title>GreenBridge - Registrazione</title>
+</head>
+<body>
+
+
+
+<section layout:fragment="content">
+    <h1>Modifica i tuoi dati</h1>
+    <form action="#" method="post">
+
+        <label>id</label>
+        <input type="text" id="id">
+        <label>nome</label>
+        <input type="text" id="nome">
+        <label>nomeBottega</label>
+        <input type="text" id="nomeBottega">
+        <label>indirizzoBottega</label>
+        <input type="text" id="indirizzoBottega">
+        <label>email</label>
+        <input type="text" id="email">
+        <label>password</label>
+        <input type="text" id="password">
+        <button type="button" onclick="submitForm()">aggiorna </button>
+    </form>
+    <script th:inline="javascript">
+        function submitForm() {
+            var id = document.getElementById("id").value
+            var nome = document.getElementById("nome").value
+            var nomeBottega = document.getElementById("nomeBottega").value
+            var indirizzoBottegal = document.getElementById("indirizzoBottega").value
+            var email = document.getElementById("email").value
+            var password = document.getElementById("password").value
+            let newUser =
+                {
+                    id:id,
+                    nome:nome,
+                    nomeBottega:nomeBottega,
+                    indirizzoBottega:indirizzoBottegal,
+                    email: email,
+                    password: password}
+
+            $.ajax({
+                type: 'POST',
+                url: '/api/modifica-utente', // Update the URL to match your REST endpoint
+                contentType: 'application/json',
+                data: JSON.stringify(newUser), //in formato stringa
+                success: function (response) {
+                    // Handle success response
+
+                    window.location.replace("registrazione-Agricoltore");
+                    console.log(response);
+                },
+                error: function (error) {
+                    // Handle error response
+                    console.error(error);
+                }
+            });
+        }
+
+    </script>
+</section>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+    <title>GreenBridge - Registrazione</title>
+</head>
+<body>
+<section layout:fragment="content">
+    <form action="#" method="post">
+
+
+        <label>nome</label>
+        <input type="text" id="nome">
+        <label>nomeBottega</label>
+        <input type="text" id="nomeBottega">
+        <label>indirizzoBottega</label>
+        <input type="text" id="indirizzoBottega">
+        <label>email</label>
+        <input type="text" id="email">
+        <label>password</label>
+        <input type="text" id="password">
+        <button type="button" onclick="submitForm()">Registrati</button>
+    </form>
+    <script th:inline="javascript">
+        function submitForm() {
+
+            var nome = document.getElementById("nome").value
+            var nomeBottega = document.getElementById("nomeBottega").value
+            var indirizzoBottegal = document.getElementById("indirizzoBottega").value
+            var email = document.getElementById("email").value
+            var password = document.getElementById("password").value
+            let newUser = {
+
+                      nome:nome,
+                      nomeBottega:nomeBottega,
+                      indirizzoBottega:indirizzoBottegal,
+                      email: email,
+                      password: password
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: '/api/RegistrazioneUtente',
+                contentType: 'application/json',
+                data: JSON.stringify(newUser), //in formato stringa
+                success: function (response) {
+                    // Handle success response
+                    console.log(response);
+                    window.location.replace("");
+                },
+                error: function (error) {
+                    // Handle error response
+                    console.error(error);
+                    $("#esito").text("utente già esiste")
+                }
+            });
+        }
+
+    </script>
+</section>
+</body>
+</html>
