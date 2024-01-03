@@ -9,4 +9,7 @@ public class ChatbotController {
     public String showForm(){
         return "/pages/user/form";
     }
+
+    @GetMapping("/")
+    public String showHome(){return "/pages/user/home";}
 }

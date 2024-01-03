@@ -8,9 +8,10 @@
 <section layout:fragment="content">
     <form action="#" method="post">
         <label>Send data to Flask</label>
-        <input type="text" id="data">
+        <label for="data"></label><input type="text" id="data">
         <button type="button" onclick="submitForm()">submit</button>
     </form>
+
     <script th:inline="javascript">
         function submitForm() {
             var form_data = document.getElementById("data").value
