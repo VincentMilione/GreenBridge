@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrati!</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+<p id="esito"></p>
+<form>
+    <input type="email" id="email" required>
+    <input type="password" id="password" required>
+    <button type="button" onclick="submitForm()">Login!</button>
+</form>
+
+<script th:inline="javascript">
+    function submitForm() {
+        let cliente = {
+            email: document.getElementById('email').value,
+            password: document.getElementById('password').value,
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: '/api/loginCliente',
+            contentType: 'application/json',
+            data: JSON.stringify(cliente),
+            success: function (response) {
+                console.log(response)
+                window.location.replace("detail");
+            },
+            error: function (response) {
+                console.log(response)
+                $("#esito").text("Credenziali errate")
+            }
+        });
+    }
+</script>
+</body>
+</html>
