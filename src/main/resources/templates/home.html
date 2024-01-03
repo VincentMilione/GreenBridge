@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Andata</title>
+</head>
+<body>
+    <div th:each="cliente: ${clienti}">
+        <p th:text="${cliente.nome +' '+ cliente.cognome}">
+
+
+        </p>
+    </div>
+
+</body>
+</html>
