@@ -1,0 +1,59 @@
+#loginFormContainer{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    padding: 50px;
+    background: #fff;
+    border-radius: 20px;
+    width: 30%;
+    height: 50%;
+    margin: auto;
+}
+
+#loginFormContainer::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    margin: -5px;
+    border-radius: inherit;
+    background-image: linear-gradient(93.12deg, #0c5e0a 0.52%, #0a9e07 100%);
+
+}
+
+#esito{
+    margin:auto;
+    font-family: "Roboto";
+    font-size: 20px;
+    color: red;
+}
+
+#loginForm{
+    margin: auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column ;
+    width: 50%;
+}
+
+.inputText{
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.inputButton{
+    margin-top: 30px;
+    border-radius: 20px;
+    font-size: 25px;
+    color: white;
+    width: 80%;
+    height: 50px;
+    background-image: linear-gradient(93.12deg, #0c5e0a 0.52%, #0a9e07 100%);
+}
