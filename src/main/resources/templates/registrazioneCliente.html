@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrati!</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+    <p id="esito"></p>
+    <form>
+        <input type="text" id="nome" required>
+        <input type="text" id="cognome" required>
+        <input type="email" id="email" required>
+        <input type="password" id="password" required>
+        <input type="date" id="data" required>
+        <button type="button" onclick="submitForm()">Iscriviti!</button>
+    </form>
+
+    <script th:inline="javascript">
+        function submitForm() {
+            let cliente = {
+                nome: document.getElementById('nome').value,
+                cognome: document.getElementById('cognome').value,
+                email: document.getElementById('email').value,
+                password: document.getElementById('password').value,
+                dataDiNascita: document.getElementById('data').value
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: '/api/saveCliente',
+                contentType: 'application/json',
+                data: JSON.stringify(cliente),
+                success: function (response) {
+                    console.log(response)
+                    window.location.replace("home");
+                },
+                error: function (error) {
+                    console.error(error)
+                    $("#esito").text("Utente gia esistente")
+                }
+            });
+        }
+    </script>
+</body>
+</html>
