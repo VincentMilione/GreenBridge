@@ -27,8 +27,7 @@ public class ClienteController {
     }
 
     @GetMapping("/detail")
-    public String detailClienteView(Model model, HttpSession session){
-        model.addAttribute("cliente", (Cliente)session.getAttribute("cliente"));
+    public String detailClienteView(HttpSession session){
         return "detailCliente";
     }
     @GetMapping("/login")
