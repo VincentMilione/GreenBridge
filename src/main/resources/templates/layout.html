@@ -2,13 +2,30 @@
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
+  <link rel="stylesheet" href="css/headerStyle.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 
-<body class="">
-  <nav class="">
-  <h1>Hello GreenBridge</h1>
-  </nav>
+<body>
+<div id="navBarContainer">
+  <div id="firstLevelNavBar">
+    <img id="menuIcon" onclick="openMenu()"  src="/img/menu.png">
+    <img id="logo" src="/img/logo.png" alt="logo">
+    <input  placeholder="Cerca..." type="text" id="searchBar">
+
+    </input>
+    <a href="#">
+      <img class="imgIcon" src="/img/cart.png" alt="chartIcon">
+    </a>
+    <a href="#">
+      <img class="imgIcon" src="/img/user.png" alt="userIcon">
+    </a>
+  </div>
+  <div id="secondLevelNavBar" style="left: -400px">
+    <a href="#">Catalogo</a>
+    <a href="#">Agricoltori</a>
+  </div>
+</div>
 
   <!--SECTION-->
   <div id="page-content">
@@ -19,5 +36,18 @@
   <!--footer-->
   <footer class="">
   </footer>
+
+  <script>
+    function openMenu(){
+      var button = document.getElementById('secondLevelNavBar')
+      if(button.style.left === '-400px') {
+        button.style.left = '0px'
+        document.getElementById('menuIcon').src = '/img/close.png'
+      }else {
+        button.style.left = '-400px'
+        document.getElementById('menuIcon').src = '/img/menu.png'
+      }
+    }
+  </script>
 </body>
 </html>
