@@ -47,6 +47,6 @@ document.addEventListener('DOMContentLoaded', function () {
             sendMessage();
         }
     });
-
+//dddd
     sendButton.addEventListener('click', sendMessage);
 });
