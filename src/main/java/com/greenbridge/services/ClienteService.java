@@ -8,9 +8,7 @@ import java.util.List;
 
 public interface ClienteService {
     public void saveCliente(Cliente cliente);
-
     public List<Cliente> getAllClienti();
-
     public Cliente getClienteByEmail(String email);
     public boolean clienteExistsByEmail(Cliente cliente);
 }
