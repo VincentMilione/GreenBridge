@@ -1,28 +1,26 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<html lang="en">
 <head>
-    <title>GreenBridge - Registrazione</title>
+    <title>Registrazione</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<section layout:fragment="content">
+
+<div id="loginFormContainer">
     <form action="#" method="post">
-
-
-        <label>nome</label>
-        <input type="text" id="nome">
-        <label>nomeBottega</label>
-        <input type="text" id="nomeBottega">
-        <label>indirizzoBottega</label>
-        <input type="text" id="indirizzoBottega">
-        <label>email</label>
-        <input type="text" id="email">
-        <label>password</label>
-        <input type="text" id="password">
+        <input class="inputext" placeholder="nome" id="nome" required>
+        <input class="inputext" placeholder="nomeBottega" id="nomeBottega" required>
+        <input class="inputext" placeholder="indirizzoBottega" id="indirizzoBottega" required>
+        <input class="inputext" placeholder="Email" id="email" required>
+        <input class="inputext" placeholder="password" id="password" required>
         <button type="button" onclick="submitForm()">Registrati</button>
     </form>
+
+    <p id="esito"></p>
+</div>
     <script th:inline="javascript">
         function submitForm() {
-
             var nome = document.getElementById("nome").value
             var nomeBottega = document.getElementById("nomeBottega").value
             var indirizzoBottegal = document.getElementById("indirizzoBottega").value
@@ -45,7 +43,7 @@
                 success: function (response) {
                     // Handle success response
                     console.log(response);
-                    window.location.replace("");
+                    window.location.replace("registratoConSuccesso");
                 },
                 error: function (error) {
                     // Handle error response
@@ -56,6 +54,6 @@
         }
 
     </script>
-</section>
+
 </body>
 </html>

@@ -18,16 +18,15 @@ public class AgricoltoreService {
     }
 
     public void modifyUser(Agricoltore agricoltore) {
-
         if (!agricoltoreRepository.existsById(agricoltore.getId()))
             throw new RuntimeException("utente non esiste");
         agricoltoreRepository.save(agricoltore);
     }
 
-//    public List<Agricoltore> getAllAgricoltore() {
-//        return agricoltoreRepository.findAll();
-//    }
+
+
+
 //    public void deleteAgricoltoreById(long id) {
-//        this.agricoltoreRepository.deleteById(id);
+//       this.agricoltoreRepository.deleteById(id);
 //    }
 }

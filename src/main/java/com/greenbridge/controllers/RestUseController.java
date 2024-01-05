@@ -21,7 +21,7 @@ public class RestUseController {
 
     @PostMapping("/api/RegistrazioneUtente")
     public ResponseEntity<String> completaRegistrazione(@RequestBody Agricoltore agricoltore) {
-        //TODO: process POST request
+        //TODO: proc
         agricoltoreService.save(agricoltore);
         return ResponseEntity.ok("Tutto ok!");
     }
