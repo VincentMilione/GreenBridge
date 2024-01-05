@@ -26,7 +26,7 @@ public class ClienteController {
         return "home";
     }
 
-    @GetMapping("/detail")
+    @GetMapping("/detailCliente")
     public String detailClienteView(HttpSession session){
         return "detailCliente";
     }

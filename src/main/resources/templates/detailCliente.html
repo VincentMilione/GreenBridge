@@ -6,5 +6,7 @@
 </head>
 <body layout:fragment="content">
     <p th:text="${session.cliente == null} ? 'Null' : ${session.cliente.nome +' '+ session.cliente.cognome} "></p>
+    <a th:if="${session.cliente != null}" th:href="@{/api/logoutCliente}">Logout</a>
+
 </body>
 </html>

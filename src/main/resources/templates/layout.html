@@ -17,7 +17,10 @@
     <a href="#">
       <img class="imgIcon" src="/img/cart.png" alt="chartIcon">
     </a>
-    <a href="#">
+    <a th:if="${session.cliente == null}" th:href="@{/login}">
+      <img class="imgIcon" src="/img/user.png" alt="userIcon">
+    </a>
+    <a th:if="${session.cliente != null}" th:href="@{/detailCliente}">
       <img class="imgIcon" src="/img/user.png" alt="userIcon">
     </a>
   </div>
