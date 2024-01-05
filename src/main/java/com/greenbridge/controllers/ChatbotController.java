@@ -8,11 +8,6 @@ import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class ChatbotController {
-    @GetMapping("/chatbot")
-    public String showForm(){
-        return "/pages/user/form";
-    }
-
     @GetMapping("/")
     public String showHome(Model model, HttpSession session){
         session.setAttribute("cliente", "true");

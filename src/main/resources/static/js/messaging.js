@@ -1,10 +1,12 @@
 document.addEventListener('DOMContentLoaded', function () {
     const chatbot = {
         respondToCommand: function (command) {
+            let bot=this;
             this.sendMessage(command, 'messages__item--operator');
             switch (command) {
                 case '/start':
-                    this.sendMessage('Ecco una lista di agricoltori da noi consigliati:', 'messages__item--visitor');
+                    submitForm("/sendDataToFlask").done(function (){
+                        bot.sendMessage('Ecco una lista di agricoltori da noi consigliati:', 'messages__item--visitor');})
                     break;
                 // Aggiungi altri comandi e risposte qui
                 default:
@@ -23,17 +25,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const input = document.getElementById('input');
     const sendButton = document.getElementById('sendButton');
 
-  /*  input.addEventListener('keydown', function (event) {
-        if (event.key === 'Enter') {
-            const command = input.value.trim();
-            if (command !== '') {
-                chatbot.respondToCommand(command);
-                input.value = '';
-            }
-        }
-    });
-});*/
-
     function sendMessage() {
         const command = input.value.trim();
         if (command !== '') {
@@ -47,6 +38,17 @@ document.addEventListener('DOMContentLoaded', function () {
             sendMessage();
         }
     });
-//dddd
+
     sendButton.addEventListener('click', sendMessage);
 });
+
+function submitForm(url) {
+
+
+    return $.ajax({
+        type: 'POST',
+        url: url, // Update the URL to match your REST endpoint
+        contentType: 'application/json'
+    });
+
+}

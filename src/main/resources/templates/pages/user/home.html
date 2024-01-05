@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="/static/css/chat.css">
 </head>
 <body>
-<!-- sss-->
   <section layout:fragment="content">
       <div class="container">
           <div class="chatbox" th:if="${session['cliente'] eq 'true'}"> <!--th:if da modificare quando sarà integrato il login con th:if="${session['cliente'] ne null}"-->
@@ -46,7 +45,7 @@
 
       <!--th:if da modificare quando sarà integrato il login con th:if="${session['cliente'] ne null}"-->
       <script src="/static/js/chatbot.js" th:if="${session['cliente'] eq 'true'}"></script>
-      <script src="/static/js/chatbotscript.js" defer th:if="${session['cliente'] eq 'true'}"></script>
+      <script src="/static/js/messaging.js" defer th:if="${session['cliente'] eq 'true'}"></script>
       <script th:if="${session['cliente'] eq 'true'}">
           const chatButton = document.querySelector('.chatbox__button');
           const chatContent = document.querySelector('.chatbox__support');
