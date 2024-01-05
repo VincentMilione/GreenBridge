@@ -1,41 +1,52 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  layout:decorate="~{layout}">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>GreenBridge - Registrazione</title>
+    <meta charset="UTF-8">
+    <title>Ricerca Prodotti</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
-  <section layout:fragment="content">
-    <form action="#" method="post">
-        <label>email</label>
-        <input type="text" id="email">
-        <label>password</label>
-        <input type="text" id="password">
-        <button type="button" onclick="submitForm()">submit</button>
-    </form>
-    <script th:inline="javascript">
-      function submitForm() {
-          var email = document.getElementById("email").value
-          var password = document.getElementById("password").value
-          let data = {email: email, psw: password}
 
-          $.ajax({
-              type: 'POST',
-              url: '/api/registrazione', // Update the URL to match your REST endpoint
-              contentType: 'application/json',
-              data: JSON.stringify(data), //in formato stringa
-              success: function (response) {
-                  // Handle success response
-                  console.log(response);
-              },
-              error: function (error) {
-                  // Handle error response
-                  console.error(error);
-              }
-          });
-      }
+<h2>Ricerca Prodotti</h2>
 
-  </script>
-  </section>
+
+    <label for="nome">Nome Prodotto:</label>
+    <input type="text" id="nome" name="nome" />
+    <button id="submit" type="submit">Cerca</button>
+
+
+<h3>Elenco di Prodotti</h3>
+<ul>
+    <li th:each="prodotto : ${risultati_ricerca}">
+        <span th:text="${prodotto.getNome()}"></span>
+        <span th:text="${prodotto.getId()}"></span>
+    </li>
+</ul>
+<script>
+    $(document).ready(function(){
+        $("#submit").click(function(){
+            $("#responseContainer").text("");
+           var nome= $("#nome").val();
+           alert(nome);
+            $.ajax({
+                url: '/risultato?nome=' + encodeURIComponent(nome),
+                type:'GET',
+                success: function(response) {
+
+                        response.forEach(function (oggetto, index) {
+                            let nameProduct = JSON.stringify(response[index].nome);
+                            $('<pre>').text(nameProduct).appendTo('#responseContainer');
+                        });
+
+                },
+                error: function(error) {
+                    alert("Errore durante la chiamata AJAX:", error);
+                }
+            });
+        });
+    });
+</script>
 </body>
+
+<div id="responseContainer"></div>
 </html>
