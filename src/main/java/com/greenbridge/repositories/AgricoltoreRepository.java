@@ -8,6 +8,8 @@ import java.util.Optional;
 
 public interface AgricoltoreRepository extends JpaRepository<Agricoltore, Integer>{
 
+     Agricoltore findByEmail(String email);
+     boolean existsByEmail(String email);
 
 
 }

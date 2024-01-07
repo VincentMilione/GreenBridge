@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+</head>
+<body>
+<form>
+    <p id="esito"></p>
+    <input type="email" id="email" placeholder="email" required>
+    <input type="password" id="password" placeholder="password" required>
+    <button type="button" onclick="submitForm()">Login</button>
+</form>
+
+<script th:inline="javascript">
+    function submitForm() {
+        var data = {
+            email: document.getElementById('email').value,
+            password: document.getElementById('password').value
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: '/api/loginAgricoltore',
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            success: function (response) {
+                console.log(response);
+                window.location.replace("detailAgricoltore");
+            },
+            error: function (response) {
+                console.log(response);
+                $("#esito").text("Credenziali errate");
+            }
+        });
+    }
+</script>
+</body>
+</html>

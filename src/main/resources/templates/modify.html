@@ -1,64 +1,55 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/html">
 <head>
-
     <title>Modifica dati</title>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <link rel="stylesheet" href="css/style.css">
 
 </head>
 <body>
-
-
 <div id="loginFormContainer">
-    <form action="#" method="post">
+    <form>
+        <input type="hidden" th:value="${session.agricoltore.id}" id="id">
         <input class="inputext" placeholder="nome" id="nome" required>
         <input class="inputext" placeholder="nomeBottega" id="nomeBottega" required>
         <input class="inputext" placeholder="indirizzoBottega" id="indirizzoBottega" required>
         <input class="inputext" placeholder="Email" id="email" required>
         <input class="inputext" placeholder="password" id="password" required>
         <button type="button" onclick="submitForm()">aggiorna </button>
-
-
     </form>
-
 </div>
-    <script th:inline="javascript">
-        function submitForm() {
-            var id = document.getElementById("id").value
-            var nome = document.getElementById("nome").value
-            var nomeBottega = document.getElementById("nomeBottega").value
-            var indirizzoBottega = document.getElementById("indirizzoBottega").value
+<script th:inline="javascript">
+    function submitForm() {
+        var id = document.getElementById("id").value;
+        var nome = document.getElementById("nome").value;
+        var nomeBottega = document.getElementById("nomeBottega").value;
+        var indirizzoBottega = document.getElementById("indirizzoBottega").value;
+        var email = document.getElementById("email").value;
+        var password = document.getElementById("password").value;
 
-            var email = document.getElementById("email").value
-            var password = document.getElementById("password").value
-            let newUser =
-                {
-                    id:id,
-                    nome:nome,
-                    nomeBottega:nomeBottega,
-                    indirizzoBottega:indirizzoBottega,
-                    email: email,
-                    password: password}
+        var newUser = {
+            id: id,
+            nome: nome,
+            nomeBottega: nomeBottega,
+            indirizzoBottega: indirizzoBottega,
+            email: email,
+            password: password
+        };
 
-            $.ajax({
-                type: 'POST',
-                url: '/api/modifica-utente', // Update the URL to match your REST endpoint
-                contentType: 'application/json',
-                data: JSON.stringify(newUser), //in formato stringa
-                success: function (response) {
-                    // Handle success response
-                    window.location.replace("registrazione-Agricoltore");
-                    console.log(response);
-                },
-                error: function (error) {
-                    // Handle error response
-                    console.error(error);
-                    $("#esito").text("Utente gia esistente")
-                }
-            });
-        }
-
-    </script>
+        $.ajax({
+            type: 'POST',
+            url: '/api/modify' ,
+            contentType: 'application/json',
+            data: JSON.stringify(newUser),
+            success: function (response) {
+                console.log(response);
+                window.location.replace("modifica");
+            },
+            error: function (error) {
+                console.error(error);
+                $("#esito").text("Utente già esistente");
+            }
+        });
+    }
+</script>
 </body>
 </html>
