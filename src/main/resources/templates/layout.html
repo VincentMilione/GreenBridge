@@ -2,18 +2,44 @@
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
+  <link rel="stylesheet" href="../css/layout.css">
+  <title>Layout page</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
-
+  <script src="https://use.fontawesome.com/releases/v5.12.0/js/all.js"></script>
 </head>
 
-<body class="">
-  <nav class="">
-  <h1>Hello GreenBridge</h1>
+<body class="d-flex flex-column">
+  <nav class="navbar navbar-expand-lg navbar-light extension">
+    <a class="navbar-brand"  href="/">Trawell</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto" th:if="${session.user}">
+        <li th:if="not ${session.user.isAdmin}" class="nav-item my-li"><a class="nav-link" href="#"><span class="fas fa-car"></span>Carsharing</a></li>
+        <li th:if="not ${session.user.isAdmin}" class="nav-item my-li"><a class="nav-link" href="#"><span class="fas fa-suitcase-rolling"></span>Posts</a></li>
+          <li class="nav-item dropdown ">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="Right-aligned menu" aria-expanded="false">My Account</a>
+            <div class="dropdown-menu dropdown-menu-right " aria-labelledby="navbarDropdown">
+                 <a id="plink" th:if="not ${session.user.isAdmin}" class="dropdown-item" href="/group/list-view">My Groups</a>
+                 <a id="plink" th:if="not ${session.user.isAdmin}" class="dropdown-item" href="/itinerary/list-view">My Itineraries</a>
+                  <a id="plink" th:if="not ${session.user.isAdmin}" class="dropdown-item" href="/carsharing/list-view">My Carsharing</a>
+                <a id="plink" th:if=" ${session.isAgency}" class="dropdown-item" href="/agency/home">Agency Ads</a> 
+                <a id="plink" th:if="${session.user.isAdmin}" class="dropdown-item" href="/admin/banUsersLand">Ban a User</a>
+                <a id="plink" th:if="${session.user.isAdmin}" class="dropdown-item" href="/admin/deleteAdsLand">Check and delete Ads</a>
+                <a id="plink" th:if="${session.user.isAdmin}" class="dropdown-item" href="/Complaint/viewComplaint">List of Complaints</a>
+                <a id="plink" th:if="${session.user.isAdmin}" class="dropdown-item" href="/post/listReportedPosts">Reported Posts</a>       
+                <div class="dropdown-divider"></div>  
+                <a id="plink" th:if="not ${session.user.isAdmin}" class="dropdown-item" href="/users/change-user-data">Update Credentials</a>
+                <a id="plink" th:if="${session.user}" class="dropdown-item" href="/users/logout"><span class="fas fa-sign-out-alt"></span>Log out</a>
+              </div>
+          </li>
+    </ul>
+    </div>
   </nav>
 
   <!--SECTION-->
@@ -23,7 +49,16 @@
     </section>
   </div>
   <!--footer-->
-  <footer class="">
+  <footer id="sticky-footer" class="py-2 text-white-50 extension">
+    <div class="container text-center">
+      <img src="../image/logo.png" id="logo"><br>
+      <a href="/Complaint/viewComplaint">Contact us</a><br>
+      <small>Copyright &copy; TraWell</small><br><br>
+      
+      <a href="https://www.iubenda.com/privacy-policy/33689223" class="iubenda-black iubenda-embed" title="Privacy Policy ">Privacy Policy</a><script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
+    </div>
   </footer>
+ 
 </body>
+
 </html>
