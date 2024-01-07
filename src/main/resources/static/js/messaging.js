@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     submitForm("/sendDataToFlask").done(function (){
                         bot.sendMessage('Ecco una lista di agricoltori da noi consigliati:', 'messages__item--visitor');})
                     break;
-                // Aggiungi altri comandi e risposte qui
                 default:
                     this.sendMessage('Comando non riconosciuto', 'messages__item--visitor');
             }
@@ -47,7 +46,7 @@ function submitForm(url) {
 
     return $.ajax({
         type: 'POST',
-        url: url, // Update the URL to match your REST endpoint
+        url: url,
         contentType: 'application/json'
     });
 
