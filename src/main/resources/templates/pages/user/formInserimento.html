@@ -1,43 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GreenBridge</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/form.css}" />
 </head>
 <body>
 
-    <h1>Inserimento prodotto</h1>
-    <form th:action="@{/addProdotto}" method="post" th:object="${prodotto}" enctype="multipart/form-data">
-        <label for="nome">Nome:</label>
-        <input type="text" id="nome" th:field="*{nome}" required><br>
+<h1>Inserimento prodotto</h1>
+<form th:action="@{/addProdotto}" method="post" th:object="${prodotto}" enctype="multipart/form-data">
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" th:field="*{nome}" required>
 
-        <label for="origine">Origine:</label>
-        <input type="text" id="origine" th:field="*{origine}" required><br>
+    <label for="origine">Origine:</label>
+    <input type="text" id="origine" th:field="*{origine}" required>
 
-        <label for="immagineFile">Immagine:</label>
-        <input type="file" id="immagineFile" th:field="*{immagineFile}" accept="image/*" required><br>
+    <label for="immagineFile">Immagine:</label>
+    <input type="file" id="immagineFile" th:field="*{immagineFile}" accept="image/*" required>
 
-        <label for="formatoVendita">Formato Vendita:</label>
-        <input type="number" id="formatoVendita" th:field="*{formatoVendita}" required><br>
+    <label for="formatoVendita">Formato Vendita:</label>
+    <input type="text" id="formatoVendita" th:field="*{formatoVendita}" required pattern="[0-9]+([,.][0-9]+)?">
 
-        <label for="prezzoKg">Prezzo al Kg:</label>
-        <input type="number" id="prezzoKg" th:field="*{prezzoKg}" required><br>
+    <label for="prezzoKg">Prezzo al Kg:</label>
+    <input type="text" id="prezzoKg" th:field="*{prezzoKg}" required pattern="[0-9]+([,.][0-9]+)?">
 
-        <label for="prezzoVendita">Prezzo di vendita:</label>
-        <input type="number" id="prezzoVendita" th:field="*{prezzoVendita}" required><br>
+    <label for="prezzoVendita">Prezzo di vendita:</label>
+    <input type="text" id="prezzoVendita" th:field="*{prezzoVendita}" required pattern="[0-9]+([,.][0-9]+)?">
 
-        <label for="quantitaDisp">Quantità Disponibile:</label>
-        <input type="number" id="quantitaDisp" th:field="*{quantitaDisp}" required><br>
+    <label for="quantitaDisp">Quantità Disponibile:</label>
+    <input type="text" id="quantitaDisp" th:field="*{quantitaDisp}"  required pattern="[0-9]+([,.][0-9]+)?">
 
-        <label for="lotto">Rintracciabilità:</label>
-        <input type="number" id="lotto" th:field="*{lotto}" required><br>
+    <label for="lotto">Rintracciabilità:</label>
+    <input type="number" id="lotto" th:field="*{lotto}"  required>
 
-        <label for="descrizione">Descrizione:</label>
-        <input type="text" id="descrizione" th:field="*{descrizione}" required><br>
+    <label for="descrizione">Descrizione:</label>
+    <input type="text" id="descrizione" th:field="*{descrizione}" required>
 
-        <button type="submit">Salva</button>
-    </form>
-
-
+    <button type="submit">Salva</button>
+</form>
 
 </body>
 </html>

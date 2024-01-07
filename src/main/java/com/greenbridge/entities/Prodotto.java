@@ -37,8 +37,6 @@ public class Prodotto {
 
     public void setImmagine(byte[] immagine) {
         this.immagine = immagine;
-
-        // Converti l'immagine in formato base64 e assegna al campo immagineBase64
         if (immagine != null) {
             this.immagineBase64 = Base64.getEncoder().encodeToString(immagine);
         }
@@ -48,7 +46,6 @@ public class Prodotto {
     public void setImmagineBase64(String immagineBase64) {
         this.immagineBase64 = immagineBase64;
 
-        // Converti l'immagine base64 in un array di byte e assegna al campo immagine
         if (immagineBase64 != null) {
             this.immagine = Base64.getDecoder().decode(immagineBase64);
         }
