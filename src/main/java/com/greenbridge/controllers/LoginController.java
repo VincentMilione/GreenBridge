@@ -30,13 +30,6 @@ public class LoginController {
     @GetMapping("/logoutCliente")
     public RedirectView logoutCliente(HttpSession session){
         session.removeAttribute("cliente");
-        /*
-        Carrello carrello = session.getAttribute("carrello");
-        if(carrello != null){
-            session.removeAttribute("carrello");
-            clienteService.saveCarrello(carrello);
-        }
-        */
         return new RedirectView("/home");
     }
 
