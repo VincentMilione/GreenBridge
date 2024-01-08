@@ -3,19 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Registrati!</title>
+    <link rel="stylesheet" href="/css/formStyle.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
-    <p id="esito"></p>
-    <form>
-        <input type="text" id="nome" required>
-        <input type="text" id="cognome" required>
-        <input type="email" id="email" required>
-        <input type="password" id="password" required>
-        <input type="date" id="data" required>
-        <button type="button" onclick="submitForm()">Iscriviti!</button>
-    </form>
-
+    <div id="loginFormContainer">
+        <p id="esito"></p>
+        <form id="loginForm">
+            <input class="inputText" placeholder="Nome" type="text" id="nome" required>
+            <input class="inputText" placeholder="Cognome" type="text" id="cognome" required>
+            <input class="inputText" placeholder="Email" type="email" id="email" required>
+            <input class="inputText" placeholder="Password" type="password" id="password" required>
+            <input class="inputText" type="date" id="data" required>
+            <button class="inputButton" type="button" onclick="submitForm()">Registrati</button>
+        </form>
+    </div>
     <script th:inline="javascript">
         function submitForm() {
             let cliente = {

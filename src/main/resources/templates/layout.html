@@ -3,6 +3,7 @@
 
 <head>
   <link rel="stylesheet" type="text/css" href="/css/footerStyle.css">
+  <link rel="stylesheet" href="css/headerStyle.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -11,10 +12,33 @@
     crossorigin="anonymous"></script>
   <title>Layout page</title>
 </head>
-<body class="">
+
+<body>
+<div id="navBarContainer">
+  <div id="firstLevelNavBar">
+    <img id="menuIcon" onclick="openMenu()"  src="/img/menu.png">
+    <img id="logo" src="/img/logo.png" alt="logo">
+    <input  placeholder="Cerca..." type="text" id="searchBar">
+
+    </input>
+    <a href="#">
+      <img class="imgIcon" src="/img/cart.png" alt="chartIcon">
+    </a>
+    <a th:if="${session.cliente == null}" th:href="@{/login}">
+      <img class="imgIcon" src="/img/user.png" alt="userIcon">
+    </a>
+    <a th:if="${session.cliente != null}" th:href="@{/detailCliente}">
+      <img class="imgIcon" src="/img/user.png" alt="userIcon">
+    </a>
+  </div>
+  <div id="secondLevelNavBar" style="left: -400px">
+    <a href="#">Catalogo</a>
+    <a href="#">Agricoltori</a>
+  </div>
+</div>
 
   <!--SECTION-->
-  <div>
+  <div id="page-content">
     <section layout:fragment="content" >
 
     </section>
@@ -40,5 +64,18 @@
         </div>
       </div>
   </footer>
+
+  <script>
+    function openMenu(){
+      var button = document.getElementById('secondLevelNavBar')
+      if(button.style.left === '-400px') {
+        button.style.left = '0px'
+        document.getElementById('menuIcon').src = '/img/close.png'
+      }else {
+        button.style.left = '-400px'
+        document.getElementById('menuIcon').src = '/img/menu.png'
+      }
+    }
+  </script>
 </body>
 </html>
