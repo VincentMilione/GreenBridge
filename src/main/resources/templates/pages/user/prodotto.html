@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+
+<<html xmlns:th="http://www.thymeleaf.org">>
+<head>
+    <meta charset="UTF-8">
+    <title>Pagina Prodotto</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+<h1>Dettagli del Prodotto</h1>
+<p hidden id="id" th:text=" ${prodotto.getIdProdotto()}"></p>
+<p th:text="'Nome :' + ${prodotto.getNome()}"></p>
+<p th:text="'Descrizione :' + ${prodotto.getDescrizione()}"></p>
+<p th:text="'Quantita :' + ${prodotto.getQuantitaDisp()}"></p>
+<p th:text="'Prezzo :' + ${prodotto.getPrezzoVendita()}"></p>
+
+<button id="sottrai"> - </button>
+<p id="quant" th:name="${prodotto.getQuantitaDisp()}" >1</p>
+<button id="somma" > + </button>
+
+<button id="add" type="submit">Aggiungi al carrello</button>
+
+</body>
+</html>

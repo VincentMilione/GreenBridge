@@ -17,13 +17,8 @@ public class ProdottoService {
             return prodottoRepository.findByNomeContainingIgnoreCase(Nome);
     }
 
-    public Prodotto getById(Long id){
-        Optional<Prodotto> prodotto = prodottoRepository.findById(id);
-        if(prodotto.isEmpty()){
-            return null;
-        }else{
-            return prodotto.get();
-        }
+    public Prodotto getProdottoById(int idProdotto){
+        return prodottoRepository.getProdottoByIdProdotto(idProdotto);
     }
 
 }

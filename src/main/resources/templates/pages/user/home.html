@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Ricerca Prodotti</title>
+    <link rel="stylesheet" type="text/css" href="css/ricercaProdotto.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
@@ -15,27 +16,37 @@
     <button id="submit" type="submit">Cerca</button>
 
 
-<h3>Elenco di Prodotti</h3>
-<ul>
-    <li th:each="prodotto : ${risultati_ricerca}">
-        <span th:text="${prodotto.getNome()}"></span>
-        <span th:text="${prodotto.getId()}"></span>
-    </li>
-</ul>
+<h3>Risultati ricerca</h3>
+
 <script>
     $(document).ready(function(){
         $("#submit").click(function(){
             $("#responseContainer").text("");
            var nome= $("#nome").val();
-           alert(nome);
+           //alert(nome);
             $.ajax({
                 url: '/risultato?nome=' + encodeURIComponent(nome),
                 type:'GET',
                 success: function(response) {
 
                         response.forEach(function (oggetto, index) {
-                            let nameProduct = JSON.stringify(response[index].nome);
-                            $('<pre>').text(nameProduct).appendTo('#responseContainer');
+                            let nomeProdotto = JSON.stringify(response[index].nome);
+
+                            let idProdotto = response[index].idProdotto;
+                            let descrizioneProdotto = response[index].descrizione;
+                            let prezzoProdotto = response[index].prezzoVendita;
+
+                            let productHtml = `
+                            <div class="product">
+                                <img src="/immagine/${response[index].idProdotto}" alt="${nomeProdotto}">
+                                <div class="product-title">${nomeProdotto}</div>
+                                <div class="product-description">${descrizioneProdotto}</div>
+                                <div class="product-price">Prezzo: ${prezzoProdotto} €</div>
+                                <a href="/prodotto/${response[index].idProdotto}" class="product-link">Dettagli</a>
+                            </div>
+                        `;
+
+                            $('#responseContainer').append(productHtml);
                         });
 
                 },
