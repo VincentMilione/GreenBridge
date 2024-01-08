@@ -18,8 +18,8 @@ public class ProdottoService {
     public List<Prodotto> getAllProdotti(int idAgricoltore) {
         return prodottoRepository.findAllByIdAgricoltoreAndAcquistabileTrue(idAgricoltore);
     }
-    public Prodotto getProdottoById(int idProdotto){
-        return prodottoRepository.getProdottoByIdProdotto(idProdotto);
+    public Prodotto getProdottoById(int id){
+        return prodottoRepository.getProdottoById(id);
     }
 
     public void saveAndFlushProdotto(Prodotto prodotto) {

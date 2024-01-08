@@ -19,10 +19,10 @@
         <img th:if="${prodotto.immagineBase64}" th:src="'data:image/png;base64,' + ${prodotto.immagineBase64}" alt="Immagine" class="product-image"/>
         <p th:text="${prodotto.descrizione}"></p>
         <p>Prezzo: €<span th:text="${prodotto.prezzoVendita}"></span></p>
-        <a th:href="@{/formModificaProdotto/{id}(id=${prodotto.idProdotto})}">
+        <a th:href="@{/formModificaProdotto/{id}(id=${prodotto.id})}">
             <button type="button">Modifica</button>
         </a>
-        <a th:href="@{/cancellaProdotto/{id}(id=${prodotto.idProdotto})}"
+        <a th:href="@{/cancellaProdotto/{id}(id=${prodotto.id})}"
            onclick="return confermaCancellazione()">
             <button type="button">Cancella</button>
         </a>

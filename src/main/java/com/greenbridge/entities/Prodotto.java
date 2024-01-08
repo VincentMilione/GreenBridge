@@ -12,7 +12,7 @@ import java.util.Base64;
 @Entity
 public class Prodotto {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idProdotto;
+    private int id;
     private String nome;
     private String origine;
 

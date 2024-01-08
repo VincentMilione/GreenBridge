@@ -9,7 +9,7 @@
 <h1>Modifica prodotto</h1>
 <form th:action="@{/modProdotto}" th:method="post" th:object="${prodottoMod}" enctype="multipart/form-data">
 
-    <input type="hidden" th:field="*{idProdotto}">
+    <input type="hidden" th:field="*{id}">
 
     <label for="nome">Nome:</label>
     <input type="text" id="nome" th:field="*{nome}" required><br>
