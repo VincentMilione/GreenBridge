@@ -2,7 +2,7 @@ package com.greenbridge.services;
 
 import com.greenbridge.entities.Agricoltore;
 import com.greenbridge.repositories.AgricoltoreRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,8 +10,11 @@ import java.util.Optional;
 
 @Service
 public class AgricoltoreServiceImpl implements AgricoltoreService {
-    @Autowired
-    AgricoltoreRepository agricoltoreRepository;
+
+    private final AgricoltoreRepository agricoltoreRepository;
+    public AgricoltoreServiceImpl(AgricoltoreRepository agricoltoreRepository) {
+        this.agricoltoreRepository = agricoltoreRepository;
+    }
 
     @Override
     public List<Agricoltore> getAgricoltori() {
@@ -20,9 +23,9 @@ public class AgricoltoreServiceImpl implements AgricoltoreService {
 
     @Override
     public Agricoltore saveAgricoltore(Agricoltore agricoltore) {
-        if(agricoltoreRepository.existsById(agricoltore.getId()))
+        if (agricoltoreRepository.existsById(agricoltore.getId()))
             throw new RuntimeException("utente gia esiste");
-     return   agricoltoreRepository.save(agricoltore);
+        return agricoltoreRepository.save(agricoltore);
     }
 
     @Override
@@ -35,32 +38,16 @@ public class AgricoltoreServiceImpl implements AgricoltoreService {
     @Override
     public Agricoltore getSingleAgricoltore(int id) {
         Optional<Agricoltore> agricoltoreOptional = agricoltoreRepository.findById(id);
-        if (agricoltoreOptional.isPresent()) {
-            return agricoltoreOptional.get();
-        } else {
-            // Se l'agricoltore non è presente, restituisci null
-            return null;
-        }
+        // Se l'agricoltore non è presente, restituisci null
+        return agricoltoreOptional.orElse(null);
     }
-
-    @Override
-    public void deleteAgricoltore(int id) {
-        this.agricoltoreRepository.deleteById(id);
-
-    }
-
     @Override
     public Agricoltore getAgricoltoreByEmail(String email) {
         return this.agricoltoreRepository.findByEmail(email);
     }
 
-    @Override
-    public Boolean AgricoltoreExistsByEmail(Agricoltore agricoltore) {
-        return agricoltoreRepository.existsByEmail(agricoltore.getEmail());
-    }
+
 }
-
-
 
 
 

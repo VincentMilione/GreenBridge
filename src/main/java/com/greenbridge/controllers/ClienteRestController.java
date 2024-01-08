@@ -1,5 +1,4 @@
 package com.greenbridge.controllers;
-
 import com.greenbridge.entities.Cliente;
 import com.greenbridge.services.ClienteServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +9,8 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api")
 public class ClienteRestController {
-
     @Autowired
     ClienteServiceImpl clienteService;
-
     @PostMapping("/saveCliente")
     public ResponseEntity<String> saveCliente(@RequestBody Cliente cliente){
         if (clienteService.clienteExistsByEmail(cliente))
