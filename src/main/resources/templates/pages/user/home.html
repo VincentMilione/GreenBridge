@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout}">
+<head>
+  <title>GreenBridge - Home</title>
+    <link rel="stylesheet" href="/static/css/chatbot.css">
+    <link rel="stylesheet" href="/static/css/chat.css">
+</head>
+<body>
+  <section layout:fragment="content">
+      <!--Assicurarsi che nella sessione sia presente l'attributo cliente per poter utilizzare il chatbot-->
+      <div class="chatbox" th:if="${session['cliente'] ne null}" th:include="pages/user/fragments/chatbot-fragment"></div>
+  </section>
+</body>
+</html>
