@@ -23,8 +23,8 @@ public class LoginController {
             @RequestBody Cliente cliente,
             HttpSession session) {
         Cliente c = clienteService.getClienteByEmail(cliente.getEmail());
-        if (c != null &&
-            cliente.getPassword().compareTo(c.getPassword()) == 0) {
+        if (c != null && cliente.getPassword()
+                .compareTo(c.getPassword()) == 0) {
             session.setAttribute("cliente", c);
             return new ResponseEntity<>("ok",HttpStatus.OK);
         }
