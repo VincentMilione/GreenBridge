@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Dettagli</title>
+</head>
+<body layout:fragment="content">
+    <p th:text="${session.cliente == null} ? 'Null' : ${session.cliente.nome +' '+ session.cliente.cognome} "></p>
+    <a th:if="${session.cliente != null}" th:href="@{/api/logoutCliente}">Logout</a>
+
+</body>
+</html>
