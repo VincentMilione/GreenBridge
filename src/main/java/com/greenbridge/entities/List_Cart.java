@@ -3,9 +3,9 @@ package com.greenbridge.entities;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
+
 @Setter
 @Getter
 
@@ -51,7 +51,7 @@ public float[] delete(Integer prodotto_id){
 
     while (iterator.hasNext()) {
         CarrelloCliente carrelloCliente = iterator.next();
-        if (carrelloCliente.getProdotto().getIdProdotto()==prodotto_id) {
+        if (carrelloCliente.getProdotto().getIdProdotto() == prodotto_id) {
             iterator.remove();
         }
     }
@@ -74,12 +74,11 @@ public float[] delete(Integer prodotto_id){
                     }
                 } else if(edit.equals("sott")) {
                     quantita = itemCart.getKg_richiesti() - 1;
-                    if(quantita>=1)
+                    if (quantita >= 1)
                         itemCart.setKg_richiesti(quantita);
-                }else{
-                    quantita++;
+                    else
+                        quantita++;
                 }
-
             }
 
         }
@@ -89,6 +88,14 @@ public float[] delete(Integer prodotto_id){
 
     }
 
+    public Map<String, List<CarrelloCliente>> getProdottiOrdinati(){
+        List <CarrelloCliente> list = list_cart;
+        list.sort(Comparator.comparing(p -> p.getProdotto().getAgricoltore().getNome()));
+
+        Map<String, List<CarrelloCliente>> prodottiByAgricoltore =
+                list.stream().collect(Collectors.groupingBy(p -> p.getProdotto().getAgricoltore().getNome()));
+        return prodottiByAgricoltore;
+    }
 
     @Override
     public String toString() {

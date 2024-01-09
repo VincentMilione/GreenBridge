@@ -14,10 +14,9 @@ public class Cliente {
 
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
-    private Integer id_cliente;
+    private Integer id;
     private String nome;
     private String cognome;
-    @Column(name="pwd")
     private String password;
     private Date dataDiNascita;
     private String email;

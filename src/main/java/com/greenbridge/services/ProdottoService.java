@@ -14,10 +14,10 @@ public class ProdottoService {
     private ProdottoRepository prodottoRepository;
 
 
-
+    /*
     public List<Prodotto> getAllProdotti(int idAgricoltore) {
         return prodottoRepository.findAllByIdAgricoltoreAndAcquistabileTrue(idAgricoltore);
-    }
+    }*/
     public Prodotto getProdottoById(int idProdotto){
         return prodottoRepository.getProdottoByIdProdotto(idProdotto);
     }

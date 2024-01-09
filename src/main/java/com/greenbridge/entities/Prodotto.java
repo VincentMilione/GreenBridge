@@ -35,7 +35,9 @@ public class Prodotto {
     private int lotto;
     private String descrizione;
     private boolean acquistabile;
-    private int idAgricoltore;
+    @ManyToOne
+    @JoinColumn(name = "id_agricoltore")
+    private Agricoltore agricoltore;
 
 
     @Override
@@ -54,7 +56,7 @@ public class Prodotto {
                 ", lotto=" + lotto +
                 ", descrizione='" + descrizione + '\'' +
                 ", acquistabile=" + acquistabile +
-                ", idAgricoltore=" + idAgricoltore +
+                ", agricoltore=" + agricoltore.getNome() +
                 '}';
     }
 

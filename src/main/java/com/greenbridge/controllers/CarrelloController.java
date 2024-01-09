@@ -1,5 +1,6 @@
 package com.greenbridge.controllers;
 
+import com.greenbridge.entities.CarrelloCliente;
 import com.greenbridge.entities.List_Cart;
 import com.greenbridge.entities.Prodotto;
 import com.greenbridge.services.CarrelloClienteService;
@@ -10,6 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
+
+import java.util.*;
+import java.util.stream.Collectors;
+
+import static com.fasterxml.jackson.databind.type.LogicalType.Collection;
 
 
 @Controller
@@ -36,8 +42,8 @@ public class CarrelloController {
         //@ResponseBody
     String getCarrello(Model model, HttpSession session){
         List_Cart list_cart = (List_Cart)session.getAttribute("list_cart");
-        System.out.println(list_cart.getList_cart());
-        model.addAttribute("cart",list_cart.getList_cart());
+
+        model.addAttribute("cart",list_cart.getProdottiOrdinati());
         model.addAttribute("totale", list_cart.getTotale());
         return "/carrello";
 
