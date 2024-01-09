@@ -1,10 +1,7 @@
 package com.greenbridge.entities;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.sql.Date;
@@ -13,17 +10,31 @@ import java.sql.Date;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 public class Cliente {
 
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
-    private Integer id;
+    private Integer id_cliente;
     private String nome;
     private String cognome;
-    private String email;
+    @Column(name="pwd")
     private String password;
     private Date dataDiNascita;
+    private String email;
+
+    @Override
+    public String toString() {
+        return "Cliente{" +
+
+                ", nome='" + nome + '\'' +
+                ", cognome='" + cognome + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", dataDiNascita=" + dataDiNascita +
+                '}';
+    }
+
+
 
     public Cliente(String nome, String cognome, String email, String password, Date dataDiNascita) {
         this.nome = nome;

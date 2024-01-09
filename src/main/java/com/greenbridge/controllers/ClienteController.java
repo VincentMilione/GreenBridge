@@ -1,6 +1,5 @@
 package com.greenbridge.controllers;
 
-import com.greenbridge.entities.Cliente;
 import com.greenbridge.services.ClienteServiceImpl;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +10,11 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class ClienteController {
 
+
+
     @Autowired
-    ClienteServiceImpl clienteService;
+    private ClienteServiceImpl clienteService;
+
 
     @GetMapping("/register")
     public String registraCliente(Model model){
@@ -34,4 +36,6 @@ public class ClienteController {
     public String loginClienteView(Model model){
         return "loginCliente";
     }
+
+
 }

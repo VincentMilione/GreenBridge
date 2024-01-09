@@ -1,7 +1,9 @@
 package com.greenbridge.controllers;
 
+import com.greenbridge.entities.CarrelloCliente;
 import com.greenbridge.entities.Cliente;
-import com.greenbridge.services.ClienteService;
+import com.greenbridge.entities.List_Cart;
+import com.greenbridge.services.CarrelloClienteService;
 import com.greenbridge.services.ClienteServiceImpl;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,18 +12,30 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @RequestMapping("/api")
 public class LoginController {
 
     @Autowired
     ClienteServiceImpl clienteService;
+    @Autowired
+    private CarrelloClienteService carrelloClienteService;
 
     @PostMapping("/loginCliente")
     public ResponseEntity<String> saveCliente(@RequestBody Cliente cliente, HttpSession session){
         Cliente c = clienteService.getClienteByEmail(cliente.getEmail());
+        System.out.println("sto comparando " + c.getPassword() + "e" + cliente.getPassword());
         if (c != null && cliente.getPassword().compareTo(c.getPassword()) == 0) {
             session.setAttribute("cliente", c);
+            List<CarrelloCliente> lista = carrelloClienteService.getByClientId(c);
+            if(lista==null){
+                lista= new ArrayList<CarrelloCliente>();
+            }
+            List_Cart list_cart = new List_Cart(c,lista);
+            session.setAttribute("list_cart", list_cart);
             return new ResponseEntity<>("ok",HttpStatus.OK);
         }
         return new ResponseEntity<>("notok", HttpStatus.FORBIDDEN);
@@ -30,13 +44,13 @@ public class LoginController {
     @GetMapping("/logoutCliente")
     public RedirectView logoutCliente(HttpSession session){
         session.removeAttribute("cliente");
-        /*
-        Carrello carrello = session.getAttribute("carrello");
-        if(carrello != null){
-            session.removeAttribute("carrello");
-            clienteService.saveCarrello(carrello);
+        List_Cart list_cart =(List_Cart)session.getAttribute("list_cart");
+        for (CarrelloCliente itemCart : list_cart.getList_cart()) {
+            System.out.println(itemCart);
+            carrelloClienteService.save(itemCart);
         }
-        */
+        session.removeAttribute("list_cart");
+
         return new RedirectView("/home");
     }
 

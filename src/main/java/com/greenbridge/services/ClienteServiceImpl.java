@@ -19,7 +19,7 @@ public class ClienteServiceImpl {
     }
 
     public List<Cliente> getAllClienti() {
-        return clienteRepository.findAll(Sort.by("id"));
+        return clienteRepository.findAll();
     }
 
     public Cliente getClienteByEmail(String email){
@@ -29,4 +29,6 @@ public class ClienteServiceImpl {
     public boolean clienteExistsByEmail(Cliente cliente) {
         return clienteRepository.existsByEmail(cliente.getEmail());
     }
+
+    public Cliente getClienteById(int id) {return clienteRepository.findById(id).get();}
 }

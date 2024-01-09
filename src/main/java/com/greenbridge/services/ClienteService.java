@@ -11,4 +11,6 @@ public interface ClienteService {
     public List<Cliente> getAllClienti();
     public Cliente getClienteByEmail(String email);
     public boolean clienteExistsByEmail(Cliente cliente);
+
+    public Cliente getClienteById(int id);
 }

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Carrello</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link rel="stylesheet" href="/css/carrelloStyle.css">
+</head>
+<body>
+    <div class="titolo"><h2> Carrello</h2></div>
+    <div class="container">
+            <div class="item"> <h3>Nome Prodotto</h3> </div>
+            <div class="item"> <h3>Quantita</h3> </div>
+        <div class="item"> <h3>Prezzo</h3> </div>
+            <div class="item"> <h3>Rimuovi</h3> </div>
+        <div class="item"> <h3>Checkout</h3> </div>
+    </div>
+    <div th:each="cart : ${cart}">
+        <div th:class="${cart.getProdotto().getIdProdotto()} + ' container'">
+            <div class="item" th:text="${cart.getProdotto().getNome()} "></div>
+            <div class="item container-quant">
+                <div class="item-quant"><button class="item edit-button" th:onclick="'edit(' + ${cart.getProdotto().getIdProdotto()} + ', \'sott\')'"> - </button></div>
+                <div class="item-quant"><p class="item product-quantity" th:id="${cart.getProdotto().getIdProdotto()}" th:text="${cart.getKg_richiesti()}"></p></div>
+                <div class="item-quant"><button class="item edit-button" th:onclick="'edit(' + ${cart.getProdotto().getIdProdotto()} + ', \'add\')'"> + </button></div>
+            </div>
+            <div class="item" th:text="${cart.getProdotto().getPrezzoKg()} + '$' "></div>
+            <div class="item container-quant">
+                <div class="item-quant"> <button  th:onclick="'edit(' + ${cart.getProdotto().getIdProdotto()} + ', \'delete\')'"> Rimuovi </button></div>
+                <div class="item-quant">
+                    <form action="/checkout" method="post">
+                        <input type="number" name="id" th:value="${cart.getProdotto().getIdProdotto()}" hidden>
+                        <button class="item edit-button" type="submit"> CHECKOUT</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="item"><h3 class="totale" th:text="'TOTALE:'+ ${totale} +'$'" ></h3></div>
+        <div class="item">
+            <form action="/checkout" method="post">
+                <input type="number" name="id" value="0" hidden>
+                <button class="item edit-button" type="submit"> CHECKOUT</button>
+            </form>
+        </div>
+    </div>
+    <!-- Aggiungi altre colonne necessarie -->
+
+<script>
+    function edit(prodotto_id, string_edit) {
+        $.ajax({
+            url: '/carrello/edit_prodotto',
+            data: {
+                prodotto_id: prodotto_id,
+                edit: string_edit
+            },
+            type: 'POST',
+            success: function(response) {
+                $(".totale").text("TOTALE:"+response[1]+"$");
+                let valoreIntero = Math.floor(response[0]);
+                if (valoreIntero !== -1)
+                    $("#" + prodotto_id).text(valoreIntero);
+                else {
+                    var div = "div." + prodotto_id;
+                    $(div).empty();
+                }
+            }
+        });
+    }
+</script>
+
+</body>
+</html>
