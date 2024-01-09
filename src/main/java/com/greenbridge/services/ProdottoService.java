@@ -1,5 +1,6 @@
 package com.greenbridge.services;
 
+import com.greenbridge.entities.Agricoltore;
 import com.greenbridge.entities.Prodotto;
 import com.greenbridge.repositories.ProdottoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +15,10 @@ public class ProdottoService {
     private ProdottoRepository prodottoRepository;
 
 
-    /*
-    public List<Prodotto> getAllProdotti(int idAgricoltore) {
-        return prodottoRepository.findAllByIdAgricoltoreAndAcquistabileTrue(idAgricoltore);
-    }*/
+
+    public List<Prodotto> getAllProdotti(Agricoltore agricoltore) {
+        return prodottoRepository.findAllByAgricoltoreAndAcquistabileTrue(agricoltore);
+    }
     public Prodotto getProdottoById(int idProdotto){
         return prodottoRepository.getProdottoByIdProdotto(idProdotto);
     }
