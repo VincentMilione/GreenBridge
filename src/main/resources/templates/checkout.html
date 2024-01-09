@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Checkout</title>
+</head>
+<body>
+    <div class="titolo"><h2> Carrello</h2></div>
+    <div class="container">
+        <form action="/process_checkout" method="post">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" th:value="${nome}" readonly required>
+
+            <label for="cognome">Cognome:</label>
+            <input type="text" id="cognome" name="cognome" th:value="${cognome}" readonly required>
+
+            <div class="indirizzo"><h2>Metodo di spedizione</h2></div>
+            <div>
+                <input type="radio" id="pickup" name="shippingOption" value="pickup" onclick="hideAddressForm()" required>
+                <label for="pickup">Ritiro in bottega</label>
+                <p id="nomeBottega" th:text="${bottega}" th:if="${bottega}" style="display: none;"></p>
+            </div>
+            <div>
+                <input type="radio" id="delivery" name="shippingOption" value="delivery" onclick="showAddressForm()" required>
+                <label for="delivery">Consegna a domicilio</label>
+            </div>
+
+            <div id="indirizzoForm" style="display: none;">
+                <label for="via">Via:</label>
+                <input type="text" id="via" name="via" required>
+
+                <label for="civico">Civico:</label>
+                <input type="text" id="civico" name="civico" required>
+
+                <label for="cap">CAP:</label>
+                <input type="text" id="cap" name="cap" required>
+
+                <label for="paese">Paese:</label>
+                <input type="text" id="paese" name="paese" required>
+            </div>
+
+            <button type="submit">Conferma ordine</button>
+        </form>
+    </div>
+
+<script>
+    function hideAddressForm(){
+        document.getElementById("indirizzoForm").style.display="none";
+        document.getElementById("nomeBottega").style.display="block";
+    }
+
+    function showAddressForm(){
+        document.getElementById("indirizzoForm").style.display="block";
+        document.getElementById("nomeBottega").style.display="none";
+    }
+</script>
+</body>
+</html>
