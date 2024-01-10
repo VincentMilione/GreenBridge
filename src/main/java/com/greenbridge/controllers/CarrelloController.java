@@ -1,6 +1,7 @@
 package com.greenbridge.controllers;
 
 import com.greenbridge.entities.CarrelloCliente;
+import com.greenbridge.entities.Cliente;
 import com.greenbridge.entities.List_Cart;
 import com.greenbridge.entities.Prodotto;
 import com.greenbridge.services.CarrelloClienteService;
@@ -49,16 +50,12 @@ public class CarrelloController {
 
     }
     @PostMapping ("/checkout")
-        @ResponseBody
     String getCheckout(@RequestParam int id, Model model, HttpSession session){
-            if(id==0){ //checkkout di tutti i prodotti
-
-            }else{ //checkout di un unico prodotto
-
-            }
-
-        return "stai facnedo il checkout del prodotto con id" + id;
-
+           Cliente cliente =(Cliente) session.getAttribute("cliente");
+        //   CarrelloCliente itemCart =
+           model.addAttribute("nome",cliente.getNome());
+           model.addAttribute("cognome",cliente.getCognome());
+           return "/checkout";
     }
 
 

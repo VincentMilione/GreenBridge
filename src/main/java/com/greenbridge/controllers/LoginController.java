@@ -27,7 +27,7 @@ public class LoginController {
     @PostMapping("/loginCliente")
     public ResponseEntity<String> saveCliente(@RequestBody Cliente cliente, HttpSession session){
         Cliente c = clienteService.getClienteByEmail(cliente.getEmail());
-        System.out.println("sto comparando " + c.getPassword() + "e" + cliente.getPassword());
+        System.out.println("sto comparando " + c + "e" + cliente.getPassword());
         if (c != null && cliente.getPassword().compareTo(c.getPassword()) == 0) {
             session.setAttribute("cliente", c);
             List<CarrelloCliente> lista = carrelloClienteService.getByClientId(c);

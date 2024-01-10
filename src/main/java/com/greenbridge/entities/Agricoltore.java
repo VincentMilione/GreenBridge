@@ -14,7 +14,7 @@ import java.util.List;
 public class Agricoltore {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int id_agricoltore;
     private String nome;
     private String nomeBottega;
     private String indirizzoBottega;
