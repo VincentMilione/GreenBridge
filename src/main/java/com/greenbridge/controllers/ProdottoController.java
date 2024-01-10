@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.Base64;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -136,8 +137,26 @@ public class ProdottoController {
 
 
 
+    @GetMapping("/prodotto/{idProdotto}")
+    String getProdotto(Model model, @PathVariable int idProdotto){
+        Prodotto prodotto = prodottoService.getProdottoById(idProdotto);
+        System.out.println(idProdotto);
+        model.addAttribute("prodotto", prodotto);
+        return "pages/user/prodotto";
+    }
+
+    @GetMapping("/")
+    public String getHome(){
+        return "pages/user/home";
+    }
 
 
+    @PostMapping ("/ricerca")
+    public String getProduct(@RequestParam String name, Model model) {
+        List<Prodotto> risultatiRicerca = prodottoService.getResult(name);
+        model.addAttribute("ricerca", risultatiRicerca);
+        return "pages/user/ricercaProdotto";
+    }
 
 
 

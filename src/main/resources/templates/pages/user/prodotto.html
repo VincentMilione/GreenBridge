@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Pagina Prodotto</title>
+    <link rel="stylesheet" href="/css/dettagliProdotto.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body >
+<div class="product-container">
+    <div class="product-image">
+    </div>
+    <div class="product-details">
+        <h1 th:text="${prodotto.getNome()}"></h1>
+        <p class="description" th:text="${prodotto.getDescrizione()}"></p>
+        <p class="price" th:text="'Prezzo: €' + ${prodotto.getPrezzoVendita()}"></p>
+        <div class="quantity-controls">
+            <button id="sottrai"> - </button>
+            <p id="quant" th:name="${prodotto.getQuantitaDisp()}">1</p>
+            <button id="somma"> + </button>
+        </div>
+        <button id="add" type="submit">Aggiungi al carrello</button>
+    </div>
+</div>
+</body>
+</html>

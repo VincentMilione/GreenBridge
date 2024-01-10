@@ -16,11 +16,15 @@
 <body>
 <div id="navBarContainer">
   <div id="firstLevelNavBar">
-    <img id="menuIcon" onclick="openMenu()"  src="/img/menu.png">
+   <img id="menuIcon" onclick="openMenu()"  src="/img/menu.png">
     <img id="logo" src="/img/logo.png" alt="logo">
-    <input  placeholder="Cerca..." type="text" id="searchBar">
+     <form action="/ricerca" method="post" >
+      <input  name="name" placeholder="Cerca..." type="text" id="searchBar" required>
+       <button type="submit" id="searchButton">Cerca</button>
+     </form>
 
-    </input>
+    <div id="responseContainer"></div>
+
     <a href="#">
       <img class="imgIcon" src="/img/cart.png" alt="chartIcon">
     </a>
