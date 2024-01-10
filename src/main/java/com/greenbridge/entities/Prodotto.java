@@ -16,6 +16,7 @@ import java.util.Base64;
 public class Prodotto {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idProdotto;
+
     private String nome;
     private String origine;
 

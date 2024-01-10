@@ -15,6 +15,8 @@ import org.springframework.web.servlet.view.RedirectView;
 import java.util.ArrayList;
 import java.util.List;
 
+/** Questa classe gestisce le operazione di autenticazione nel sistema.*/
+
 @RestController
 @RequestMapping("/api")
 public class LoginController {
@@ -24,8 +26,12 @@ public class LoginController {
     @Autowired
     private CarrelloClienteService carrelloClienteService;
 
+
+    /**Questo metodo autentifica un utente cliente.*/
     @PostMapping("/loginCliente")
-    public ResponseEntity<String> saveCliente(@RequestBody Cliente cliente, HttpSession session){
+    public ResponseEntity<String> saveCliente(
+            @RequestBody Cliente cliente,
+            HttpSession session) {
         Cliente c = clienteService.getClienteByEmail(cliente.getEmail());
         System.out.println("sto comparando " + c + "e" + cliente.getPassword());
         if (c != null && cliente.getPassword().compareTo(c.getPassword()) == 0) {
@@ -41,6 +47,7 @@ public class LoginController {
         return new ResponseEntity<>("notok", HttpStatus.FORBIDDEN);
     }
 
+    /**Questo metodo effettua il logout di un utente cliente.*/
     @GetMapping("/logoutCliente")
     public RedirectView logoutCliente(HttpSession session){
         session.removeAttribute("cliente");

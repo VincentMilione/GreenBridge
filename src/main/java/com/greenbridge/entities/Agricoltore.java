@@ -12,9 +12,9 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 public class Agricoltore {
-    @Id
+     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_agricoltore;
+    private int id;
     private String nome;
     private String nomeBottega;
     private String indirizzoBottega;

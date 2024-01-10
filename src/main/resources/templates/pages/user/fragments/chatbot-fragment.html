@@ -1,0 +1,45 @@
+<div class="chatbox__support">
+  <div class="chatbox__header">
+    <div class="chatbox__image--header">
+      <img src="/static/images/image.svg" alt="image">
+    </div>
+    <div class="chatbox__content--header">
+      <h4 class="chatbox__heading--header">Assistente Chat</h4>
+      <p class="chatbox__description--header">Ricevi suggerimenti secondo il tuo gusto!</p>
+    </div>
+  </div>
+  <div class="chatbox__messages">
+    <div>
+      <div class="messages__item messages__item--visitor">
+        Ciao, benvenuto su Greenbridge!
+      </div>
+      <div class="messages__item messages__item--visitor">
+        Sono un chatbot in grado di consigliarti gli Agricoltori pi&ugrave; affini alle tue esigenze. Digita "/start" per ricevere il tuo consiglio.
+      </div>
+      <div id="chat">
+      </div>
+    </div>
+  </div>
+  <div class="chatbox__footer">
+    <input type="text" id="input" placeholder="Scrivi un messaggio...">
+    <p class="chatbox__send--footer" id="sendButton">Invio</p>
+  </div>
+</div>
+<div class="chatbox__button">
+  <button>button</button>
+</div>
+
+<!--th:if da modificare quando sarà integrato il login con th:if="${session['cliente'] ne null}"-->
+<script src="/static/js/chatbot.js"></script>
+<script src="/static/js/messaging.js" defer></script>
+<script>
+  const chatButton = document.querySelector('.chatbox__button');
+  const chatContent = document.querySelector('.chatbox__support');
+  const icons = {
+    isClicked: '<img src="/static/images/icons/chatbox-icon.svg" />',
+    isNotClicked: '<img src="/static/images/icons/chatbox-icon.svg" />'
+  }
+  const chatbox = new InteractiveChatbox(chatButton, chatContent, icons);
+  chatbox.display();
+  chatbox.toggleIcon(false, chatButton);
+</script>
