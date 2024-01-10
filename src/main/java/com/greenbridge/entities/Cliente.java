@@ -1,6 +1,8 @@
 package com.greenbridge.entities;
 
-
+import jakarta.persistence.*;
+import lombok.*;
+import java.sql.Date;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,13 +12,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 import java.sql.Date;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 public class Cliente {
 
     /** Identificativo utente cliente. */
@@ -27,12 +29,29 @@ public class Cliente {
     private String nome;
     /** Cognome del cliente. */
     private String cognome;
+    private String password;
     /** Email del cliente. */
     private String email;
     /** Password del cliente. */
+
     private String password;
     /** Data di nascita del cliente. */
     private Date dataDiNascita;
+    private String email;
+
+    @Override
+    public String toString() {
+        return "Cliente{" +
+
+                ", nome='" + nome + '\'' +
+                ", cognome='" + cognome + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", dataDiNascita=" + dataDiNascita +
+                '}';
+    }
+
+
 
     public Cliente(
             String nome,

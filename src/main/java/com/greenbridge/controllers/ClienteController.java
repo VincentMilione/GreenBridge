@@ -1,5 +1,8 @@
 package com.greenbridge.controllers;
 
+
+import com.greenbridge.services.ClienteServiceImpl;
+import jakarta.servlet.http.HttpSession; 
 import com.greenbridge.services.ClienteService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +15,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class ClienteController {
 
+
+
     @Autowired
-    private ClienteService clienteService;
+    private ClienteServiceImpl clienteService;
+
 
     /** il metodo effettua il redirect alla pagina di registrazione cliente. */
     @GetMapping("/register")
@@ -39,4 +45,6 @@ public class ClienteController {
     public String loginClienteView(Model model) {
         return "loginCliente";
     }
+
+
 }

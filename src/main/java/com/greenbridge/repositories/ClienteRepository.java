@@ -11,4 +11,8 @@ public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
 
     /** Questo metodo permette di cercare un utente cliente per Email */
     Cliente findByEmail(String email);
+
+
+
+
 }

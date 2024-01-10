@@ -21,7 +21,7 @@
     <input  placeholder="Cerca..." type="text" id="searchBar">
 
     </input>
-    <a href="#">
+    <a th:href="@{/carrello}">
       <img class="imgIcon" src="/img/cart.png" alt="chartIcon">
     </a>
     <a th:if="${session.cliente == null}" th:href="@{/login}">

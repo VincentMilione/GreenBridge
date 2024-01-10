@@ -1,0 +1,66 @@
+*{
+    margin:0;
+    padding:0;
+}
+.titolo {
+    font-family: "Roboto Black", serif;
+    font-size: 30px;
+    text-align: center; /* Centra il testo orizzontalmente */
+    margin: 20px; /* Aggiungi spazio attorno al titolo */
+}
+
+#agricoltore{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-family: "Roboto Black", serif;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.container{
+    border: 2px solid green;
+    display: flex;
+    width: 80%;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.item{
+    flex-grow: 1;
+    margin: 10px;
+    text-align: center; /* Centra verticalmente */
+    align-items: center;
+    justify-content: center;
+
+}
+.container-quant{
+    display: flex;
+    margin: 0 auto;
+}
+.item-quant{
+    flex-grow: 1;
+    margin: 10px;
+    width: 50%;
+    text-align: center; /* Centra verticalmente */
+    align-items: center;
+    justify-content: center;
+
+
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px; /* Angoli curvi */
+    background-color: green; /* Colore verde */
+    color: #fff; /* Testo bianco */
+}
+
+h3{
+    margin: 0;
+}
