@@ -41,16 +41,16 @@
         <input class="inputext" placeholder="Email" id="email" required>
         <input class="inputext" placeholder="password" id="password" required>
         <input class="inputext" placeholder="confirmaPassword" id="confirmaPassword" required>
+        <div id="privacyBox">
+            <h3>Informativa sulla Privacy</h3>
+            <p>La tua privacy è importante per noi. Leggi la nostra informativa sulla privacy e acconsenti all'uso dei tuoi dati personali.</p>
+            <label >
+                <input type="checkbox" id="privacyCheckbox"> Acconsento</label>
+<!--           <button onclick="acceptPrivacy()">Accetta</button>-->
+        </div>
         <button type="button" onclick="submitForm()">Registrati</button>
     </form>
-    <div id="privacyBox">
-        <h3>Informativa sulla Privacy</h3>
-        <p>La tua privacy è importante per noi. Leggi la nostra informativa sulla privacy e acconsenti all'uso dei tuoi dati personali.</p>
-        <label>
-            <input type="checkbox" id="privacyCheckbox"> Acconsento
-        </label>
-        <button onclick="acceptPrivacy()">Accetta</button>
-    </div>
+
 
 </div>
 
@@ -101,7 +101,7 @@
     function isPasswordValid(password) {
 
          if (password.length < 9) {
-            alert('password non corretta');
+            alert("password non deve contenere meno di 9 carattere");
             return false;
         }else if (password.length >= 9) {
              return true;
@@ -121,17 +121,22 @@
             alert("conferma password errata. Riprova.");
         }
     }
+
     function acceptPrivacy() {
         var privacyCheckbox = document.getElementById("privacyCheckbox");
-
         if (privacyCheckbox.checked) {
-            // L'utente ha accettato la privacy, puoi eseguire azioni aggiuntive qui
-            alert("Hai accettato la privacy. Grazie!");
-        } else {
+            alert("Hai accettato la privacy. vuoi continuare la registrazione ");
+
+
+        }else {
             alert("Devi accettare la privacy per procedere.");
+
+            var redirectUrl = getRedirectUrl();
+            window.location.replace(redirectUrl);
+            return false;
+
         }
     }
-
 
     function submitForm() {
         var nome = document.getElementById("nome").value
@@ -157,12 +162,9 @@
 
 
 
-        if (isEmailValid(email)) {
-            alert("Email è corretta!");
-
-        } else {
+        if (!isEmailValid(email)) {
             alert("email non corretta!");
-            return false;
+
         }
 
 
@@ -171,6 +173,9 @@
             return false;
         }
 
+        if (acceptPrivacy()) {
+            return true;
+        }
 
 
 
