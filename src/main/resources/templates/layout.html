@@ -1,20 +1,41 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang= "en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
+  <link rel="stylesheet" type="text/css" href="/css/footerStyle.css">
+  <link rel="stylesheet" href="css/headerStyle.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
-
+  <title>Layout page</title>
 </head>
 
-<body class="">
-  <nav class="">
-  <h1>Hello GreenBridge</h1>
-  </nav>
+<body>
+<div id="navBarContainer">
+  <div id="firstLevelNavBar">
+    <img id="menuIcon" onclick="openMenu()"  src="/img/menu.png">
+    <img id="logo" src="/img/logo.png" alt="logo">
+    <input  placeholder="Cerca..." type="text" id="searchBar">
+
+    </input>
+    <a href="#">
+      <img class="imgIcon" src="/img/cart.png" alt="chartIcon">
+    </a>
+    <a th:if="${session.cliente == null}" th:href="@{/login}">
+      <img class="imgIcon" src="/img/user.png" alt="userIcon">
+    </a>
+    <a th:if="${session.cliente != null}" th:href="@{/detailCliente}">
+      <img class="imgIcon" src="/img/user.png" alt="userIcon">
+    </a>
+  </div>
+  <div id="secondLevelNavBar" style="left: -400px">
+    <a href="#">Catalogo</a>
+    <a href="#">Agricoltori</a>
+  </div>
+</div>
 
   <!--SECTION-->
   <div id="page-content">
@@ -23,7 +44,38 @@
     </section>
   </div>
   <!--footer-->
-  <footer class="">
+  <footer class="footerContainer" >
+      <div class="footerContainer">
+        <div class="socialIcons">
+          <a href="#"><i class="fa-brands fa-facebook"></i></a>
+          <a href=""><i class="fa-brands fa-instagram"></i></a>
+          <a href=""> <i class="fa-brands fa-github"></i></a>
+          <a href=""><i class="fa-brands fa-youtube"></i></a>
+        </div>
+
+        <div class="footerNav">
+          <ul>
+            <li><a href="">ASSISTENZA CLIENTI</a> </li>
+            <li><a href="">Contattaci</a> </li>
+            <li><a href="">INFORMAZIONI LEGALI</a> </li>
+            <li><a href="">Privacy Policy</a> </li>
+            <li><a href="">Termini e Condizioni</a> </li>
+          </ul>
+        </div>
+      </div>
   </footer>
+
+  <script>
+    function openMenu(){
+      var button = document.getElementById('secondLevelNavBar')
+      if(button.style.left === '-400px') {
+        button.style.left = '0px'
+        document.getElementById('menuIcon').src = '/img/close.png'
+      }else {
+        button.style.left = '-400px'
+        document.getElementById('menuIcon').src = '/img/menu.png'
+      }
+    }
+  </script>
 </body>
 </html>

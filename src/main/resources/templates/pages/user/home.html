@@ -1,63 +1,16 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout}">
 <head>
-    <meta charset="UTF-8">
-    <title>Ricerca Prodotti</title>
-    <link rel="stylesheet" type="text/css" href="css/ricercaProdotto.css">
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <title>GreenBridge - Home</title>
+    <link rel="stylesheet" href="/static/css/chatbot.css">
+    <link rel="stylesheet" href="/static/css/chat.css">
 </head>
-<body>
+<body >
+  <section layout:fragment="content">
+      <!--Assicurarsi che nella sessione sia presente l'attributo cliente per poter utilizzare il chatbot-->
+      <div class="chatbox" th:if="${session['cliente'] ne null}" th:include="pages/user/fragments/chatbot-fragment"></div>
+  </section>
 
-<h2>Ricerca Prodotti</h2>
-
-
-    <label for="nome">Nome Prodotto:</label>
-    <input type="text" id="nome" name="nome" />
-    <button id="submit" type="submit">Cerca</button>
-
-
-<h3>Risultati ricerca</h3>
-
-<script>
-    $(document).ready(function(){
-        $("#submit").click(function(){
-            $("#responseContainer").text("");
-           var nome= $("#nome").val();
-           //alert(nome);
-            $.ajax({
-                url: '/risultato?nome=' + encodeURIComponent(nome),
-                type:'GET',
-                success: function(response) {
-
-                        response.forEach(function (oggetto, index) {
-                            let nomeProdotto = JSON.stringify(response[index].nome);
-
-                            let idProdotto = response[index].idProdotto;
-                            let descrizioneProdotto = response[index].descrizione;
-                            let prezzoProdotto = response[index].prezzoVendita;
-
-                            let productHtml = `
-                            <div class="product">
-                                <img src="/immagine/${response[index].idProdotto}" alt="${nomeProdotto}">
-                                <div class="product-title">${nomeProdotto}</div>
-                                <div class="product-description">${descrizioneProdotto}</div>
-                                <div class="product-price">Prezzo: ${prezzoProdotto} €</div>
-                                <a href="/prodotto/${response[index].idProdotto}" class="product-link">Dettagli</a>
-                            </div>
-                        `;
-
-                            $('#responseContainer').append(productHtml);
-                        });
-
-                },
-                error: function(error) {
-                    alert("Errore durante la chiamata AJAX:", error);
-                }
-            });
-        });
-    });
-</script>
 </body>
-
-<div id="responseContainer"></div>
 </html>

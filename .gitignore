@@ -35,3 +35,4 @@ build/
 
 #upload data
 /src/main/resources/static/uploads
+/src/main/resources/application.properties
