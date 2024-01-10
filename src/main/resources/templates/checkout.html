@@ -3,44 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <title>Checkout</title>
+    <link rel="stylesheet" href="/css/checkoutStyle.css">
 </head>
 <body>
-    <div class="titolo"><h2> Carrello</h2></div>
     <div class="container">
-        <form action="/process_checkout" method="post">
+        <div class="titolo"><h2>Checkout</h2></div>
             <label for="nome">Nome:</label>
-            <input type="text" id="nome" name="nome" th:value="${nome}" readonly required>
+            <input class="inputCliente" type="text" id="nome" name="nome" th:value="${nome}" readonly required>
+            <br>
 
             <label for="cognome">Cognome:</label>
-            <input type="text" id="cognome" name="cognome" th:value="${cognome}" readonly required>
-
-            <div class="indirizzo"><h2>Metodo di spedizione</h2></div>
-            <div>
+            <input class="inputCliente" type="text" id="cognome" name="cognome" th:value="${cognome}" readonly required>
+        <div class="indirizzo"><h2>Metodo di spedizione</h2></div>
+            <div class="radio-container">
                 <input type="radio" id="pickup" name="shippingOption" value="pickup" onclick="hideAddressForm()" required>
                 <label for="pickup">Ritiro in bottega</label>
-                <p id="nomeBottega" th:text="${bottega}" th:if="${bottega}" style="display: none;"></p>
+                <!--<p id="nomeBottega" th:text="${bottega}" th:if="${bottega}" style="display: none;"></p>-->
             </div>
-            <div>
+            <div class="radio-container">
                 <input type="radio" id="delivery" name="shippingOption" value="delivery" onclick="showAddressForm()" required>
                 <label for="delivery">Consegna a domicilio</label>
             </div>
 
             <div id="indirizzoForm" style="display: none;">
                 <label for="via">Via:</label>
-                <input type="text" id="via" name="via" required>
+                <input class="inputText" type="text" id="via" name="via" required>
+                <br>
 
                 <label for="civico">Civico:</label>
-                <input type="text" id="civico" name="civico" required>
+                <input class="inputText" type="text" id="civico" name="civico" required>
+                <br>
 
                 <label for="cap">CAP:</label>
-                <input type="text" id="cap" name="cap" required>
+                <input class="inputText" type="text" id="cap" name="cap" required>
+                <br>
 
                 <label for="paese">Paese:</label>
-                <input type="text" id="paese" name="paese" required>
+                <input class="inputText" type="text" id="paese" name="paese" required>
+                <br>
             </div>
-
-            <button type="submit">Conferma ordine</button>
-        </form>
+        <div class="button-container">
+            <form action="/process_checkout" method="post">
+                <button class="inputButton" type="submit">Conferma ordine</button>
+            </form>
+        </div>
     </div>
 
 <script>
