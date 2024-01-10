@@ -126,11 +126,8 @@
         var privacyCheckbox = document.getElementById("privacyCheckbox");
         if (privacyCheckbox.checked) {
             alert("Hai accettato la privacy. vuoi continuare la registrazione ");
-
-
         }else {
             alert("Devi accettare la privacy per procedere.");
-
             var redirectUrl = getRedirectUrl();
             window.location.replace(redirectUrl);
             return false;
