@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <title>Checkout</title>
     <link rel="stylesheet" href="/css/checkoutStyle.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 
 </head>
 <body>
     <div class="titolo"><h2> Checkout </h2></div>
     <div class="container">
-        <form action="/process_checkout" method="post">
             <label for="nome">Nome:</label>
             <input type="text" id="nome" name="nome" th:value="${nome}" readonly required>
 
@@ -29,23 +30,54 @@
 
             <div id="indirizzoForm" style="display: none;">
                 <label for="via">Via:</label>
-                <input type="text" id="via" name="via" required>
+                <input type="text" value="" id="via" name="via" required>
 
                 <label for="civico">Civico:</label>
-                <input type="text" id="civico" name="civico" required>
+                <input type="text" value="" id="civico" name="civico" required>
 
                 <label for="cap">CAP:</label>
-                <input type="text" id="cap" name="cap" required>
+                <input type="text" value=""  id="cap" name="cap" required>
 
                 <label for="paese">Paese:</label>
-                <input type="text" id="paese" name="paese" required>
+                <input type="text" value=""  id="paese" name="paese" required>
+
+                <label for="citta">Citta:</label>
+                <input type="text" value="" id="citta" name="citta" required>
             </div>
 
-            <button type="submit">Conferma ordine</button>
-        </form>
+            <button onclick="sendForm()" type="submit">Conferma ordine</button>
     </div>
 
 <script>
+    function sendForm(){
+        var selectedOption = $('input[name="shippingOption"]:checked').val();
+        var indirizzo ={
+            opzione : selectedOption,
+            via : $("#via").val(),
+            civico : $("#civico").val(),
+            cap : $("#cap").val(),
+            paese : $("#paese").val(),
+            citta : $("#citta").val(),
+        };
+        alert(JSON.stringify(indirizzo));
+
+        $.ajax({
+            type: 'POST',
+            url: '/checkForm',
+            contentType: 'application/json',
+            data: JSON.stringify(indirizzo),
+            /*success: function (response) {
+                console.log(response)
+                window.location.replace("detailCliente");
+            },
+            error: function (response) {
+                console.log(response)
+                $("#esito").text("Credenziali errate")
+            }*/
+        });
+
+
+    }
     function hideAddressForm(){
         document.getElementById("indirizzoForm").style.display="none";
         document.getElementById("nomeBottega").style.display="block";
@@ -55,6 +87,7 @@
         document.getElementById("indirizzoForm").style.display="block";
         document.getElementById("nomeBottega").style.display="none";
     }
+
 </script>
 </body>
 </html>

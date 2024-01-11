@@ -37,6 +37,12 @@ public class List_Cart {
         aggiorno_totale();
 
     }
+    public void addCart(CarrelloCliente carrelloCliente){
+
+        list_cart.add(carrelloCliente);
+        aggiorno_totale();
+
+    }
     public boolean isPresent(Integer prodotto_id){
         for (CarrelloCliente itemCart : list_cart) {
             if (itemCart.getProdotto().getIdProdotto() == prodotto_id) {
@@ -45,6 +51,15 @@ public class List_Cart {
 
         }
     return false;
+    }
+    public CarrelloCliente getProdottoById(Integer prodotto_id){
+        for (CarrelloCliente itemCart : list_cart) {
+            if (itemCart.getProdotto().getIdProdotto() == prodotto_id) {
+                return itemCart;
+            }
+
+        }
+        return null;
     }
 public float[] delete(Integer prodotto_id){
     Iterator<CarrelloCliente> iterator = list_cart.iterator();

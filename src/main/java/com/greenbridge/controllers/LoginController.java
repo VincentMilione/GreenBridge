@@ -31,6 +31,7 @@ public class LoginController {
         if (c != null && cliente.getPassword().compareTo(c.getPassword()) == 0) {
             session.setAttribute("cliente", c);
             List<CarrelloCliente> lista = carrelloClienteService.getByClientId(c);
+            System.out.println("il suo carrello è :" + lista);
             if(lista==null){
                 lista= new ArrayList<CarrelloCliente>();
             }
