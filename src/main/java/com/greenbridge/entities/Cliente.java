@@ -21,24 +21,19 @@ import java.sql.Date;
 @NoArgsConstructor
 public class Cliente {
 
-    /** Identificativo utente cliente. */
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
-    @Column(name="id_cliente")
     private Integer id;
     /** Nome del cliente. */
     private String nome;
     /** Cognome del cliente. */
     private String cognome;
-    private String password;
     /** Email del cliente. */
     private String email;
     /** Password del cliente. */
-
     private String password;
     /** Data di nascita del cliente. */
     private Date dataDiNascita;
-    private String email;
 
     @Override
     public String toString() {

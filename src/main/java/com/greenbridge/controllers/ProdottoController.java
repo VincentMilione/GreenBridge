@@ -1,6 +1,8 @@
 package com.greenbridge.controllers;
 
+import com.greenbridge.entities.Agricoltore;
 import com.greenbridge.entities.Prodotto;
+import com.greenbridge.services.AgricoltoreService;
 import com.greenbridge.services.ProdottoService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +22,14 @@ public class ProdottoController {
     @Autowired
     private ProdottoService prodottoService;
 
+    @Autowired
+    private AgricoltoreService agricoltoreService;
+
+
     @GetMapping("/formInserimento")
     public String getProdotto(Model model, HttpSession session) {
         int idAgricoltore = 1;
-        session.setAttribute("idAgricoltore", idAgricoltore);
+        session.setAttribute("agricoltore",  agricoltoreService.getSingleAgricoltore(idAgricoltore));
         model.addAttribute("prodotto", new Prodotto());
         return "pages/user/formInserimento";
     }
@@ -37,17 +43,15 @@ public class ProdottoController {
                 byte[] bytes = immagineFile.getBytes();
                 prodotto.setImmagine(bytes);
             }
-
-            prodotto.setIdAgricoltore((Integer)
-                    session.getAttribute("idAgricoltore"));
+            Agricoltore agricoltore = (Agricoltore) session.getAttribute("agricoltore");
+            prodotto.setAgricoltore(agricoltore);
 
             prodotto.setAcquistabile(true);
 
             prodottoService.saveProdotto(prodotto);
 
             // Aggiorna la lista di prodotti nel model
-            List<Prodotto> prodotti = prodottoService.getAllProdotti((Integer)
-                    session.getAttribute("idAgricoltore"));
+            List<Prodotto> prodotti = prodottoService.getAllProdotti((Agricoltore) session.getAttribute("agricoltore"));
             for (Prodotto p : prodotti) {
                 if (p.getImmagine() != null) {
                     String immagineBase64 = Base64.getEncoder().encodeToString(p.getImmagine());
@@ -65,7 +69,7 @@ public class ProdottoController {
     public String getCatalogo(Model model, HttpSession session) {
         int idAgricoltore = 1;
         session.setAttribute("idAgricoltore", idAgricoltore);
-        List<Prodotto> prodotti = prodottoService.getAllProdotti((Integer) session.getAttribute("idAgricoltore"));
+        List<Prodotto> prodotti = prodottoService.getAllProdotti((Agricoltore) session.getAttribute("agricoltore"));
 
         for (Prodotto prodotto : prodotti) {
             if (prodotto.getImmagine() != null) {
@@ -94,14 +98,13 @@ public class ProdottoController {
                 prodotto.setImmagine(bytes);
             }
 
-            prodotto.setIdAgricoltore((Integer) session.getAttribute("idAgricoltore"));
+            prodotto.setAgricoltore((Agricoltore) session.getAttribute("agricoltore"));
             prodotto.setAcquistabile(true);
 
             prodottoService.saveAndFlushProdotto(prodotto);
 
             // Aggiorna la lista di prodotti nel model
-            List<Prodotto> prodotti = prodottoService.getAllProdotti((Integer)
-                    session.getAttribute("idAgricoltore"));
+            List<Prodotto> prodotti = prodottoService.getAllProdotti((Agricoltore) session.getAttribute("agricoltore"));
             for (Prodotto p : prodotti) {
                 if (p.getImmagine() != null) {
                     String immagineBase64 = Base64.getEncoder().encodeToString(p.getImmagine());
@@ -121,8 +124,7 @@ public class ProdottoController {
         prodotto.setAcquistabile(false);
         prodottoService.saveAndFlushProdotto(prodotto);
 
-        List<Prodotto> prodotti = prodottoService.getAllProdotti((Integer)
-                session.getAttribute("idAgricoltore"));
+        List<Prodotto> prodotti = prodottoService.getAllProdotti((Agricoltore) session.getAttribute("agricoltore"));
         for (Prodotto p : prodotti) {
             if (p.getImmagine() != null) {
                 String immagineBase64 = Base64.getEncoder().encodeToString(p.getImmagine());

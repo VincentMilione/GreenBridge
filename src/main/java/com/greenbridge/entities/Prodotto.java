@@ -76,4 +76,5 @@ public class Prodotto {
             this.immagine = Base64.getDecoder().decode(immagineBase64);
         }
     }
+
 }

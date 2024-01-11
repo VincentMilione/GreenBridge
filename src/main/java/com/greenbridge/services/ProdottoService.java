@@ -21,8 +21,8 @@ public class ProdottoService {
         prodottoRepository.save(prodotto);
     }
 
-    public List<Prodotto> getAllProdotti(int idAgricoltore) {
-        return prodottoRepository.findAllByIdAgricoltoreAndAcquistabileTrue(idAgricoltore);
+    public List<Prodotto> getAllProdotti(Agricoltore agricoltore) {
+        return prodottoRepository.findAllByAgricoltoreAndAcquistabileTrue(agricoltore);
     }
     public Prodotto getProdottoById(int idProdotto){
         return prodottoRepository.getProdottoByIdProdotto(idProdotto);
