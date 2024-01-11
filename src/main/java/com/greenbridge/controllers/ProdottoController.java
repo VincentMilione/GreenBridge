@@ -135,7 +135,26 @@ public class ProdottoController {
         return "pages/user/catalogo";
     }
 
+  @GetMapping("/prodotto/{idProdotto}")
+    String getProdotto(Model model, @PathVariable int idProdotto){
+        Prodotto prodotto = prodottoService.getProdottoById(idProdotto);
+        System.out.println(idProdotto);
+        model.addAttribute("prodotto", prodotto);
+        return "pages/user/prodotto";
+    }
 
+    @GetMapping("/")
+    public String getHome(){
+        return "pages/user/home";
+    }
+
+
+    @PostMapping ("/ricerca")
+    public String getProduct(@RequestParam String name, Model model) {
+        List<Prodotto> risultatiRicerca = prodottoService.getResult(name);
+        model.addAttribute("ricerca", risultatiRicerca);
+        return "pages/user/ricercaProdotto";
+    }
 
     @GetMapping("/prodotto/{idProdotto}")
     String getProdotto(Model model, @PathVariable int idProdotto){
@@ -161,6 +180,4 @@ public class ProdottoController {
 
 
 }
-
-
 

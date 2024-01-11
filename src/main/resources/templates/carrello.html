@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Carrello</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link rel="stylesheet" href="/css/carrelloStyle.css">
+</head>
+<body layout:fragment="content">
+    <div class="titolo"><h2> Carrello</h2></div>
+    <div th:each="gruppo : ${cart}">
+        <h2 id="agricoltore" th:text="${'Agricoltore: ' + gruppo.key}"></h2>
+        <div class="container">
+            <div class="item"> <h3>Nome Prodotto</h3> </div>
+            <div class="item"> <h3>Quantita</h3> </div>
+            <div class="item"> <h3>Prezzo</h3> </div>
+            <div class="item"> <h3>Rimuovi</h3> </div>
+            <div class="item"> <h3>Checkout</h3> </div>
+        </div>
+        <div th:each="elemento : ${gruppo.value}">
+                <div th:class="${elemento.getProdotto().getIdProdotto()} + ' container'">
+                    <div class="item" th:text="${elemento.getProdotto().getNome()} "></div>
+                    <div class="item container-quant">
+                        <div class="item-quant"><button class="item edit-button" th:onclick="'edit(' + ${elemento.getProdotto().getIdProdotto()} + ', \'sott\')'"> - </button></div>
+                        <div class="item-quant"><p class="item product-quantity" th:id="${elemento.getProdotto().getIdProdotto()}" th:text="${elemento.getKg_richiesti()}"></p></div>
+                        <div class="item-quant"><button class="item edit-button" th:onclick="'edit(' + ${elemento.getProdotto().getIdProdotto()} + ', \'add\')'"> + </button></div>
+                    </div>
+                    <div class="item" th:text="${elemento.getProdotto().getPrezzoKg()} + '$' "></div>
+                    <div class="item container-quant">
+                        <div class="item-quant"> <button  th:onclick="'edit(' + ${elemento.getProdotto().getIdProdotto()} + ', \'delete\')'"> Rimuovi </button></div>
+                        <div class="item-quant">
+                            <form action="/checkout" method="post">
+                                <input type="number" name="id" th:value="${elemento.getProdotto().getIdProdotto()}" hidden>
+                                <button class="item edit-button" type="submit"> CHECKOUT</button>
+                            </form>
+            </div>
+    </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="item"><h3 class="totale" th:text="'TOTALE:'+ ${totale} +'$'" ></h3></div>
+        <div class="item">
+            <form action="/checkout" method="post">
+                <input type="number" name="id" value="0" hidden>
+                <button class="item edit-button" type="submit"> CHECKOUT</button>
+            </form>
+        </div>
+    </div>
+    <!-- Aggiungi altre colonne necessarie -->
+
+<script>
+    function edit(prodotto_id, string_edit) {
+        $.ajax({
+            url: '/carrello/edit_prodotto',
+            data: {
+                prodotto_id: prodotto_id,
+                edit: string_edit
+            },
+            type: 'POST',
+            success: function(response) {
+                $(".totale").text("TOTALE:"+response[1]+"$");
+                let valoreIntero = Math.floor(response[0]);
+                if (valoreIntero !== -1)
+                    $("#" + prodotto_id).text(valoreIntero);
+                else {
+                    var div = "div." + prodotto_id;
+                    $(div).empty();
+                }
+            }
+        });
+    }
+</script>
+
+</body>
+</html>

@@ -23,7 +23,7 @@ public class ClienteServiceImpl implements ClienteService {
 
     /** Questo metodo consente di ottenere tutti gli utenti cliente nel database. */
     public List<Cliente> getAllClienti() {
-        return clienteRepository.findAll(Sort.by("id"));
+        return clienteRepository.findAll();
     }
 
     /** Questo metodo consente di ottenere un utente data un Email in input. */
@@ -35,4 +35,6 @@ public class ClienteServiceImpl implements ClienteService {
     public boolean clienteExistsByEmail(Cliente cliente) {
         return clienteRepository.existsByEmail(cliente.getEmail());
     }
+
+    public Cliente getClienteById(int id) {return clienteRepository.findById(id).get();}
 }

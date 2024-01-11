@@ -4,12 +4,15 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
 public class Agricoltore {
-    @Id
+     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String nome;
@@ -18,6 +21,6 @@ public class Agricoltore {
     private String email;
     private String password;
 
-
-
+    @OneToMany(mappedBy = "agricoltore")
+    List<Prodotto> prodotti;
 }

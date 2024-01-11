@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pagina Prodotto</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+<h1>Dettagli del Prodotto</h1>
+<p hidden id="id" th:text=" ${prodotto.getIdProdotto()}"></p>
+<p th:text="'Nome :' + ${prodotto.getNome()}"></p>
+<p th:text="'Descrizione :' + ${prodotto.getDescrizione()}"></p>
+<p th:text="'Quantita :' + ${prodotto.getQuantitaDisp()}"></p>
+<p th:text="'Prezzo :' + ${prodotto.getPrezzoVendita()}"></p>
+
+<button id="sottrai"> - </button>
+<p id="quant" th:name="${prodotto.getQuantitaDisp()}" >1</p>
+<button id="somma" > + </button>
+
+<button id="add" type="submit">Aggiungi al carrello</button>
+
+<script>
+    $(document).ready(function(){
+        $("#add").click(function(){
+            var prodotto_id= $("#id").text();
+            let quantita = $("#quant").text();
+            console.log("id del prodotto:"+ prodotto_id + "quantita prodotto:" + quantita);
+            $.ajax({
+                url: '/carrello/aggiungiCart',
+                data: {
+                    prodotto_id: prodotto_id, // Sostituisci 'valore_del_nome' con il valore effettivo
+                    quantita : quantita
+                },
+                type:'POST',
+                success:function(response){
+                    if(response==0){
+                        console.log("elemento gia presente nel carrello");
+                    }else{
+                        console.log("elemento inserito correttamente");
+
+                    }
+                }
+
+            });
+        });
+        $("#somma").click(function(){
+            let quantita = $("#quant").text();
+            quantita = parseInt(quantita, 10);
+            quantita = quantita + 1;
+
+            console.log('Quantità dopo la somma:', quantita);
+
+            var max=$("#quant").attr('name');
+            if(quantita<=max){
+                $("#quant").text(quantita);
+            }
+        });
+        $("#sottrai").click(function(){
+            let quantita= $("#quant").text();
+
+            quantita = quantita-1;
+            console.log('Quantità dopo la sottrazione:', quantita);
+            if(quantita>=1){
+                $("#quant").text(quantita);
+            }
+        });
+
+
+    });
+</script>
+</body>
+</html>
