@@ -1,8 +1,17 @@
 package com.greenbridge.entities;
 
-
 import jakarta.persistence.*;
 import lombok.*;
+import java.sql.Date;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 
 import java.sql.Date;
 
@@ -12,14 +21,22 @@ import java.sql.Date;
 @NoArgsConstructor
 public class Cliente {
 
+    /** Identificativo utente cliente. */
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
     @Column(name="id_cliente")
     private Integer id;
+    /** Nome del cliente. */
     private String nome;
+    /** Cognome del cliente. */
     private String cognome;
-    @Column(name = "pwd")
     private String password;
+    /** Email del cliente. */
+    private String email;
+    /** Password del cliente. */
+
+    private String password;
+    /** Data di nascita del cliente. */
     private Date dataDiNascita;
     private String email;
 
@@ -37,7 +54,12 @@ public class Cliente {
 
 
 
-    public Cliente(String nome, String cognome, String email, String password, Date dataDiNascita) {
+    public Cliente(
+            String nome,
+            String cognome,
+            String email,
+            String password,
+            Date dataDiNascita) {
         this.nome = nome;
         this.cognome = cognome;
         this.email = email;

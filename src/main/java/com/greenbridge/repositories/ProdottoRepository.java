@@ -9,4 +9,5 @@ import java.util.List;
 public interface ProdottoRepository extends JpaRepository<Prodotto, Integer> {
     List<Prodotto> findAllByAgricoltoreAndAcquistabileTrue(Agricoltore agricoltore);
     Prodotto getProdottoByIdProdotto(int id);
+    List<Prodotto> findByNomeContainingIgnoreCase(String nome);
 }

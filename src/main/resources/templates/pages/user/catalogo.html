@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista Prodotti</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/catalogo.css}" />
+</head>
+<body>
+
+<h2>Lista Prodotti</h2>
+<div class="insert-button">
+    <a th:href="@{/formInserimento}">
+        <button type="button">Inserisci prodotto</button>
+    </a>
+</div>
+
+<div class="product-container">
+    <div th:each="prodotto : ${prodotti}" class="product-card">
+        <h3 th:text="${prodotto.nome}"></h3>
+        <img th:if="${prodotto.immagineBase64}" th:src="'data:image/png;base64,' + ${prodotto.immagineBase64}" alt="Immagine" class="product-image"/>
+        <p th:text="${prodotto.descrizione}"></p>
+        <p>Prezzo: €<span th:text="${prodotto.prezzoVendita}"></span></p>
+        <a th:href="@{/formModificaProdotto/{id}(id=${prodotto.idProdotto})}">
+            <button type="button">Modifica</button>
+        </a>
+        <a th:href="@{/cancellaProdotto/{id}(id=${prodotto.idProdotto})}"
+           onclick="return confermaCancellazione()">
+            <button type="button">Cancella</button>
+        </a>
+    </div>
+</div>
+</body>
+<script>
+    function confermaCancellazione() {
+        if (confirm("Eliminare il prodotto? La cancellazione non comporterà modifiche alle fatture")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>
+</html>
