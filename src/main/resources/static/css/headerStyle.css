@@ -108,18 +108,12 @@
         visibility: visible;
     }
 
-    #searchBar {
-        border-radius: 20px !important;
-        padding: 8px !important;
-    }
+}
 
-    #searchBar:focus {
-        outline: none !important;
-    }
-
-    #searchButton {
-        border-radius: 20px !important;
-        padding: 10px 20px !important;
-    }
-
+#searchButton {
+    margin-top: 80px;
+    height: 70px;
+    width: 70px;
+    border-radius: 50px;
+    background-color: white;
 }
