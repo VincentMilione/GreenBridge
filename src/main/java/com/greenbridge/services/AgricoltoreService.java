@@ -10,4 +10,5 @@ public interface AgricoltoreService {
     Agricoltore getSingleAgricoltore(int id);
     Agricoltore getAgricoltoreByEmail(String email);
 
+
 }

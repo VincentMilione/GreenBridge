@@ -139,9 +139,8 @@ public class ProdottoController {
   @GetMapping("/prodotto/{idProdotto}")
     String getProdotto(Model model, @PathVariable int idProdotto){
         Prodotto prodotto = prodottoService.getProdottoById(idProdotto);
-        System.out.println(idProdotto);
         model.addAttribute("prodotto", prodotto);
-        return "pages/user/prodotto";
+        return "prodotto";
     }
 
     @GetMapping("/")

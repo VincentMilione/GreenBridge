@@ -14,6 +14,7 @@ import java.util.List;
 public class Agricoltore {
      @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+     @Column(name="id_agricoltore")
     private int id;
     private String nome;
     private String nomeBottega;

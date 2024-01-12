@@ -30,15 +30,6 @@ public class CarrelloController {
 
 
 
-    @GetMapping("/prodotto/{id}")
-        //@ResponseBody
-    String getProdotto(Model model,@PathVariable Integer id){
-
-        Prodotto prodotto = prodottoService.getProdottoById(id);
-        model.addAttribute("prodotto", prodotto);
-        return "/prodotto";
-    }
-
     @GetMapping("/carrello")
         //@ResponseBody
     String getCarrello(Model model, HttpSession session){
@@ -49,24 +40,7 @@ public class CarrelloController {
         return "/carrello";
 
     }
-   /* @PostMapping ("/checkout")
-    String getCheckout(@RequestParam int id, Model model, HttpSession session){
-           Cliente cliente =(Cliente) session.getAttribute("cliente");
-           session.setAttribute("prodotto",prodottoService.getProdottoById(id));
-           model.addAttribute("nome",cliente.getNome());
-           model.addAttribute("cognome",cliente.getCognome());
-           return "/checkout";
-    }
 
-    @PostMapping ("/checkForm")
-    @ResponseBody
-    String checkForm(@RequestBody IndirizzoSpedizione indirizzoSpedizione, Model model, HttpSession session){
-        indirizzoSpedizione.setCliente( (Cliente) session.getAttribute("cliente") );
-        indirizzoSpedizioneService.saveIndirizzoSpedizione(indirizzoSpedizione);
-
-
-        return "indirizzoSpedizione";
-    }*/
 
 
 
