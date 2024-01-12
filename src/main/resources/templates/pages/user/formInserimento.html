@@ -10,35 +10,47 @@
 
 <h1>Inserimento prodotto</h1>
 <form th:action="@{/addProdotto}" method="post" th:object="${prodotto}" enctype="multipart/form-data">
+
     <label for="nome">Nome:</label>
-    <input type="text" id="nome" th:field="*{nome}" required>
+    <input type="text" id="nome" th:field="*{nome}" required pattern=".{1,20}" title="Il nome deve essere tra 1 e 20 caratteri">
 
     <label for="origine">Origine:</label>
-    <input type="text" id="origine" th:field="*{origine}" required>
+    <input type="text" id="origine" th:field="*{origine}" required pattern=".{1,20}" title="L'origine deve essere tra 1 e 20 caratteri">
 
     <label for="immagineFile">Immagine:</label>
-    <input type="file" id="immagineFile" th:field="*{immagineFile}" accept="image/*" required>
+    <input type="file" id="immagineFile" th:field="*{immagineFile}" required  onchange="validateFileType(this)">
 
     <label for="formatoVendita">Formato Vendita:</label>
-    <input type="text" id="formatoVendita" th:field="*{formatoVendita}" required pattern="[0-9]+([,.][0-9]+)?">
-
-    <label for="prezzoKg">Prezzo al Kg:</label>
-    <input type="text" id="prezzoKg" th:field="*{prezzoKg}" required pattern="[0-9]+([,.][0-9]+)?">
+    <input type="number" id="formatoVendita" step="0.01" th:field="*{formatoVendita}" required min="0.2" max="20" title="Il formato deve essere compreso tra 0,2 e 20">
 
     <label for="prezzoVendita">Prezzo di vendita:</label>
-    <input type="text" id="prezzoVendita" th:field="*{prezzoVendita}" required pattern="[0-9]+([,.][0-9]+)?">
+    <input type="number" id="prezzoVendita" step="0.01" th:field="*{prezzoVendita}" required min="0.2" max="40" title="Il prezzo di vendita deve essere compreso tra 0,2 e 40">
+
+    <label for="prezzoKg">Prezzo al Kg:</label>
+    <input type="number" id="prezzoKg" step="0.01" th:field="*{prezzoKg}" required min="1" max="20" title="Il prezzo al Kg deve essere compreso tra 1 e 20">
 
     <label for="quantitaDisp">Quantità Disponibile:</label>
-    <input type="text" id="quantitaDisp" th:field="*{quantitaDisp}"  required pattern="[0-9]+([,.][0-9]+)?">
+    <input type="number" id="quantitaDisp" step="0.01" th:field="*{quantitaDisp}" required min="1" max="40" title="La quantità deve essere compresa tra 1 e 40">
 
     <label for="lotto">Rintracciabilità:</label>
-    <input type="number" id="lotto" th:field="*{lotto}"  required>
+    <input type="text" id="lotto" th:field="*{lotto}" required pattern="^\d{5}$" title="La rintracciabilità deve essere di 5 numeri">
 
     <label for="descrizione">Descrizione:</label>
-    <input type="text" id="descrizione" th:field="*{descrizione}" required>
+    <input type="text" id="descrizione" th:field="*{descrizione}" required pattern=".{1,100}" title="La descrizone deve essere tra 1 e 100 caratteri">
 
     <button type="submit">Salva</button>
 </form>
 
 </body>
+<script>
+    function validateFileType(input) {
+        const allowedExtensions = ['png', 'jpeg', 'jpg'];
+        const fileName = input.value.toLowerCase();
+        const extension = fileName.split('.').pop();
+
+        if (!allowedExtensions.includes(extension)) {
+            input.value = ''; // Cancella il valore del campo file
+        }
+    }
+</script>
 </html>
