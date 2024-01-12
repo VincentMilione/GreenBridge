@@ -15,7 +15,6 @@ public class CarrelloCliente {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    @Column(name="id")
     private Integer id_carrello;
     @ManyToOne
     @JoinColumn(name = "id_cliente")

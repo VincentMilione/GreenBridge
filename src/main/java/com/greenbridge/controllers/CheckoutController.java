@@ -34,7 +34,7 @@ public class CheckoutController {
         }
         model.addAttribute("nome",cliente.getNome());
         model.addAttribute("cognome",cliente.getCognome());
-        return "/checkout";
+        return "checkout";
     }
 
     @PostMapping ("/checkForm")
