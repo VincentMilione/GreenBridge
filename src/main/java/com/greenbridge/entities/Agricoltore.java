@@ -14,12 +14,12 @@ import java.util.List;
 public class Agricoltore {
      @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-     @Column(name="id_agricoltore")
     private int id;
     private String nome;
     private String nomeBottega;
     private String indirizzoBottega;
     private String email;
+    @Column(name="pwd")
     private String password;
 
     @OneToMany(mappedBy = "agricoltore")

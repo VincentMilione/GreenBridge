@@ -20,9 +20,11 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ProdottiOrdine {
 
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
 
     @ManyToOne
     @JoinColumn(name = "id_prodotto")

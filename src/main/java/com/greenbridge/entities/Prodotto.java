@@ -15,6 +15,7 @@ import java.util.Base64;
 @NoArgsConstructor
 public class Prodotto {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer idProdotto;
 
     private String nome;

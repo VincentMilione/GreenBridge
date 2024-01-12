@@ -11,6 +11,7 @@
 <body>
     <div class="titolo"><h2> Checkout </h2></div>
     <div class="container">
+        <div th:text="${session.counter}"></div>
             <label for="nome">Nome:</label>
             <input type="text" id="nome" name="nome" th:value="${nome}" readonly required>
 
@@ -66,14 +67,10 @@
             url: '/checkForm',
             contentType: 'application/json',
             data: JSON.stringify(indirizzo),
-            /*success: function (response) {
-                console.log(response)
-                window.location.replace("detailCliente");
-            },
-            error: function (response) {
-                console.log(response)
-                $("#esito").text("Credenziali errate")
-            }*/
+            success: function (response) {
+                if(response === ("payment"))
+                    window.location.replace("/paymentSuccess");
+            }
         });
 
 

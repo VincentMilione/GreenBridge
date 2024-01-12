@@ -28,11 +28,9 @@
                 contentType: 'application/json',
                 data: JSON.stringify(cliente),
                 success: function (response) {
-                    console.log(response)
                     window.location.replace("detailCliente");
                 },
                 error: function (response) {
-                    console.log(response)
                     $("#esito").text("Credenziali errate")
                 }
             });

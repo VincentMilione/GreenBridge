@@ -15,7 +15,7 @@ public class CarrelloCliente {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private Integer id_carrello;
+    private Integer id;
     @ManyToOne
     @JoinColumn(name = "id_cliente")
     private Cliente cliente;

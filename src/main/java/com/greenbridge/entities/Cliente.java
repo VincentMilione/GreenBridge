@@ -31,9 +31,10 @@ public class Cliente {
     /** Email del cliente. */
     private String email;
     /** Password del cliente. */
+    @Column(name = "pwd")
     private String password;
     /** Data di nascita del cliente. */
-    private Date dataDiNascita;
+    private Date dataNascita;
 
     @Override
     public String toString() {
@@ -42,7 +43,7 @@ public class Cliente {
             ", cognome='" + cognome + '\'' +
             ", email='" + email + '\'' +
             ", password='" + password + '\'' +
-            ", dataDiNascita=" + dataDiNascita +
+            ", dataNascita=" + dataNascita +
             '}';
     }
 
@@ -53,12 +54,12 @@ public class Cliente {
             String cognome,
             String email,
             String password,
-            Date dataDiNascita) {
+            Date dataNascita) {
         this.nome = nome;
         this.cognome = cognome;
         this.email = email;
         this.password = password;
-        this.dataDiNascita = dataDiNascita;
+        this.dataNascita = dataNascita;
     }
 
 }

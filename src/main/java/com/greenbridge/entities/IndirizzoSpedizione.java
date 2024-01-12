@@ -42,16 +42,16 @@ public class IndirizzoSpedizione {
     @Column(name = "citta")
     private String citta;
 
-    @Column(name = "paese")
-    private String paese;
+    @Column(name = "provincia")
+    private String provincia;
 
-    public IndirizzoSpedizione(Cliente cliente, Integer civico, String via, Integer cap, String citta, String paese) {
+    public IndirizzoSpedizione(Cliente cliente, Integer civico, String via, Integer cap, String citta, String provincia) {
         this.cliente = cliente;
         this.civico = civico;
         this.via = via;
         this.cap = cap;
         this.citta = citta;
-        this.paese = paese;
+        this.provincia = provincia;
     }
 
     public Boolean isEmpty(){
@@ -68,7 +68,7 @@ public class IndirizzoSpedizione {
                 ", via='" + via + '\'' +
                 ", cap=" + cap +
                 ", citta='" + citta + '\'' +
-                ", paese='" + paese + '\'' +
+                ", provincia='" + provincia + '\'' +
                 '}';
     }
 }
