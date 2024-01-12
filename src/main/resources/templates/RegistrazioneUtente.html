@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
     <title>Registrazione</title>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -78,7 +78,6 @@
 
 
 <script th:inline="javascript">
-
 
     function isNameValid(nome) {
         if (nome === "" || nome === null) {
@@ -173,8 +172,6 @@
         if (acceptPrivacy()) {
             return true;
         }
-
-
 
 
         $.ajax({

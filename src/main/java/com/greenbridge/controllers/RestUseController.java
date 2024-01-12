@@ -2,7 +2,6 @@ package com.greenbridge.controllers;
 
 import com.greenbridge.entities.Agricoltore;
 import com.greenbridge.services.AgricoltoreServiceImpl;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
@@ -18,13 +17,13 @@ public class RestUseController {
     private AgricoltoreServiceImpl agricoltoreService;
 
     @GetMapping("/Agricoltori")
-    public List<Agricoltore> getAgricoltori(){
+    public List<Agricoltore> getAllAgricoltori(){
         return agricoltoreService.getAgricoltori();
 
     }
 
     @GetMapping("/Agricoltori/{id}")
-    public Agricoltore getAgricoltore(@PathVariable int id){
+    public Agricoltore getAgricoltoreById(@PathVariable int id){
         return agricoltoreService.getSingleAgricoltore(id);
     }
 

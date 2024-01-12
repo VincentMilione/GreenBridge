@@ -18,6 +18,17 @@ public class Agricoltore {
     private String email;
     private String password;
 
+    public Agricoltore(String nome,
+                       String nomeBottega,
+                       String indirizzoBottega,
+                       String email,
+                       String password) {
+        this.nome = nome;
+        this.nomeBottega = nomeBottega;
+        this.indirizzoBottega = indirizzoBottega;
+        this.email = email;
+        this.password = password;
+    }
 
 
 }
