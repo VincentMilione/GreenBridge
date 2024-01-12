@@ -1,5 +1,5 @@
-create database greenbridgedb2;
-use greenbridgedb2;
+create database greenbridgedb;
+use greenbridgedb;
 create table portafoglio(
 id int primary key auto_increment,
 credito float,
@@ -12,6 +12,7 @@ nome varchar(40) not null,
 email varchar(50) not null,
 pwd varchar(16) not null,
 nome_bottega varchar(30) not null,
+indirizzo_bottega varchar(30) not null,
 id_portafoglio int,
 foreign key(id_portafoglio) references portafoglio(id)
 ON update cascade
@@ -155,7 +156,7 @@ civico int not null,
 via varchar(20) not null,
 cap int not null,
 citta varchar(20) not null,
-paese varchar(20) not null,
+provincia varchar(20) not null,
 foreign key(id_cliente) references cliente(id)
 on update cascade
 on delete cascade
