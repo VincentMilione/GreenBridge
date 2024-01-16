@@ -73,6 +73,7 @@ importo float not null,
 data_ordine date not null,
 pagamento varchar(20),
 id_cliente int NULL,
+id_indirizzo int,
 foreign key(id_cliente) references cliente(id)
 on update cascade
 on delete set null,
