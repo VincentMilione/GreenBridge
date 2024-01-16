@@ -11,7 +11,7 @@ id int primary key auto_increment,
 nome varchar(40) not null,
 email varchar(50) not null,
 pwd varchar(16) not null,
-nome_bottega varchar(30) not null,
+nome_bottega varchar(255) not null,
 indirizzo_bottega varchar(255) not null,  
 id_portafoglio int,
 foreign key(id_portafoglio) references portafoglio(id)
@@ -27,7 +27,7 @@ pwd varchar(16) not null
 
 create table certificato(
 id int primary key auto_increment,
-nome varchar(20) not null,
+nome varchar(100) not null,
 data_scadenza date not null,
 scansione mediumblob not null,
 id_agricoltore int,
@@ -114,7 +114,7 @@ create table recensione_agricoltore(
 id int primary key auto_increment,
 id_cliente int,
 id_agricoltore int,
-descrizione varchar(30) not null,
+descrizione varchar(200) not null,
 voto int not null,
 foreign key(id_agricoltore) references agricoltore(id)
 on update cascade
@@ -141,7 +141,7 @@ create table recensione_prodotti(
 id int primary key auto_increment, 
 id_cliente int,
 id_prodotto int,
-descrizione varchar(30) not null,
+descrizione varchar(200) not null,
 voto int not null,
 foreign key(id_cliente) references cliente(id)
 on update cascade
