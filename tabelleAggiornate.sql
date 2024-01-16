@@ -86,6 +86,7 @@ create table prodotti_ordine(
 id_prodotto int,
 id_ordine int,
 kg_acquistati int,
+prezzo_kg float,
 foreign key(id_prodotto) references prodotto(id)
 on update cascade
 on delete no action,
@@ -109,6 +110,7 @@ on delete no action
 );
 
 create table recensione_agricoltore(
+id int primary key auto_increment,
 id_cliente int,
 id_agricoltore int,
 descrizione varchar(30) not null,
@@ -118,8 +120,7 @@ on update cascade
 on delete cascade,
 foreign key(id_cliente) references cliente(id)
 on update cascade
-on delete cascade,
-primary key(id_cliente,id_agricoltore)
+on delete cascade
 );
 
 create table carrello_cliente(
@@ -136,6 +137,7 @@ on delete cascade
 );
 
 create table recensione_prodotti(
+id int primary key auto_increment, 
 id_cliente int,
 id_prodotto int,
 descrizione varchar(30) not null,
@@ -145,8 +147,7 @@ on update cascade
 on delete cascade,
 foreign key(id_prodotto) references prodotto(id)
 on update cascade
-on delete cascade,
-primary key(id_cliente,id_prodotto)
+on delete cascade
 );
 
 create table indirizzo_spedizione(
