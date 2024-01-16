@@ -155,7 +155,7 @@ create table indirizzo_spedizione(
 id_cliente int,
 id int primary key auto_increment,
 civico int not null,
-via varchar(20) not null,
+via varchar(50) not null,
 cap int not null,
 citta varchar(20) not null,
 provincia varchar(20) not null,
