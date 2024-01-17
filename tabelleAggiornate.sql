@@ -84,6 +84,7 @@ on delete set null
 );
 
 create table prodotti_ordine(
+id int primary key auto_increment,
 id_prodotto int,
 id_ordine int,
 kg_acquistati int,
@@ -93,8 +94,7 @@ on update cascade
 on delete no action,
 foreign key(id_ordine) references ordine(id)
 on update cascade
-on delete cascade,
-primary key(id_prodotto,id_ordine)
+on delete cascade
 );
 
 create table fattura(
@@ -163,6 +163,3 @@ foreign key(id_cliente) references cliente(id)
 on update cascade
 on delete cascade
 );
-
-
-
