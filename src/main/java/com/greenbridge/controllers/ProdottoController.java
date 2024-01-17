@@ -3,7 +3,11 @@ package com.greenbridge.controllers;
 import com.greenbridge.entities.Prodotto;
 import com.greenbridge.services.ProdottoService;
 import jakarta.servlet.http.HttpSession;
+import org.hibernate.exception.DataException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -57,9 +61,29 @@ public class ProdottoController {
             model.addAttribute("prodotti", prodotti);
         } catch (IOException e) {
             System.out.println(e.getMessage());
+        } catch (DataIntegrityViolationException e) {
+            // Forza il lancio dell'eccezione
+            throw new DataIntegrityViolationException("Data truncation: Data too long for column");
+        } catch (Exception e){
+            handleException(e);
         }
         return "pages/user/catalogo";
     }
+
+    // Gestione dell'eccezione a livello di controller
+    @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public void handleDataIntegrityViolationException(DataIntegrityViolationException e) {
+        // Puoi aggiungere ulteriori log o gestione dell'errore se necessario
+        System.out.println("Handling DataIntegrityViolationException: " + e.getMessage());
+    }
+    @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
+    @ExceptionHandler(Exception.class)
+    public void handleException(Exception e) {
+        // Puoi aggiungere ulteriori log o gestione dell'errore se necessario
+        System.out.println("Handling Exception: " + e.getMessage());
+    }
+
 
     @GetMapping("/catalogo")
     public String getCatalogo(Model model, HttpSession session) {
