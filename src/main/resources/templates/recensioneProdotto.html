@@ -9,30 +9,32 @@
     <div class="container">
         <div class="recensioneContainer">
             <img id="imgProdotto" src="/img/banana.png" alt="foto-prodotto">
-            <p class="prodottoRecensito"> Recensisci Prodotto </p>
-            <form action="" method="post" class="rate">
-                    <input type="radio" id="star5" name="rate" value="5" />
+            <p class="prodottoRecensito" th:action th:text="${'Recensisci '+prodottoDaRecensire.prodotto.nome}"> </p>
+            <form th:action="@{/saveRecensione}" method="post" th:object="${rec}" class="rate">
+                    <input type="radio" id="star5" name="rate" value="5" th:field="*{voto}" />
                     <label for="star5" title="text">5 stars</label>
-                    <input type="radio" id="star4" name="rate" value="4" />
+                    <input type="radio" id="star4" name="rate" value="4" th:field="*{voto}"/>
                     <label for="star4" title="text">4 stars</label>
-                    <input type="radio" id="star3" name="rate" value="3" />
+                    <input type="radio" id="star3" name="rate" value="3" th:field="*{voto}"/>
                     <label for="star3" title="text">3 stars</label>
-                    <input type="radio" id="star2" name="rate" value="2" />
+                    <input type="radio" id="star2" name="rate" value="2" th:field="*{voto}"/>
                     <label for="star2" title="text">2 stars</label>
-                    <input type="radio" id="star1" name="rate" value="1" />
+                    <input type="radio" id="star1" name="rate" value="1" th:field="*{voto}"/>
                     <label for="star1" title="text">1 star</label>
                 <br>
-                <textarea id="testo-recensione" placeholder="Descrivi la tua esperienza..."></textarea>
+                <textarea id="testo-recensione" placeholder="Descrivi la tua esperienza..." th:field="*{descrizione}"></textarea>
+                <br>
+                <div class="buttonsLeft">
+                    <input type="submit" class="buttonRecensione" value="Indietro" name="Indietro"></input>
+                    <input type="submit" class="buttonRecensione" value="Annulla" name="Annulla"></input>
+                </div>
+                <div class="buttonsRight">
+                    <input type="submit" class="buttonRecensione" value="Avanti" name="Avanti"></input>
+                    <input type="submit" class="buttonRecensione" value="Salta" name="Salta"></input>
+                </div>
             </form>
         </div>
     </div>
-    <div class="buttonsLeft">
-        <input type="button" class="buttonRecensione" value="Indietro"></input>
-        <input type="button" class="buttonRecensione" value="Annulla"></input>
-    </div>
-    <div class="buttonsRight">
-        <input type="button" class="buttonRecensione" value="Avanti"></input>
-        <input type="button" class="buttonRecensione" value="Salta"></input>
-    </div>
+
 </body>
 </html>

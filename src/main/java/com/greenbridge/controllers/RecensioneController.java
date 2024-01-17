@@ -1,13 +1,65 @@
 package com.greenbridge.controllers;
 
+import com.greenbridge.entities.Cliente;
+import com.greenbridge.entities.Ordine;
+import com.greenbridge.entities.ProdottiOrdine;
+import com.greenbridge.entities.RecensioneProdotti;
+import com.greenbridge.services.OrdineService;
+import com.greenbridge.services.ProdottiOrdineService;
+import com.greenbridge.services.RecensioneService;
+import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class RecensioneController {
 
-    @GetMapping("/recensione")
-    String recensione(){
+    @Autowired
+    ProdottiOrdineService prodottiOrdineService;
+    @Autowired
+    RecensioneService recensioneService;
+    @Autowired
+    OrdineService ordineService;
+
+    @GetMapping("/recensione/{id}")
+    String recensione(@PathVariable("id") Integer id, HttpSession session, Model model){
+        Ordine ordine = ordineService.getOrdineById(id);
+        List<ProdottiOrdine> prodottiDaRecensire = prodottiOrdineService.findAllProdottiOrdineByOrdineId(ordine);
+        session.setAttribute("prodottiOrdine", prodottiDaRecensire);
+        session.setAttribute("indiceRecensioni", 0);
+        model.addAttribute("prodottoDaRecensire", prodottiDaRecensire.get(0));
+        model.addAttribute("rec", new RecensioneProdotti());
         return "recensioneProdotto";
+    }
+
+    @PostMapping("/saveRecensione")
+    String saveRecensione(@ModelAttribute RecensioneProdotti rec, HttpSession session, Model model){
+
+        Cliente cliente = (Cliente) session.getAttribute("cliente");
+        Integer idCliente = cliente.getId();
+        List<ProdottiOrdine> prodottiOrdine = (List<ProdottiOrdine>) session.getAttribute("prodottiOrdine");
+        System.out.println(rec);
+        rec.setIdCliente(idCliente);
+        int indice = (int) session.getAttribute("indiceRecensioni");
+        rec.setIdProdotto(prodottiOrdine.get(indice).getId());
+        recensioneService.saveRecensioneProdotto(rec);
+        indice++;
+        if (indice == prodottiOrdine.size()) {
+            return "home";
+        }
+        else{
+            model.addAttribute("prodottoDaRecensire", prodottiOrdine.get(indice));
+            model.addAttribute("recensioneProdotto", new RecensioneProdotti());
+            session.setAttribute("indiceRecensioni", indice);
+            return "recensioneProdotto";
+        }
     }
 }

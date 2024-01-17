@@ -5,6 +5,8 @@ import com.greenbridge.repositories.OrdineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class OrdineService {
 
@@ -17,6 +19,10 @@ public class OrdineService {
 
     public Ordine salvaOrdine(Ordine ordine) {
         return ordineRepository.save(ordine);
+    }
+
+    public Ordine getOrdineById(Integer id) {
+        return ordineRepository.findOrdineById(id);
     }
 
 

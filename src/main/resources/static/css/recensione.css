@@ -73,7 +73,6 @@
 }
 
 .buttonsLeft{
-    margin-top: -100px;
     margin-left: 50px;
     display: flex;
     flex-direction: column;
@@ -81,7 +80,6 @@
 }
 
 .buttonsRight{
-    margin-top: -100px;
     margin-right: 50px;
     display: flex;
     flex-direction: column;
@@ -93,7 +91,7 @@
     width: 200px;
 }
 
-input[type=button]{
+input[type=submit]{
     margin: 20px;
     font-size: 30px;
     border-radius: 20px;
