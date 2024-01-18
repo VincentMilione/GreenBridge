@@ -10,7 +10,7 @@
         <div class="recensioneContainer">
             <img id="imgProdotto" src="/img/banana.png" alt="foto-prodotto">
             <p class="prodottoRecensito" th:action th:text="${'Recensisci '+prodottoDaRecensire.prodotto.nome}"> </p>
-            <form th:action="@{/saveRecensione}" method="post" th:object="${rec}" class="rate">
+            <form th:action="@{/saveRecensione}" method="post" th:object="${recensione}" class="rate">
                     <input type="radio" id="star5" name="rate" value="5" th:field="*{voto}" />
                     <label for="star5" title="text">5 stars</label>
                     <input type="radio" id="star4" name="rate" value="4" th:field="*{voto}"/>
@@ -25,12 +25,12 @@
                 <textarea id="testo-recensione" placeholder="Descrivi la tua esperienza..." th:field="*{descrizione}"></textarea>
                 <br>
                 <div class="buttonsLeft">
-                    <input type="submit" class="buttonRecensione" value="Indietro" name="Indietro"></input>
-                    <input type="submit" class="buttonRecensione" value="Annulla" name="Annulla"></input>
+                    <input th:if="${session.indiceRecensioni > 0}" th:formaction="@{/recensioneIndietro}" type="submit" class="buttonRecensione" value="Indietro" name="Indietro">
                 </div>
                 <div class="buttonsRight">
-                    <input type="submit" class="buttonRecensione" value="Avanti" name="Avanti"></input>
-                    <input type="submit" class="buttonRecensione" value="Salta" name="Salta"></input>
+                    <input th:if="${session.indiceRecensioni < session.prodottiOrdine.size()-1}" type="submit" class="buttonRecensione" value="Avanti" name="Avanti">
+                    <input th:if="${session.indiceRecensioni == session.prodottiOrdine.size()-1}" type="submit" class="buttonRecensione" value="Fine" name="Fine">
+                    <input th:if="${session.indiceRecensioni < session.prodottiOrdine.size()-1}" th:formaction="@{/recensioneAvanti}" type="submit" class="buttonRecensione" value="Salta" name="Salta" >
                 </div>
             </form>
         </div>

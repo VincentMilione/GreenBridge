@@ -35,8 +35,9 @@ public class RecensioneController {
         List<ProdottiOrdine> prodottiDaRecensire = prodottiOrdineService.findAllProdottiOrdineByOrdineId(ordine);
         session.setAttribute("prodottiOrdine", prodottiDaRecensire);
         session.setAttribute("indiceRecensioni", 0);
+        int indice = (int) session.getAttribute("indiceRecensioni");
         model.addAttribute("prodottoDaRecensire", prodottiDaRecensire.get(0));
-        model.addAttribute("rec", new RecensioneProdotti());
+        model.addAttribute("recensione", new RecensioneProdotti());
         return "recensioneProdotto";
     }
 
@@ -46,7 +47,6 @@ public class RecensioneController {
         Cliente cliente = (Cliente) session.getAttribute("cliente");
         Integer idCliente = cliente.getId();
         List<ProdottiOrdine> prodottiOrdine = (List<ProdottiOrdine>) session.getAttribute("prodottiOrdine");
-        System.out.println(rec);
         rec.setIdCliente(idCliente);
         int indice = (int) session.getAttribute("indiceRecensioni");
         rec.setIdProdotto(prodottiOrdine.get(indice).getId());
@@ -57,9 +57,33 @@ public class RecensioneController {
         }
         else{
             model.addAttribute("prodottoDaRecensire", prodottiOrdine.get(indice));
-            model.addAttribute("recensioneProdotto", new RecensioneProdotti());
+            model.addAttribute("recensione", new RecensioneProdotti());
             session.setAttribute("indiceRecensioni", indice);
             return "recensioneProdotto";
         }
+    }
+
+    @PostMapping("/recensioneAvanti")
+    String avanti(HttpSession session, Model model){
+        List<ProdottiOrdine> prodottiOrdine = (List<ProdottiOrdine>) session.getAttribute("prodottiOrdine");
+        int indice =(int) session.getAttribute("indiceRecensioni");
+        indice++;
+        System.out.println("avanti " + indice);
+        session.setAttribute("indiceRecensioni", indice);
+        model.addAttribute("prodottoDaRecensire", prodottiOrdine.get(indice));
+        model.addAttribute("recensione", new RecensioneProdotti());
+        return "recensioneProdotto";
+    }
+
+    @PostMapping("/recensioneIndietro")
+    String indietro(HttpSession session, Model model){
+        List<ProdottiOrdine> prodottiOrdine = (List<ProdottiOrdine>) session.getAttribute("prodottiOrdine");
+        int indice =(int) session.getAttribute("indiceRecensioni");
+        indice--;
+        System.out.println("indietro " + indice);
+        session.setAttribute("indiceRecensioni", indice);
+        model.addAttribute("prodottoDaRecensire", prodottiOrdine.get(indice));
+        model.addAttribute("recensione", new RecensioneProdotti());
+        return "recensioneProdotto";
     }
 }
