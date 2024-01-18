@@ -28,12 +28,39 @@
                     <input th:if="${session.indiceRecensioni > 0}" th:formaction="@{/recensioneIndietro}" type="submit" class="buttonRecensione" value="Indietro" name="Indietro">
                 </div>
                 <div class="buttonsRight">
-                    <input th:if="${session.indiceRecensioni < session.prodottiOrdine.size()-1}" type="submit" class="buttonRecensione" value="Avanti" name="Avanti">
-                    <input th:if="${session.indiceRecensioni == session.prodottiOrdine.size()-1}" type="submit" class="buttonRecensione" value="Fine" name="Fine">
+                    <input th:if="${session.indiceRecensioni < session.prodottiOrdine.size()-1}" type="submit" class="buttonRecensione" value="Avanti" name="Avanti" onclick="verifyFields()">
+                    <input th:if="${session.indiceRecensioni == session.prodottiOrdine.size()-1}" type="submit" class="buttonRecensione" value="Fine" name="Fine" onclick="verifyFields()">
                     <input th:if="${session.indiceRecensioni < session.prodottiOrdine.size()-1}" th:formaction="@{/recensioneAvanti}" type="submit" class="buttonRecensione" value="Salta" name="Salta" >
                 </div>
             </form>
         </div>
+
+        <script>
+            function verifyFields() {
+                var star1 = document.getElementById('star1');
+                var star2 = document.getElementById('star2');
+                var star3 = document.getElementById('star3');
+                var star4 = document.getElementById('star4');
+                var star5 = document.getElementById('star5');
+                var descrizione = document.getElementById('testo-recensione').value.trim();
+                console.log(descrizione.length)
+
+
+
+
+                if (star1.checked === true || star2.checked === true || star3.checked === true
+                    || star4.checked === true || star5.checked === true) {
+                    if(descrizione.length > 200){
+                        console.log(descrizione.length)
+                        alert('Descrizione non inserita!');
+                        event.preventDefault()
+                    }
+                }else{
+                    alert('Voto non inserito!');
+                    event.preventDefault();
+                }
+            }
+        </script>
     </div>
 
 </body>
