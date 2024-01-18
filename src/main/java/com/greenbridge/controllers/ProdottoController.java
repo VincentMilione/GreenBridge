@@ -172,15 +172,16 @@ public class ProdottoController {
 
     @PostMapping ("/ricerca")
     public String getProduct(@RequestParam String name, Model model) {
+        if (name.trim().isEmpty() || name.length() > 50 || !name.matches("^[A-Za-zÀ-ù ‘-]{1,50}$")) {
+            return "error.html";
+        }
+
         List<Prodotto> risultatiRicerca = prodottoService.getResult(name);
-        model.addAttribute("ricerca", risultatiRicerca);
+        if (!risultatiRicerca.isEmpty()) {
+            model.addAttribute("ricerca", risultatiRicerca);
+        }
         return "pages/user/ricercaProdotto";
     }
-
-
-
-
-
 
 }
 
