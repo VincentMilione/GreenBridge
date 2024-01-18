@@ -32,7 +32,8 @@ public class ProdottoService {
         prodottoRepository.saveAndFlush(prodotto);
     }
 
-    public List<Prodotto> getResult(String Nome) {return prodottoRepository.findByNomeContainingIgnoreCase(Nome);
+    public List<Prodotto> getResult(String Nome){
+        return prodottoRepository.findByNomeContainingIgnoreCase(Nome);
     }
 
 

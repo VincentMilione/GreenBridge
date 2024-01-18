@@ -13,8 +13,8 @@
   <div id="firstLevelNavBar">
     <img id="menuIcon" onclick="openMenu()"  src="/img/menu.png">
     <img id="logo" src="/img/logo.png" alt="logo">
-    <form action="/ricerca" method="post" >
-      <input  name="name" placeholder="Cerca..." type="text" id="searchBar" required>
+    <form action="/ricerca" method="post" onsubmit = "return validateForm()">
+      <input  name="name" placeholder="Cerca..." type="text" id="searchBar">
       <button type="submit" id="searchButton">Cerca</button>
     </form>
 
@@ -31,6 +31,7 @@
       <a th:if="${session.cliente != null}" th:href="@{/detailCliente}">
         <img class="imgIcon" src="/img/user.png" alt="userIcon">
       </a>
+    </a>
   </div>
   <div id="secondLevelNavBar" style="left: -400px">
     <a href="#">Catalogo</a>
@@ -76,6 +77,31 @@
       button.style.left = '-400px'
       document.getElementById('menuIcon').src = '/img/menu.png'
     }
+  }
+</script>
+
+<script>
+  function validateForm() {
+    var searchBar = document.getElementById("searchBar");
+    var searchText = searchBar.value.trim();
+
+    if (searchText.length === 0) {
+      alert("Il campo di ricerca non può essere vuoto");
+      return false;
+    }
+
+    if (searchText.length > 50) {
+      alert("Il prodotto inserito è troppo lungo");
+      return false;
+    }
+
+    var regex = /^[A-Za-zÀ-ù ‘-]{1,50}$/;
+    if (!regex.test(searchText)) {
+      alert("Il formato dell'input non è valido. Utilizza solo lettere, spazi, apostrofi e trattini, da 1 a 50 caratteri.");
+      return false; // Impedisce l'invio del modulo
+    }
+
+    return true;
   }
 </script>
 </body>

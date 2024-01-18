@@ -11,8 +11,8 @@ id int primary key auto_increment,
 nome varchar(40) not null,
 email varchar(50) not null,
 pwd varchar(16) not null,
-nome_bottega varchar(30) not null,
-indirizzo_bottega varchar(30) not null,
+nome_bottega varchar(255) not null,
+indirizzo_bottega varchar(255) not null,  
 id_portafoglio int,
 foreign key(id_portafoglio) references portafoglio(id)
 ON update cascade
@@ -27,7 +27,7 @@ pwd varchar(16) not null
 
 create table certificato(
 id int primary key auto_increment,
-nome varchar(20) not null,
+nome varchar(100) not null,
 data_scadenza date not null,
 scansione mediumblob not null,
 id_agricoltore int,
@@ -73,6 +73,7 @@ importo float not null,
 data_ordine date not null,
 pagamento varchar(20),
 id_cliente int NULL,
+id_indirizzo int,
 foreign key(id_cliente) references cliente(id)
 on update cascade
 on delete set null,
@@ -83,16 +84,17 @@ on delete set null
 );
 
 create table prodotti_ordine(
+id int primary key auto_increment,
 id_prodotto int,
 id_ordine int,
 kg_acquistati int,
+prezzo_kg float,
 foreign key(id_prodotto) references prodotto(id)
 on update cascade
 on delete no action,
 foreign key(id_ordine) references ordine(id)
 on update cascade
-on delete cascade,
-primary key(id_prodotto,id_ordine)
+on delete cascade
 );
 
 create table fattura(
@@ -109,17 +111,17 @@ on delete no action
 );
 
 create table recensione_agricoltore(
+id int primary key auto_increment,
 id_cliente int,
 id_agricoltore int,
-descrizione varchar(30) not null,
+descrizione varchar(200) not null,
 voto int not null,
 foreign key(id_agricoltore) references agricoltore(id)
 on update cascade
 on delete cascade,
 foreign key(id_cliente) references cliente(id)
 on update cascade
-on delete cascade,
-primary key(id_cliente,id_agricoltore)
+on delete cascade
 );
 
 create table carrello_cliente(
@@ -136,24 +138,24 @@ on delete cascade
 );
 
 create table recensione_prodotti(
+id int primary key auto_increment, 
 id_cliente int,
 id_prodotto int,
-descrizione varchar(30) not null,
+descrizione varchar(200) not null,
 voto int not null,
 foreign key(id_cliente) references cliente(id)
 on update cascade
 on delete cascade,
 foreign key(id_prodotto) references prodotto(id)
 on update cascade
-on delete cascade,
-primary key(id_cliente,id_prodotto)
+on delete cascade
 );
 
 create table indirizzo_spedizione(
 id_cliente int,
 id int primary key auto_increment,
 civico int not null,
-via varchar(20) not null,
+via varchar(50) not null,
 cap int not null,
 citta varchar(20) not null,
 provincia varchar(20) not null,
@@ -161,6 +163,3 @@ foreign key(id_cliente) references cliente(id)
 on update cascade
 on delete cascade
 );
-
-
-
