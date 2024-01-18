@@ -67,20 +67,17 @@
     resize:none;
 }
 
-.buttons{
-    display: flex;
-    justify-content: space-between;
-}
-
 .buttonsLeft{
     margin-left: 50px;
     display: flex;
+    height: 500px;
     flex-direction: column;
     float: left;
 }
 
 .buttonsRight{
     margin-right: 50px;
+    height: 500px;
     display: flex;
     flex-direction: column;
     float: right;
