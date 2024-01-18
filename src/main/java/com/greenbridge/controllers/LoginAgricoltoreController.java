@@ -18,12 +18,16 @@ public class LoginAgricoltoreController {
     }
     @PostMapping("/loginAgricoltore")
     public ResponseEntity<String> saveAgricoltore(@RequestBody Agricoltore agricoltore, HttpSession session){
+
         Agricoltore a = agricoltoreService.getAgricoltoreByEmail(agricoltore.getEmail());
-        if(a!=null && agricoltore.getPassword().compareTo(a.getPassword()) ==0){
-            session.setAttribute("agricoltore",a);
-               return new ResponseEntity<>("ok", HttpStatus.OK);
-        }
-         return new ResponseEntity<>("not ok",HttpStatus.FORBIDDEN);
+
+            if(a!=null && agricoltore.getPassword().compareTo(a.getPassword()) ==0)
+               {
+                    session.setAttribute("agricoltore",a);
+                    return new ResponseEntity<>("ok", HttpStatus.OK);
+               }
+
+            return new ResponseEntity<>("not ok",HttpStatus.FORBIDDEN);
 
     }
 
