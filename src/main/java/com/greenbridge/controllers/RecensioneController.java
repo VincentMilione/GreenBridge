@@ -30,7 +30,7 @@ public class RecensioneController {
     OrdineService ordineService;
 
     @GetMapping("/recensione/{id}")
-    String recensione(@PathVariable("id") Integer id, HttpSession session, Model model){
+    public String recensione(@PathVariable("id") Integer id, HttpSession session, Model model){
         if(session.getAttribute("cliente") == null) {
             return "loginCliente";
         } else {
