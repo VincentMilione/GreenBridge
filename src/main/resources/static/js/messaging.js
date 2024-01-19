@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
             this.sendMessage(command, 'messages__item--operator');
             switch (command) {
                 case '/start':
-                    submitForm("/sendDataToFlask").done(function (){
+                    submitForm("/api/sendDataToFlask").done(function (){
                         bot.sendMessage('Ecco una lista di agricoltori da noi consigliati:', 'messages__item--visitor');})
                     break;
                 default:

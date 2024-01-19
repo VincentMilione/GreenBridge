@@ -4,11 +4,14 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.client.RestTemplate;
 
 @RestController
+@RequestMapping("/api")
 public class ChatbotRestController {
     @PostMapping ("/sendDataToFlask")
     public String sendDataToFlask() {
@@ -19,7 +22,7 @@ public class ChatbotRestController {
 
         HttpEntity<String> entity = new HttpEntity<>(jsonData, headers);
 
-        String flaskServerUrl = "http://127.0.0.1:5000/receive-data";
+        String flaskServerUrl = "http://127.0.0.1:5000/start-module";
 
         RestTemplate restTemplate = new RestTemplate();
 
@@ -29,5 +32,13 @@ public class ChatbotRestController {
 
 
         return "Request sent to Flask server. Response: " + response;
+    }
+
+    @PostMapping("/ricevi-dati")
+    public String riceviDatiDaFlask(@RequestBody String dati) {
+        // Logica di elaborazione dei dati ricevuti dal server Flask
+        System.out.println("Dati ricevuti da Flask: " + dati);
+
+        return "Risposta al server Flask";
     }
 }
