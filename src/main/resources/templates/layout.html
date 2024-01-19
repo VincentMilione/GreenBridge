@@ -3,7 +3,7 @@
 
 <head>
   <link rel="stylesheet" type="text/css" href="/css/footerStyle.css">
-  <link rel="stylesheet" href="css/headerStyle.css">
+  <link rel="stylesheet" href="/css/headerStyle.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -36,6 +36,7 @@
       <a th:if="${session.cliente != null}" th:href="@{/detailCliente}">
         <img class="imgIcon" src="/img/user.png" alt="userIcon">
       </a>
+    </a>
   </div>
   <div id="secondLevelNavBar" style="left: -400px">
     <a href="#">Catalogo</a>
