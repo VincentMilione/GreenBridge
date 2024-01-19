@@ -20,7 +20,7 @@
 
 /* FINESTRA APERTA */
 .chatbox--active {
-    transform: translateX(860px);
+    transform: translateX(1150px);
     z-index: 123456;
     opacity: 1;
     
