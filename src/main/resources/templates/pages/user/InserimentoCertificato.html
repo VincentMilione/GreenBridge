@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Inserimento Certificato</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/css/InserimentoCertificatoStyle.css">
 </head>
 <body>
@@ -22,34 +21,7 @@
 
     <button type="button" onclick="avanti()">Avanti</button>
 </form>
-<script>
-    function avanti() {
-        var nomeCertificato = document.getElementById('nomeCertificato').value;
-        var dataScadenza = document.getElementById('dataScadenza').value;
-        var scansioneCertificato = document.getElementById('scansioneCertificato').files[0];
 
-        if (nomeCertificato && dataScadenza && scansioneCertificato) {
-            var formData = new FormData();
-            formData.append('nomeCertificato', nomeCertificato);
-            formData.append('dataScadenza', dataScadenza);
-            formData.append('scansioneCertificato', scansioneCertificato);
 
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'server.php', true);
-
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    // Puoi eseguire azioni aggiuntive qui dopo il completamento della richiesta
-                    alert("Dati del certificato inviati con successo!");
-                    // Aggiungi qui il codice per passare alla pagina successiva
-                }
-            };
-
-            xhr.send(formData);
-        } else {
-            alert("Compila tutti i campi prima di procedere.");
-        }
-    }
-</script>
 </body>
 </html>
