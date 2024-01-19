@@ -28,13 +28,13 @@
 <script>
     $(document).ready(function(){
         $("#add").click(function(){
-            var prodotto_id= $("#id").text();
+            var idProdotto= $("#id").text();
             let quantita = $("#quant").text();
-            console.log("id del prodotto:"+ prodotto_id + "quantita prodotto:" + quantita);
+            console.log("id del prodotto:"+ idProdotto + "quantita prodotto:" + quantita);
             $.ajax({
                 url: '/carrello/aggiungiCart',
                 data: {
-                    prodotto_id: prodotto_id, // Sostituisci 'valore_del_nome' con il valore effettivo
+                    idProdotto : idProdotto, // Sostituisci 'valore_del_nome' con il valore effettivo
                     quantita : quantita
                 },
                 type:'POST',

@@ -1,18 +1,27 @@
 package com.greenbridge.controllers;
 
-import com.greenbridge.entities.*;
-
-import com.greenbridge.services.*;
+import com.greenbridge.entities.Agricoltore;
+import com.greenbridge.entities.Ordine;
+import com.greenbridge.entities.Cliente;
+import com.greenbridge.entities.ListCart;
+import com.greenbridge.entities.Portafoglio;
+import com.greenbridge.entities.IndirizzoSpedizione;
+import com.greenbridge.services.CarrelloClienteService;
+import com.greenbridge.services.IndirizzoSpedizioneService;
+import com.greenbridge.services.OrdineService;
+import com.greenbridge.services.ProdottiOrdineService;
+import com.greenbridge.services.PortafoglioService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.sql.Date;
 
 @Controller
 public class CheckoutController {
@@ -20,72 +29,152 @@ public class CheckoutController {
     private ProdottiOrdineService prodottiOrdineService;
     @Autowired
     private OrdineService ordineService;
+    @Autowired
+    private CarrelloClienteService carrelloClienteService;
 
     @Autowired
     private IndirizzoSpedizioneService indirizzoSpedizioneService;
-    @PostMapping ("/checkout")
-    String getCheckout(@RequestParam int id, Model model, HttpSession session){
-        Cliente cliente =(Cliente) session.getAttribute("cliente");
-        List_Cart carrello = (List_Cart) session.getAttribute("list_cart");
-        if(id==0){
-                session.setAttribute("checkout",carrello);
-        }else{
-            List_Cart lista_checkout= new List_Cart(cliente);
-            lista_checkout.addCart(carrello.getProdottoById(id));
-            session.setAttribute("checkout",lista_checkout);
+
+    @Autowired
+    private PortafoglioService portafoglioService;
+    @PostMapping("/checkout")
+    String getCheckout(@RequestParam int id, Model model, HttpSession session) {
+        Cliente cliente = (Cliente) session.getAttribute("cliente");
+        ListCart carrello = (ListCart) session.getAttribute("list_cart");
+        //il carrello è vuoto
+        if (carrello.getListCart().isEmpty()) {
+            model.addAttribute("cart", carrello.getProdottiOrdinati());
+            model.addAttribute("totale", carrello.getTotale());
+            return "/carrello";
         }
-        model.addAttribute("nome",cliente.getNome());
-        model.addAttribute("cognome",cliente.getCognome());
+        //checkout totale
+        if (id == 0) {
+                session.setAttribute("checkout", carrello);
+        } else { //checkout singolo
+            ListCart listaCheckout = new ListCart(cliente);
+            listaCheckout.addCart(carrello.getProdottoById(id));
+            session.setAttribute("checkout", listaCheckout);
+        }
+        model.addAttribute("nome", cliente.getNome());
+        model.addAttribute("cognome", cliente.getCognome());
+
         return "checkout";
     }
+    public void aggiornaCarrello(HttpSession session,
+                                  ListCart listaCheckout) {
+        ListCart listCart = null;
+        if (listaCheckout.getListCart().size() == 1) {
+            listCart = (ListCart) session.getAttribute("list_cart");
+            carrelloClienteService.deleteByProdotto(listaCheckout.
+                    getListCart().
+                    get(0).getProdotto());
+            listCart.delete(
+                    listaCheckout.getListCart().get(0).
+                            getProdotto().getIdProdotto());
+        } else {
+            listCart = new ListCart(listaCheckout.getCliente());
+            session.removeAttribute("list_cart");
+            session.setAttribute("list_cart", listCart);
+            carrelloClienteService.deleteAllByCliente(listaCheckout.
+                    getCliente());
+        }
 
+
+    }
+
+    void aggiornaPortafoglio(float totale, Agricoltore agricoltore) {
+        int id = agricoltore.getPortafoglio().getId();
+        Portafoglio portafoglio = portafoglioService.getPortafoglioById(id);
+        portafoglio.editCredito("add", totale);
+        portafoglioService.salvaPortafoglio(portafoglio);
+
+    }
     @PostMapping ("/checkForm")
-    ResponseEntity<String> checkForm(@RequestBody IndirizzoSpedizione indirizzoSpedizione, Model model, HttpSession session){
-        int idSpedizione=0;
+    ResponseEntity<String> checkForm(@RequestBody
+                                     IndirizzoSpedizione indirizzoSpedizione,
+                                     Model model, HttpSession session) {
+        int idSpedizione = 0;
         session.setAttribute("counter", 2);
-        indirizzoSpedizione.setCliente( (Cliente) session.getAttribute("cliente") );
+        indirizzoSpedizione.setCliente((Cliente)
+                session.getAttribute("cliente"));
         IndirizzoSpedizione indirizzoSpedizione1;
-        if(!indirizzoSpedizione.isEmpty()){
-            indirizzoSpedizione1=indirizzoSpedizioneService.saveIndirizzoSpedizione(indirizzoSpedizione);
-            idSpedizione=indirizzoSpedizione1.getId();
-        }
-        List_Cart lista_checkout= (List_Cart)session.getAttribute("checkout");
 
-        if(lista_checkout.getList_cart().size()==1) {
-            Ordine ordine = new Ordine(lista_checkout.getTotale(), "mastercard", lista_checkout.getCliente(), lista_checkout.getList_cart().get(0).getProdotto().getAgricoltore()/*,idSpedizione*/);
+        if (!indirizzoSpedizione.isEmpty()) {
+
+            indirizzoSpedizione1 = indirizzoSpedizioneService.
+                    saveIndirizzoSpedizione(indirizzoSpedizione);
+            idSpedizione = indirizzoSpedizione1.getId();
+        }
+        ListCart listaCheckout = (ListCart) session.getAttribute("checkout");
+        aggiornaCarrello(session, listaCheckout);
+
+        if (listaCheckout.getListCart().size() == 1) {
+            //accredito la somma
+            Agricoltore agricoltore = listaCheckout.getListCart().get(0).
+                    getProdotto().getAgricoltore();
+            aggiornaPortafoglio(listaCheckout.getTotale(), agricoltore);
+
+            //creo nuovo ordine
+            Ordine ordine = new Ordine(listaCheckout.getTotale(),
+                    "mastercard", idSpedizione, listaCheckout.getCliente(),
+                    listaCheckout.getListCart().get(0).
+                            getProdotto().getAgricoltore());
             Ordine newOrdine = ordineService.salvaOrdine(ordine);
-            prodottiOrdineService.saveAllProdottiPerOrdine(lista_checkout,ordine);
-            lista_checkout.getList_cart().remove(0);
+            prodottiOrdineService.
+                    saveAllProdottiPerOrdine(listaCheckout, newOrdine);
+            listaCheckout.getListCart().remove(0);
 
-        }else  if(lista_checkout.getList_cart().size()!=0 ){
-            List_Cart lista_agricoltore=new List_Cart(lista_checkout.getCliente());
-                int idAgricoltore =lista_checkout.getList_cart().get(0).getProdotto().getAgricoltore().getId();
-                int i=0;
-                while(lista_checkout.getList_cart().get(i).getProdotto().getAgricoltore().getId()==idAgricoltore && i<lista_checkout.getList_cart().size()){
-                        lista_agricoltore.addCart(lista_checkout.getList_cart().get(i));
-                        lista_checkout.getList_cart().remove(i);
-                }
-                Ordine ordine = new Ordine(lista_agricoltore.getTotale(), "mastercard", lista_agricoltore.getCliente(), lista_agricoltore.getList_cart().get(0).getProdotto().getAgricoltore()/*,idSpedizione*/);
-                Ordine newOrdine = ordineService.salvaOrdine(ordine);
-                prodottiOrdineService.saveAllProdottiPerOrdine(lista_agricoltore,ordine);
+
+        } else  if (listaCheckout.getListCart().size() != 0) {
+                    ListCart listaAgricoltore = new ListCart(
+                            listaCheckout.getCliente());
+                    Agricoltore agricoltore = listaCheckout.
+                            getListCart().get(0).
+                            getProdotto().getAgricoltore();
+                    int idAgricoltore = agricoltore.getId();
+                    while (listaCheckout.getListCart().get(0).
+                            getProdotto().getAgricoltore().
+                            getId() == idAgricoltore) {
+                        listaAgricoltore.addCart(listaCheckout.
+                                getListCart().get(0));
+                        listaCheckout.getListCart().remove(0);
+                            if (listaCheckout.getListCart().size() == 0) {
+                                break;
+                            }
+
+                    }
+                    //aggiorno il portafoglio agricoltore
+                    aggiornaPortafoglio(listaAgricoltore.
+                            getTotale(), agricoltore);
+
+                    //creo il nuovo ordine
+                    Ordine ordine = new Ordine(listaAgricoltore.getTotale(),
+                            "mastercard", idSpedizione,
+                            listaAgricoltore.getCliente(),
+                            listaAgricoltore.getListCart().get(0).getProdotto().
+                                    getAgricoltore());
+                    Ordine newOrdine = ordineService.salvaOrdine(ordine);
+                    //aggiungo tutto in prodotti_ordine
+                    prodottiOrdineService.
+                            saveAllProdottiPerOrdine(listaAgricoltore, newOrdine);
         }
-
-        if(lista_checkout.getList_cart().size()==0){
+        if (listaCheckout.getListCart().size() == 0) {
             return new ResponseEntity<>("payment", HttpStatusCode.valueOf(200));
 
-        }else{
+        } else {
             session.removeAttribute("checkout");
-            session.setAttribute("checkout",lista_checkout);
-            int i = (Integer)session.getAttribute("counter");
-            session.setAttribute("counter",i--);
-            return new ResponseEntity<>("checkout", HttpStatusCode.valueOf(200));
+            session.setAttribute("checkout", listaCheckout);
+            int i = (Integer) session.getAttribute("counter");
+            session.setAttribute("counter", i--);
+            return new ResponseEntity<>("checkout",
+                    HttpStatusCode.valueOf(200));
 
 
         }
     }
 
     @GetMapping("/paymentSuccess")
-    public String paymentSuccess(){
+    public String paymentSuccess() {
         return "paymentSuccess";
     }
 }

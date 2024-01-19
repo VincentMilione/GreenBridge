@@ -1,6 +1,14 @@
 package com.greenbridge.entities;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Column;
+import jakarta.persistence.Transient;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -44,22 +52,22 @@ public class Prodotto {
 
     @Override
     public String toString() {
-        return "Prodotto{" +
-                "idProdotto=" + idProdotto +
-                ", nome='" + nome + '\'' +
-                ", origine='" + origine + '\'' +
-                ", immagine=" + Arrays.toString(immagine) +
-                ", immagineFile=" + immagineFile +
-                ", immagineBase64='" + immagineBase64 + '\'' +
-                ", formatoVendita=" + formatoVendita +
-                ", prezzoKg=" + prezzoKg +
-                ", prezzoVendita=" + prezzoVendita +
-                ", quantitaDisp=" + quantitaDisp +
-                ", lotto=" + lotto +
-                ", descrizione='" + descrizione + '\'' +
-                ", acquistabile=" + acquistabile +
-                ", agricoltore=" + agricoltore.getNome() +
-                '}';
+        return "Prodotto{"
+                + "idProdotto=" + idProdotto
+                + ", nome='" + nome + '\''
+                + ", origine='" + origine + '\''
+                + ", immagine=" + Arrays.toString(immagine)
+                + ", immagineFile=" + immagineFile
+                + ", immagineBase64='" + immagineBase64 + '\''
+                + ", formatoVendita=" + formatoVendita
+                + ", prezzoKg=" + prezzoKg
+                + ", prezzoVendita=" + prezzoVendita
+                + ", quantitaDisp=" + quantitaDisp
+                + ", lotto=" + lotto
+                + ", descrizione='" + descrizione + '\''
+                + ", acquistabile=" + acquistabile
+                + ", agricoltore=" + agricoltore.getNome()
+                + '}';
     }
 
     public void setImmagine(byte[] immagine) {

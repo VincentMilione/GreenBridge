@@ -20,12 +20,13 @@ public class ClienteRestController {
 
     /** il metodo effettua il salvataggio di un nuovo utente nel database. */
     @PostMapping("/saveCliente")
-    public ResponseEntity<String> saveCliente(@RequestBody Cliente cliente, HttpSession session) {
+    public ResponseEntity<String> saveCliente(@RequestBody Cliente cliente,
+                                              HttpSession session) {
         if (clienteService.clienteExistsByEmail(cliente)) {
             return new ResponseEntity<>("notok", HttpStatus.FORBIDDEN);
         }
         clienteService.saveCliente(cliente);
         session.setAttribute("cliente", cliente);
-        return new ResponseEntity<>("ok",HttpStatus.CREATED);
+        return new ResponseEntity<>("ok", HttpStatus.CREATED);
     }
 }

@@ -16,7 +16,8 @@ public class IndirizzoSpedizioneService {
 
     // Metodo per salvare un indirizzo di spedizione nel database
     @Transactional
-    public IndirizzoSpedizione saveIndirizzoSpedizione(IndirizzoSpedizione indirizzoSpedizione) {
+    public IndirizzoSpedizione saveIndirizzoSpedizione(IndirizzoSpedizione
+                                   indirizzoSpedizione) {
         return indirizzoSpedizioneRepository.save(indirizzoSpedizione);
     }
 

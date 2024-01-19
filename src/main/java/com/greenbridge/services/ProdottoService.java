@@ -17,14 +17,15 @@ public class ProdottoService {
     private ProdottoRepository prodottoRepository;
 
 
-    public void saveProdotto(Prodotto prodotto){
+    public void saveProdotto(Prodotto prodotto) {
         prodottoRepository.save(prodotto);
     }
 
     public List<Prodotto> getAllProdotti(Agricoltore agricoltore) {
-        return prodottoRepository.findAllByAgricoltoreAndAcquistabileTrue(agricoltore);
+        return prodottoRepository.
+                findAllByAgricoltoreAndAcquistabileTrue(agricoltore);
     }
-    public Prodotto getProdottoById(int idProdotto){
+    public Prodotto getProdottoById(int idProdotto) {
         return prodottoRepository.getProdottoByIdProdotto(idProdotto);
     }
 
@@ -32,8 +33,8 @@ public class ProdottoService {
         prodottoRepository.saveAndFlush(prodotto);
     }
 
-    public List<Prodotto> getResult(String Nome){
-        return prodottoRepository.findByNomeContainingIgnoreCase(Nome);
+    public List<Prodotto> getResult(String nome) {
+        return prodottoRepository.findByNomeContainingIgnoreCase(nome);
     }
 
 
