@@ -7,8 +7,10 @@
     background: #fff;
     border-radius: 20px;
     width: 30%;
-    height: 50%;
+    top: 10px;
     margin: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
 #loginFormContainer::after{
