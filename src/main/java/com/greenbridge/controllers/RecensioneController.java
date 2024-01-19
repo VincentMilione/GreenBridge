@@ -31,14 +31,18 @@ public class RecensioneController {
 
     @GetMapping("/recensione/{id}")
     String recensione(@PathVariable("id") Integer id, HttpSession session, Model model){
-        Ordine ordine = ordineService.getOrdineById(id);
-        List<ProdottiOrdine> prodottiDaRecensire = prodottiOrdineService.findAllProdottiOrdineByOrdineId(ordine);
-        session.setAttribute("prodottiOrdine", prodottiDaRecensire);
-        session.setAttribute("indiceRecensioni", 0);
-        int indice = (int) session.getAttribute("indiceRecensioni");
-        model.addAttribute("prodottoDaRecensire", prodottiDaRecensire.get(0));
-        model.addAttribute("recensione", new RecensioneProdotti());
-        return "recensioneProdotto";
+        if(session.getAttribute("cliente") == null) {
+            return "loginCliente";
+        } else {
+            Ordine ordine = ordineService.getOrdineById(id);
+            List<ProdottiOrdine> prodottiDaRecensire = prodottiOrdineService.findAllProdottiOrdineByOrdineId(ordine);
+            session.setAttribute("prodottiOrdine", prodottiDaRecensire);
+            session.setAttribute("indiceRecensioni", 0);
+            int indice = (int) session.getAttribute("indiceRecensioni");
+            model.addAttribute("prodottoDaRecensire", prodottiDaRecensire.get(0));
+            model.addAttribute("recensione", new RecensioneProdotti());
+            return "recensioneProdotto";
+        }
     }
 
     @PostMapping("/saveRecensione")
