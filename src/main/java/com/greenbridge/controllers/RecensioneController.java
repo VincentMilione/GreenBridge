@@ -1,5 +1,7 @@
 package com.greenbridge.controllers;
 
+import com.github.dockerjava.api.exception.InternalServerErrorException;
+import com.github.dockerjava.api.exception.NotAcceptableException;
 import com.greenbridge.entities.Cliente;
 import com.greenbridge.entities.Ordine;
 import com.greenbridge.entities.ProdottiOrdine;
@@ -9,15 +11,13 @@ import com.greenbridge.services.ProdottiOrdineService;
 import com.greenbridge.services.RecensioneService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+
 
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class RecensioneController {
@@ -45,9 +45,16 @@ public class RecensioneController {
         }
     }
 
-    @PostMapping("/saveRecensione")
-    String saveRecensione(@ModelAttribute RecensioneProdotti rec, HttpSession session, Model model){
 
+    @PostMapping("/saveRecensione")
+    public String saveRecensione(@ModelAttribute("rec") RecensioneProdotti rec, HttpSession session, Model model) throws Exception {
+        if((rec.getVoto() < 1 || rec.getVoto() > 5)){
+            throw new NotAcceptableException("voto non corretto");
+        }
+
+        if(rec.getDescrizione().length() > 200){
+            throw new NotAcceptableException("descrizione troppo lunga");
+        }
         Cliente cliente = (Cliente) session.getAttribute("cliente");
         Integer idCliente = cliente.getId();
         List<ProdottiOrdine> prodottiOrdine = (List<ProdottiOrdine>) session.getAttribute("prodottiOrdine");
@@ -65,6 +72,12 @@ public class RecensioneController {
             session.setAttribute("indiceRecensioni", indice);
             return "recensioneProdotto";
         }
+    }
+    @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
+    @ExceptionHandler(Exception.class)
+    public void handleException(Exception e) {
+        // Puoi aggiungere ulteriori log o gestione dell'errore se necessario
+        System.out.println("Handling DataIntegrityViolationException: " + e.getMessage());
     }
 
     @PostMapping("/recensioneAvanti")
