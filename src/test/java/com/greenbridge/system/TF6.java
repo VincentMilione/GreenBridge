@@ -6,19 +6,12 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.junit.Assert.assertTrue;
-
-
-import java.util.concurrent.TimeUnit;
-import static org.junit.Assert.assertEquals;
+import static java.lang.Thread.sleep;
 import static org.springframework.test.util.AssertionErrors.assertFalse;
 
 @RunWith(SpringRunner.class)
@@ -28,10 +21,18 @@ public class TF6 {
   private WebDriver driver;
 
   @Before
-  public void setUp() {
+  public void setUp() throws InterruptedException {
 
     WebDriverManager.chromedriver().setup();
     driver = new ChromeDriver();
+    driver.get("http://localhost:8080/loginAgricoltore");
+    driver.manage().window().setSize(new Dimension(1421, 816));
+    driver.findElement(By.id("email")).click();
+    driver.findElement(By.id("email")).sendKeys("adelmoanichini@example.org");
+    driver.findElement(By.id("password")).click();
+    driver.findElement(By.id("password")).sendKeys("*Vgm9SmyN^pPPvGj");
+    driver.findElement(By.cssSelector("button")).click();
+    sleep(2000);
   }
 
   @Test
@@ -74,7 +75,7 @@ public class TF6 {
 
     assertFalse("Il campo 'nome' è valido, inserimento errato", isElementValid);
     try {
-      Thread.sleep(5000);
+      sleep(5000);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
@@ -120,7 +121,7 @@ public class TF6 {
 
     assertFalse("Il campo 'origine' non è valido, inserimento errato", isElementValid);
     try {
-      Thread.sleep(5000);
+      sleep(5000);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
@@ -166,7 +167,7 @@ public class TF6 {
 
     assertFalse("Il campo 'immagine' non è valido, inserimento errato", isElementValid);
     try {
-      Thread.sleep(5000);
+      sleep(5000);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
@@ -212,7 +213,7 @@ public class TF6 {
 
     assertFalse("Il campo 'formatoVendita' è valido, inserimento errato", isElementValid);
     try {
-      Thread.sleep(5000);
+      sleep(5000);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
@@ -258,7 +259,7 @@ public class TF6 {
 
     assertFalse("Il campo 'nome' è valido, inserimento errato", isElementValid);
     try {
-      Thread.sleep(5000);
+      sleep(5000);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
@@ -304,7 +305,7 @@ public class TF6 {
 
     assertFalse("Il campo 'nome' è valido, inserimento errato", isElementValid);
     try {
-      Thread.sleep(5000);
+      sleep(5000);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
@@ -350,7 +351,7 @@ public class TF6 {
 
     assertFalse("Il campo 'nome' è valido, inserimento errato", isElementValid);
     try {
-      Thread.sleep(5000);
+      sleep(5000);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
@@ -396,7 +397,7 @@ public class TF6 {
 
     assertFalse("Il campo 'nome' è valido, inserimento errato", isElementValid);
     try {
-      Thread.sleep(5000);
+      sleep(5000);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
@@ -442,7 +443,7 @@ public class TF6 {
 
     assertFalse("Il campo 'nome' è valido, inserimento errato", isElementValid);
     try {
-      Thread.sleep(5000);
+      sleep(5000);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }

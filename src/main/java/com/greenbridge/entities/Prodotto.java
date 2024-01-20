@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.Arrays;
 import java.util.Base64;
 
+
 @Getter
 @Setter
 @Entity
@@ -40,7 +41,6 @@ public class Prodotto {
     @ManyToOne
     @JoinColumn(name = "id_agricoltore")
     private Agricoltore agricoltore;
-
 
     @Override
     public String toString() {

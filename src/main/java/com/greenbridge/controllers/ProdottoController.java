@@ -30,10 +30,11 @@ public class ProdottoController {
 
     @GetMapping("/formInserimento")
     public String getProdotto(Model model, HttpSession session) {
-        int idAgricoltore = 1;
-        session.setAttribute("agricoltore",  agricoltoreService.getSingleAgricoltore(idAgricoltore));
-        model.addAttribute("prodotto", new Prodotto());
-        return "pages/user/formInserimento";
+        if(session.getAttribute("agricoltore")!= null) {
+            model.addAttribute("prodotto", new Prodotto());
+            return "pages/user/formInserimento";
+        }
+        return "loginAgricoltore";
     }
 
     @PostMapping("/addProdotto")
@@ -88,8 +89,10 @@ public class ProdottoController {
 
     @GetMapping("/catalogo")
     public String getCatalogo(Model model, HttpSession session) {
-        int idAgricoltore = 1;
-        session.setAttribute("idAgricoltore", idAgricoltore);
+        if(session.getAttribute("agricoltore")== null) {
+            return "loginAgricoltore";
+        }
+
         List<Prodotto> prodotti = prodottoService.getAllProdotti((Agricoltore) session.getAttribute("agricoltore"));
 
         for (Prodotto prodotto : prodotti) {
@@ -103,7 +106,10 @@ public class ProdottoController {
     }
 
     @GetMapping("/formModificaProdotto/{id}")
-    public String formModificaProdotto(@PathVariable("id") int id,Model model) {
+    public String formModificaProdotto(@PathVariable("id") int id,Model model, HttpSession session) {
+        if(session.getAttribute("agricoltore")== null) {
+            return "loginAgricoltore";
+        }
         Prodotto prodotto = prodottoService.getProdottoById(id);
         model.addAttribute("prodottoMod", prodotto);
         return "pages/user/formModifica";
