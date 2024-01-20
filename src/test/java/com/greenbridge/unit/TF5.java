@@ -1,27 +1,18 @@
 package com.greenbridge.unit;
 
-import com.github.dockerjava.api.exception.InternalServerErrorException;
 import com.greenbridge.GreenBridgeApplication;
-import com.greenbridge.controllers.RecensioneController;
 import com.greenbridge.entities.*;
-import com.greenbridge.services.RecensioneService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -31,22 +22,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class TF5 {
     @Autowired
     MockMvc mockMvc;
-
-    @InjectMocks
-    private RecensioneController recensioneController;
-
-    @Mock
-    private RecensioneService recensioneService;
-    @Mock
-    HttpSession mockSession;
-
     @Test
     public void testSaveRecensioneCorretto() throws Exception {
-    
-        mockSession = mock(HttpSession.class);
         Cliente cliente = new Cliente();
         cliente.setId(1);
-        when(mockSession.getAttribute("cliente")).thenReturn(cliente);
 
         List<ProdottiOrdine> prodottiOrdineList = new ArrayList<>();
         ProdottiOrdine p = new ProdottiOrdine();
@@ -73,11 +52,8 @@ public class TF5 {
 
     @Test
     public void testSaveRecensioneSenzaVoto() throws Exception {
-
-        mockSession = mock(HttpSession.class);
         Cliente cliente = new Cliente();
         cliente.setId(1);
-        when(mockSession.getAttribute("cliente")).thenReturn(cliente);
 
         List<ProdottiOrdine> prodottiOrdineList = new ArrayList<>();
         ProdottiOrdine p = new ProdottiOrdine();
@@ -103,11 +79,8 @@ public class TF5 {
 
     @Test
     public void testSaveRecensioneDescrizioneLunga() throws Exception {
-
-        mockSession = mock(HttpSession.class);
         Cliente cliente = new Cliente();
         cliente.setId(1);
-        when(mockSession.getAttribute("cliente")).thenReturn(cliente);
 
         List<ProdottiOrdine> prodottiOrdineList = new ArrayList<>();
         ProdottiOrdine p = new ProdottiOrdine();
