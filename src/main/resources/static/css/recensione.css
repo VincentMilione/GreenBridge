@@ -67,22 +67,17 @@
     resize:none;
 }
 
-.buttons{
-    display: flex;
-    justify-content: space-between;
-}
-
 .buttonsLeft{
-    margin-top: -100px;
     margin-left: 50px;
     display: flex;
+    height: 500px;
     flex-direction: column;
     float: left;
 }
 
 .buttonsRight{
-    margin-top: -100px;
     margin-right: 50px;
+    height: 500px;
     display: flex;
     flex-direction: column;
     float: right;
@@ -93,7 +88,7 @@
     width: 200px;
 }
 
-input[type=button]{
+input[type=submit]{
     margin: 20px;
     font-size: 30px;
     border-radius: 20px;

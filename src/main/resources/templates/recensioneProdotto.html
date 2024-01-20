@@ -9,30 +9,59 @@
     <div class="container">
         <div class="recensioneContainer">
             <img id="imgProdotto" src="/img/banana.png" alt="foto-prodotto">
-            <p class="prodottoRecensito"> Recensisci Prodotto </p>
-            <form action="" method="post" class="rate">
-                    <input type="radio" id="star5" name="rate" value="5" />
+            <p class="prodottoRecensito" th:action th:text="${'Recensisci '+prodottoDaRecensire.prodotto.nome}"> </p>
+            <form th:action="@{/saveRecensione}" method="post" th:object="${recensione}" class="rate">
+                    <input type="radio" id="star5" name="rate" value="5" th:field="*{voto}" required/>
                     <label for="star5" title="text">5 stars</label>
-                    <input type="radio" id="star4" name="rate" value="4" />
+                    <input type="radio" id="star4" name="rate" value="4" th:field="*{voto}" required/>
                     <label for="star4" title="text">4 stars</label>
-                    <input type="radio" id="star3" name="rate" value="3" />
+                    <input type="radio" id="star3" name="rate" value="3" th:field="*{voto}" required/>
                     <label for="star3" title="text">3 stars</label>
-                    <input type="radio" id="star2" name="rate" value="2" />
+                    <input type="radio" id="star2" name="rate" value="2" th:field="*{voto}" required/>
                     <label for="star2" title="text">2 stars</label>
-                    <input type="radio" id="star1" name="rate" value="1" />
+                    <input type="radio" id="star1" name="rate" value="1" th:field="*{voto}" required/>
                     <label for="star1" title="text">1 star</label>
                 <br>
-                <textarea id="testo-recensione" placeholder="Descrivi la tua esperienza..."></textarea>
+                <textarea id="testo-recensione" placeholder="Descrivi la tua esperienza..." th:field="*{descrizione}"></textarea>
+                <br>
+                <div class="buttonsLeft">
+                    <input th:if="${session.indiceRecensioni > 0}" th:formaction="@{/recensioneIndietro}" type="submit" class="buttonRecensione" value="Indietro" name="Indietro">
+                </div>
+                <div class="buttonsRight">
+                    <input th:if="${session.indiceRecensioni < session.prodottiOrdine.size()-1}" type="submit" class="buttonRecensione" value="Avanti" name="Avanti" onclick="verifyFields()">
+                    <input th:if="${session.indiceRecensioni == session.prodottiOrdine.size()-1}" type="submit" class="buttonRecensione" value="Fine" name="Fine" onclick="verifyFields()">
+                    <input th:if="${session.indiceRecensioni < session.prodottiOrdine.size()-1}" th:formaction="@{/recensioneAvanti}" type="submit" class="buttonRecensione" value="Salta" name="Salta" >
+                </div>
             </form>
         </div>
+
+        <script>
+            function verifyFields() {
+                var star1 = document.getElementById('star1');
+                var star2 = document.getElementById('star2');
+                var star3 = document.getElementById('star3');
+                var star4 = document.getElementById('star4');
+                var star5 = document.getElementById('star5');
+                var descrizione = document.getElementById('testo-recensione').value.trim();
+                console.log(descrizione.length)
+
+
+
+
+                if (star1.checked === true || star2.checked === true || star3.checked === true
+                    || star4.checked === true || star5.checked === true) {
+                    if(descrizione.length > 200){
+                        console.log(descrizione.length)
+                        alert('Descrizione troppo lunga!');
+                        event.preventDefault()
+                    }
+                }else{
+                    alert('Voto non inserito!');
+                    event.preventDefault();
+                }
+            }
+        </script>
     </div>
-    <div class="buttonsLeft">
-        <input type="button" class="buttonRecensione" value="Indietro"></input>
-        <input type="button" class="buttonRecensione" value="Annulla"></input>
-    </div>
-    <div class="buttonsRight">
-        <input type="button" class="buttonRecensione" value="Avanti"></input>
-        <input type="button" class="buttonRecensione" value="Salta"></input>
-    </div>
+
 </body>
 </html>

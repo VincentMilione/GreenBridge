@@ -5,4 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface OrdineRepository extends JpaRepository<Ordine, Integer> {
     // Puoi aggiungere eventuali metodi personalizzati qui, se necessario
+    public Ordine findOrdineById(int id);
 }
