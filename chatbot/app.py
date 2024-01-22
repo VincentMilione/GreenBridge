@@ -3,7 +3,7 @@ from flask import Flask, request, jsonify
 from entities import db
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:8872.Giov@localhost:3306/greenbridgedb'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:password@localhost:3306/greenbridgedb'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 

@@ -3,14 +3,13 @@ document.addEventListener('DOMContentLoaded', function () {
         respondToCommand: function (command) {
             let bot=this;
             this.sendMessage(command, 'messages__item--operator');
-            switch (command) {
-                case '/start':
-                    submitForm("/api/sendDataToFlask").done(function (){
-                        bot.sendMessage('Ecco una lista di agricoltori da noi consigliati:', 'messages__item--visitor');})
-                    break;
+            /*switch (command) {
+                case '/start':*/
+                    submitForm(command)
+                /*    break;
                 default:
                     this.sendMessage('Comando non riconosciuto', 'messages__item--visitor');
-            }
+            }*/
         },
         sendMessage: function (message, className) {
             const chat = document.getElementById('chat');
@@ -41,10 +40,10 @@ document.addEventListener('DOMContentLoaded', function () {
     sendButton.addEventListener('click', sendMessage);
 });
 
-function inviaComandoAlServer(command) {
+function submitForm(command) {
+    let bot=this;
     // Definisci l'URL del tuo endpoint Spring Boot
     const url = '/api/executeCommand';
-
     // Effettua la richiesta utilizzando fetch
     fetch(url, {
         method: 'POST',
