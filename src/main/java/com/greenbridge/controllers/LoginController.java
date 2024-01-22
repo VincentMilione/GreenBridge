@@ -47,7 +47,7 @@ public class LoginController {
             if (lista == null) {
                 lista = new ArrayList<CarrelloCliente>();
             }
-            List_Cart listCart = new List_Cart(c,lista);
+            ListCart listCart = new ListCart(c,lista);
             session.setAttribute("list_cart", listCart);
             return new ResponseEntity<>("ok", HttpStatus.OK);
         }
