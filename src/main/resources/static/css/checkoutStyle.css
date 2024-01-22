@@ -2,6 +2,8 @@
 .titolo{
     margin-top: -20px;
     text-align: center;
+    position: relative;
+    padding-top: 20px ;
 }
 
 
@@ -9,17 +11,17 @@
     text-align: center; /* Centra il testo orizzontalmente */
 }
 
-.container{
+.container {
     display: flex;
-    justify-content: center;
-    flex-direction: column;
-    position: relative;
+    justify-content: flex-start;
     padding: 50px;
     background: #fff;
     border-radius: 20px;
     width: 30%;
-    height: 50%;
+    height: 90%;
     margin: auto;
+    position: relative;
+    flex-direction: column;
 }
 
 .container::after{

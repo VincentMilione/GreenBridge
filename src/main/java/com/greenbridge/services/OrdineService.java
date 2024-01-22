@@ -28,8 +28,8 @@ public class OrdineService {
         return ordini;
     }
 
-    public Ordine getOrdineById(int id){
-        return ordineRepository.findById(id).get();
+    public Ordine getOrdineById(Integer id) {
+        return ordineRepository.findOrdineById(id);
     }
 
 

@@ -8,7 +8,12 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -29,21 +34,24 @@ public class ProdottoController {
     @GetMapping("/formInserimento")
     public String getProdotto(Model model, HttpSession session) {
         int idAgricoltore = 1;
-        session.setAttribute("agricoltore",  agricoltoreService.getSingleAgricoltore(idAgricoltore));
+        session.setAttribute("agricoltore",  agricoltoreService.
+                getSingleAgricoltore(idAgricoltore));
         model.addAttribute("prodotto", new Prodotto());
         return "pages/user/formInserimento";
     }
 
     @PostMapping("/addProdotto")
-    public String addProdottoForm(@ModelAttribute("prodotto") Prodotto prodotto,
-                                  @RequestParam("immagineFile") MultipartFile immagineFile, Model model,
-                                  HttpSession session) {
+    public String addProdottoForm(@ModelAttribute("prodotto") Prodotto
+              prodotto, @RequestParam("immagineFile")
+                        MultipartFile immagineFile,
+                        Model model, HttpSession session) {
         try {
             if (!immagineFile.isEmpty()) {
                 byte[] bytes = immagineFile.getBytes();
                 prodotto.setImmagine(bytes);
             }
-            Agricoltore agricoltore = (Agricoltore) session.getAttribute("agricoltore");
+            Agricoltore agricoltore = (Agricoltore)
+                    session.getAttribute("agricoltore");
             prodotto.setAgricoltore(agricoltore);
 
             prodotto.setAcquistabile(true);
@@ -51,10 +59,13 @@ public class ProdottoController {
             prodottoService.saveProdotto(prodotto);
 
             // Aggiorna la lista di prodotti nel model
-            List<Prodotto> prodotti = prodottoService.getAllProdotti((Agricoltore) session.getAttribute("agricoltore"));
+            List<Prodotto> prodotti = prodottoService.
+                    getAllProdotti((Agricoltore)
+                    session.getAttribute("agricoltore"));
             for (Prodotto p : prodotti) {
                 if (p.getImmagine() != null) {
-                    String immagineBase64 = Base64.getEncoder().encodeToString(p.getImmagine());
+                    String immagineBase64 = Base64.getEncoder().
+                            encodeToString(p.getImmagine());
                     p.setImmagineBase64(immagineBase64);
                 }
             }
@@ -69,11 +80,14 @@ public class ProdottoController {
     public String getCatalogo(Model model, HttpSession session) {
         int idAgricoltore = 1;
         session.setAttribute("idAgricoltore", idAgricoltore);
-        List<Prodotto> prodotti = prodottoService.getAllProdotti((Agricoltore) session.getAttribute("agricoltore"));
+        List<Prodotto> prodotti = prodottoService.
+                getAllProdotti((Agricoltore) session.
+                        getAttribute("agricoltore"));
 
         for (Prodotto prodotto : prodotti) {
             if (prodotto.getImmagine() != null) {
-                String immagineBase64 = Base64.getEncoder().encodeToString(prodotto.getImmagine());
+                String immagineBase64 = Base64.getEncoder().
+                        encodeToString(prodotto.getImmagine());
                 prodotto.setImmagineBase64(immagineBase64);
             }
         }
@@ -82,32 +96,38 @@ public class ProdottoController {
     }
 
     @GetMapping("/formModificaProdotto/{id}")
-    public String formModificaProdotto(@PathVariable("id") int id,Model model) {
+    public String formModificaProdotto(@PathVariable("id")
+                       int id, Model model) {
         Prodotto prodotto = prodottoService.getProdottoById(id);
         model.addAttribute("prodottoMod", prodotto);
         return "pages/user/formModifica";
     }
 
     @PostMapping("/modProdotto")
-    public String modificaProdottoForm(@ModelAttribute("prodottoMod") Prodotto prodotto,
-                                       @RequestParam("immagineFile") MultipartFile immagineFile,
-                                       Model model, HttpSession session) {
+    public String modificaProdottoForm(@ModelAttribute
+                   ("prodottoMod") Prodotto prodotto,
+                   @RequestParam("immagineFile") MultipartFile immagineFile,
+                   Model model, HttpSession session) {
         try {
             if (!immagineFile.isEmpty()) {
                 byte[] bytes = immagineFile.getBytes();
                 prodotto.setImmagine(bytes);
             }
 
-            prodotto.setAgricoltore((Agricoltore) session.getAttribute("agricoltore"));
+            prodotto.setAgricoltore((Agricoltore) session.
+                    getAttribute("agricoltore"));
             prodotto.setAcquistabile(true);
 
             prodottoService.saveAndFlushProdotto(prodotto);
 
             // Aggiorna la lista di prodotti nel model
-            List<Prodotto> prodotti = prodottoService.getAllProdotti((Agricoltore) session.getAttribute("agricoltore"));
+            List<Prodotto> prodotti = prodottoService.
+                    getAllProdotti((Agricoltore) session.
+                            getAttribute("agricoltore"));
             for (Prodotto p : prodotti) {
                 if (p.getImmagine() != null) {
-                    String immagineBase64 = Base64.getEncoder().encodeToString(p.getImmagine());
+                    String immagineBase64 = Base64.
+                            getEncoder().encodeToString(p.getImmagine());
                     p.setImmagineBase64(immagineBase64);
                 }
             }
@@ -119,15 +139,18 @@ public class ProdottoController {
     }
 
     @GetMapping("/cancellaProdotto/{id}")
-    public String cancellaProdotto(HttpSession session,Model model,@PathVariable("id") int id){
-        Prodotto prodotto=prodottoService.getProdottoById(id);
+    public String cancellaProdotto(HttpSession session,
+                   Model model, @PathVariable("id") int id) {
+        Prodotto prodotto = prodottoService.getProdottoById(id);
         prodotto.setAcquistabile(false);
         prodottoService.saveAndFlushProdotto(prodotto);
 
-        List<Prodotto> prodotti = prodottoService.getAllProdotti((Agricoltore) session.getAttribute("agricoltore"));
+        List<Prodotto> prodotti = prodottoService.getAllProdotti((Agricoltore)
+                session.getAttribute("agricoltore"));
         for (Prodotto p : prodotti) {
             if (p.getImmagine() != null) {
-                String immagineBase64 = Base64.getEncoder().encodeToString(p.getImmagine());
+                String immagineBase64 = Base64.getEncoder().
+                        encodeToString(p.getImmagine());
                 p.setImmagineBase64(immagineBase64);
             }
         }
@@ -137,14 +160,14 @@ public class ProdottoController {
     }
 
   @GetMapping("/prodotto/{idProdotto}")
-    String getProdotto(Model model, @PathVariable int idProdotto){
+    String getProdotto(Model model, @PathVariable int idProdotto) {
         Prodotto prodotto = prodottoService.getProdottoById(idProdotto);
         model.addAttribute("prodotto", prodotto);
         return "prodotto";
     }
 
     @GetMapping("/")
-    public String getHome(){
+    public String getHome() {
         return "pages/user/home";
     }
 

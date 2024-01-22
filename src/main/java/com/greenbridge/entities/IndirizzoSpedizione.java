@@ -1,8 +1,6 @@
 package com.greenbridge.entities;
 
-import javax.persistence.*;
 
-import jakarta.persistence.*;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,9 +8,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import java.sql.Date;
+
 
 @Entity
 @Getter
@@ -45,7 +45,8 @@ public class IndirizzoSpedizione {
     @Column(name = "provincia")
     private String provincia;
 
-    public IndirizzoSpedizione(Cliente cliente, Integer civico, String via, Integer cap, String citta, String provincia) {
+    public IndirizzoSpedizione(Cliente cliente, Integer civico,
+               String via, Integer cap, String citta, String provincia) {
         this.cliente = cliente;
         this.civico = civico;
         this.via = via;
@@ -54,21 +55,22 @@ public class IndirizzoSpedizione {
         this.provincia = provincia;
     }
 
-    public Boolean isEmpty(){
-        if(via.isEmpty() || via.equals(""))
+    public Boolean isEmpty() {
+        if (via.isEmpty() || via.equals("")) {
             return true;
+        }
         return false;
     }
     @Override
     public String toString() {
-        return "IndirizzoSpedizione{" +
-                "id=" + id +
-                ", cliente=" + cliente +
-                ", civico=" + civico +
-                ", via='" + via + '\'' +
-                ", cap=" + cap +
-                ", citta='" + citta + '\'' +
-                ", provincia='" + provincia + '\'' +
-                '}';
+        return "IndirizzoSpedizione{"
+                + "id=" + id
+                + ", cliente=" + cliente
+                + ", civico=" + civico
+                + ", via='" + via + '\''
+                + ", cap=" + cap
+                + ", citta='" + citta + '\''
+                + ", provincia='" + provincia + '\''
+                + '}';
     }
 }

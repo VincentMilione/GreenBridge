@@ -10,4 +10,5 @@ import java.util.List;
 public interface OrdineRepository extends JpaRepository<Ordine, Integer> {
     // Puoi aggiungere eventuali metodi personalizzati qui, se necessario
     List<Ordine> findByAgricoltore(Agricoltore agricoltore);
+    public Ordine findOrdineById(int id);
 }
