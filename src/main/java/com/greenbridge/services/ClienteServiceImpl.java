@@ -16,17 +16,20 @@ public class ClienteServiceImpl implements ClienteService {
         this.clienteRepository = clienteRepository;
     }
 
-    /** Questo metodo consente di salvare un nuovo utente cliente nel database. */
+    /** Questo metodo consente di salvare
+     * un nuovo utente cliente nel database. */
     public void saveCliente(Cliente cliente) {
         clienteRepository.save(cliente);
     }
 
-    /** Questo metodo consente di ottenere tutti gli utenti cliente nel database. */
+    /** Questo metodo consente di
+     * ottenere tutti gli utenti cliente nel database. */
     public List<Cliente> getAllClienti() {
         return clienteRepository.findAll();
     }
 
-    /** Questo metodo consente di ottenere un utente data un Email in input. */
+    /** Questo metodo consente di
+     * ottenere un utente data un Email in input. */
     public Cliente getClienteByEmail(String email) {
         return clienteRepository.findByEmail(email);
     }
@@ -36,5 +39,7 @@ public class ClienteServiceImpl implements ClienteService {
         return clienteRepository.existsByEmail(cliente.getEmail());
     }
 
-    public Cliente getClienteById(int id) {return clienteRepository.findById(id).get();}
+    public Cliente getClienteById(int id) {
+        return clienteRepository.findById(id).get();
+    }
 }

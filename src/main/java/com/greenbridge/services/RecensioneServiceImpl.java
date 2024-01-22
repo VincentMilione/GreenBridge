@@ -5,7 +5,7 @@ import com.greenbridge.repositories.RecensioneRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RecensioneServiceImpl implements RecensioneService{
+public class RecensioneServiceImpl implements RecensioneService {
 
     private final RecensioneRepository recensioneRepository;
 

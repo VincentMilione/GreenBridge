@@ -4,5 +4,5 @@ import com.greenbridge.entities.RecensioneProdotti;
 
 public interface RecensioneService {
 
-    public void saveRecensioneProdotto(RecensioneProdotti recensione);
+    void saveRecensioneProdotto(RecensioneProdotti recensione);
 }

@@ -1,6 +1,9 @@
 package com.greenbridge.entities;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,7 +23,10 @@ public class RecensioneProdotti {
     private String descrizione;
     private Integer voto;
 
-    public RecensioneProdotti(int idCliente, int idProdotto, String descrzione, Integer voto){
+    public RecensioneProdotti(int idCliente,
+                              int idProdotto,
+                              String descrzione,
+                              Integer voto) {
         this.idCliente = idCliente;
         this.idProdotto = idProdotto;
         this.descrizione = descrzione;
