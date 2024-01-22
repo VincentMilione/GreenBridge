@@ -46,6 +46,10 @@ public class Ordine {
     @JoinColumn(name = "id_agricoltore")
     private Agricoltore agricoltore;
 
+    @Column(name = "stato")
+    private int stato;
+    /*valori di stato --> 1*/
+
     public Ordine(float importo,  String pagamento, int id_indirizzo,
                   Cliente cliente, Agricoltore agricoltore) {
         this.importo = importo;
@@ -58,6 +62,7 @@ public class Ordine {
         this.id_indirizzo = id_indirizzo;
         this.cliente = cliente;
         this.agricoltore = agricoltore;
+        this.stato=1;
     }
 
 

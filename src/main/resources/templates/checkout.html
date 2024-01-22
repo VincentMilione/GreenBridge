@@ -53,39 +53,41 @@
     function sendForm(){
         //cap
         var sem=0;
-        var cap=$("#cap").val().trim();
-        var regex = /^\d{5}$/;
-        if(!regex.test(cap)){
-            alert("formato cap non corretto");
-            sem=1;
-        }
-        //civico
-        var civico=$("#civico").val().trim();
-         regex = /^\d{1,10}$/;
-        if(!regex.test(civico)){
-            alert("formato civico non corretto");
-            sem=1;
-        }
-        //via
-        var via=$("#via").val();
-         regex = /^[A-Za-zÀ-ù' ‘-]{1,50}$/;
-        if(!regex.test(via)){
-            alert("formato via non corretto");
-            sem=1;
-        }
-        //città
-        var citta=$("#citta").val();
-        var regex = /^[A-Za-zÀ-ù'\s-]{1,30}$/;
-        if(!regex.test(citta)){
-            alert("formato citta non corretto");
-            sem=1;
-        }
-        //Provincia
-        var provincia=$("#provincia").val().trim();
-         regex = /^[A-Za-zÀ-ù'’-]{2}$/;
-        if(!regex.test(provincia)){
-            alert("formato provincia non corretto");
-            sem=1;
+        if($('input[name="shippingOption"]:checked').val()=="delivery") {
+            var cap = $("#cap").val().trim();
+            var regex = /^\d{5}$/;
+            if (!regex.test(cap)) {
+                alert("formato cap non corretto");
+                sem = 1;
+            }
+            //civico
+            var civico = $("#civico").val().trim();
+            regex = /^\d{1,10}$/;
+            if (!regex.test(civico)) {
+                alert("formato civico non corretto");
+                sem = 1;
+            }
+            //via
+            var via = $("#via").val();
+            regex = /^[A-Za-zÀ-ù' ‘-]{1,50}$/;
+            if (!regex.test(via)) {
+                alert("formato via non corretto");
+                sem = 1;
+            }
+            //città
+            var citta = $("#citta").val();
+            var regex = /^[A-Za-zÀ-ù'\s-]{1,30}$/;
+            if (!regex.test(citta)) {
+                alert("formato citta non corretto");
+                sem = 1;
+            }
+            //Provincia
+            var provincia = $("#provincia").val().trim();
+            regex = /^[A-Za-zÀ-ù'’-]{2}$/;
+            if (!regex.test(provincia)) {
+                alert("formato provincia non corretto");
+                sem = 1;
+            }
         }
         if(sem==0) {
             var selectedOption = $('input[name="shippingOption"]:checked').val();

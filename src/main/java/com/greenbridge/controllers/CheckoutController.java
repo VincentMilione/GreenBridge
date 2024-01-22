@@ -97,7 +97,7 @@ public class CheckoutController {
         session.setAttribute("counter", 2);
         indirizzoSpedizione.setCliente((Cliente)
                 session.getAttribute("cliente"));
-        IndirizzoSpedizione indirizzoSpedizione1;
+        IndirizzoSpedizione indirizzoSpedizione1=null;
 
         if (!indirizzoSpedizione.isEmpty()) {
 
