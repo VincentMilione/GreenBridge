@@ -41,10 +41,34 @@ document.addEventListener('DOMContentLoaded', function () {
     sendButton.addEventListener('click', sendMessage);
 });
 
-function submitForm(url) {
-        return $.ajax({
-            type: 'POST',
-            url: url,
-            contentType: 'application/json'
+function submitForm(command) {
+    // Definisci l'URL del tuo endpoint Spring Boot
+    const url = '/api/executeCommand';
+
+    // Effettua la richiesta utilizzando fetch
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ command: command })
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Errore durante la richiesta al server');
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Gestisci la risposta del server
+            console.log('Risposta dal server:', data);
+        })
+        .catch(error => {
+            // Gestisci gli errori durante la richiesta
+            console.error('Errore:', error.message);
+            // Visualizza un messaggio di errore personalizzato se lo stato è BAD_REQUEST
+            if (error.response && error.response.status === 400) {
+                console.error('Messaggio di errore dal server:', error.response.data);
+            }
         });
 }
