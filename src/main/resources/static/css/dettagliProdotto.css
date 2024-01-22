@@ -75,12 +75,12 @@ h1 {
 }
 
 .recensioniContainer {
+    margin: auto;
     display: grid;
-    grid-template-rows: auto;
-    grid-template-columns: auto auto;
-    gap: 10px;
-    border: 1px solid #000;
-    width: 100%;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 8px;
+    width: 80%;
 }
 
 .recensioneBox {
@@ -92,6 +92,8 @@ h1 {
     width: 300px;
     font-family: "Roboto", serif;
     font-size: 30px;
+    border: #4CAF50 1px solid;
+    border-radius: 10px;
 }
 
 .recensioneVoto {
