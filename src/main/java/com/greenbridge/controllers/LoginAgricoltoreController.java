@@ -13,17 +13,23 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoginAgricoltoreController {
 
     private final AgricoltoreServiceImpl agricoltoreService;
-    public LoginAgricoltoreController(AgricoltoreServiceImpl agricoltoreService) {
+    public LoginAgricoltoreController(AgricoltoreServiceImpl
+                                              agricoltoreService) {
         this.agricoltoreService = agricoltoreService;
     }
     @PostMapping("/loginAgricoltore")
-    public ResponseEntity<String> saveAgricoltore(@RequestBody Agricoltore agricoltore, HttpSession session){
-        Agricoltore a = agricoltoreService.getAgricoltoreByEmail(agricoltore.getEmail());
-        if(a!=null && agricoltore.getPassword().compareTo(a.getPassword()) ==0){
-            session.setAttribute("agricoltore",a);
+    public ResponseEntity<String> saveAgricoltore(@RequestBody
+                  Agricoltore agricoltore, HttpSession session) {
+        Agricoltore a = agricoltoreService.
+                getAgricoltoreByEmail(agricoltore.getEmail());
+        if (a != null && agricoltore.getPassword().
+                compareTo(a.getPassword()) == 0) {
+
+            session.setAttribute("agricoltore", a);
                return new ResponseEntity<>("ok", HttpStatus.OK);
         }
-         return new ResponseEntity<>("not ok",HttpStatus.FORBIDDEN);
+         return new ResponseEntity<>("not ok",
+                 HttpStatus.FORBIDDEN);
 
     }
 

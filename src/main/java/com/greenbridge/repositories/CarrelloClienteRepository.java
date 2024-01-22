@@ -7,10 +7,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface CarrelloClienteRepository extends JpaRepository<CarrelloCliente, Integer> {
+public interface CarrelloClienteRepository
+        extends JpaRepository<CarrelloCliente, Integer> {
                 List<CarrelloCliente> findByCliente(Cliente cliente);
 
                 void deleteByProdotto(Prodotto prodotto);
+
+                void deleteByCliente(Cliente cliente);
 
 
 

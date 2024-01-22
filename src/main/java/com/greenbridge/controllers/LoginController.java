@@ -2,7 +2,7 @@ package com.greenbridge.controllers;
 
 import com.greenbridge.entities.CarrelloCliente;
 import com.greenbridge.entities.Cliente;
-import com.greenbridge.entities.List_Cart;
+import com.greenbridge.entities.ListCart;
 import com.greenbridge.services.CarrelloClienteService;
 import com.greenbridge.services.ClienteServiceImpl;
 import jakarta.servlet.http.HttpSession;

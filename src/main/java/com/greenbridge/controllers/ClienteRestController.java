@@ -27,7 +27,6 @@ public class ClienteRestController {
         }
         clienteService.saveCliente(cliente);
         session.setAttribute("cliente", cliente);
-
         return new ResponseEntity<>("ok", HttpStatus.CREATED);
     }
 }

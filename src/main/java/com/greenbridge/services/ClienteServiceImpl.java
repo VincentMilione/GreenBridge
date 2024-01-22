@@ -2,7 +2,6 @@ package com.greenbridge.services;
 
 import com.greenbridge.entities.Cliente;
 import com.greenbridge.repositories.ClienteRepository;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +21,7 @@ public class ClienteServiceImpl implements ClienteService {
         clienteRepository.save(cliente);
     }
 
+
     /** Questo metodo consente di
      * ottenere tutti gli utenti cliente nel database. */
     public List<Cliente> getAllClienti() {
@@ -30,6 +30,7 @@ public class ClienteServiceImpl implements ClienteService {
 
     /** Questo metodo consente di
      * ottenere un utente data un Email in input. */
+
     public Cliente getClienteByEmail(String email) {
         return clienteRepository.findByEmail(email);
     }

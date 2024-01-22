@@ -1,6 +1,15 @@
 package com.greenbridge.entities;
 
-import jakarta.persistence.*;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Column;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,8 +28,12 @@ public class Agricoltore {
     private String nomeBottega;
     private String indirizzoBottega;
     private String email;
-    @Column(name="pwd")
+    @Column(name = "pwd")
     private String password;
+
+    @OneToOne
+    @JoinColumn(name = "id_portafoglio")
+    private Portafoglio portafoglio;
 
     @OneToMany(mappedBy = "agricoltore")
     List<Prodotto> prodotti;

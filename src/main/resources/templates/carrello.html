@@ -50,11 +50,11 @@
     <!-- Aggiungi altre colonne necessarie -->
 
 <script>
-    function edit(prodotto_id, string_edit) {
+    function edit(idProdotto, string_edit) {
         $.ajax({
             url: '/carrello/edit_prodotto',
             data: {
-                prodotto_id: prodotto_id,
+                idProdotto: idProdotto,
                 edit: string_edit
             },
             type: 'POST',
@@ -62,9 +62,9 @@
                 $(".totale").text("TOTALE:"+response[1]+"$");
                 let valoreIntero = Math.floor(response[0]);
                 if (valoreIntero !== -1)
-                    $("#" + prodotto_id).text(valoreIntero);
+                    $("#" + idProdotto).text(valoreIntero);
                 else {
-                    var div = "div." + prodotto_id;
+                    var div = "div." + idProdotto;
                     $(div).empty();
                 }
             }

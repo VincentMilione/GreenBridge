@@ -1,7 +1,6 @@
 package com.greenbridge.services;
 
 import com.greenbridge.entities.Cliente;
-
 import java.util.List;
 
 public interface ClienteService {
