@@ -9,12 +9,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /** La classe è un controller che gestisce il redirect
- * alla pagine di interesse per l'attore cliente. */
+ * alle pagine di interesse per l'attore cliente. */
 @Controller
 public class ClienteController {
-
-
-
+    
     @Autowired
     private ClienteServiceImpl clienteService;
 

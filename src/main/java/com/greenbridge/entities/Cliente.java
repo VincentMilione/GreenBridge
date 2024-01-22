@@ -1,18 +1,14 @@
 package com.greenbridge.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Column;
-
-
-import java.sql.Date;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-
+import java.sql.Date;
 
 @Entity
 @Getter
@@ -38,15 +34,13 @@ public class Cliente {
     @Override
     public String toString() {
         return "Cliente{"
-                + ", nome='" + nome + '\''
-                + ", cognome='" + cognome + '\''
-                + ", email='" + email + '\''
-                + ", password='" + password + '\''
-                + ", dataNascita=" + dataNascita
-                + '}';
+            + ", nome='" + nome + '\''
+            + ", cognome='" + cognome + '\''
+            + ", email='" + email + '\''
+            + ", password='" + password + '\''
+            + ", dataNascita=" + dataNascita
+            + '}';
     }
-
-
 
     public Cliente(
             String nome,
@@ -60,5 +54,4 @@ public class Cliente {
         this.password = password;
         this.dataNascita = dataNascita;
     }
-
 }

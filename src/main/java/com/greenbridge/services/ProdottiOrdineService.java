@@ -39,4 +39,8 @@ public class ProdottiOrdineService {
             saveProdottiOrdine(prodottiOrdine);
         }
     }
+
+    public List<ProdottiOrdine> findAllProdottiOrdineByOrdineId(Ordine ordine){
+        return prodottiOrdineRepository.findProdottiOrdineByOrdine(ordine);
+    }
 }
