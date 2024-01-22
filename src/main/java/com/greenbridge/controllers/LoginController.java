@@ -58,8 +58,8 @@ public class LoginController {
     @GetMapping("/logoutCliente")
     public RedirectView logoutCliente(HttpSession session) {
         session.removeAttribute("cliente");
-        List_Cart listCart = (List_Cart) session.getAttribute("list_cart");
-        for (CarrelloCliente itemCart : listCart.getList_cart()) {
+        ListCart listCart = (ListCart) session.getAttribute("list_cart");
+        for (CarrelloCliente itemCart : listCart.getListCart()) {
             System.out.println(itemCart);
             carrelloClienteService.save(itemCart);
         }
