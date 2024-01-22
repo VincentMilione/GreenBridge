@@ -65,7 +65,7 @@ public class LoginController {
         }
         session.removeAttribute("list_cart");
 
-        return new RedirectView("/home");
+        return new RedirectView("../");
     }
 
 }
