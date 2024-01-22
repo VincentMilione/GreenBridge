@@ -20,7 +20,6 @@ public class RestUseController {
     @GetMapping("/Agricoltori")
     public List<Agricoltore> getAgricoltori(){
         return agricoltoreService.getAgricoltori();
-
     }
 
     @GetMapping("/Agricoltori/{id}")

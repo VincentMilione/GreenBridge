@@ -46,6 +46,9 @@ public class Ordine {
     @JoinColumn(name = "id_agricoltore")
     private Agricoltore agricoltore;
 
+    @Column(name = "stato")
+    private int stato;
+
     public Ordine(float importo,  String pagamento, Cliente cliente, Agricoltore agricoltore) {
         this.importo = importo;
         Calendar cal = Calendar.getInstance();
@@ -56,11 +59,19 @@ public class Ordine {
         this.pagamento = pagamento;
         this.cliente = cliente;
         this.agricoltore = agricoltore;
+        this.stato = 1;
     }
 
-
-
-
-
+    @Override
+    public String toString() {
+        return "Ordine{" +
+                "id=" + id +
+                ", importo=" + importo +
+                ", dataOrdine=" + dataOrdine +
+                ", pagamento='" + pagamento + '\'' +
+                ", cliente=" + cliente +
+                ", agricoltore=" + agricoltore +
+                '}';
+    }
 }
 

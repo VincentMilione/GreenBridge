@@ -16,13 +16,12 @@ public class ProdottiOrdineService {
     @Autowired
     private ProdottiOrdineRepository prodottiOrdineRepository;
 
-
-
-
     public List<ProdottiOrdine> findAllProdottiOrdine() {
         return prodottiOrdineRepository.findAll();
     }
-
+    public List<ProdottiOrdine> findAllProdottiOrdineByOrdine(Ordine ordine) {
+        return prodottiOrdineRepository.findProdottiOrdineByOrdine(ordine);
+    }
     public ProdottiOrdine saveProdottiOrdine(ProdottiOrdine prodottiOrdine) {
         return prodottiOrdineRepository.save(prodottiOrdine);
     }
@@ -38,4 +37,6 @@ public class ProdottiOrdineService {
             saveProdottiOrdine(prodottiOrdine);
         }
     }
+
+
 }

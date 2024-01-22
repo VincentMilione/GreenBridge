@@ -1,16 +1,24 @@
 package com.greenbridge.controllers;
+import com.greenbridge.entities.Agricoltore;
+import com.greenbridge.entities.Ordine;
+import com.greenbridge.services.OrdineService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.ui.Model;
 import com.greenbridge.services.AgricoltoreServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Optional;
+
 
 @Controller
 public class AgricoltoreController {
     private final  AgricoltoreServiceImpl agricoltoreService;
-    public AgricoltoreController(AgricoltoreServiceImpl agricoltoreService) {
+    private final OrdineService ordineService;
+    public AgricoltoreController(AgricoltoreServiceImpl agricoltoreService, OrdineService ordineService) {
         this.agricoltoreService = agricoltoreService;
+        this.ordineService = ordineService;
     }
     @GetMapping("/pageAgricoltore")
     public String homeViewAgricoltore(Model model){
@@ -42,5 +50,4 @@ public class AgricoltoreController {
         model.addAttribute("agricoltore",session.getAttribute("agricoltore"));
       return"detailAgricoltore";
     }
-
 }

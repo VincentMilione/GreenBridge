@@ -1,0 +1,109 @@
+/* Aggiorna il tuo file dettagliOrdine.css con queste regole aggiuntive */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+h2 {
+    color: #333;
+}
+
+table.dettagli-ordine, table.elementi-ordine {
+    width: 70%;
+    margin-top: 20px;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    background-color: #f2f2f2;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.item {
+    flex: 1;
+    text-align: center;
+}
+
+.item-quant {
+    flex: 0.5;
+    text-align: center;
+}
+
+.item p {
+    margin: 0;
+}
+
+a, button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+a:hover, button:hover {
+    background-color: #45a049;
+}
+
+/* Barra di avanzamento dello stato dell'ordine */
+.progress-bar-container {
+    position: relative;
+}
+
+.progress-bar {
+    height: 30px;
+    background-color: #0A9E07;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.progress-bar div {
+    height: 100%;
+}
+
+/* Stili per le etichette degli stati */
+.status-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+    font-size: 12px;
+    color: #0A9E07;
+}
+
+.status-label {
+    flex-grow: 1;
+    text-align: center;
+}
+
+/* Stili per il testo all'interno della barra di avanzamento */
+.progress-bar .progress-text,
+.progress-bar .progress-percent {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.progress-bar .progress-text {
+    color: #fff;
+    font-weight: bold;
+}
+
+.progress-bar .progress-percent {
+    color: #000;
+}
