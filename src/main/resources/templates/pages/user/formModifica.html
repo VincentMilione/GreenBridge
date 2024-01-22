@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
 <head>
     <title>GreenBridge</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/form.css}" />
 </head>
-<body>
+<body layout:fragment="content">
 
 <h1>Modifica prodotto</h1>
-<form th:action="@{/modProdotto}" th:method="post" th:object="${prodottoMod}" enctype="multipart/form-data">
+<form class="formInsert" th:action="@{/modProdotto}" th:method="post" th:object="${prodottoMod}" enctype="multipart/form-data">
 
     <input type="hidden" th:field="*{idProdotto}">
 

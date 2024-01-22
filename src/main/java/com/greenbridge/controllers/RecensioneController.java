@@ -1,7 +1,5 @@
 package com.greenbridge.controllers;
 
-import com.github.dockerjava.api.exception.InternalServerErrorException;
-import com.github.dockerjava.api.exception.NotAcceptableException;
 import com.greenbridge.entities.Cliente;
 import com.greenbridge.entities.Ordine;
 import com.greenbridge.entities.ProdottiOrdine;
@@ -17,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
+import javax.ws.rs.NotAcceptableException;
 import java.util.List;
 
 @Controller

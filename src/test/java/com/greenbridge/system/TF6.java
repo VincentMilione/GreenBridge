@@ -449,8 +449,6 @@ public class TF6 {
     }
   }
 
-
-
   @Test
   public void testInsertCorretta() {
 
