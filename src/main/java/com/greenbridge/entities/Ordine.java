@@ -48,7 +48,7 @@ public class Ordine {
 
     @Column(name = "stato")
     private int stato;
-    /*valori di stato --> 1*/
+
 
     public Ordine(float importo,  String pagamento, int id_indirizzo,
                   Cliente cliente, Agricoltore agricoltore) {
