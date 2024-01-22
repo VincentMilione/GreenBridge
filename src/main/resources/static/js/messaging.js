@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
     sendButton.addEventListener('click', sendMessage);
 });
 
-function submitForm(command) {
+function inviaComandoAlServer(command) {
     // Definisci l'URL del tuo endpoint Spring Boot
     const url = '/api/executeCommand';
 
@@ -62,6 +62,8 @@ function submitForm(command) {
         .then(data => {
             // Gestisci la risposta del server
             console.log('Risposta dal server:', data);
+            // Visualizza il messaggio ricevuto dal server
+            bot.sendMessage(data, 'messages__item--visitor');
         })
         .catch(error => {
             // Gestisci gli errori durante la richiesta
@@ -69,6 +71,8 @@ function submitForm(command) {
             // Visualizza un messaggio di errore personalizzato se lo stato è BAD_REQUEST
             if (error.response && error.response.status === 400) {
                 console.error('Messaggio di errore dal server:', error.response.data);
+                // Visualizza il messaggio di errore ricevuto dal server
+                bot.sendMessage(error.response.data, 'messages__item--visitor');
             }
         });
 }

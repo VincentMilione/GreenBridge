@@ -16,7 +16,6 @@ public class ChatbotRestController {
     public ResponseEntity<String> executeCommand(@RequestBody String command) {
         // Controllo sul comando ricevuto
         if ("/start".equals(command)) {
-            // Esegui un'operazione specifica per il comando "/start"
             eseguiOperazioneStart();
             return ResponseEntity.ok("Operazione avviata con successo per il comando: " + command);
         } else {
@@ -25,26 +24,10 @@ public class ChatbotRestController {
         }
     }
 
-    private String eseguiOperazioneStart() {
+    private void eseguiOperazioneStart() {
         // Implementa qui l'operazione specifica per il comando "/start"
         // Ad esempio, puoi avviare un processo, eseguire un'azione, ecc.
         System.out.println("Eseguendo operazione specifica per il comando /start");
-
-        String jsonData = "{\"key\": \"value\"}";
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-
-        HttpEntity<String> entity = new HttpEntity<>(jsonData, headers);
-
-        String flaskServerUrl = "http://127.0.0.1:5000/start-module";
-
-        String response = restTemplate.exchange(
-                        flaskServerUrl, HttpMethod.POST, entity, String.class).
-                getBody();
-
-
-        return "Request sent to Flask server. Response: " + response;
     }
 
     @PostMapping ("/sendDataToFlask")
