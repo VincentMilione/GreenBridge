@@ -74,7 +74,7 @@ data_ordine date not null,
 pagamento varchar(20),
 id_cliente int NULL,
 id_indirizzo int,
-stato int,
+stato int DEFAULT 1,
 foreign key(id_cliente) references cliente(id)
 on update cascade
 on delete set null,
