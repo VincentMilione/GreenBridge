@@ -12,7 +12,7 @@ public interface RecensioneRepository extends
         JpaRepository<RecensioneProdotti, Integer> {
     /**
      * l'interfaccia consente di trovare tutte
-     * le recensione legate a un prodotto
+     * le recensione legate a un prodotto.
      * @param id identificativo del prodotto
      * @return Lista di recensioni associate al prodotto
      */

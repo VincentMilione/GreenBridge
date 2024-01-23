@@ -2,7 +2,6 @@ package com.greenbridge.controllers;
 
 
 import com.greenbridge.services.ClienteServiceImpl;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +13,10 @@ import org.springframework.web.bind.annotation.GetMapping;
  * */
 @Controller
 public class ClienteController {
-    
+
+    /**
+     * Permette di utilizzare i servizi disposti per l'entità cliente.
+     */
     @Autowired
     private ClienteServiceImpl clienteService;
 
@@ -30,7 +32,8 @@ public class ClienteController {
 
     /** il metodo effettua il redirect alla homepage cliente.
      *  Risponde all'url /home
-     *  @param model contiene gli attributi da visualizzare nella view di ritorno
+     *  @param model contiene gli attributi da visualizzare
+     *              nella view di ritorno
      *  @return nome del template HTML
      * */
     @GetMapping("/home")

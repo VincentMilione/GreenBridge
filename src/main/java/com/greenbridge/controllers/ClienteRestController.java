@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  *  Questa classe gestisce il login e il logout
- *  dell'attore cliente sulla piattaforma
+ *  dell'attore cliente sulla piattaforma.
  *  @author Michele Martino
  */
 @RestController
@@ -22,7 +22,7 @@ public class ClienteRestController {
 
     /**
      * Attributo che permette di utilizzare
-     * i servizi disponibili per il cliente
+     * i servizi disponibili per il cliente.
      */
     @Autowired
     private ClienteService clienteService;
