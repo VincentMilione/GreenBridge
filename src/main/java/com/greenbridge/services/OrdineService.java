@@ -23,7 +23,7 @@ public class OrdineService {
         return ordineRepository.save(ordine);
     }
 
-    public List<Ordine> getOrdiniByAgricoltore(Agricoltore agricoltore){
+    public List<Ordine> getOrdiniByAgricoltore(Agricoltore agricoltore) {
         List<Ordine> ordini = ordineRepository.findByAgricoltore(agricoltore);
         return ordini;
     }

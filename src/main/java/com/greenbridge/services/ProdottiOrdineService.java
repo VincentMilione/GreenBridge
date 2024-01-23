@@ -44,7 +44,7 @@ public class ProdottiOrdineService {
 
 
 
-    public List<ProdottiOrdine> findAllProdottiOrdineByOrdineId(Ordine ordine){
+    public List<ProdottiOrdine> findAllProdottiOrdineByOrdineId(Ordine ordine) {
         return prodottiOrdineRepository.findProdottiOrdineByOrdine(ordine);
     }
 }
