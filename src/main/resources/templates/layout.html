@@ -87,6 +87,28 @@
 </script>
 
 <script>
+  function confermaCancellazione() {
+    if (confirm("Eliminare il prodotto? La cancellazione non comporterà modifiche alle fatture")) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+</script>
+
+<script>
+  function validateFileType(input) {
+    const allowedExtensions = ['png', 'jpeg', 'jpg'];
+    const fileName = input.value.toLowerCase();
+    const extension = fileName.split('.').pop();
+
+    if (!allowedExtensions.includes(extension)) {
+      input.value = ''; //
+    }
+  }
+</script>
+
+<script>
   function validateForm() {
     var searchBar = document.getElementById("searchBar");
     var searchText = searchBar.value.trim();

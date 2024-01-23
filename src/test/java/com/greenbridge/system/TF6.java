@@ -20,18 +20,21 @@ public class TF6 {
 
   private WebDriver driver;
 
+
+
+
   @Before
   public void setUp() throws InterruptedException {
 
     WebDriverManager.chromedriver().setup();
     driver = new ChromeDriver();
     driver.get("http://localhost:8080/loginAgricoltore");
-    driver.manage().window().setSize(new Dimension(1421, 816));
+    driver.manage().window().setSize(new Dimension(1430, 816));
     driver.findElement(By.id("email")).click();
-    driver.findElement(By.id("email")).sendKeys("adelmoanichini@example.org");
+    driver.findElement(By.id("email")).sendKeys("mauro@a.com");
     driver.findElement(By.id("password")).click();
-    driver.findElement(By.id("password")).sendKeys("*Vgm9SmyN^pPPvGj");
-    driver.findElement(By.cssSelector("button")).click();
+    driver.findElement(By.id("password")).sendKeys("mauro");
+    driver.findElement(By.cssSelector("button:nth-child(3)")).click();
     sleep(2000);
   }
 
@@ -39,7 +42,6 @@ public class TF6 {
   public void testNomeErrato() {
 
     driver.get("http://localhost:8080/formInserimento");
-
 
     WebElement nomeInput = driver.findElement(By.id("nome"));
     WebElement origineInput = driver.findElement(By.id("origine"));
@@ -50,7 +52,7 @@ public class TF6 {
     WebElement quantitaDispInput = driver.findElement(By.id("quantitaDisp"));
     WebElement lottoInput = driver.findElement(By.id("lotto"));
     WebElement descrizioneInput = driver.findElement(By.id("descrizione"));
-    WebElement submitButton = driver.findElement(By.xpath("//button[@type='submit']"));
+    WebElement submitButton =  driver.findElement(By.xpath("/html/body/div[2]/form/button"));
 
 
     nomeInput.sendKeys("Fico artacarpus heterophyllus");
@@ -96,7 +98,7 @@ public class TF6 {
     WebElement quantitaDispInput = driver.findElement(By.id("quantitaDisp"));
     WebElement lottoInput = driver.findElement(By.id("lotto"));
     WebElement descrizioneInput = driver.findElement(By.id("descrizione"));
-    WebElement submitButton = driver.findElement(By.xpath("//button[@type='submit']"));
+    WebElement submitButton =  driver.findElement(By.xpath("/html/body/div[2]/form/button"));
 
 
     nomeInput.sendKeys("Fico");
@@ -128,7 +130,7 @@ public class TF6 {
   }
 
   @Test
-  public void testImmagineErrata() {
+  public void testImmagineErrata() throws InterruptedException {
 
     driver.get("http://localhost:8080/formInserimento");
 
@@ -142,12 +144,12 @@ public class TF6 {
     WebElement quantitaDispInput = driver.findElement(By.id("quantitaDisp"));
     WebElement lottoInput = driver.findElement(By.id("lotto"));
     WebElement descrizioneInput = driver.findElement(By.id("descrizione"));
-    WebElement submitButton = driver.findElement(By.xpath("//button[@type='submit']"));
+    WebElement submitButton =  driver.findElement(By.xpath("/html/body/div[2]/form/button"));
 
 
     nomeInput.sendKeys("Fico");
     origineInput.sendKeys("Regno Unito");
-    immagineFileInput.sendKeys("C:\\Users\\mauro\\Desktop\\tabelle.txt");
+    immagineFileInput.sendKeys("C:\\Users\\mauro\\Desktop\\DataSourceDefinition.docx");
     formatoVenditaInput.clear();
     formatoVenditaInput.sendKeys("2");
     prezzoVenditaInput.clear();
@@ -171,6 +173,7 @@ public class TF6 {
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
+
   }
 
   @Test
@@ -188,7 +191,7 @@ public class TF6 {
     WebElement quantitaDispInput = driver.findElement(By.id("quantitaDisp"));
     WebElement lottoInput = driver.findElement(By.id("lotto"));
     WebElement descrizioneInput = driver.findElement(By.id("descrizione"));
-    WebElement submitButton = driver.findElement(By.xpath("//button[@type='submit']"));
+    WebElement submitButton =  driver.findElement(By.xpath("/html/body/div[2]/form/button"));
 
 
     nomeInput.sendKeys("Fico");
@@ -234,7 +237,7 @@ public class TF6 {
     WebElement quantitaDispInput = driver.findElement(By.id("quantitaDisp"));
     WebElement lottoInput = driver.findElement(By.id("lotto"));
     WebElement descrizioneInput = driver.findElement(By.id("descrizione"));
-    WebElement submitButton = driver.findElement(By.xpath("//button[@type='submit']"));
+    WebElement submitButton =  driver.findElement(By.xpath("/html/body/div[2]/form/button"));
 
 
     nomeInput.sendKeys("Fico");
@@ -280,7 +283,7 @@ public class TF6 {
     WebElement quantitaDispInput = driver.findElement(By.id("quantitaDisp"));
     WebElement lottoInput = driver.findElement(By.id("lotto"));
     WebElement descrizioneInput = driver.findElement(By.id("descrizione"));
-    WebElement submitButton = driver.findElement(By.xpath("//button[@type='submit']"));
+    WebElement submitButton =  driver.findElement(By.xpath("/html/body/div[2]/form/button"));
 
 
     nomeInput.sendKeys("Fico");
@@ -326,7 +329,7 @@ public class TF6 {
     WebElement quantitaDispInput = driver.findElement(By.id("quantitaDisp"));
     WebElement lottoInput = driver.findElement(By.id("lotto"));
     WebElement descrizioneInput = driver.findElement(By.id("descrizione"));
-    WebElement submitButton = driver.findElement(By.xpath("//button[@type='submit']"));
+    WebElement submitButton =  driver.findElement(By.xpath("/html/body/div[2]/form/button"));
 
 
     nomeInput.sendKeys("Fico");
@@ -372,7 +375,7 @@ public class TF6 {
     WebElement quantitaDispInput = driver.findElement(By.id("quantitaDisp"));
     WebElement lottoInput = driver.findElement(By.id("lotto"));
     WebElement descrizioneInput = driver.findElement(By.id("descrizione"));
-    WebElement submitButton = driver.findElement(By.xpath("//button[@type='submit']"));
+    WebElement submitButton =  driver.findElement(By.xpath("/html/body/div[2]/form/button"));
 
 
     nomeInput.sendKeys("Fico");
@@ -418,7 +421,7 @@ public class TF6 {
     WebElement quantitaDispInput = driver.findElement(By.id("quantitaDisp"));
     WebElement lottoInput = driver.findElement(By.id("lotto"));
     WebElement descrizioneInput = driver.findElement(By.id("descrizione"));
-    WebElement submitButton = driver.findElement(By.xpath("//button[@type='submit']"));
+    WebElement submitButton =  driver.findElement(By.xpath("/html/body/div[2]/form/button"));
 
 
     nomeInput.sendKeys("Fico");
@@ -464,7 +467,7 @@ public class TF6 {
     WebElement quantitaDispInput = driver.findElement(By.id("quantitaDisp"));
     WebElement lottoInput = driver.findElement(By.id("lotto"));
     WebElement descrizioneInput = driver.findElement(By.id("descrizione"));
-    WebElement submitButton = driver.findElement(By.xpath("//button[@type='submit']"));
+    WebElement submitButton =  driver.findElement(By.xpath("/html/body/div[2]/form/button"));
 
 
     nomeInput.sendKeys("Fico");
