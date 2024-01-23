@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     .catch(error => {
                         // Gestisci gli errori durante la richiesta
                         console.error('Errore:', error.message);
+                        //bot.sendMessage(error.message,'messages__item--visitor');
                         // Visualizza un messaggio di errore personalizzato se lo stato è BAD_REQUEST
                         if (error.response && error.response.status === 400) {
                             console.error('Messaggio di errore dal server:', error.response.data);
@@ -48,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const input = document.getElementById('input');
     const sendButton = document.getElementById('sendButton');
 
-    function sendMessage() {
+    function submitMessage() {
         const command = input.value.trim();
         if (command !== '') {
             chatbot.respondToCommand(command);
@@ -58,11 +59,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     input.addEventListener('keydown', function (event) {
         if (event.key === 'Enter') {
-            sendMessage();
+            submitMessage();
         }
     });
 
-    sendButton.addEventListener('click', sendMessage);
+    sendButton.addEventListener('click', submitMessage);
 });
 
 /**
