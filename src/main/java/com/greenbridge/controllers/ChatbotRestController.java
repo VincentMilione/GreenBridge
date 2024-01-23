@@ -1,6 +1,9 @@
 package com.greenbridge.controllers;
 
 
+import com.greenbridge.entities.Agricoltore;
+import com.greenbridge.services.AgricoltoreServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -9,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,9 +21,11 @@ import java.util.Map;
 @RequestMapping("/api")
 public class ChatbotRestController {
     RestTemplate restTemplate = new RestTemplate();
+    @Autowired
+    AgricoltoreServiceImpl agricoltoreServiceImpl;
 
     @PostMapping("/executeCommand")
-    public ResponseEntity<Map<String, Object>> executeCommand(@RequestBody String command) {
+    public List<String> executeCommand(@RequestBody String command) {
         System.out.println(command);
 
         // Controllo sul comando ricevuto
@@ -37,6 +44,7 @@ public class ChatbotRestController {
 
             // Ottenere l'oggetto associato alla chiave "id_list"
             Object idListObject = responseBody.get("id_list");
+            List<String> agricoltoriList = new ArrayList<>();
 
             // Verificare se l'oggetto è effettivamente un array
             if (idListObject instanceof List) {
@@ -45,19 +53,26 @@ public class ChatbotRestController {
 
                 for (Integer intValue : idList) {
                     System.out.println("Valore intero: " + intValue);
+                    agricoltoreServiceImpl.getSingleAgricoltore(intValue);
+                    Agricoltore agricoltore = agricoltoreServiceImpl.getSingleAgricoltore(intValue);
+
+                    agricoltoriList.add(agricoltore.getNomeBottega()); // Aggiungi l'agricoltore alla lista
 
                 }
-            } else {
+            }
+            else {
                 // Gestire il caso in cui l'oggetto non è un array
                 System.err.println("La chiave 'arrayDiInt' non contiene un array di interi.");
             }
 
 
-        return ResponseEntity.ok(responseEntity.getBody());
+            return agricoltoriList;
         }
          else{
             // Comando non riconosciuto
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+            List<String> error = new ArrayList<>();
+            error.add("Comando non riconosciuto");
+            return error;
         }
     }
 }
