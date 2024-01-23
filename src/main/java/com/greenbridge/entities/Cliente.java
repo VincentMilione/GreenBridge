@@ -10,12 +10,16 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.sql.Date;
 
+/**
+ * Questa classe rappresenta il cliente
+ * @author Michele Martino
+ */
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 public class Cliente {
-
+    /** Identificativo univoco del cliente  */
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
     private Integer id;
@@ -31,6 +35,10 @@ public class Cliente {
     /** Data di nascita del cliente. */
     private Date dataNascita;
 
+    /**
+     * Il metodo consente di visualizzare un cliente come stringa
+     * @return stringa con i valori degli attributi del cliente
+     */
     @Override
     public String toString() {
         return "Cliente{"
@@ -42,6 +50,14 @@ public class Cliente {
             + '}';
     }
 
+    /**
+     * Costruttore di Cliente che esclude l'id
+     * @param nome nome del cliente
+     * @param cognome cognome del cliente
+     * @param email email del cliente
+     * @param password password del cliente
+     * @param dataNascita data di nascita del cliente
+     */
     public Cliente(
             String nome,
             String cognome,

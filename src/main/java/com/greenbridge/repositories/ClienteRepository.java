@@ -3,7 +3,9 @@ package com.greenbridge.repositories;
 import com.greenbridge.entities.Cliente;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-/** Questa classe contente l'accesso al database ai dati relativi al cliente. */
+/** Questa classe contente l'accesso al database ai dati relativi al cliente.
+ * @author Michele Martino
+ * */
 public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
     /** Questo metodo consente di sapere se
      *  esiste o meno un cliente associato ad una Email data in input. */
