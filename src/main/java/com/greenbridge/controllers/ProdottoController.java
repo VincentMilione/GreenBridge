@@ -2,8 +2,10 @@ package com.greenbridge.controllers;
 
 import com.greenbridge.entities.Agricoltore;
 import com.greenbridge.entities.Prodotto;
+import com.greenbridge.entities.RecensioneProdotti;
 import com.greenbridge.services.AgricoltoreService;
 import com.greenbridge.services.ProdottoService;
+import com.greenbridge.services.RecensioneService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,6 +31,8 @@ public class ProdottoController {
 
     @Autowired
     private AgricoltoreService agricoltoreService;
+    @Autowired
+    private RecensioneService recensioneService;
 
 
     @GetMapping("/formInserimento")
@@ -170,6 +174,9 @@ public class ProdottoController {
     String getProdotto(Model model, @PathVariable int idProdotto) {
         Prodotto prodotto = prodottoService.getProdottoById(idProdotto);
         model.addAttribute("prodotto", prodotto);
+        List<RecensioneProdotti> recensioni = recensioneService.
+                                            getRecensioniByIdProdotto(prodotto.getIdProdotto());
+        model.addAttribute("recensioni", recensioni);
         return "prodotto";
     }
 
