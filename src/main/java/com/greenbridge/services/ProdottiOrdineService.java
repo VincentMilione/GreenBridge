@@ -22,7 +22,9 @@ public class ProdottiOrdineService {
     public List<ProdottiOrdine> findAllProdottiOrdine() {
         return prodottiOrdineRepository.findAll();
     }
-
+    public List<ProdottiOrdine> findAllProdottiOrdineByOrdine(Ordine ordine) {
+        return prodottiOrdineRepository.findProdottiOrdineByOrdine(ordine);
+    }
     public ProdottiOrdine saveProdottiOrdine(ProdottiOrdine prodottiOrdine) {
         return prodottiOrdineRepository.save(prodottiOrdine);
     }
@@ -40,7 +42,9 @@ public class ProdottiOrdineService {
         }
     }
 
-    public List<ProdottiOrdine> findAllProdottiOrdineByOrdineId(Ordine ordine){
+
+
+    public List<ProdottiOrdine> findAllProdottiOrdineByOrdineId(Ordine ordine) {
         return prodottiOrdineRepository.findProdottiOrdineByOrdine(ordine);
     }
 }
