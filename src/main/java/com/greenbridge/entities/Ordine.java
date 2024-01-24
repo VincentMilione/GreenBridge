@@ -17,6 +17,11 @@ import lombok.Setter;
 import java.util.Calendar;
 import java.util.Date;
 
+
+/**
+ * Entità che rappresenta un ordine effettuato da un cliente.
+ * @Author Salvatore
+ */
 @Entity
 @Setter
 @Getter
@@ -49,7 +54,15 @@ public class Ordine {
     @Column(name = "stato")
     private int stato;
 
-
+    /**
+     * Costruttore per creare un'istanza di Ordine.
+     *
+     * @param importo     Importo totale dell'ordine.
+     * @param pagamento   Metodo di pagamento utilizzato.
+     * @param id_indirizzo Identificativo dell'indirizzo di spedizione.
+     * @param cliente     Cliente che ha effettuato l'ordine.
+     * @param agricoltore Agricoltore associato all'ordine.
+     */
     public Ordine(float importo,  String pagamento, int id_indirizzo,
                   Cliente cliente, Agricoltore agricoltore) {
         this.importo = importo;

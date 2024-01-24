@@ -5,13 +5,16 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Column;
 import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
-
+/**
+ * Entità che rappresenta un elemento nel carrello di un cliente.
+ */
 @Entity
 @Getter
 @Setter
@@ -29,22 +32,34 @@ public class CarrelloCliente {
     @JoinColumn(name = "id_prodotto")
     private Prodotto prodotto;
 
+    @Column(name = "kg_richiesti")
+     private int kgRichiesti;
 
-     private int kg_richiesti;
-
+    /**
+     * Restituisce una rappresentazione in forma di stringa dell'oggetto CarrelloCliente.
+     *
+     * @return Stringa rappresentante l'oggetto CarrelloCliente.
+     */
     @Override
     public String toString() {
         return "Cart{"
                 + ", cliente=" + cliente
                 + ", prodotto=" + prodotto
-                + ", quantita=" + kg_richiesti
+                + ", quantita=" + kgRichiesti
                 + '}';
     }
 
+    /**
+     * Costruttore per creare un'istanza di CarrelloCliente.
+     *
+     * @param cliente     Cliente associato al carrello.
+     * @param prodotto    Prodotto associato al carrello.
+     * @param kgRichiesti Quantità del prodotto richiesta nel carrello.
+     */
     public CarrelloCliente(Cliente cliente, Prodotto prodotto,
-                           int kg_richiesti) {
+                           int kgRichiesti) {
         this.cliente = cliente;
         this.prodotto = prodotto;
-        this.kg_richiesti = kg_richiesti;
+        this.kgRichiesti = kgRichiesti;
     }
 }
