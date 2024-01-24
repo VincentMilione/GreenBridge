@@ -9,12 +9,11 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.ArrayList;
@@ -27,7 +26,7 @@ import java.util.List;
 public class LoginController {
 
     @Autowired
-    ClienteServiceImpl clienteService;
+    private ClienteServiceImpl clienteService;
     @Autowired
     private CarrelloClienteService carrelloClienteService;
 
@@ -38,15 +37,17 @@ public class LoginController {
             @RequestBody Cliente cliente,
             HttpSession session) {
         Cliente c = clienteService.getClienteByEmail(cliente.getEmail());
-        if (c != null && cliente.getPassword().
-                compareTo(c.getPassword()) == 0) {
+        System.out.println("sto comparando " + c + "e" + cliente.getPassword());
+        if (c != null &&
+                cliente.getPassword().compareTo(c.getPassword()) == 0) {
             session.setAttribute("cliente", c);
-            List<CarrelloCliente> lista = carrelloClienteService.
-                    getByClientId(c);
+            List<CarrelloCliente> lista =
+                    carrelloClienteService.getByClientId(c);
+            System.out.println("il suo carrello è :" + lista);
             if (lista == null) {
                 lista = new ArrayList<CarrelloCliente>();
             }
-            ListCart listCart = new ListCart(c, lista);
+            ListCart listCart = new ListCart(c,lista);
             session.setAttribute("list_cart", listCart);
             return new ResponseEntity<>("ok", HttpStatus.OK);
         }
@@ -59,11 +60,12 @@ public class LoginController {
         session.removeAttribute("cliente");
         ListCart listCart = (ListCart) session.getAttribute("list_cart");
         for (CarrelloCliente itemCart : listCart.getListCart()) {
+            System.out.println(itemCart);
             carrelloClienteService.save(itemCart);
         }
         session.removeAttribute("list_cart");
 
-        return new RedirectView("/home");
+        return new RedirectView("../");
     }
 
 }

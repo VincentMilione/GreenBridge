@@ -2,8 +2,10 @@ package com.greenbridge.controllers;
 
 import com.greenbridge.entities.Agricoltore;
 import com.greenbridge.entities.Prodotto;
+import com.greenbridge.entities.RecensioneProdotti;
 import com.greenbridge.services.AgricoltoreService;
 import com.greenbridge.services.ProdottoService;
+import com.greenbridge.services.RecensioneService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,6 +31,8 @@ public class ProdottoController {
 
     @Autowired
     private AgricoltoreService agricoltoreService;
+    @Autowired
+    private RecensioneService recensioneService;
 
 
     @GetMapping("/formInserimento")
@@ -159,10 +163,20 @@ public class ProdottoController {
         return "pages/user/catalogo";
     }
 
-  @GetMapping("/prodotto/{idProdotto}")
+    /**
+     * Gestisce la richiesta di visualizzazione di un singolo prodotto identificato dall'id associato.
+     *
+     * @param model Modello per la gestione degli attributi nella vista.
+     * @param idProdotto Identificativo del prodotto da visualizzare.
+     * @return Stringa che rappresenta il nome della vista da visualizzare ovvero prodotto.html
+     */
+    @GetMapping("/prodotto/{idProdotto}")
     String getProdotto(Model model, @PathVariable int idProdotto) {
         Prodotto prodotto = prodottoService.getProdottoById(idProdotto);
         model.addAttribute("prodotto", prodotto);
+        List<RecensioneProdotti> recensioni = recensioneService.
+                                            getRecensioniByIdProdotto(prodotto.getIdProdotto());
+        model.addAttribute("recensioni", recensioni);
         return "prodotto";
     }
 
@@ -172,9 +186,18 @@ public class ProdottoController {
     }
 
 
+    /**
+     * Gestisce la richiesta di ricerca dei prodotti in base al nome.
+     *
+     * @param name Nome del prodotto da cercare
+     * @param model Modello per la gestione degli attributi nella vista.
+     * @return Stringa che rappresenta il nome della vista da visualizzare; nel caso di successo ricercaProdotto.html, nel caso contrario errrore.html
+     */
     @PostMapping ("/ricerca")
     public String getProduct(@RequestParam String name, Model model) {
-        if (name.trim().isEmpty() || name.length() > 50 || !name.matches("^[A-Za-zÀ-ù ‘-]{1,50}$")) {
+        int numb = 50;
+        if (name.trim().isEmpty() || name.length() > numb
+                || !name.matches("^[A-Za-zÀ-ù ‘-]{1,50}$")) {
             return "error.html";
         }
 

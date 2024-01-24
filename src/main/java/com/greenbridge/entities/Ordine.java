@@ -65,9 +65,16 @@ public class Ordine {
         this.stato=1;
     }
 
-
-
-
-
+    @Override
+    public String toString() {
+        return "Ordine{" +
+                "id=" + id +
+                ", importo=" + importo +
+                ", dataOrdine=" + dataOrdine +
+                ", pagamento='" + pagamento + '\'' +
+                ", cliente=" + cliente +
+                ", agricoltore=" + agricoltore +
+                '}';
+    }
 }
 
