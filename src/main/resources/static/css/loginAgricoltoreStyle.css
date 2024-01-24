@@ -71,7 +71,7 @@
 
 button {
     border: none; /* Removed border for a cleaner button */
-    margin-top: 20px; /* Increased margin for better separation */
+    margin-top: 15px; /* Increased margin for better separation */
     border-radius: 20px;
     font-size: 20px;
     color: white;
@@ -114,8 +114,7 @@ input {
     border-radius: 10px;
     padding: 10px;
     font-size: 20px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 30px;
 }
 
 h1{
