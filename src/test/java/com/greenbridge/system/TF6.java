@@ -4,7 +4,6 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -38,7 +37,7 @@ public class TF6 {
     sleep(2000);
   }
 
-  @Test
+ @org.junit.Test
   public void testNomeErrato() {
 
     driver.get("http://localhost:8080/formInserimento");
@@ -83,7 +82,7 @@ public class TF6 {
     }
   }
 
-  @Test
+ @org.junit.Test
   public void testOrigineErrato() {
 
     driver.get("http://localhost:8080/formInserimento");
@@ -129,7 +128,7 @@ public class TF6 {
     }
   }
 
-  @Test
+ @org.junit.Test
   public void testImmagineErrata() throws InterruptedException {
 
     driver.get("http://localhost:8080/formInserimento");
@@ -176,7 +175,7 @@ public class TF6 {
 
   }
 
-  @Test
+ @org.junit.Test
   public void testFormatoErrato() {
 
     driver.get("http://localhost:8080/formInserimento");
@@ -222,7 +221,7 @@ public class TF6 {
     }
   }
 
-  @Test
+ @org.junit.Test
   public void testPrezzoErrato() {
 
     driver.get("http://localhost:8080/formInserimento");
@@ -268,7 +267,7 @@ public class TF6 {
     }
   }
 
-  @Test
+ @org.junit.Test
   public void testPrezzoKgErrato() {
 
     driver.get("http://localhost:8080/formInserimento");
@@ -314,7 +313,7 @@ public class TF6 {
     }
   }
 
-  @Test
+ @org.junit.Test
   public void testQuantitaDispErrato() {
 
     driver.get("http://localhost:8080/formInserimento");
@@ -360,7 +359,7 @@ public class TF6 {
     }
   }
 
-  @Test
+ @org.junit.Test
   public void testLottoErrato() {
 
     driver.get("http://localhost:8080/formInserimento");
@@ -406,7 +405,7 @@ public class TF6 {
     }
   }
 
-  @Test
+ @org.junit.Test
   public void testDescrizioneErrato() {
 
     driver.get("http://localhost:8080/formInserimento");
@@ -452,7 +451,7 @@ public class TF6 {
     }
   }
 
-  @Test
+ @org.junit.Test
   public void testInsertCorretta() {
 
     driver.get("http://localhost:8080/formInserimento");

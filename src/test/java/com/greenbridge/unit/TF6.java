@@ -4,20 +4,19 @@ import com.greenbridge.GreenBridgeApplication;
 
 import com.greenbridge.entities.Agricoltore;
 import com.greenbridge.services.AgricoltoreService;
-import com.greenbridge.services.ProdottoService;
 import jakarta.servlet.http.HttpSession;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.mock.web.MockMultipartFile;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -25,7 +24,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import static org.mockito.Mockito.when;
 
 
-@ExtendWith(SpringExtension.class)
+@RunWith(SpringRunner.class)
 @SpringBootTest(classes = GreenBridgeApplication.class) //
 @AutoConfigureMockMvc
 public class TF6 {
@@ -36,7 +35,7 @@ public class TF6 {
     @Mock
     private AgricoltoreService agricoltoreService;
 
-    @Test
+    @org.junit.Test
     public void testNomeErrato() throws Exception {
 
         // Creare un file immagine fittizio
@@ -67,7 +66,7 @@ public class TF6 {
                 .andExpect(MockMvcResultMatchers.status().isNotAcceptable());
     }
 
-    @Test
+    @org.junit.Test
     public void testOrigineErrata() throws Exception {
 
         // Creare un file immagine fittizio
@@ -99,7 +98,7 @@ public class TF6 {
 
     }
 
-    @Test
+    @org.junit.Test
     public void testFormatoErrato() throws Exception {
 
         // Creare un file immagine fittizio
@@ -131,7 +130,7 @@ public class TF6 {
 
     }
 
-    @Test
+    @org.junit.Test
     public void testPrezzoVenditaErrato() throws Exception {
 
         // Creare un file immagine fittizio
@@ -163,7 +162,7 @@ public class TF6 {
 
     }
 
-    @Test
+    @org.junit.Test
     public void testPrezzoKgErrato() throws Exception {
 
         // Creare un file immagine fittizio
@@ -195,7 +194,7 @@ public class TF6 {
 
     }
 
-    @Test
+    @org.junit.Test
     public void testQuantitaDispErrata() throws Exception {
 
         // Creare un file immagine fittizio
@@ -227,7 +226,7 @@ public class TF6 {
 
     }
 
-    @Test
+    @org.junit.Test
     public void testLottoErrato() throws Exception {
 
         // Creare un file immagine fittizio
@@ -259,7 +258,7 @@ public class TF6 {
 
     }
 
-    @Test
+    @org.junit.Test
     public void testDescrizioneErrata() throws Exception {
 
         // Creare un file immagine fittizio
@@ -290,7 +289,7 @@ public class TF6 {
                 .andExpect(MockMvcResultMatchers.status().isNotAcceptable());
     }
 
-    @Test
+    @org.junit.Test
     public void testInsertCorretta() throws Exception {
 
         // Creare un file immagine fittizio
