@@ -4,6 +4,7 @@ import com.greenbridge.entities.Agricoltore;
 import com.greenbridge.services.AgricoltoreServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -56,10 +57,11 @@ public class RestUseController {
 
     @PostMapping("/Agricoltori/{id}/aggiungiCertificato")
     public ResponseEntity<String> aggiungiCertificato(@PathVariable int id,
-                                                      @RequestParam String nomeCertificato,
-                                                      @RequestParam Date dataScadenzaCertificato,
-                                                      @RequestParam("scansioneCertificato") MultipartFile scansioneCertificato) {
-//        agricoltoreService.aggiungiCertificato(id, nomeCertificato, dataScadenzaCertificato );
+                                                      @RequestParam String certName,
+                                                      @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate expiryDate,
+                                                      @RequestParam MultipartFile certScan) {
+        System.out.println("Ciao mi chiamo Batman!");
+        agricoltoreService.aggiungiCertificato(id, certName, expiryDate);
         return new ResponseEntity<>("Certificato aggiunto con successo", HttpStatus.OK);
     }
 }

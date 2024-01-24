@@ -93,18 +93,23 @@
         } else if (expiryDateInput === currentDate) {
             alert("Impossibile procedere poiché la data di scadenza inserita è uguale alla data corrente");
         }else{
-            // Invia i dati al server utilizzando $.ajax
+            // Invia i dati al server utilizzando
+            let formData = new FormData();
+            let certScanInput = document.getElementById('certScan');
+            let certScanFile = certScanInput.files[0];
+            formData.append('certName', $('#certName').val());
+            formData.append('expiryDate', expiryDateInput);
+            formData.append('certScan', certScanFile);
             $.ajax({
                 url: '/api/Agricoltori/' + id + '/aggiungiCertificato', // Inserisci l'URL del tuo server
                 method: 'POST',
-                data: {
-                    certName: $('#certName').val(),
-                    expiryDate: expiryDateInput,
-                    certScan: $('#certScan').val()
-                },
+                data: formData,
+                processData: false,
+                contentType: false,
                 success: function (response) {
                     // Puoi gestire la risposta del server qui
                     alert("Passa al passo successivo");
+                    window.location.replace("/detailAgricoltore");
                 },
                 error: function (error) {
                     // Gestisci gli errori qui
