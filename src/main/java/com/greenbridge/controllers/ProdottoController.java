@@ -8,14 +8,12 @@ import com.greenbridge.services.ProdottoService;
 import com.greenbridge.services.RecensioneService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -37,11 +35,11 @@ public class ProdottoController {
 
     @GetMapping("/formInserimento")
     public String getProdotto(Model model, HttpSession session) {
-        int idAgricoltore = 1;
-        session.setAttribute("agricoltore",  agricoltoreService.
-                getSingleAgricoltore(idAgricoltore));
-        model.addAttribute("prodotto", new Prodotto());
-        return "pages/user/formInserimento";
+        if(session.getAttribute("agricoltore")!= null) {
+            model.addAttribute("prodotto", new Prodotto());
+            return "pages/user/formInserimento";
+        }
+        return "loginAgricoltore";
     }
 
     @PostMapping("/addProdotto")
@@ -76,17 +74,36 @@ public class ProdottoController {
             model.addAttribute("prodotti", prodotti);
         } catch (IOException e) {
             System.out.println(e.getMessage());
+        } catch (DataIntegrityViolationException e) {
+            // Forza il lancio dell'eccezione
+            throw new DataIntegrityViolationException("Data truncation: Data too long for column");
+        } catch (Exception e){
+            handleException(e);
         }
         return "pages/user/catalogo";
     }
 
+    // Gestione dell'eccezione a livello di controller
+    @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public void handleDataIntegrityViolationException(DataIntegrityViolationException e) {
+        // Puoi aggiungere ulteriori log o gestione dell'errore se necessario
+        System.out.println("Handling DataIntegrityViolationException: " + e.getMessage());
+    }
+    @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
+    @ExceptionHandler(Exception.class)
+    public void handleException(Exception e) {
+        // Puoi aggiungere ulteriori log o gestione dell'errore se necessario
+        System.out.println("Handling Exception: " + e.getMessage());
+    }
+
     @GetMapping("/catalogo")
     public String getCatalogo(Model model, HttpSession session) {
-        int idAgricoltore = 1;
-        session.setAttribute("idAgricoltore", idAgricoltore);
-        List<Prodotto> prodotti = prodottoService.
-                getAllProdotti((Agricoltore) session.
-                        getAttribute("agricoltore"));
+        if(session.getAttribute("agricoltore")== null) {
+            return "loginAgricoltore";
+        }
+
+        List<Prodotto> prodotti = prodottoService.getAllProdotti((Agricoltore) session.getAttribute("agricoltore"));
 
         for (Prodotto prodotto : prodotti) {
             if (prodotto.getImmagine() != null) {
@@ -100,8 +117,10 @@ public class ProdottoController {
     }
 
     @GetMapping("/formModificaProdotto/{id}")
-    public String formModificaProdotto(@PathVariable("id")
-                       int id, Model model) {
+    public String formModificaProdotto(@PathVariable("id") int id,Model model, HttpSession session) {
+        if(session.getAttribute("agricoltore")== null) {
+            return "loginAgricoltore";
+        }
         Prodotto prodotto = prodottoService.getProdottoById(id);
         model.addAttribute("prodottoMod", prodotto);
         return "pages/user/formModifica";

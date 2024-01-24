@@ -13,6 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 
 
+/**
+ * Controller REST per gestire le operazioni del carrello degli acquisti.
+ * @Author salvatore mattiello
+ */
 @RestController
 @RequestMapping("/carrello")
 public class CarrelloRestController {
@@ -21,7 +25,14 @@ public class CarrelloRestController {
     @Autowired
     private CarrelloClienteService carrelloClienteService;
 
-    //aggiungere un prodotto al carrello
+    /**
+     * Metodo per aggiungere un prodotto al carrello.
+     *
+     * @param idProdotto Identificativo del prodotto da aggiungere.
+     * @param quantita   Quantità del prodotto da aggiungere.
+     * @param session    Sessione HTTP per mantenere lo stato del carrello.
+     * @return 0 se il prodotto è già presente nel carrello, 1 altrimenti.
+     */
     @PostMapping("/aggiungiCart")
     int aggiungiCart(@RequestParam Integer idProdotto,
                      @RequestParam int quantita, HttpSession session) {
@@ -35,7 +46,16 @@ public class CarrelloRestController {
         return 1;
 
     }
-//AGGIUNGERE DA  QUI
+
+
+    /**
+     * Metodo per modificare un prodotto nel carrello (elimina o modifica quantità).
+     *
+     * @param idProdotto Identificativo del prodotto da modificare.
+     * @param edit       Tipo di modifica ("delete" per eliminare, altrimenti modifica la quantità).
+     * @param session    Sessione HTTP per mantenere lo stato del carrello.
+     * @return Array di float contenente informazioni aggiornate sul carrello (nuova quantità e nuovo prezzo totale).
+     */
         @PostMapping("/edit_prodotto")
     float[] editProdotto(@RequestParam Integer idProdotto,
                          @RequestParam String edit, HttpSession session) {

@@ -13,6 +13,9 @@
             <input class="inputText" type="email" placeholder="Email" id="email" required>
             <input class="inputText" type="password" placeholder="Password" id="password" required>
             <button class="inputButton" type="button" onclick="submitForm()">Login</button>
+            <a th:href="@{/register}">
+                <button class="inputButton2" type="button">Registrazione</button>
+            </a>
         </form>
     </div>
     <script th:inline="javascript">

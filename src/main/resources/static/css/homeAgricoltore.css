@@ -1,0 +1,30 @@
+.button-container {
+    margin: 100px;
+    text-align: center;
+}
+
+.button {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 10px;
+    cursor: pointer;
+    border: 2px solid #2ecc71; /* Bordo verde */
+    border-radius: 11px; /* Bordo arrotondato */
+    background-color: #fff; /* Colore di sfondo bianco */
+    color: #35383b;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transizioni per un effetto più fluido */
+
+    /* Posizione relativa se necessario */
+    position: relative;
+}
+
+.button:hover {
+    background-color: #2ecc71; /* Cambia colore di sfondo al passaggio del mouse */
+    color: #fff; /* Cambia colore del testo al passaggio del mouse */
+}
+
+.button-text {
+    margin-top: 5px;
+    font-size: 14px;
+    color: #555;
+}
