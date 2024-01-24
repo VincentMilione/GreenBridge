@@ -37,6 +37,13 @@
       <a th:if="${session.agricoltore == null && session.cliente==null }" th:href="@{/loginAgricoltore}">
         <button type="submit" class="buttonLogin">Login Agricoltore</button>
       </a>
+
+      <th:block th:if="${session.agricoltore != null}">
+        <div>
+        <img class="imgIcon" src="/img/wallet.png" alt="walletIcon">
+        <p style="color: white; text-align: center"  id="portafoglio"></p>
+        </div>
+      </th:block>
     </a>
   </div>
   <div id="secondLevelNavBar" style="left: -400px">
@@ -72,6 +79,20 @@
     </div>
   </div>
 </footer>
+
+<script>
+  $(document).ready(function() {
+    $.ajax({
+      url: '/getSaldo',
+      type: 'POST',
+      success: function(response) {
+        if(response !=0){
+          $("#portafoglio").text(response+" $");
+        }
+      }
+    });
+  });
+</script>
 
 <script>
   function openMenu(){
