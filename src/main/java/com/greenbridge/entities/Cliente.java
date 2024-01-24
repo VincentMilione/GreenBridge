@@ -21,7 +21,7 @@ import lombok.Setter;
 public class Cliente {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.AUTO)
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Integer id;
     /** Nome del cliente. */
     private String nome;

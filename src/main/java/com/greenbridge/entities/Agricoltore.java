@@ -1,18 +1,12 @@
 package com.greenbridge.entities;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Column;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Fetch;
 
 import java.util.List;
 
@@ -37,4 +31,8 @@ public class Agricoltore {
 
     @OneToMany(mappedBy = "agricoltore")
     List<Prodotto> prodotti;
+    @OneToMany(mappedBy = "agricoltore", fetch = FetchType.LAZY)
+    private List<Certificato> certificati;
+
+
 }

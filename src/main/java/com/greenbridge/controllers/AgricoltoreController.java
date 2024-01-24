@@ -1,5 +1,6 @@
 package com.greenbridge.controllers;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import com.greenbridge.services.AgricoltoreServiceImpl;
 import org.springframework.stereotype.Controller;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class AgricoltoreController {
+    @Autowired
     private   AgricoltoreServiceImpl agricoltoreService;
     public AgricoltoreController(AgricoltoreServiceImpl agricoltoreService) {
         this.agricoltoreService = agricoltoreService;
@@ -20,6 +22,10 @@ public class AgricoltoreController {
     @GetMapping("/registrazione-Agricoltore")
     public String registrazione() {
         return "RegistrazioneUtente";
+    }
+    @GetMapping("/inserimento-certificato")
+    public String inserimentoCertificato() {
+        return "InserimentoCertificato";
     }
     @GetMapping("/modifica")
     public String modificaUtente(Model model) {

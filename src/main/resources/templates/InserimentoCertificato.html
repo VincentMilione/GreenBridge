@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Inserimento Certificato</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+          integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" href="/css/headerStyle.css">
+    <link rel="stylesheet" type="text/css" href="/css/InserimentoCertificatoStyle.css">
+    <link rel="stylesheet" type="text/css" href="/css/footerStyle.css">
+</head>
+<body>
+<div id="navBarContainer">
+    <div id="firstLevelNavBar">
+        <img id="menuIcon" onclick="openMenu()"  src="/img/menu.png">
+        <img id="logo" src="/img/logo.png" alt="logo">
+        <input  placeholder="Cerca..." type="text" id="searchBar">
+
+        </input>
+        <a href="#">
+            <img class="imgIcon" src="/img/cart.png" alt="chartIcon">
+        </a>
+        <a th:if="${session.cliente == null}" th:href="@{/login}">
+            <img class="imgIcon" src="/img/user.png" alt="userIcon">
+        </a>
+        <a th:if="${session.cliente != null}" th:href="@{/detailCliente}">
+            <img class="imgIcon" src="/img/user.png" alt="userIcon">
+        </a>
+    </div>
+    <div id="secondLevelNavBar" style="left: -400px">
+        <a href="#">Catalogo</a>
+        <a href="#">Agricoltori</a>
+    </div>
+</div>
+<h1>Inserimento Certificato</h1>
+
+<form id="certificatoForm">
+    <input type="hidden" th:value="${session.agricoltore.id}" id="id">
+    <label for="nomeCertificato">Nome Certificato:</label>
+    <input type="text" id="nomeCertificato" name="nomeCertificato" required><br>
+    <label for="dataScadenza">Data di Scadenza:</label>
+    <input type="date" id="dataScadenza" name="dataScadenza" required><br>
+
+    <label for="scansioneCertificato">Scansione Certificato:</label>
+    <input type="file" id="scansioneCertificato" name="scansioneCertificato" accept=".pdf, .jpg, .png" required><br>
+
+    <button type="button" onclick="avanti()">Avanti</button>
+</form>
+
+<footer>
+    <div class="footerContainer">
+        <div class="socialIcons">
+            <a href="#"><i class="fa-brands fa-facebook"></i></a>
+            <a href=""><i class="fa-brands fa-instagram"></i></a>
+            <a href=""> <i class="fa-brands fa-github"></i></a>
+            <a href=""><i class="fa-brands fa-youtube"></i></a>
+        </div>
+        <div class="footerNav">
+            <ul>
+                <li><a href="">ASSISTENZA CLIENTI</a> </li>
+                <li><a href="">Contattaci</a> </li>
+                <li><a href="">INFORMAZIONI LEGALI</a> </li>
+                <li><a href="">Privacy Policy</a> </li>
+                <li><a href="">Termini e Condizioni</a> </li>
+            </ul>
+        </div>
+    </div>
+
+</footer>
+<script th:inline="javascript">
+    function isNameCertificatoValido(nomeCertificato) {
+        if (nomeCertificato === "" || nomeCertificato === null) {
+            alert('nome del certificato non inserito');
+            return false;
+        } else if (nomeCertificato.length <4) {
+            alert('nome del certificato è troppo corto');
+            return false;
+        }else if (nomeCertificato.length >30){
+            alert('nome del certificato è troppo lungo');
+            return false;
+
+        }
+    }
+
+    function checkFileType() {
+        const fileInput = document.getElementById('scansioneCertificato');
+        const filePath = fileInput.value;
+        const allowedExtensions = /(\.pdf)$/i;
+
+        if (!allowedExtensions.exec(filePath)) {
+            alert('Scegli un file con estensione PDF.');
+            // Resetta l'input file per consentire all'utente di selezionare un nuovo file
+            fileInput.value = '';
+            return false;
+        }
+        // Se l'estensione è corretta, puoi procedere con il tuo codice
+    }
+    function isDataScadenzaValida(dataScadenza) {
+        var currentDate = new Date();
+        var selectedDate = new Date(dataScadenza);
+
+        if (selectedDate < currentDate) {
+            alert('La data di scadenza deve essere successiva alla data corrente.');
+            return false;
+        }
+
+        return true;
+    }
+
+    function avanti() {
+        var id = document.getElementById("id").value;
+        var nomeCertificato = document.getElementById("nomeCertificato").value;
+        var dataScadenza = document.getElementById("dataScadenza").value;
+        var scansioneCertificato = document.getElementById("scansioneCertificato").value;
+
+        // Costruisci un oggetto FormData per inviare file
+        var formData = new FormData();
+        formData.append('id', id);
+        formData.append('nomeCertificato', nomeCertificato);
+        formData.append('dataScadenza', dataScadenza);
+        formData.append('scansioneCertificato', document.getElementById("scansioneCertificato").files[0]);
+
+        if (!isNameCertificatoValido(nomeCertificato) || !checkFileType() || !isDataScadenzaValida(dataScadenza)) {
+            return false;
+        }
+
+        $.ajax({
+            type: 'POST',
+            url: '/api/Agricoltori/' + id + '/aggiungiCertificato',
+            processData: false,
+            contentType: false,
+            data: formData,
+            success: function (response) {
+                // Handle success response
+                console.log(response);
+                window.location.replace("/inserimento-certificato");
+            },
+            error: function (error) {
+                // Handle error response
+                console.error(error);
+                $("#esito").text("Certificato già esiste");
+            }
+        });
+    }
+
+</script>
+</body>
+</html>
