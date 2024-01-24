@@ -6,7 +6,7 @@
     padding: 40px; /* Decreased padding for a more compact look */
     background: #fff;
     border-radius: 20px;
-    width: 433px;
+    width: 272px;
     height: 82%;
     margin: auto;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Added box shadow for a subtle effect */
@@ -27,6 +27,7 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
+    box-sizing: content-box;
     position: relative;
     padding: 40px;
     background: #fff;
@@ -49,15 +50,14 @@
     background-image: linear-gradient(93.12deg, #0c5e0a 0.52%, #0a9e07 100%);
 }
 
-
-
-
 #loginForm {
-    margin: auto;
     display: flex;
     align-items: center;
     flex-direction: column;
     width: 80%; /* Adjusted width for responsiveness */
+    padding: 20px;
+    margin-top: 10px;
+    box-sizing: content-box;
 }
 
 .inputText {
@@ -69,9 +69,9 @@
     margin-bottom: 10px;
 }
 
-button {
+#loginFormAgricoltore button {
     border: none; /* Removed border for a cleaner button */
-    margin-top: 15px; /* Increased margin for better separation */
+    margin-top: 20px; /* Increased margin for better separation */
     border-radius: 20px;
     font-size: 20px;
     color: white;
@@ -97,11 +97,11 @@ section {
 }
 
 /* Rest of your CSS remains unchanged */
-form {
+#loginFormAgricoltore form {
     font-size: 18px;
     display: flex;
     flex-direction: column;
-    margin-top: 21px;
+    margin-top: -28px;
 }
 
 label {
@@ -114,7 +114,8 @@ input {
     border-radius: 10px;
     padding: 10px;
     font-size: 20px;
-    margin-top: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 h1{
@@ -137,110 +138,3 @@ h2{
 button:hover {
     background-color: #45a049;
 }
-
-
-/**{*/
-/*    padding: 20px;*/
-/*    margin: 0;*/
-/*    box-sizing: content-box;*/
-/*}*/
-/*&footer{*/
-/*    background-image: linear-gradient(93.12deg, #0c5e0a 0.52%, #0a9e07 100%);*/
-/*    margin-top: 20px; !* Aggiunto un margine superiore *!*/
-
-/*}*/
-
-/*.footerContainer{*/
-/*    width: 100%;*/
-/*    padding: 70px 30px 20px;*/
-/*}*/
-
-
-/*.footerNav ul{*/
-/*    display: flex;*/
-
-/*}*/
-/*.footerNav ul li a{*/
-/*    color: white;*/
-/*    margin: 20px;*/
-/*    text-decoration: none;*/
-/*    justify-content: center;*/
-/*    font-size: 1.3em;*/
-/*    opacity: 0.7;*/
-/*    transition: 0.5s;*/
-/*}*/
-/*.footerNav ul li a:hover{*/
-
-/*    opacity: 1;*/
-/*    justify-content: center;*/
-
-/*}*/
-/*.footerBottom{*/
-
-/*}*/
-/*.contactUs {*/
-/*    margin-top: 20px;*/
-/*    padding: 10px;*/
-/*    background-color: #113333;*/
-
-/*}*/
-
-/*.contactUs h3 {*/
-/*    font-size: 18px;*/
-/*    margin-bottom: 10px;*/
-/*}*/
-
-/*.contactUs p {*/
-/*    margin: 5px 0;*/
-/*}*/
-
-/*.footerNav ul li{*/
-/*    width:100%;*/
-/*    text-align: center ;*/
-/*    margin: 10px;*/
-
-/*}*/
-/*.footer {*/
-/*    position: relative;*/
-/*    bottom: 0;*/
-/*    width: 100%;*/
-/*    background-color: #333; !* Cambia colore di sfondo a tuo piacimento *!*/
-/*    color: #fff; !* Cambia il colore del testo a tuo piacimento *!*/
-/*    padding: 10px; !* Aggiungi spaziatura interna a tuo piacimento *!*/
-/*}*/
-
-/*.body {*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*    min-height: 100vh;*/
-/*    margin: 0;*/
-/*}*/
-
-main {
-    flex: 1;
-}
-
-.footer {
-    background-color: #333;
-    color: #111111;
-    padding: 10px;
-}
-
-.body {
-    display: flex;
-    grid-template-rows: 1fr auto;
-    min-height: 100vh;
-    margin: 0;
-}
-
-main {
-    /* Aggiungi stili al tuo contenuto principale, se necessario */
-}
-
-.footer {
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
-}
-
-
