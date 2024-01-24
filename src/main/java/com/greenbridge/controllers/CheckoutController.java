@@ -13,16 +13,17 @@ import com.greenbridge.services.ProdottiOrdineService;
 import com.greenbridge.services.PortafoglioService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-
+/**
+ * Controller per gestire il processo di checkout.
+ * @Author salvatore mattiello
+ */
 @Controller
 public class CheckoutController {
     @Autowired
@@ -37,6 +38,15 @@ public class CheckoutController {
 
     @Autowired
     private PortafoglioService portafoglioService;
+
+    /**
+     * Metodo per gestire la richiesta POST a "/checkout".
+     *
+     * @param id      Identificativo del prodotto per il checkout singolo.
+     * @param model   Modello per aggiungere attributi per la visualizzazione.
+     * @param session Sessione HTTP per mantenere lo stato del checkout.
+     * @return La vista associata al checkout.
+     */
     @PostMapping("/checkout")
     String getCheckout(@RequestParam int id, Model model, HttpSession session) {
         Cliente cliente = (Cliente) session.getAttribute("cliente");
@@ -47,7 +57,7 @@ public class CheckoutController {
             model.addAttribute("totale", carrello.getTotale());
             return "/carrello";
         }
-        //checkout totale
+
         if (id == 0) {
                 session.setAttribute("checkout", carrello);
         } else { //checkout singolo
@@ -60,6 +70,13 @@ public class CheckoutController {
 
         return "checkout";
     }
+
+    /**
+     * Metodo per aggiornare il carrello dopo il checkout.
+     *
+     * @param session       Sessione HTTP per mantenere lo stato del carrello.
+     * @param listaCheckout Lista di prodotti per il checkout.
+     */
     public void aggiornaCarrello(HttpSession session,
                                   ListCart listaCheckout) {
         ListCart listCart = null;
@@ -82,6 +99,12 @@ public class CheckoutController {
 
     }
 
+    /**
+     * Metodo per aggiornare il portafoglio dell'agricoltore dopo il checkout.
+     *
+     * @param totale       Totale del checkout.
+     * @param agricoltore  Agricoltore associato al prodotto.
+     */
     void aggiornaPortafoglio(float totale, Agricoltore agricoltore) {
         int id = agricoltore.getPortafoglio().getId();
         Portafoglio portafoglio = portafoglioService.getPortafoglioById(id);
@@ -89,10 +112,49 @@ public class CheckoutController {
         portafoglioService.salvaPortafoglio(portafoglio);
 
     }
+
+    /**
+     * permette di associare alle eccezioni
+     * degli HttpStatus.
+     * @param e eccezione generata
+     */
+    @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
+    @ExceptionHandler(Exception.class)
+    public void handleException(Exception e) {
+        System.out.println("Handling DataIntegrityViolationException: "
+                + e.getMessage());
+    }
+
+    /**
+     * Metodo per gestire la richiesta POST a "/checkForm" per verificare i dati del modulo di spedizione.
+     * Gestisce anche la creazione di ordine e prodotti_ordine.
+     *
+     * @param indirizzoSpedizione Dati del modulo di spedizione.
+     * @param model               Modello per aggiungere attributi per la visualizzazione.
+     * @param session             Sessione HTTP per mantenere lo stato del checkout.
+     * @return Risposta HTTP con esito del controllo.
+     */
     @PostMapping ("/checkForm")
     ResponseEntity<String> checkForm(@RequestBody
-                                     IndirizzoSpedizione indirizzoSpedizione,
-                                     Model model, HttpSession session) {
+                         IndirizzoSpedizione indirizzoSpedizione,
+                         Model model, HttpSession session) throws Exception {
+        if (indirizzoSpedizione == null) {
+            throw new Exception("indirizzoSpedizione non inviato");
+        }
+        if (indirizzoSpedizione.isNotCoorect()) {
+            throw new Exception("indirizzoSpedizione non corretto");
+        }
+        if (session.getAttribute("checkout") == null) {
+            throw new Exception("nessun checkout da fare");
+        }
+        if (session.getAttribute("list_cart") == null) {
+            throw new Exception("nessun elemento nel carello");
+        }
+        if (session.getAttribute("cliente") == null) {
+            throw new Exception("cliente non loggato");
+        }
+
+
         int idSpedizione = 0;
         session.setAttribute("counter", 2);
         indirizzoSpedizione.setCliente((Cliente)
@@ -173,6 +235,11 @@ public class CheckoutController {
         }
     }
 
+    /**
+     * Metodo per gestire la richiesta GET a "/paymentSuccess".
+     *
+     * @return La vista di conferma del pagamento.
+     */
     @GetMapping("/paymentSuccess")
     public String paymentSuccess() {
         return "paymentSuccess";

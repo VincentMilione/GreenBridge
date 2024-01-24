@@ -9,9 +9,10 @@ body {
 
 h1 {
     margin-bottom: 20px;
+    text-align: center;
 }
 
-form {
+.formInsert{
     background-color: #ffffff; /* Sfondo bianco */
     border: 2px solid #4CAF50; /* Cornice verde */
     border-radius: 10px; /* Angoli arrotondati */

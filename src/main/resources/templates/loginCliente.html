@@ -1,18 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
 <head>
     <meta charset="UTF-8">
     <title>Login!</title>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <link rel="stylesheet" href="/css/formStyle.css">
+    <link rel="stylesheet" href="/css/loginClienteStyle.css">
 </head>
-<body>
+<body layout:fragment="content">
     <div id="loginFormContainer">
         <p id="esito"></p>
         <form id="loginForm">
             <input class="inputText" type="email" placeholder="Email" id="email" required>
             <input class="inputText" type="password" placeholder="Password" id="password" required>
             <button class="inputButton" type="button" onclick="submitForm()">Login</button>
+            <a th:href="@{/register}">
+                <button class="inputButton2" type="button">Registrazione</button>
+            </a>
         </form>
     </div>
     <script th:inline="javascript">
@@ -28,7 +31,7 @@
                 contentType: 'application/json',
                 data: JSON.stringify(cliente),
                 success: function (response) {
-                    window.location.replace("detailCliente");
+                    window.location.replace("../detailCliente");
                 },
                 error: function (response) {
                     $("#esito").text("Credenziali errate")

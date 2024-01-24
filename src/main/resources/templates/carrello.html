@@ -22,7 +22,7 @@
                     <div class="item" th:text="${elemento.getProdotto().getNome()} "></div>
                     <div class="item container-quant">
                         <div class="item-quant"><button class="item edit-button" th:onclick="'edit(' + ${elemento.getProdotto().getIdProdotto()} + ', \'sott\')'"> - </button></div>
-                        <div class="item-quant"><p class="item product-quantity" th:id="${elemento.getProdotto().getIdProdotto()}" th:text="${elemento.getKg_richiesti()}"></p></div>
+                        <div class="item-quant"><p class="item product-quantity" th:id="${elemento.getProdotto().getIdProdotto()}" th:text="${elemento.getKgRichiesti()}"></p></div>
                         <div class="item-quant"><button class="item edit-button" th:onclick="'edit(' + ${elemento.getProdotto().getIdProdotto()} + ', \'add\')'"> + </button></div>
                     </div>
                     <div class="item" th:text="${elemento.getProdotto().getPrezzoKg()} + '$' "></div>

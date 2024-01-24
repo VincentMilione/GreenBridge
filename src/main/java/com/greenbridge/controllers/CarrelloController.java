@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
-
+/**
+ * Controller per gestire le operazioni del carrello degli acquisti.
+ */
 
 @Controller
 public class CarrelloController {
@@ -24,7 +26,14 @@ public class CarrelloController {
     private IndirizzoSpedizioneService indirizzoSpedizioneService;
 
 
-
+    /**
+     * Metodo per gestire la richiesta GET a "/carrello".
+     *
+     * @param model   Modello per aggiungere attributi per la visualizzazione.
+     * @param session Sessione HTTP per mantenere lo stato del carrello.
+     * @return La vista associata al carrello.
+     *  * @Author salvatore mattiello.
+     */
     @GetMapping("/carrello")
         //@ResponseBody
     String getCarrello(Model model, HttpSession session) {
