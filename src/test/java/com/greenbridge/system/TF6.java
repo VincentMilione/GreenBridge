@@ -19,9 +19,6 @@ public class TF6 {
 
   private WebDriver driver;
 
-
-
-
   @Before
   public void setUp() throws InterruptedException {
 
@@ -30,9 +27,9 @@ public class TF6 {
     driver.get("http://localhost:8080/loginAgricoltore");
     driver.manage().window().setSize(new Dimension(1430, 816));
     driver.findElement(By.id("email")).click();
-    driver.findElement(By.id("email")).sendKeys("mauro@a.com");
+    driver.findElement(By.id("email")).sendKeys("costantinocilea@example.com");
     driver.findElement(By.id("password")).click();
-    driver.findElement(By.id("password")).sendKeys("mauro");
+    driver.findElement(By.id("password")).sendKeys("NhNvJYfA#92HZ@zX");
     driver.findElement(By.cssSelector("button:nth-child(3)")).click();
     sleep(2000);
   }
