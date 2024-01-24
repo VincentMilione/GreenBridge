@@ -23,21 +23,25 @@ public class AgricoltoreServiceImpl implements AgricoltoreService {
 
     @Override
     public Agricoltore saveAgricoltore(Agricoltore agricoltore) {
-        if (agricoltoreRepository.existsById(agricoltore.getId()))
+        if (agricoltoreRepository.existsById(agricoltore.getId())) {
             throw new RuntimeException("utente gia esiste");
+        }
         return agricoltoreRepository.save(agricoltore);
     }
 
     @Override
     public void modificaAgricoltore(Agricoltore agricoltore) {
-        if (!agricoltoreRepository.existsById(agricoltore.getId()))
+        if (!agricoltoreRepository.existsById(agricoltore.getId())) {
             throw new RuntimeException("utente non esiste");
+        }
+
         agricoltoreRepository.save(agricoltore);
     }
 
     @Override
     public Agricoltore getSingleAgricoltore(int id) {
-        Optional<Agricoltore> agricoltoreOptional = agricoltoreRepository.findById(id);
+        Optional<Agricoltore> agricoltoreOptional = agricoltoreRepository.
+                findById(id);
         // Se l'agricoltore non è presente, restituisci null
         return agricoltoreOptional.orElse(null);
     }
@@ -45,6 +49,7 @@ public class AgricoltoreServiceImpl implements AgricoltoreService {
     public Agricoltore getAgricoltoreByEmail(String email) {
         return this.agricoltoreRepository.findByEmail(email);
     }
+
 
 
 }

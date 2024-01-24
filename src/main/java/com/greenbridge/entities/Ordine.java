@@ -1,7 +1,7 @@
 package com.greenbridge.entities;
 
 
-import jakarta.persistence.*;
+
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,15 +10,18 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import lombok.*;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import javax.persistence.*;
 import java.util.Calendar;
 import java.util.Date;
 
+
+/**
+ * Entità che rappresenta un ordine effettuato da un cliente.
+ * @Author Salvatore
+ */
 @Entity
 @Setter
 @Getter
@@ -39,6 +42,8 @@ public class Ordine {
     @Column(name = "pagamento")
     private String pagamento;
 
+    @Column(name = "id_indirizzo")
+    private int id_indirizzo;
     @ManyToOne
     @JoinColumn(name = "id_cliente")
     private Cliente cliente;
@@ -46,7 +51,20 @@ public class Ordine {
     @JoinColumn(name = "id_agricoltore")
     private Agricoltore agricoltore;
 
-    public Ordine(float importo,  String pagamento, Cliente cliente, Agricoltore agricoltore) {
+    @Column(name = "stato")
+    private int stato;
+
+    /**
+     * Costruttore per creare un'istanza di Ordine.
+     *
+     * @param importo     Importo totale dell'ordine.
+     * @param pagamento   Metodo di pagamento utilizzato.
+     * @param id_indirizzo Identificativo dell'indirizzo di spedizione.
+     * @param cliente     Cliente che ha effettuato l'ordine.
+     * @param agricoltore Agricoltore associato all'ordine.
+     */
+    public Ordine(float importo,  String pagamento, int id_indirizzo,
+                  Cliente cliente, Agricoltore agricoltore) {
         this.importo = importo;
         Calendar cal = Calendar.getInstance();
 
@@ -54,13 +72,22 @@ public class Ordine {
         Date dataOrdine = new Date(cal.getTimeInMillis());
         this.dataOrdine = dataOrdine;
         this.pagamento = pagamento;
+        this.id_indirizzo = id_indirizzo;
         this.cliente = cliente;
         this.agricoltore = agricoltore;
+        this.stato=1;
     }
 
-
-
-
-
+    @Override
+    public String toString() {
+        return "Ordine{" +
+                "id=" + id +
+                ", importo=" + importo +
+                ", dataOrdine=" + dataOrdine +
+                ", pagamento='" + pagamento + '\'' +
+                ", cliente=" + cliente +
+                ", agricoltore=" + agricoltore +
+                '}';
+    }
 }
 

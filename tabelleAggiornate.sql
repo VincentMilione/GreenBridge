@@ -12,7 +12,7 @@ nome varchar(40) not null,
 email varchar(50) not null,
 pwd varchar(16) not null,
 nome_bottega varchar(255) not null,
-indirizzo_bottega varchar(255) not null,  
+indirizzo_bottega varchar(255) not null,
 id_portafoglio int,
 foreign key(id_portafoglio) references portafoglio(id)
 ON update cascade
@@ -138,7 +138,7 @@ on delete cascade
 );
 
 create table recensione_prodotti(
-id int primary key auto_increment, 
+id int primary key auto_increment,
 id_cliente int,
 id_prodotto int,
 descrizione varchar(200) not null,
@@ -163,3 +163,6 @@ foreign key(id_cliente) references cliente(id)
 on update cascade
 on delete cascade
 );
+
+
+

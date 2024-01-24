@@ -1,8 +1,6 @@
 package com.greenbridge.entities;
 
-import javax.persistence.*;
 
-import jakarta.persistence.*;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,10 +8,18 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import java.sql.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+
+/**
+ * Entità che rappresenta un indirizzo di spedizione associato a un cliente.
+ * @Author Salvatore Mattiello
+ */
 @Entity
 @Getter
 @Setter
@@ -42,10 +48,22 @@ public class IndirizzoSpedizione {
     @Column(name = "citta")
     private String citta;
 
+
     @Column(name = "provincia")
     private String provincia;
 
-    public IndirizzoSpedizione(Cliente cliente, Integer civico, String via, Integer cap, String citta, String provincia) {
+    /**
+     * Costruttore per creare un'istanza di IndirizzoSpedizione.
+     *
+     * @param cliente    Cliente associato all'indirizzo di spedizione.
+     * @param civico     Numero civico.
+     * @param via        Nome della via.
+     * @param cap        Codice di avviamento postale.
+     * @param citta      Nome della città.
+     * @param provincia  Nome della provincia.
+     */
+    public IndirizzoSpedizione(Cliente cliente, Integer civico,
+               String via, Integer cap, String citta, String provincia) {
         this.cliente = cliente;
         this.civico = civico;
         this.via = via;
@@ -54,21 +72,93 @@ public class IndirizzoSpedizione {
         this.provincia = provincia;
     }
 
-    public Boolean isEmpty(){
-        if(via.isEmpty() || via.equals(""))
+    /**
+     * Verifica se l'indirizzo di spedizione è vuoto.
+     *
+     * @return True se l'indirizzo è vuoto, altrimenti False.
+     */
+    public Boolean isEmpty() {
+        if (via.isEmpty() || via.equals("")) {
             return true;
+        }
+        if (citta.isEmpty() || citta.equals("")) {
+            return true;
+        }
+        if (provincia.isEmpty() || provincia.equals("")) {
+            return true;
+        }
+        if (civico == 0) {
+            return true;
+        }
+        if (cap == 0) {
+            return true;
+        }
+
         return false;
     }
+
+    /**
+     * Match tra regex e stringa
+     *
+     * @return True se l'indirizzo  è matchato, altrimenti False.
+     */
+    public Boolean isMatchRegexString(String regex, String string) {
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(string);
+        return matcher.matches();
+    }
+
+
+
+    /**
+     * Verifica se l'indirizzo di spedizione è corretto.
+     *
+     * @return True se l'indirizzo non è corretto, altrimenti False.
+     */
+    public Boolean isNotCoorect() {
+        if (!isEmpty()) {
+            if (!isMatchRegexString("^[A-Za-zÀ-ù' ‘-]{1,50}$", via)) {
+                System.out.println("via sbagliato");
+                    return true;
+            }
+            if (!isMatchRegexString("^\\d{1,10}$",
+                    String.valueOf(civico))) {
+                System.out.println("civico sbagliato");
+                return true;
+            }
+            if (!isMatchRegexString("^\\d{5}$",
+                    String.valueOf(cap))) {
+                System.out.println("cap sbagliato");
+                return true;
+            }
+            if (!isMatchRegexString("^[A-Za-zÀ-ù'\\s-]{1,30}$", citta)) {
+                System.out.println("citta sbagliato");
+                return true;
+            }
+            if (!isMatchRegexString("^[A-Za-zÀ-ù'’-]{2}$", provincia)) {
+                System.out.println("provincia sbagliato");
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Restituisce una rappresentazione in forma di stringa dell'oggetto IndirizzoSpedizione.
+     *
+     * @return Stringa rappresentante l'oggetto IndirizzoSpedizione.
+     */
     @Override
     public String toString() {
-        return "IndirizzoSpedizione{" +
-                "id=" + id +
-                ", cliente=" + cliente +
-                ", civico=" + civico +
-                ", via='" + via + '\'' +
-                ", cap=" + cap +
-                ", citta='" + citta + '\'' +
-                ", provincia='" + provincia + '\'' +
-                '}';
+        return "IndirizzoSpedizione{"
+                + "id=" + id
+                + ", cliente=" + cliente
+                + ", civico=" + civico
+                + ", via='" + via + '\''
+                + ", cap=" + cap
+                + ", citta='" + citta + '\''
+                + ", provincia='" + provincia + '\''
+                + '}';
     }
 }

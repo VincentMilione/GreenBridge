@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
 <head>
     <meta charset="UTF-8">
     <title>Checkout</title>
@@ -8,10 +9,10 @@
 
 
 </head>
-<body>
+<body layout:fragment="content">
     <div class="titolo"><h2> Checkout </h2></div>
     <div class="container">
-        <div th:text="${session.counter}"></div>
+
             <label for="nome">Nome:</label>
             <input type="text" id="nome" name="nome" th:value="${nome}" readonly required>
 
@@ -37,13 +38,13 @@
                 <input type="text" value="" id="civico" name="civico" required>
 
                 <label for="cap">CAP:</label>
-                <input type="text" value=""  id="cap" name="cap" required>
-
-                <label for="paese">Paese:</label>
-                <input type="text" value=""  id="paese" name="paese" required>
+                <input type="text" maxlength="5" value=""  id="cap" name="cap" required>
 
                 <label for="citta">Citta:</label>
                 <input type="text" value="" id="citta" name="citta" required>
+
+                <label for="citta">Provincia:</label>
+                <input type="text" maxlength="2" value="" id="provincia" name="provincia" required>
             </div>
 
             <button onclick="sendForm()" type="submit">Conferma ordine</button>
@@ -51,39 +52,90 @@
 
 <script>
     function sendForm(){
-        var selectedOption = $('input[name="shippingOption"]:checked').val();
-        var indirizzo ={
-            opzione : selectedOption,
-            via : $("#via").val(),
-            civico : $("#civico").val(),
-            cap : $("#cap").val(),
-            paese : $("#paese").val(),
-            citta : $("#citta").val(),
-        };
-        alert(JSON.stringify(indirizzo));
-
-        $.ajax({
-            type: 'POST',
-            url: '/checkForm',
-            contentType: 'application/json',
-            data: JSON.stringify(indirizzo),
-            success: function (response) {
-                if(response === ("payment"))
-                    window.location.replace("/paymentSuccess");
+        //cap
+        var sem=0;
+        if($('input[name="shippingOption"]:checked').val()=="delivery") {
+            var cap = $("#cap").val().trim();
+            var regex = /^\d{5}$/;
+            if (!regex.test(cap)) {
+                alert("formato cap non corretto");
+                sem = 1;
             }
-        });
+            //civico
+            var civico = $("#civico").val().trim();
+            regex = /^\d{1,10}$/;
+            if (!regex.test(civico)) {
+                alert("formato civico non corretto");
+                sem = 1;
+            }
+            //via
+            var via = $("#via").val();
+            regex = /^[A-Za-zÀ-ù' ‘-]{1,50}$/;
+            if (!regex.test(via)) {
+                alert("formato via non corretto");
+                sem = 1;
+            }
+            //città
+            var citta = $("#citta").val();
+            var regex = /^[A-Za-zÀ-ù'\s-]{1,30}$/;
+            if (!regex.test(citta)) {
+                alert("formato citta non corretto");
+                sem = 1;
+            }
+            //Provincia
+            var provincia = $("#provincia").val().trim();
+            regex = /^[A-Za-zÀ-ù'’-]{2}$/;
+            if (!regex.test(provincia)) {
+                alert("formato provincia non corretto");
+                sem = 1;
+            }
+        }
+        if(sem==0) {
+            var selectedOption = $('input[name="shippingOption"]:checked').val();
+            var indirizzo = {
+                opzione: selectedOption,
+                via: $("#via").val(),
+                civico: $("#civico").val(),
+                cap: $("#cap").val(),
+                citta: $("#citta").val(),
+                provincia: $("#provincia").val(),
+            };
+            alert(JSON.stringify(indirizzo));
 
+            $.ajax({
+                type: 'POST',
+                url: '/checkForm',
+                contentType: 'application/json',
+                data: JSON.stringify(indirizzo),
+                success: function (response) {
+                    $("#via").val("");
+                    $("#civico").val("");
+                    $("#cap").val("");
+                    $("#citta").val("");
+                    $("#provincia").val("");
+                    if (response === ("payment"))
+                        window.location.replace("/paymentSuccess");
+                }
+            });
 
+        }
     }
     function hideAddressForm(){
         document.getElementById("indirizzoForm").style.display="none";
         document.getElementById("nomeBottega").style.display="block";
+        $("#via").val("");
+        $("#civico").val("");
+        $("#cap").val("");
+        $("#citta").val("");
+        $("#provincia").val("");
     }
 
     function showAddressForm(){
         document.getElementById("indirizzoForm").style.display="block";
         document.getElementById("nomeBottega").style.display="none";
     }
+
+
 
 </script>
 </body>

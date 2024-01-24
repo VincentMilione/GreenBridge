@@ -73,3 +73,42 @@ h1 {
     border-radius: 5px;
     cursor: pointer;
 }
+
+.recensioniContainer {
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 8px;
+    width: 80%;
+}
+
+.recensioneBox {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    width: 300px;
+    font-family: "Roboto", serif;
+    font-size: 30px;
+    border: #4CAF50 1px solid;
+    border-radius: 10px;
+}
+
+.recensioneVoto {
+    font-family: "Roboto Black", serif;
+    margin-right: 50px;
+    background: #4CAF50;
+    padding: 10px;
+    border-radius: 60px;
+}
+
+.recensioniTitolo {
+    margin-left: 50px;
+    font-size: 40px;
+}
+
+.recensioneDescrizione {
+    font-size: 20px;
+}
