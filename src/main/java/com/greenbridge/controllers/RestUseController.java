@@ -15,27 +15,55 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Controller for handling operations related to farmers through RESTful APIs.
+ *
+ * Supported operations include retrieving the list of farmers, retrieving a single
+ * farmer by ID, saving a new farmer, modifying an existing farmer, registering a new
+ * farmer user, and adding a certificate to a farmer.
+ */
 @RestController
 @RequestMapping("/api")
 public class RestUseController {
 
     @Autowired
     private AgricoltoreServiceImpl agricoltoreService;
-
+    /**
+     * Retrieves the list of all farmers.
+     *
+     * @return List of farmers
+     */
     @GetMapping("/Agricoltori")
     public List<Agricoltore> getAgricoltori() {
         return agricoltoreService.getAgricoltori();
     }
-
+    /**
+     * Retrieves a single farmer by ID.
+     *
+     * @param id ID of the farmer to retrieve
+     * @return Farmer corresponding to the provided ID
+     */
     @GetMapping("/Agricoltori/{id}")
     public Agricoltore getAgricoltore(@PathVariable int id) {
         return agricoltoreService.getSingleAgricoltore(id);
     }
-
+    /**
+     * Saves a new farmer.
+     *
+     * @param agricoltore Farmer object to save
+     * @return Newly saved farmer
+     */
     @PostMapping("/Agricoltori")
     public Agricoltore saveAgricoltore(@RequestBody Agricoltore agricoltore) {
         return agricoltoreService.saveAgricoltore(agricoltore);
     }
+    /**
+     * Modifies the information of an existing farmer by ID.
+     *
+     * @param id           ID of the farmer to modify
+     * @param agricoltore  New farmer information
+     * @return ResponseEntity containing a success or error message
+     */
     @PostMapping("/modify/{id}")
     public ResponseEntity<String> modifyUserById(@PathVariable int id,
                          @RequestBody Agricoltore agricoltore) {
@@ -47,20 +75,32 @@ public class RestUseController {
         }
         return new ResponseEntity<>("Not found", HttpStatus.FORBIDDEN);
     }
-
+    /**
+     * Completes the registration of a new farmer user.
+     *
+     * @param agricoltore New farmer user to register
+     * @return ResponseEntity containing a confirmation message
+     */
     @PostMapping("/RegistrazioneUtente")
     public ResponseEntity<String> completaRegistrazione(@RequestBody
                                             Agricoltore agricoltore) {
         agricoltoreService.saveAgricoltore(agricoltore);
         return ResponseEntity.ok("Tutto ok!");
     }
-
+    /**
+     * Adds a certificate to an existing farmer by ID.
+     *
+     * @param id          ID of the farmer to add the certificate to
+     * @param certName    Name of the certificate
+     * @param expiryDate  Expiry date of the certificate
+     * @param certScan    Certificate file in MultipartFile format
+     * @return ResponseEntity containing a success or error message
+     */
     @PostMapping("/Agricoltori/{id}/aggiungiCertificato")
     public ResponseEntity<String> aggiungiCertificato(@PathVariable int id,
                                                       @RequestParam String certName,
                                                       @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate expiryDate,
                                                       @RequestParam MultipartFile certScan) {
-        System.out.println("Ciao mi chiamo Batman!");
         agricoltoreService.aggiungiCertificato(id, certName, expiryDate);
         return new ResponseEntity<>("Certificato aggiunto con successo", HttpStatus.OK);
     }

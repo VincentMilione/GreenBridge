@@ -8,15 +8,31 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+/**
+ * Controller for handling login operations related to farmers through RESTful APIs.
+ */
 @RestController
 @RequestMapping("/api")
 public class LoginAgricoltoreController {
 
     private final AgricoltoreServiceImpl agricoltoreService;
+
+    /**
+     * Constructor for LoginAgricoltoreController.
+     *
+     * @param agricoltoreService AgricoltoreServiceImpl instance for handling farmer-related operations
+     */
     public LoginAgricoltoreController(AgricoltoreServiceImpl
                                               agricoltoreService) {
         this.agricoltoreService = agricoltoreService;
     }
+    /**
+     * Handles the login operation for farmers.
+     *
+     * @param agricoltore Farmer object containing login credentials
+     * @param session      HttpSession for storing farmer information after successful login
+     * @return ResponseEntity containing a success or error message
+     */
     @PostMapping("/loginAgricoltore")
     public ResponseEntity<String> saveAgricoltore(@RequestBody
                   Agricoltore agricoltore, HttpSession session) {

@@ -4,6 +4,7 @@ import com.greenbridge.controllers.RestUseController;
 import com.greenbridge.entities.Agricoltore;
 import com.greenbridge.services.AgricoltoreServiceImpl;
 import com.greenbridge.services.ProdottoService;
+import jakarta.servlet.http.HttpSession;
 import org.hibernate.mapping.Array;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.Arrays;
 
@@ -43,9 +45,14 @@ public class TF2 {
 
     @Test
     public void testModificaUtente() throws Exception {
-        
+        Agricoltore agricoltoreFittizio = new Agricoltore();
+        int idAgricoltore=1;
+
         when(agricoltoreService.getAgricoltori()).thenReturn(Arrays.asList(new Agricoltore(), new Agricoltore()));
 
+        HttpSession session = mockMvc.perform(MockMvcRequestBuilders.get("/dummy-url")
+                .sessionAttr("agricoltore", agricoltoreService.getSingleAgricoltore(idAgricoltore))
+        ).andReturn().getRequest().getSession();
         // Esegui la richiesta e verifiche
         mockMvc.perform(get("/modifica"))
                 .andExpect(status().isOk())

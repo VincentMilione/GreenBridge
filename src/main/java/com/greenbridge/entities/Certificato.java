@@ -6,7 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
-
+/**
+ * Entity class representing a Certificato (certificate) associated with an Agricoltore (farmer).
+ */
 @Getter
 @Setter
 @NoArgsConstructor
@@ -19,13 +21,23 @@ public class Certificato {
     private LocalDate dataScadenzaCertificato;
     @ManyToOne(fetch = FetchType.LAZY)
     private Agricoltore agricoltore;
-
+    /**
+     * Constructor for creating a Certificato with specified attributes.
+     *
+     * @param nomeCertificato           Name of the certificate
+     * @param dataScadenzaCertificato   Expiry date of the certificate
+     * @param agricoltore               Associated farmer (Agricoltore)
+     */
     public Certificato(String nomeCertificato, LocalDate dataScadenzaCertificato, Agricoltore agricoltore) {
         this.nomeCertificato = nomeCertificato;
         this.dataScadenzaCertificato = dataScadenzaCertificato;
         this.agricoltore = agricoltore;
     }
-
+    /**
+     * Returns a string representation of the Certificato.
+     *
+     * @return String representation of the Certificato
+     */
     @Override
     public String toString() {
         return "Certificato{" +

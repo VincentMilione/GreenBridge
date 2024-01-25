@@ -5,6 +5,11 @@
   <link rel="stylesheet" type="text/css" href="/css/footerStyle.css">
   <link rel="stylesheet" href="/css/headerStyle.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+          integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+          crossorigin="anonymous"></script>
   <title>Layout page</title>
 </head>
 
@@ -22,20 +27,14 @@
 
     <a href="#">
       </input>
-      <a th:if="${session.agricoltore == null}" th:href="@{/carrello}">
+      <a th:href="@{/carrello}">
         <img class="imgIcon" src="/img/cart.png" alt="chartIcon">
+      </a>
+      <a th:if="${session.cliente == null}" th:href="@{/login}">
+        <img class="imgIcon" src="/img/user.png" alt="userIcon">
       </a>
       <a th:if="${session.cliente != null}" th:href="@{/detailCliente}">
         <img class="imgIcon" src="/img/user.png" alt="userIcon">
-      </a>
-      <a th:if="${session.agricoltore!=null}" th:href="@{/homeAgricoltore}">
-        <img class="imgIcon" src="/img/user.png" alt="userIcon">
-      </a>
-      <a th:if="${session.cliente == null && session.agricoltore== null}" th:href="@{/login}">
-        <button type="submit" class="buttonLogin">Login Cliente</button>
-      </a>
-      <a th:if="${session.agricoltore == null && session.cliente==null }" th:href="@{/loginAgricoltore}">
-        <button type="submit" class="buttonLogin">Login Agricoltore</button>
       </a>
     </a>
   </div>
@@ -82,28 +81,6 @@
     }else {
       button.style.left = '-400px'
       document.getElementById('menuIcon').src = '/img/menu.png'
-    }
-  }
-</script>
-
-<script>
-  function confermaCancellazione() {
-    if (confirm("Eliminare il prodotto? La cancellazione non comporterà modifiche alle fatture")) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-</script>
-
-<script>
-  function validateFileType(input) {
-    const allowedExtensions = ['png', 'jpeg', 'jpg'];
-    const fileName = input.value.toLowerCase();
-    const extension = fileName.split('.').pop();
-
-    if (!allowedExtensions.includes(extension)) {
-      input.value = ''; //
     }
   }
 </script>

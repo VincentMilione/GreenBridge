@@ -10,6 +10,9 @@ import org.hibernate.annotations.Fetch;
 
 import java.util.List;
 
+/**
+ * Entity class representing an Agricultore (farmer) in the system.
+ */
 @Getter
 @Setter
 @NoArgsConstructor
