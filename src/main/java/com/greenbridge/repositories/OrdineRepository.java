@@ -1,6 +1,7 @@
 package com.greenbridge.repositories;
 
 import com.greenbridge.entities.Agricoltore;
+import com.greenbridge.entities.Cliente;
 import com.greenbridge.entities.Ordine;
 import com.greenbridge.entities.Prodotto;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -28,4 +29,12 @@ public interface OrdineRepository extends JpaRepository<Ordine, Integer> {
      * @return L'ordine corrispondente all'identificativo specificato.
      */
     public Ordine findOrdineById(int id);
+
+    /**
+     * Trova tutti gli ordini associati a un determinato cliente.
+     *
+     * @param cliente cliente di cui cercare gli ordini.
+     * @return Lista di ordini associati all'agricoltore specificato.
+     */
+    List<Ordine> findByCliente(Cliente cliente);
 }

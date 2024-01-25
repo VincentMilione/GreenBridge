@@ -1,6 +1,7 @@
 package com.greenbridge.services;
 
 import com.greenbridge.entities.Agricoltore;
+import com.greenbridge.entities.Cliente;
 import com.greenbridge.entities.Ordine;
 import com.greenbridge.repositories.OrdineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,5 +55,16 @@ public class OrdineService {
         return ordineRepository.findOrdineById(id);
     }
 
+
+    /**
+     * Ottiene tutti gli ordini associati a un agricoltore.
+     *
+     * @param cliente Il cliente associato agli ordini da cercare.
+     * @return Una lista di ordini associati all'agricoltore specificato.
+     */
+    public List<Ordine> getOrdiniByCliente(Cliente cliente) {
+        List<Ordine> ordini = ordineRepository.findByCliente(cliente);
+        return ordini;
+    }
 
 }
