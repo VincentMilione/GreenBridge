@@ -36,23 +36,23 @@ public class TF2 {
     }
     @Test
     public void tC1() {
+            driver.get("http://localhost:8080/registrazione-Agricoltore");
+            driver.manage().window().setSize(new Dimension(1110, 794));
+            driver.findElement(By.id("nomeBottega")).click();
+            driver.findElement(By.id("nomeBottega")).sendKeys("zitounielmehdi");
+            driver.findElement(By.id("indirizzoBottega")).click();
+            driver.findElement(By.id("indirizzoBottega")).sendKeys("via roma");
+            driver.findElement(By.id("email")).click();
+            driver.findElement(By.id("email")).sendKeys("xhbouchra3@gmail.com");
+            driver.findElement(By.id("password")).click();
+            driver.findElement(By.id("password")).sendKeys("Mehdi1998");
+            driver.findElement(By.id("confirmaPassword")).click();
+            driver.findElement(By.id("confirmaPassword")).sendKeys("Mehdi1998");
+            driver.findElement(By.id("privacyCheckbox")).click();
+            driver.findElement(By.cssSelector("button")).click();
+            assertThat(driver.switchTo().alert().getText(), is("nome utente non inserito"));
 
-        driver.get("http://localhost:8080/registrazione-Agricoltore");
-        driver.manage().window().setSize(new Dimension(1094, 794));
-        driver.findElement(By.id("nomeBottega")).click();
-        driver.findElement(By.id("nomeBottega")).sendKeys("nomeBottega");
-        driver.findElement(By.id("indirizzoBottega")).click();
-        driver.findElement(By.id("indirizzoBottega")).sendKeys("via fratelli napoli");
-        driver.findElement(By.id("email")).click();
-        driver.findElement(By.id("email")).sendKeys("johndoe+test@email.us");
-        driver.findElement(By.id("password")).click();
-        driver.findElement(By.id("password")).sendKeys("3333333333333");
-        driver.findElement(By.id("confirmaPassword")).click();
-        driver.findElement(By.id("confirmaPassword")).sendKeys("3333333333333");
-        driver.findElement(By.id("privacyCheckbox")).click();
-        driver.findElement(By.cssSelector("button")).click();
-        assertThat(driver.switchTo().alert().getText(), is("nome utente non inserito"));
-        driver.close();
+
     }
 
     @Test
@@ -75,9 +75,29 @@ public class TF2 {
         driver.findElement(By.cssSelector("button:nth-child(8)")).click();
         assertThat(driver.switchTo().alert().getText(), is("nome utente troppo lungo"));
     }
+    @Test
+    public void tc3() {
+        driver.get("http://localhost:8080/registrazione-Agricoltore");
+        driver.manage().window().setSize(new Dimension(761, 794));
+        driver.findElement(By.id("nome")).click();
+        driver.findElement(By.id("nome")).sendKeys("mehdi");
+        driver.findElement(By.id("indirizzoBottega")).click();
+        driver.findElement(By.id("indirizzoBottega")).sendKeys("via roma 22");
+        driver.findElement(By.cssSelector("form")).click();
+        driver.findElement(By.id("email")).click();
+        driver.findElement(By.id("email")).sendKeys("johndoe+test@email.us");
+        driver.findElement(By.id("password")).click();
+        driver.findElement(By.id("password")).sendKeys("3333333333333");
+        driver.findElement(By.id("confirmaPassword")).click();
+        driver.findElement(By.id("confirmaPassword")).sendKeys("3333333333333");
+        driver.findElement(By.cssSelector("label")).click();
+        driver.findElement(By.cssSelector("button")).click();
+        assertThat(driver.switchTo().alert().getText(), is("nome Bottega non inserito"));
+
+    }
 
     @Test
-    public void tC3() {
+    public void tC4() {
         driver.get("http://localhost:8080/registrazione-Agricoltore");
         driver.manage().window().setSize(new Dimension(700, 794));
         driver.findElement(By.id("nome")).click();
@@ -98,95 +118,44 @@ public class TF2 {
         assertThat(driver.switchTo().alert().getText(), is("email non corretta!"));
     }
 
-    @Test
-    public void tC4() {
-        driver.get("http://localhost:8080/registrazione-Agricoltore");
-        driver.manage().window().setSize(new Dimension(700, 794));
-        driver.findElement(By.id("nome")).click();
-        driver.findElement(By.id("nome")).sendKeys("ZITOUNI EL MEHDI");
-        driver.findElement(By.id("nomeBottega")).sendKeys("ZITOUNI EL MEHDI");
-        driver.findElement(By.id("indirizzoBottega")).sendKeys("Hay Lalla Meriem");
-        driver.findElement(By.id("email")).sendKeys("xhbouchra3@gmail.com");
-        driver.findElement(By.cssSelector("body")).click();
-        driver.findElement(By.id("email")).sendKeys("johndoe+test@email.us");
-        driver.findElement(By.id("password")).click();
-        driver.findElement(By.id("password")).sendKeys("3333333333333");
-        driver.findElement(By.id("confirmaPassword")).click();
-        driver.findElement(By.id("confirmaPassword")).sendKeys("3333333333333");
-        driver.findElement(By.id("privacyCheckbox")).click();
-        driver.findElement(By.cssSelector("button:nth-child(8)")).click();
-    }
 
     @Test
     public void tC5() {
         driver.get("http://localhost:8080/registrazione-Agricoltore");
-        driver.manage().window().setSize(new Dimension(700, 794));
+        driver.manage().window().setSize(new Dimension(761, 794));
         driver.findElement(By.id("nome")).click();
-        driver.findElement(By.id("nome")).sendKeys("ZITOUNI EL MEHDI");
-        driver.findElement(By.id("nomeBottega")).sendKeys("ZITOUNI EL MEHDI");
-        driver.findElement(By.id("indirizzoBottega")).sendKeys("Hay Lalla Meriem");
-        driver.findElement(By.id("email")).sendKeys("xhbouchra3@gmail.com");
-        driver.findElement(By.cssSelector("body")).click();
+        driver.findElement(By.id("nome")).sendKeys("hhhhhhhh");
+        driver.findElement(By.id("nomeBottega")).click();
+        driver.findElement(By.id("nomeBottega")).sendKeys("hhhhhhhhh");
+        driver.findElement(By.id("indirizzoBottega")).click();
+        driver.findElement(By.id("indirizzoBottega")).sendKeys("hhhhhhhhhhh");
+        driver.findElement(By.id("email")).click();
         driver.findElement(By.id("email")).sendKeys("johndoe+test@email.us");
         driver.findElement(By.id("password")).click();
-        driver.findElement(By.id("password")).sendKeys("password");
+        driver.findElement(By.id("password")).sendKeys("3333333333333");
         driver.findElement(By.id("confirmaPassword")).click();
-        driver.findElement(By.id("confirmaPassword")).sendKeys("password");
-        driver.findElement(By.id("privacyCheckbox")).click();
-        driver.findElement(By.cssSelector("button:nth-child(8)")).click();
-        assertThat(driver.switchTo().alert().getText(), is("password non deve contenere meno di 9 carattere"));
+        driver.findElement(By.id("confirmaPassword")).sendKeys("33333333333");
+        driver.findElement(By.cssSelector("body")).click();
+        driver.findElement(By.cssSelector("label")).click();
+        driver.findElement(By.cssSelector("button")).click();
+        assertThat(driver.switchTo().alert().getText(), is("conferma password errata. Riprova."));
     }
 
     @Test
     public void tC6() {
         driver.get("http://localhost:8080/registrazione-Agricoltore");
-        driver.manage().window().setSize(new Dimension(700, 794));
+        driver.manage().window().setSize(new Dimension(1109, 794));
         driver.findElement(By.id("nome")).click();
-        driver.findElement(By.id("nome")).sendKeys("ZITOUNI EL MEHDI");
-        driver.findElement(By.id("nomeBottega")).sendKeys("ZITOUNI EL MEHDI");
-        driver.findElement(By.id("indirizzoBottega")).sendKeys("Hay Lalla Meriem");
-        driver.findElement(By.id("email")).sendKeys("xhbouchra3@gmail.com");
-        driver.findElement(By.cssSelector("body")).click();
+        driver.findElement(By.id("nome")).sendKeys("hhhhhhhhh");
+        driver.findElement(By.id("nomeBottega")).click();
+        driver.findElement(By.id("nomeBottega")).sendKeys("hhhhhhhhhh");
+        driver.findElement(By.id("indirizzoBottega")).click();
+        driver.findElement(By.id("indirizzoBottega")).sendKeys("JDSKJS");
+        driver.findElement(By.id("email")).click();
         driver.findElement(By.id("email")).sendKeys("johndoe+test@email.us");
         driver.findElement(By.id("password")).click();
         driver.findElement(By.id("password")).sendKeys("3333333333333");
         driver.findElement(By.id("confirmaPassword")).click();
-        driver.findElement(By.id("confirmaPassword")).sendKeys("3333333333333");
-        driver.findElement(By.cssSelector("label")).click();
-        driver.findElement(By.cssSelector("button")).click();
-        assertThat(driver.switchTo().alert().getText(), is("Hai accettato la privacy. vuoi continuare la registrazione "));
-    }
-
-    @Test
-    public void tC7() {
-        driver.get("http://localhost:8080/registrazione-Agricoltore");
-        driver.manage().window().setSize(new Dimension(700, 794));
-        driver.findElement(By.id("nome")).click();
-        driver.findElement(By.id("nome")).sendKeys("ZITOUNI EL MEHDI");
-        driver.findElement(By.id("nomeBottega")).sendKeys("ZITOUNI EL MEHDI");
-        driver.findElement(By.id("indirizzoBottega")).sendKeys("Hay Lalla Meriem");
-        driver.findElement(By.id("email")).sendKeys("xhbouchra3@gmail.com");
-        driver.findElement(By.id("password")).click();
-        driver.findElement(By.id("email")).click();
-        driver.findElement(By.id("email")).click();
-        driver.findElement(By.id("email")).click();
-        {
-            WebElement element = driver.findElement(By.id("email"));
-            Actions builder = new Actions(driver);
-            builder.doubleClick(element).perform();
-        }
-        driver.findElement(By.id("email")).click();
-        driver.findElement(By.id("email")).sendKeys("johndoe+test@email.us");
-        driver.findElement(By.id("password")).click();
-        driver.findElement(By.id("password")).sendKeys("3333333333333");
-        driver.findElement(By.cssSelector("form")).click();
-        driver.findElement(By.id("confirmaPassword")).click();
-        driver.findElement(By.id("confirmaPassword")).click();
-        {
-            WebElement element = driver.findElement(By.id("confirmaPassword"));
-            Actions builder = new Actions(driver);
-            builder.doubleClick(element).perform();
-        }
         driver.findElement(By.id("confirmaPassword")).sendKeys("3333333333333");
         driver.findElement(By.cssSelector("button")).click();
         assertThat(driver.switchTo().alert().getText(), is("Devi accettare la privacy per procedere."));

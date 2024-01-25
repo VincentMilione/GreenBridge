@@ -3,10 +3,10 @@
     justify-content: center;
     flex-direction: column;
     position: relative;
-    padding: 40px; /* Decreased padding for a more compact look */
+    padding: 91px; /* Decreased padding for a more compact look */
     background: #fff;
     border-radius: 20px;
-    width: 272px;
+    width: 434px;
     height: 82%;
     margin: auto;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Added box shadow for a subtle effect */
@@ -29,7 +29,7 @@
     flex-direction: column;
     box-sizing: content-box;
     position: relative;
-    padding: 40px;
+    padding: 71px;
     background: #fff;
     border-radius: 20px;
     width: 356px;

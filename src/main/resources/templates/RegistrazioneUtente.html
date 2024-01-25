@@ -89,6 +89,17 @@
 
         return true;
     }
+    function isNameBottegaValid(nomeBottega) {
+        if (nomeBottega === "" || nomeBottega === null) {
+            alert('nome Bottega non inserito');
+            return false;
+        } else if (nome.length > 35) {
+            alert('nome Bottega  troppo lungo');
+            return false;
+        }
+
+        return true;
+    }
 
 
     function isEmailValid(email) {
@@ -107,28 +118,15 @@
 
     }
 
-    function checkPassword() {
-        var password = document.getElementById("password").value;
-        var confirmaPassword = document.getElementById("confirmaPassword").value;
 
-        if (password === confirmaPassword) {
-            alert("Password confermata correttamente!");
-
-        } else {
-            alert("conferma password errata. Riprova.");
-        }
-    }
 
     function acceptPrivacy() {
         var privacyCheckbox = document.getElementById("privacyCheckbox");
-        if (privacyCheckbox.checked) {
-            alert("Hai accettato la privacy. vuoi continuare la registrazione ");
-        }else {
+        if (!privacyCheckbox.checked) {
             alert("Devi accettare la privacy per procedere.");
             var redirectUrl = getRedirectUrl();
             window.location.replace(redirectUrl);
             return false;
-
         }
     }
 
@@ -154,7 +152,10 @@
             return false;
         }
 
+        if (!isNameValid(nomeBottega)) {
 
+            return false;
+        }
 
         if (!isEmailValid(email)) {
             alert("email non corretta!");

@@ -50,9 +50,6 @@ public class TF2 {
 
         when(agricoltoreService.getAgricoltori()).thenReturn(Arrays.asList(new Agricoltore(), new Agricoltore()));
 
-        HttpSession session = mockMvc.perform(MockMvcRequestBuilders.get("/dummy-url")
-                .sessionAttr("agricoltore", agricoltoreService.getSingleAgricoltore(idAgricoltore))
-        ).andReturn().getRequest().getSession();
         // Esegui la richiesta e verifiche
         mockMvc.perform(get("/modifica"))
                 .andExpect(status().isOk())
