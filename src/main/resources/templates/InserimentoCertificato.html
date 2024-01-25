@@ -32,19 +32,21 @@
         <a href="#">Agricoltori</a>
     </div>
 </div>
-<h1>Inserimento Certificato</h1>
+<h1>L'Agricoltore - Inserimento Certificazione</h1>
 
 <form id="certificatoForm">
     <input type="hidden" th:value="${session.agricoltore.id}" id="id">
-    <label for="nomeCertificato">Nome Certificato:</label>
-    <input type="text" id="nomeCertificato" name="nomeCertificato" required><br>
-    <label for="dataScadenza">Data di Scadenza:</label>
-    <input type="date" id="dataScadenza" name="dataScadenza" required><br>
+    <label for="certName">Nome certificato:</label>
+    <input type="text" id="certName"  required><br>
 
-    <label for="scansioneCertificato">Scansione Certificato:</label>
-    <input type="file" id="scansioneCertificato" name="scansioneCertificato" accept=".pdf, .jpg, .png" required><br>
+    <label for="expiryDate">Data di scadenza:</label>
+    <input type="date" id="expiryDate"  required><br>
 
-    <button type="button" onclick="avanti()">Avanti</button>
+    <label for="certScan">Scansione certificato:</label>
+    <input type="file" id="certScan" accept=".pdf" required><br>
+
+    <button type="button" onclick="checkAndProceed()">Avanti</button>
+
 </form>
 
 <footer>
@@ -68,7 +70,13 @@
 
 </footer>
 <script th:inline="javascript">
-    function isNameCertificatoValido(nomeCertificato) {
+
+    function checkAndProceed() {
+         var id = document.getElementById("id").value;
+        var nomeCertificato = document.getElementById("certName").value;
+        var expiryDateInput = document.getElementById("expiryDate").value;
+        var currentDate = new Date().toISOString().split('T')[0];
+
         if (nomeCertificato === "" || nomeCertificato === null) {
             alert('nome del certificato non inserito');
             return false;
@@ -80,69 +88,38 @@
             return false;
 
         }
-    }
-
-    function checkFileType() {
-        const fileInput = document.getElementById('scansioneCertificato');
-        const filePath = fileInput.value;
-        const allowedExtensions = /(\.pdf)$/i;
-
-        if (!allowedExtensions.exec(filePath)) {
-            alert('Scegli un file con estensione PDF.');
-            // Resetta l'input file per consentire all'utente di selezionare un nuovo file
-            fileInput.value = '';
-            return false;
+        if (expiryDateInput < currentDate) {
+            alert("Impossibile procedere poiché la data di scadenza inserita è precedente alla data corrente");
+        } else if (expiryDateInput === currentDate) {
+            alert("Impossibile procedere poiché la data di scadenza inserita è uguale alla data corrente");
+        }else{
+            // Invia i dati al server utilizzando
+            let formData = new FormData();
+            let certScanInput = document.getElementById('certScan');
+            let certScanFile = certScanInput.files[0];
+            formData.append('certName', $('#certName').val());
+            formData.append('expiryDate', expiryDateInput);
+            formData.append('certScan', certScanFile);
+            $.ajax({
+                url: '/api/Agricoltori/' + id + '/aggiungiCertificato', // Inserisci l'URL del tuo server
+                method: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    // Puoi gestire la risposta del server qui
+                    alert("Passa al passo successivo");
+                    window.location.replace("/detailAgricoltore");
+                },
+                error: function (error) {
+                    // Gestisci gli errori qui
+                    console.error("Errore durante la richiesta AJAX:", error);
+                }
+            });
         }
-        // Se l'estensione è corretta, puoi procedere con il tuo codice
     }
-    function isDataScadenzaValida(dataScadenza) {
-        var currentDate = new Date();
-        var selectedDate = new Date(dataScadenza);
-
-        if (selectedDate < currentDate) {
-            alert('La data di scadenza deve essere successiva alla data corrente.');
-            return false;
-        }
-
-        return true;
-    }
-
-    function avanti() {
-        var id = document.getElementById("id").value;
-        var nomeCertificato = document.getElementById("nomeCertificato").value;
-        var dataScadenza = document.getElementById("dataScadenza").value;
-        var scansioneCertificato = document.getElementById("scansioneCertificato").value;
-
-        // Costruisci un oggetto FormData per inviare file
-        var formData = new FormData();
-        formData.append('id', id);
-        formData.append('nomeCertificato', nomeCertificato);
-        formData.append('dataScadenza', dataScadenza);
-        formData.append('scansioneCertificato', document.getElementById("scansioneCertificato").files[0]);
-
-        if (!isNameCertificatoValido(nomeCertificato) || !checkFileType() || !isDataScadenzaValida(dataScadenza)) {
-            return false;
-        }
-
-        $.ajax({
-            type: 'POST',
-            url: '/api/Agricoltori/' + id + '/aggiungiCertificato',
-            processData: false,
-            contentType: false,
-            data: formData,
-            success: function (response) {
-                // Handle success response
-                console.log(response);
-                window.location.replace("/inserimento-certificato");
-            },
-            error: function (error) {
-                // Handle error response
-                console.error(error);
-                $("#esito").text("Certificato già esiste");
-            }
-        });
-    }
-
 </script>
 </body>
 </html>
+
+
