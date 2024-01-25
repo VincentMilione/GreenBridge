@@ -56,6 +56,7 @@
             <td th:text="${elemento.getProdotto().getNome()}"></td>
             <td th:text="${elemento.getKgAcquistati()}"></td>
             <td th:text="${elemento.getProdotto().getPrezzoVendita()} + '$'"></td>
+
         </tr>
         </tbody>
     </table>
@@ -74,8 +75,12 @@
     </div>
 
     <button th:if="${session.agricoltore != null}" th:onclick="'aggiornaStatoOrdine(' + ${ordine.getId()} + ')'">Prosegui</button>
-    <!-- Aggiungi script JavaScript -->
 
+    <a th:if="${session.cliente != null}" th:href="@{'/recensione/' + ${ordine.id}}">
+        <img class="imgIcon" src="/img/recensione.png" alt="userIcon">
+    </a>
+
+    <!-- Aggiungi script JavaScript -->
     <script>
         function aggiornaStatoOrdine(ordineId) {
             alert(ordineId);
