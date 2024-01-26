@@ -1,6 +1,9 @@
 package com.greenbridge.controllers;
 
+import com.greenbridge.entities.Agricoltore;
+import com.greenbridge.entities.Certificato;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import com.greenbridge.services.AgricoltoreServiceImpl;
 import org.springframework.stereotype.Controller;
@@ -63,6 +66,25 @@ public class AgricoltoreController {
     @GetMapping("/inserimento-certificato")
     public String inserimentoCertificato() {
         return "InserimentoCertificato";
+    }
+
+    /**
+     * Gestisce la richiesta per la visualizzazione della pagina dei certificati degli agricoltori.
+     *
+     * @param model Modello per passare dati alla vista.
+     * @return La vista associata alla pagina principale degli agricoltori.
+     */
+    @GetMapping("/visualizzazione-certificati")
+    public String visualizzazioneCertificati(HttpSession session, Model model) {
+        Agricoltore user = (Agricoltore) session
+                .getAttribute("agricoltore");
+        if (user == null) {
+            return "error";
+        }
+
+        model.addAttribute("certificati",
+                agricoltoreService.getCertificati(user));
+        return "certificati";
     }
 
     /**

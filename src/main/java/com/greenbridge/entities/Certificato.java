@@ -1,46 +1,71 @@
 package com.greenbridge.entities;
 
-import jakarta.persistence.*;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Column;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.time.LocalDate;
+
 /**
- * Entity class representing a Certificato (certificate) associated with an Agricoltore (farmer).
+ * Entity class representing a Certificato (certificate)
+ * associated with an Agricoltore (farmer).
  */
-
-
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
 public class Certificato {
+    /**
+     * Identificatore univoco del certificato.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name="nome")
+    /**
+     * Nome del certificato.
+     */
+    @Column(name = "nome")
     private String nomeCertificato;
-    @Column(name="data_scadenza")
+    /**
+     * Data di scadenza del certificato.
+     */
+    @Column(name = "data_scadenza")
     private LocalDate dataScadenzaCertificato;
+    /**
+     * Agricoltore a cui è associato il certificato.
+     */
     @ManyToOne
-    @JoinColumn(name="id_agricoltore")
+    @JoinColumn(name = "id_agricoltore")
     private Agricoltore agricoltore;
+    /**
+     * Scansione del certificato in formato byte array.
+     */
     @Lob
     private byte[] scansione;
 
     /**
      * Constructor for creating a Certificato with specified attributes.
      *
-     * @param nomeCertificato           Name of the certificate
-     * @param dataScadenzaCertificato   Expiry date of the certificate
-     * @param agricoltore               Associated farmer (Agricoltore)
+     * @param nomeCertificatoParam           Name of the certificate
+     * @param dataScadenzaCertificatoParam   Expiry date of the certificate
+     * @param agricoltoreParam               Associated farmer (Agricoltore)
+     * @param scan                 Scan of the certificate
      */
-    public Certificato(String nomeCertificato, LocalDate dataScadenzaCertificato, Agricoltore agricoltore, byte[] scansione) {
-        this.nomeCertificato = nomeCertificato;
-        this.dataScadenzaCertificato=dataScadenzaCertificato;
-        this.agricoltore = agricoltore;
-        this.scansione = scansione;
+    public Certificato(String nomeCertificatoParam,
+                       LocalDate dataScadenzaCertificatoParam,
+                       Agricoltore agricoltoreParam, byte[] scan) {
+        this.nomeCertificato = nomeCertificatoParam;
+        this.dataScadenzaCertificato = dataScadenzaCertificatoParam;
+        this.agricoltore = agricoltoreParam;
+        this.scansione = scan;
     }
     /**
      * Returns a string representation of the Certificato.
@@ -49,11 +74,11 @@ public class Certificato {
      */
     @Override
     public String toString() {
-        return "Certificato{" +
-                "id=" + id +
-                ", nomeCertificato='" + nomeCertificato + '\'' +
-                ", dataScadenzaCertificato=" + dataScadenzaCertificato +
-                ", agricoltore=" + agricoltore +
-                '}';
+        return "Certificato{"
+                + "id=" + id
+                + ", nomeCertificato='" + nomeCertificato + '\''
+                + ", dataScadenzaCertificato=" + dataScadenzaCertificato
+                + ", agricoltore=" + agricoltore
+                + '}';
     }
 }
