@@ -1,5 +1,7 @@
 package com.greenbridge.controllers;
 
+import com.greenbridge.entities.Agricoltore;
+import com.greenbridge.entities.Certificato;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -61,6 +63,25 @@ public class AgricoltoreController {
     }
 
     /**
+     * Gestisce la richiesta per la visualizzazione della pagina dei certificati degli agricoltori.
+     *
+     * @param model Modello per passare dati alla vista.
+     * @return La vista associata alla pagina principale degli agricoltori.
+     */
+    @GetMapping("/visualizzazione-certificati")
+    public String visualizzazioneCertificati(HttpSession session, Model model) {
+        Agricoltore user = (Agricoltore) session
+                .getAttribute("agricoltore");
+        if (user == null) {
+            return "error";
+        }
+
+        model.addAttribute("certificati",
+                agricoltoreService.getCertificati(user));
+        return "certificati";
+    }
+
+    /**
      * Gestisce la richiesta per la modifica di un utente agricoltore.
      *
      * @param model Modello per passare dati alla vista.
@@ -68,7 +89,8 @@ public class AgricoltoreController {
      */
     @GetMapping("/modifica")
     public String modificaUtente(Model model) {
-        model.addAttribute("agricoltori", agricoltoreService.getAgricoltori());
+        model.addAttribute("agricoltori",
+                agricoltoreService.getAgricoltori());
         return "modify";
     }
 
@@ -115,7 +137,8 @@ public class AgricoltoreController {
      */
     @GetMapping("/detailAgricoltore")
     public String detailAgricoltore(Model model, HttpSession session) {
-        model.addAttribute("agricoltore", session.getAttribute("agricoltore"));
+        model.addAttribute("agricoltore",
+                session.getAttribute("agricoltore"));
         return "homeAgricoltore";
     }
 }

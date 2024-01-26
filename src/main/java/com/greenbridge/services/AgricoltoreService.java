@@ -61,4 +61,5 @@ public interface AgricoltoreService {
     void aggiungiCertificato(int agricoltoreId, String nomeCertificato, LocalDate dataScadenzaCertificato, MultipartFile scansione);
 
 
+    List<Certificato> getCertificati(Agricoltore agricoltore);
 }

@@ -2,9 +2,11 @@ package com.greenbridge.services;
 import com.greenbridge.entities.Agricoltore;
 
 import com.greenbridge.entities.Certificato;
+import com.greenbridge.entities.Portafoglio;
 import com.greenbridge.repositories.AgricoltoreRepository;
 
 import com.greenbridge.repositories.CertificatoRepository;
+import com.greenbridge.repositories.PortafoglioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,6 +25,8 @@ public class AgricoltoreServiceImpl implements AgricoltoreService {
     private CertificatoRepository certificatoRepository;
     @Autowired
     private AgricoltoreRepository agricoltoreRepository;
+    @Autowired
+    private PortafoglioRepository portafoglioRepository;
 
     /**
      * Retrieves a list of all Agricoltore entities.
@@ -45,6 +49,11 @@ public class AgricoltoreServiceImpl implements AgricoltoreService {
     public Agricoltore saveAgricoltore(Agricoltore agricoltore) {
         if (agricoltoreRepository.existsById(agricoltore.getId()))
             throw new RuntimeException("User already exists");
+
+        Portafoglio portafoglio = new Portafoglio();
+        Portafoglio loadedWallet = portafoglioRepository.save(portafoglio);
+        agricoltore.setPortafoglio(loadedWallet);
+
         return agricoltoreRepository.save(agricoltore);
     }
 
@@ -98,25 +107,22 @@ public class AgricoltoreServiceImpl implements AgricoltoreService {
         Agricoltore agricoltore = getSingleAgricoltore(agricoltoreId);
 
         try {
-            Certificato certificato = new Certificato(nomeCertificato, dataScadenzaCertificato,
-                    agricoltore, scansione.getBytes());
+            Certificato certificato = new Certificato(nomeCertificato,
+                    dataScadenzaCertificato, agricoltore, scansione.getBytes());
             certificato.setAgricoltore(agricoltore);
             certificatoRepository.save(certificato);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-
-
-
-
+    /**
+     * Retrieves the list of Certificato associated to an existing Agricoltore entity.
+     *
+     * @param agricoltore   Agricoltore to retrieve the list of certificates
+     */
+    @Override
+    public List<Certificato> getCertificati(Agricoltore agricoltore) {
+        return certificatoRepository
+                .findByAgricoltore(agricoltore);
+    }
 }
-
-
-
-
-
-
-
-
-
