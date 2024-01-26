@@ -18,7 +18,8 @@ public interface ProdottoRepository extends JpaRepository<Prodotto, Integer> {
      * @param agricoltore l'agricoltore di cui trovare i prodotti
      * @return una lista di prodotti acquistabili
      */
-    List<Prodotto> findAllByAgricoltoreAndAcquistabileTrue(Agricoltore agricoltore);
+    List<Prodotto> findAllByAgricoltoreAndAcquistabileTrue
+    (Agricoltore agricoltore);
 
     /**
      * Ottiene un prodotto dal database dato l'ID del prodotto.
@@ -29,11 +30,13 @@ public interface ProdottoRepository extends JpaRepository<Prodotto, Integer> {
     Prodotto getProdottoByIdProdotto(int id);
 
     /**
-     * Trova tutti i prodotti nel database il cui nome contiene la stringa specificata,
+     * Trova tutti i prodotti nel database
+     * il cui nome contiene la stringa specificata,
      * ignorando maiuscole e minuscole.
      *
      * @param nome la stringa da cercare nel nome dei prodotti
-     * @return una lista di prodotti con il nome che contiene la stringa specificata
+     * @return una lista di prodotti con il nome che
+     * contiene la stringa specificata
      */
     List<Prodotto> findByNomeContainingIgnoreCase(String nome);
 }

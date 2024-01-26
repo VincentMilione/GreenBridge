@@ -14,7 +14,9 @@ import java.util.List;
  */
 @Service
 public class ProdottoService {
-
+    /**
+     * Controller prodotto per il service
+     */
     @Autowired
     private ProdottoRepository prodottoRepository;
 
@@ -23,7 +25,8 @@ public class ProdottoService {
      *
      * @param prodotto il prodotto da salvare
      */
-    public void saveProdotto(Prodotto prodotto) {
+    public void saveProdotto(final Prodotto prodotto) {
+
         prodottoRepository.save(prodotto);
     }
 
@@ -33,8 +36,9 @@ public class ProdottoService {
      * @param agricoltore l'agricoltore di cui trovare i prodotti
      * @return una lista di prodotti acquistabili
      */
-    public List<Prodotto> getAllProdotti(Agricoltore agricoltore) {
-        return prodottoRepository.findAllByAgricoltoreAndAcquistabileTrue(agricoltore);
+    public List<Prodotto> getAllProdotti(final Agricoltore agricoltore) {
+        return prodottoRepository.
+                findAllByAgricoltoreAndAcquistabileTrue(agricoltore);
     }
 
     /**
@@ -43,8 +47,9 @@ public class ProdottoService {
      * @param idProdotto l'ID del prodotto da ottenere
      * @return il prodotto corrispondente all'ID specificato
      */
-    public Prodotto getProdottoById(int idProdotto) {
-        return prodottoRepository.getProdottoByIdProdotto(idProdotto);
+    public Prodotto getProdottoById(final int idProdotto) {
+        return prodottoRepository.
+                getProdottoByIdProdotto(idProdotto);
     }
 
     /**
@@ -52,7 +57,7 @@ public class ProdottoService {
      *
      * @param prodotto il prodotto da salvare e fare flush
      */
-    public void saveAndFlushProdotto(Prodotto prodotto) {
+    public void saveAndFlushProdotto(final Prodotto prodotto) {
         prodottoRepository.saveAndFlush(prodotto);
     }
 
@@ -63,7 +68,8 @@ public class ProdottoService {
      * @param nome la stringa da cercare nel nome dei prodotti
      * @return una lista di prodotti con il nome che contiene la stringa specificata
      */
-    public List<Prodotto> getResult(String nome) {
-        return prodottoRepository.findByNomeContainingIgnoreCase(nome);
+    public List<Prodotto> getResult(final String nome) {
+        return prodottoRepository.
+                findByNomeContainingIgnoreCase(nome);
     }
 }

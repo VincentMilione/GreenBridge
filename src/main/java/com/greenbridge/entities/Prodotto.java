@@ -86,7 +86,7 @@ public class Prodotto {
      *
      * @param immagine l'immagine da impostare
      */
-    public void setImmagine(byte[] immagine) {
+    public void setImmagine(final byte[] immagine) {
         this.immagine = immagine;
         if (immagine != null) {
             this.immagineBase64 = Base64.getEncoder().encodeToString(immagine);
@@ -98,7 +98,7 @@ public class Prodotto {
      *
      * @param immagineBase64 l'immagine codificata in Base64 da impostare
      */
-    public void setImmagineBase64(String immagineBase64) {
+    public void setImmagineBase64(final String immagineBase64) {
         this.immagineBase64 = immagineBase64;
 
         if (immagineBase64 != null) {
