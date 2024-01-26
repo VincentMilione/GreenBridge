@@ -53,13 +53,25 @@ public interface AgricoltoreService {
     /**
      * Adds a Certificato to an existing Agricoltore entity.
      *
-     * @param agricoltoreId              ID of the Agricoltore to add the Certificato to
+     * @param agricoltoreId              ID of the Agricoltore to
+     *                                   add the Certificato to
      * @param nomeCertificato            Name of the Certificato
      * @param dataScadenzaCertificato    Expiry date of the Certificato
      * @param scansione                  Scan of Certificato
      */
-    void aggiungiCertificato(int agricoltoreId, String nomeCertificato, LocalDate dataScadenzaCertificato, MultipartFile scansione);
+    void aggiungiCertificato(int agricoltoreId, String nomeCertificato,
+                             LocalDate dataScadenzaCertificato,
+                             MultipartFile scansione);
 
-
+    /**
+     * Restituisce una lista di certificati associati
+     * all'agricoltore specificato.
+     *
+     * @param agricoltore L'agricoltore di cui si vogliono
+     *                    recuperare i certificati.
+     * @return Una lista di certificati associati all'agricoltore
+     *         specificato. Se non sono presenti certificati,
+     *         viene restituita una lista vuota.
+     */
     List<Certificato> getCertificati(Agricoltore agricoltore);
 }

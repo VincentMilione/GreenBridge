@@ -16,15 +16,25 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 /**
- * Implementation of the AgricoltoreService interface for managing Agricoltore entities and related operations.
+ * Implementation of the AgricoltoreService interface for managing
+ * Agricoltore entities and related operations.
  */
 @Service
 public class AgricoltoreServiceImpl implements AgricoltoreService {
 
+    /**
+     * Repository per gestire le operazioni CRUD sui certificati.
+     */
     @Autowired
     private CertificatoRepository certificatoRepository;
+    /**
+     * Repository per gestire le operazioni CRUD sugli agricoltori.
+     */
     @Autowired
     private AgricoltoreRepository agricoltoreRepository;
+    /**
+     * Repository per gestire le operazioni CRUD sui portafogli.
+     */
     @Autowired
     private PortafoglioRepository portafoglioRepository;
 
@@ -43,12 +53,14 @@ public class AgricoltoreServiceImpl implements AgricoltoreService {
      *
      * @param agricoltore Agricoltore entity to be saved
      * @return Saved Agricoltore entity
-     * @throws RuntimeException if the Agricoltore with the same ID already exists
+     * @throws RuntimeException if the Agricoltore with
+     *                          the same ID already exists
      */
     @Override
     public Agricoltore saveAgricoltore(Agricoltore agricoltore) {
-        if (agricoltoreRepository.existsById(agricoltore.getId()))
+        if (agricoltoreRepository.existsById(agricoltore.getId())) {
             throw new RuntimeException("User already exists");
+        }
 
         Portafoglio portafoglio = new Portafoglio();
         Portafoglio loadedWallet = portafoglioRepository.save(portafoglio);
@@ -61,12 +73,14 @@ public class AgricoltoreServiceImpl implements AgricoltoreService {
      * Modifies an existing Agricoltore entity.
      *
      * @param agricoltore Modified Agricoltore entity
-     * @throws RuntimeException if the Agricoltore with the specified ID does not exist
+     * @throws RuntimeException if the Agricoltore with the
+     *                          specified ID does not exist
      */
     @Override
     public void modificaAgricoltore(Agricoltore agricoltore) {
-        if (!agricoltoreRepository.existsById(agricoltore.getId()))
+        if (!agricoltoreRepository.existsById(agricoltore.getId())) {
             throw new RuntimeException("User does not exist");
+        }
         agricoltoreRepository.save(agricoltore);
     }
 
@@ -74,11 +88,13 @@ public class AgricoltoreServiceImpl implements AgricoltoreService {
      * Retrieves a single Agricoltore entity by ID.
      *
      * @param id ID of the Agricoltore entity to retrieve
-     * @return Agricoltore entity corresponding to the provided ID, or null if not found
+     * @return Agricoltore entity corresponding to the
+     *         provided ID, or null if not found
      */
     @Override
     public Agricoltore getSingleAgricoltore(int id) {
-        Optional<Agricoltore> agricoltoreOptional = agricoltoreRepository.findById(id);
+        Optional<Agricoltore> agricoltoreOptional =
+                agricoltoreRepository.findById(id);
         // Se l'agricoltore non è presente, restituisci null
         return agricoltoreOptional.orElse(null);
     }
@@ -97,13 +113,15 @@ public class AgricoltoreServiceImpl implements AgricoltoreService {
     /**
      * Adds a Certificato to an existing Agricoltore entity.
      *
-     * @param agricoltoreId              ID of the Agricoltore to add the Certificato to
+     * @param agricoltoreId              ID of the Agricoltore to
+     *                                   add the Certificato to
      * @param nomeCertificato            Name of the Certificato
      * @param dataScadenzaCertificato    Expiry date of the Certificato
      */
     @Override
     public void aggiungiCertificato(int agricoltoreId, String nomeCertificato,
-                                    LocalDate dataScadenzaCertificato, MultipartFile scansione) {
+                                    LocalDate dataScadenzaCertificato,
+                                    MultipartFile scansione) {
         Agricoltore agricoltore = getSingleAgricoltore(agricoltoreId);
 
         try {
@@ -116,7 +134,8 @@ public class AgricoltoreServiceImpl implements AgricoltoreService {
         }
     }
     /**
-     * Retrieves the list of Certificato associated to an existing Agricoltore entity.
+     * Retrieves the list of Certificato associated
+     * to an existing Agricoltore entity.
      *
      * @param agricoltore   Agricoltore to retrieve the list of certificates
      */
