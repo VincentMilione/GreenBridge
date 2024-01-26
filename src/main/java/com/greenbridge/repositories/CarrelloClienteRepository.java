@@ -9,30 +9,37 @@ import java.util.List;
 
 /**
  * Repository per l'entità CarrelloCliente.
- * @Author Salvatore Mattiello
+ * @author Salvatore Mattiello
  */
 public interface CarrelloClienteRepository
         extends JpaRepository<CarrelloCliente, Integer> {
 
                 /**
-                 * Trova tutti gli elementi del carrello associati a un determinato Cliente.
+                 * Trova tutti gli elementi
+                 * del carrello associati a un determinato Cliente.
                  *
-                 * @param cliente Il cliente associato ai carrelli da cercare.
-                 * @return Una lista di carrelli associati al cliente specificato.
+                 * @param cliente Il cliente associato
+                 *               ai carrelli da cercare.
+                 * @return Una lista di carrelli
+                 * associati al cliente specificato.
                  */
                 List<CarrelloCliente> findByCliente(Cliente cliente);
 
                 /**
-                 * Elimina gli elementi del carrello associati a un determinato Prodotto.
+                 * Elimina gli elementi del carrello
+                 * associati a un determinato Prodotto.
                  *
-                 * @param prodotto Il prodotto associato ai carrelli da eliminare.
+                 * @param prodotto Il prodotto
+                 *           associato ai carrelli da eliminare.
                  */
                 void deleteByProdotto(Prodotto prodotto);
 
                 /**
-                 * Elimina tutti gli elementi nel carrello associati a un determinato Cliente.
+                 * Elimina tutti gli elementi
+                 * nel carrello associati a un determinato Cliente.
                  *
-                 * @param cliente Il cliente associato ai carrelli da eliminare.
+                 * @param cliente Il cliente associato
+                 *                ai carrelli da eliminare.
                  */
                 void deleteByCliente(Cliente cliente);
 

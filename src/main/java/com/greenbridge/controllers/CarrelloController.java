@@ -16,12 +16,28 @@ import org.springframework.ui.Model;
 
 @Controller
 public class CarrelloController {
+    /**
+     * Servizio per la gestione delle
+     * operazioni legate ai prodotti.
+     */
     @Autowired
     private ProdottoService prodottoService;
+    /**
+     * Servizio per la gestione delle
+     * operazioni legate ai clienti.
+     */
     @Autowired
     private ClienteServiceImpl clienteService;
+    /**
+     * Servizio per la gestione delle
+     * operazioni legate al carrello.
+     */
     @Autowired
     private CarrelloClienteService carrelloClienteService;
+    /**
+     * Servizio per la gestione delle
+     * operazioni legate agli indirizzi stradali.
+     */
     @Autowired
     private IndirizzoSpedizioneService indirizzoSpedizioneService;
 
@@ -35,7 +51,7 @@ public class CarrelloController {
      *  * @Author salvatore mattiello.
      */
     @GetMapping("/carrello")
-        //@ResponseBody
+    //@ResponseBody
     String getCarrello(Model model, HttpSession session) {
         ListCart listCart = (ListCart) session.getAttribute("list_cart");
         model.addAttribute("cart", listCart.getProdottiOrdinati());

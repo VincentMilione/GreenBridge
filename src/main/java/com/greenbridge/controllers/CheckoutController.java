@@ -18,24 +18,50 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  * Controller per gestire il processo di checkout.
- * @Author salvatore mattiello
+ * @author salvatore mattiello
  */
 @Controller
 public class CheckoutController {
+    /**
+     * Servizio per la gestione delle
+     * operazioni legate ai prodotti ordinati.
+     */
     @Autowired
     private ProdottiOrdineService prodottiOrdineService;
+    /**
+     * Servizio per la gestione delle
+     * operazioni legate agli ordini.
+     */
     @Autowired
     private OrdineService ordineService;
+    /**
+     * Servizio per la gestione delle
+     * operazioni legate al carrello.
+     */
     @Autowired
     private CarrelloClienteService carrelloClienteService;
 
+    /**
+     * Servizio per la gestione delle
+     * operazioni legate agli indirizzi.
+     */
     @Autowired
     private IndirizzoSpedizioneService indirizzoSpedizioneService;
 
+    /**
+     * Servizio per la gestione delle
+     * operazioni legate ai portafogli
+     * degli agricoltori.
+     */
     @Autowired
     private PortafoglioService portafoglioService;
 
@@ -59,7 +85,7 @@ public class CheckoutController {
         }
 
         if (id == 0) {
-                session.setAttribute("checkout", carrello);
+            session.setAttribute("checkout", carrello);
         } else { //checkout singolo
             ListCart listaCheckout = new ListCart(cliente);
             listaCheckout.addCart(carrello.getProdottoById(id));
@@ -78,7 +104,7 @@ public class CheckoutController {
      * @param listaCheckout Lista di prodotti per il checkout.
      */
     public void aggiornaCarrello(HttpSession session,
-                                  ListCart listaCheckout) {
+                                 ListCart listaCheckout) {
         ListCart listCart = null;
         if (listaCheckout.getListCart().size() == 1) {
             listCart = (ListCart) session.getAttribute("list_cart");
@@ -136,8 +162,8 @@ public class CheckoutController {
      */
     @PostMapping ("/checkForm")
     ResponseEntity<String> checkForm(@RequestBody
-                         IndirizzoSpedizione indirizzoSpedizione,
-                         Model model, HttpSession session) throws Exception {
+                                     IndirizzoSpedizione indirizzoSpedizione,
+                                     Model model, HttpSession session) throws Exception {
         if (indirizzoSpedizione == null) {
             throw new Exception("indirizzoSpedizione non inviato");
         }
@@ -188,37 +214,37 @@ public class CheckoutController {
 
 
         } else  if (listaCheckout.getListCart().size() != 0) {
-                    ListCart listaAgricoltore = new ListCart(
-                            listaCheckout.getCliente());
-                    Agricoltore agricoltore = listaCheckout.
-                            getListCart().get(0).
-                            getProdotto().getAgricoltore();
-                    int idAgricoltore = agricoltore.getId();
-                    while (listaCheckout.getListCart().get(0).
-                            getProdotto().getAgricoltore().
-                            getId() == idAgricoltore) {
-                        listaAgricoltore.addCart(listaCheckout.
-                                getListCart().get(0));
-                        listaCheckout.getListCart().remove(0);
-                            if (listaCheckout.getListCart().size() == 0) {
-                                break;
-                            }
+            ListCart listaAgricoltore = new ListCart(
+                    listaCheckout.getCliente());
+            Agricoltore agricoltore = listaCheckout.
+                    getListCart().get(0).
+                    getProdotto().getAgricoltore();
+            int idAgricoltore = agricoltore.getId();
+            while (listaCheckout.getListCart().get(0).
+                    getProdotto().getAgricoltore().
+                    getId() == idAgricoltore) {
+                listaAgricoltore.addCart(listaCheckout.
+                        getListCart().get(0));
+                listaCheckout.getListCart().remove(0);
+                if (listaCheckout.getListCart().size() == 0) {
+                    break;
+                }
 
-                    }
-                    //aggiorno il portafoglio agricoltore
-                    aggiornaPortafoglio(listaAgricoltore.
-                            getTotale(), agricoltore);
+            }
+            //aggiorno il portafoglio agricoltore
+            aggiornaPortafoglio(listaAgricoltore.
+                    getTotale(), agricoltore);
 
-                    //creo il nuovo ordine
-                    Ordine ordine = new Ordine(listaAgricoltore.getTotale(),
-                            "mastercard", idSpedizione,
-                            listaAgricoltore.getCliente(),
-                            listaAgricoltore.getListCart().get(0).getProdotto().
-                                    getAgricoltore());
-                    Ordine newOrdine = ordineService.salvaOrdine(ordine);
-                    //aggiungo tutto in prodotti_ordine
-                    prodottiOrdineService.
-                            saveAllProdottiPerOrdine(listaAgricoltore, newOrdine);
+            //creo il nuovo ordine
+            Ordine ordine = new Ordine(listaAgricoltore.getTotale(),
+                    "mastercard", idSpedizione,
+                    listaAgricoltore.getCliente(),
+                    listaAgricoltore.getListCart().get(0).getProdotto().
+                            getAgricoltore());
+            Ordine newOrdine = ordineService.salvaOrdine(ordine);
+            //aggiungo tutto in prodotti_ordine
+            prodottiOrdineService.
+                    saveAllProdottiPerOrdine(listaAgricoltore, newOrdine);
         }
         if (listaCheckout.getListCart().size() == 0) {
             return new ResponseEntity<>("payment", HttpStatusCode.valueOf(200));

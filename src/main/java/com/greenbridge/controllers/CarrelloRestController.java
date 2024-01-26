@@ -15,13 +15,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  * Controller REST per gestire le operazioni del carrello degli acquisti.
- * @Author salvatore mattiello
+ * @author salvatore mattiello
  */
 @RestController
 @RequestMapping("/carrello")
 public class CarrelloRestController {
+    /**
+     * Servizio per la gestione delle
+     * operazioni legate ai prodotti.
+     */
     @Autowired
     private ProdottoService prodottoService;
+    /**
+     * Servizio per la gestione delle
+     * operazioni legate al carrello.
+     */
     @Autowired
     private CarrelloClienteService carrelloClienteService;
 
@@ -49,28 +57,32 @@ public class CarrelloRestController {
 
 
     /**
-     * Metodo per modificare un prodotto nel carrello (elimina o modifica quantità).
+     * Metodo per modificare un prodotto
+     * nel carrello (elimina o modifica quantità).
      *
-     * @param idProdotto Identificativo del prodotto da modificare.
-     * @param edit       Tipo di modifica ("delete" per eliminare, altrimenti modifica la quantità).
+     * @param idProdotto Identificativo del prodotto
+     *                   da modificare.
+     * @param edit       Tipo di modifica
+     *                   ("delete" per eliminare, altrimenti modifica la quantità).
      * @param session    Sessione HTTP per mantenere lo stato del carrello.
-     * @return Array di float contenente informazioni aggiornate sul carrello (nuova quantità e nuovo prezzo totale).
+     * @return Array di float contenente informazioni
+     * aggiornate sul carrello (nuova quantità e nuovo prezzo totale).
      */
-        @PostMapping("/edit_prodotto")
+    @PostMapping("/edit_prodotto")
     float[] editProdotto(@RequestParam Integer idProdotto,
                          @RequestParam String edit, HttpSession session) {
-            ListCart listCart = (ListCart) session.getAttribute("list_cart");
-            if (edit.equals("delete")) {
-                return listCart.delete(idProdotto);
-            } else {
-                Prodotto prodotto =
-                        prodottoService.getProdottoById(idProdotto);
-                carrelloClienteService.deleteByProdotto(prodotto);
-                return listCart.editProdotto(idProdotto, edit);
-
-            }
+        ListCart listCart = (ListCart) session.getAttribute("list_cart");
+        if (edit.equals("delete")) {
+            return listCart.delete(idProdotto);
+        } else {
+            Prodotto prodotto =
+                    prodottoService.getProdottoById(idProdotto);
+            carrelloClienteService.deleteByProdotto(prodotto);
+            return listCart.editProdotto(idProdotto, edit);
 
         }
+
+    }
 
 
 

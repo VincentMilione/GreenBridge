@@ -15,7 +15,7 @@ import java.util.List;
  */
 @Service
 public class ProdottiOrdineService {
-
+    /** Repository di prodotti ordine.*/
     @Autowired
     private ProdottiOrdineRepository prodottiOrdineRepository;
 
@@ -32,10 +32,12 @@ public class ProdottiOrdineService {
     }
 
     /**
-     * Restituisce tutti i prodotti in ordine associati a un determinato ordine.
+     * Restituisce tutti i prodotti in ordine
+     * associati a un determinato ordine.
      *
      * @param ordine L'ordine associato ai prodotti da cercare.
-     * @return Una lista di prodotti in ordine associati all'ordine specificato.
+     * @return Una lista di prodotti in ordine associati
+     * all'ordine specificato.
      */
     public List<ProdottiOrdine> findAllProdottiOrdineByOrdine(Ordine ordine) {
         return prodottiOrdineRepository.findProdottiOrdineByOrdine(ordine);
@@ -63,9 +65,11 @@ public class ProdottiOrdineService {
 
 
     /**
-     * Salva tutti i prodotti per un determinato ordine a partire da un carrello.
+     * Salva tutti i prodotti per un determinato
+     * ordine a partire da un carrello.
      *
-     * @param listCart Il carrello contenente i prodotti da aggiungere all'ordine.
+     * @param listCart Il carrello contenente i prodotti
+     *                 da aggiungere all'ordine.
      * @param ordine   L'ordine a cui associare i prodotti.
      */
     public void saveAllProdottiPerOrdine(ListCart listCart, Ordine ordine) {
@@ -78,7 +82,8 @@ public class ProdottiOrdineService {
     }
 
     /**
-     * Restituisce tutti i prodotti in ordine associati a un determinato ordine usando l'ID dell'ordine.
+     * Restituisce tutti i prodotti in ordine
+     * associati a un determinato ordine usando l'ID dell'ordine.
      *
      * @param ordine L'ordine associato ai prodotti da cercare.
      * @return Una lista di prodotti in ordine associati all'ordine specificato.

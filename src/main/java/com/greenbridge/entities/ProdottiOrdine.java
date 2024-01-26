@@ -61,7 +61,8 @@ public class ProdottiOrdine {
     }
 
     /**
-     * Restituisce una rappresentazione in forma di stringa dell'oggetto ProdottiOrdine.
+     * Restituisce una rappresentazione in forma di
+     * stringa dell'oggetto ProdottiOrdine.
      *
      * @return Stringa rappresentante l'oggetto ProdottiOrdine.
      */
