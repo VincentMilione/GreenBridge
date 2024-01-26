@@ -1,10 +1,8 @@
 package com.greenbridge.services;
 import com.greenbridge.entities.Agricoltore;
 
-import com.greenbridge.entities.Certificato;
 import com.greenbridge.repositories.AgricoltoreRepository;
 
-import com.greenbridge.repositories.CertificatoRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -17,16 +15,14 @@ import java.util.Optional;
 public class AgricoltoreServiceImpl implements AgricoltoreService {
 
     private final AgricoltoreRepository agricoltoreRepository;
-    private final CertificatoRepository certificatoRepository;
     /**
      * Constructor for AgricoltoreServiceImpl.
      *
      * @param agricoltoreRepository   Repository for handling Agricoltore entities
-     * @param certificatoRepository   Repository for handling Certificato entities
+     *
      */
-    public AgricoltoreServiceImpl(AgricoltoreRepository agricoltoreRepository, CertificatoRepository certificatoRepository, CertificatoRepository certificatoRepository1) {
+    public AgricoltoreServiceImpl(AgricoltoreRepository agricoltoreRepository) {
         this.agricoltoreRepository = agricoltoreRepository;
-        this.certificatoRepository = certificatoRepository1;
     }
 
     /**
@@ -102,16 +98,6 @@ public class AgricoltoreServiceImpl implements AgricoltoreService {
         agricoltoreRepository.save(agricoltore);
     }
 
-    /**
-     * Retrieves a list of Certificato entities associated with a specific Agricoltore.
-     *
-     * @param agricoltore Agricoltore entity for which to retrieve Certificato entities
-     * @return List of Certificato entities associated with the provided Agricoltore
-     */
-    @Override
-    public List<Certificato> getAgricoltoreByCertificatoNome(Agricoltore agricoltore) {
-        return certificatoRepository.findByAgricoltore(agricoltore);
-    }
 
 
 

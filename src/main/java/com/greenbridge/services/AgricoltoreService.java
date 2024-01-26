@@ -1,7 +1,6 @@
 package com.greenbridge.services;
 
 import com.greenbridge.entities.Agricoltore;
-import com.greenbridge.entities.Certificato;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -58,11 +57,5 @@ public interface AgricoltoreService {
      */
     void aggiungiCertificato(int agricoltoreId, String nomeCertificato, LocalDate dataScadenzaCertificato);
 
-    /**
-     * Retrieves a list of Certificato entities associated with a specific Agricoltore.
-     *
-     * @param agricoltore Agricoltore entity for which to retrieve Certificato entities
-     * @return List of Certificato entities associated with the provided Agricoltore
-     */
-    List<Certificato> getAgricoltoreByCertificatoNome(Agricoltore agricoltore);
+
 }

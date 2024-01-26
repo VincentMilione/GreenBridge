@@ -108,13 +108,14 @@
     }
 
     function isPasswordValid(password) {
-
-         if (password.length < 9) {
-            alert("password non deve contenere meno di 9 carattere");
+        var password = document.getElementById("password").value;
+        var confirmaPassword = document.getElementById("confirmaPassword").value;
+         if (password!=confirmaPassword) {
+            alert("conferma password errata. Riprova.");
             return false;
-        }else if (password.length >= 9) {
+        }else {
              return true;
-        }
+         }
 
     }
 

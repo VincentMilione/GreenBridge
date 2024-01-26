@@ -12,12 +12,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 import java.time.LocalDate;
-import java.util.Date;
+
 import java.util.List;
 
 /**
  * Controller for handling operations related to farmers through RESTful APIs.
- *
  * Supported operations include retrieving the list of farmers, retrieving a single
  * farmer by ID, saving a new farmer, modifying an existing farmer, registering a new
  * farmer user, and adding a certificate to a farmer.
@@ -82,8 +81,7 @@ public class RestUseController {
      * @return ResponseEntity containing a confirmation message
      */
     @PostMapping("/RegistrazioneUtente")
-    public ResponseEntity<String> completaRegistrazione(@RequestBody
-                                            Agricoltore agricoltore) {
+    public ResponseEntity<String> completaRegistrazione(@RequestBody Agricoltore agricoltore) {
         agricoltoreService.saveAgricoltore(agricoltore);
         return ResponseEntity.ok("Tutto ok!");
     }
@@ -101,7 +99,7 @@ public class RestUseController {
                                                       @RequestParam String certName,
                                                       @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate expiryDate,
                                                       @RequestParam MultipartFile certScan) {
-        agricoltoreService.aggiungiCertificato(id, certName, expiryDate);
+        agricoltoreService.aggiungiCertificato(id,certName, expiryDate);
         return new ResponseEntity<>("Certificato aggiunto con successo", HttpStatus.OK);
     }
 }
