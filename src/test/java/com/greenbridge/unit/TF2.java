@@ -70,7 +70,110 @@ public class TF2 {
 
 
     }
+    @Test
+    public void testRegistraAgricoltoreNomeBottegaMancante() throws Exception {
+        Agricoltore agricoltore= new Agricoltore();
+        int idAgricoltore=1;
+        when(agricoltoreService.getSingleAgricoltore(idAgricoltore)).thenReturn(agricoltore);
+        HttpSession session = mockMvc.perform(MockMvcRequestBuilders.get("/dummy-url")
+                .sessionAttr("agricoltore", agricoltoreService.getSingleAgricoltore(idAgricoltore))
+        ).andReturn().getRequest().getSession();
+        mockMvc.perform(MockMvcRequestBuilders.multipart("/RegistrazioneUtente")
+                .param("nome", "mehdi")
+                .param("indirizzoBottega", "via roma 3")
+                .param("email", "jhondoe+test@gmail.us")
+                .param("password", "3333333333333")
+                .param("confermaPassword", "3333333333333")
+                .session((MockHttpSession) session)
+                .contentType(MediaType.MULTIPART_FORM_DATA)
+
+        );
 
 
+    }
+    @Test
+    public void testRegistraAgricoltoreindirizzoBottegaMancante() throws Exception {
+        Agricoltore agricoltore= new Agricoltore();
+        int idAgricoltore=1;
+        when(agricoltoreService.getSingleAgricoltore(idAgricoltore)).thenReturn(agricoltore);
+        HttpSession session = mockMvc.perform(MockMvcRequestBuilders.get("/dummy-url")
+                .sessionAttr("agricoltore", agricoltoreService.getSingleAgricoltore(idAgricoltore))
+        ).andReturn().getRequest().getSession();
+        mockMvc.perform(MockMvcRequestBuilders.multipart("/RegistrazioneUtente")
+                .param("nome", "mehdibottega")
+                .param("nomeBottega", "mehdibottega")
+                .param("email", "jhondoe+test@gmail.us")
+                .param("password", "3333333333333")
+                .param("confermaPassword", "3333333333333")
+                .session((MockHttpSession) session)
+                .contentType(MediaType.MULTIPART_FORM_DATA)
+
+        );
+
+
+    }
+    @Test
+    public void testRegistraAgricoltoreEmailMancante() throws Exception {
+        Agricoltore agricoltore= new Agricoltore();
+        int idAgricoltore=1;
+        when(agricoltoreService.getSingleAgricoltore(idAgricoltore)).thenReturn(agricoltore);
+        HttpSession session = mockMvc.perform(MockMvcRequestBuilders.get("/dummy-url")
+                .sessionAttr("agricoltore", agricoltoreService.getSingleAgricoltore(idAgricoltore))
+        ).andReturn().getRequest().getSession();
+        mockMvc.perform(MockMvcRequestBuilders.multipart("/RegistrazioneUtente")
+                .param("nome", "mehdibottega")
+                .param("nomeBottega", "mehdibottega")
+                .param("indirizzoBottega", "via roma 3")
+                .param("password", "3333333333333")
+                .param("confermaPassword", "3333333333333")
+                .session((MockHttpSession) session)
+                .contentType(MediaType.MULTIPART_FORM_DATA)
+
+        );
+
+
+    }
+    @Test
+    public void testRegistraAgricoltorepasswordMancante() throws Exception {
+        Agricoltore agricoltore= new Agricoltore();
+        int idAgricoltore=1;
+        when(agricoltoreService.getSingleAgricoltore(idAgricoltore)).thenReturn(agricoltore);
+        HttpSession session = mockMvc.perform(MockMvcRequestBuilders.get("/dummy-url")
+                .sessionAttr("agricoltore", agricoltoreService.getSingleAgricoltore(idAgricoltore))
+        ).andReturn().getRequest().getSession();
+        mockMvc.perform(MockMvcRequestBuilders.multipart("/RegistrazioneUtente")
+                .param("nome", "mehdibottega")
+                .param("nomeBottega", "mehdibottega")
+                .param("indirizzoBottega", "via roma 3")
+                .param("email", "jhondoe+test@gmail.us")
+                .param("confermaPassword", "3333333333333")
+                .session((MockHttpSession) session)
+                .contentType(MediaType.MULTIPART_FORM_DATA)
+
+        );
+
+
+    }
+    @Test
+    public void testRegistraAgricoltoreconfermapasswordMancante() throws Exception {
+        Agricoltore agricoltore= new Agricoltore();
+        int idAgricoltore=1;
+        when(agricoltoreService.getSingleAgricoltore(idAgricoltore)).thenReturn(agricoltore);
+        HttpSession session = mockMvc.perform(MockMvcRequestBuilders.get("/dummy-url")
+                .sessionAttr("agricoltore", agricoltoreService.getSingleAgricoltore(idAgricoltore))
+        ).andReturn().getRequest().getSession();
+        mockMvc.perform(MockMvcRequestBuilders.multipart("/RegistrazioneUtente")
+                .param("nome", "mehdibottega")
+                .param("nomeBottega", "mehdibottega")
+                .param("indirizzoBottega", "via roma 3")
+                .param("email", "jhondoe+test@gmail.us")
+                .param("password", "3333333333333")
+                .session((MockHttpSession) session)
+                .contentType(MediaType.MULTIPART_FORM_DATA)
+
+        );
+
+
+    }
 
 }
