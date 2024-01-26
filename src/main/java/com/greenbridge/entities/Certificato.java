@@ -4,16 +4,12 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.time.Instant;
 import java.time.LocalDate;
 /**
  * Entity class representing a Certificato (certificate) associated with an Agricoltore (farmer).
  */
-import java.time.ZoneId;
-import java.util.Date;
+
 
 @Getter
 @Setter

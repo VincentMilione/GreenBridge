@@ -3,9 +3,11 @@ package com.greenbridge.repositories;
 import com.greenbridge.entities.Agricoltore;
 import org.springframework.data.jpa.repository.JpaRepository;
 /**
- * Repository interface for performing CRUD operations on Agricoltore entities.
+ * Repository interface for performing CRUD
+ * operations on Agricoltore entities.
  */
-public interface AgricoltoreRepository extends JpaRepository<Agricoltore, Integer> {
+public interface AgricoltoreRepository extends
+          JpaRepository<Agricoltore, Integer> {
     /**
      * Retrieves an Agricoltore entity by email.
      *
