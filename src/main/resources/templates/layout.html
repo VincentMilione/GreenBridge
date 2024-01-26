@@ -22,15 +22,28 @@
 
     <a href="#">
       </input>
-      <a th:href="@{/carrello}">
+      <a th:if="${session.agricoltore == null}" th:href="@{/carrello}">
         <img class="imgIcon" src="/img/cart.png" alt="chartIcon">
-      </a>
-      <a th:if="${session.cliente == null}" th:href="@{/login}">
-        <img class="imgIcon" src="/img/user.png" alt="userIcon">
       </a>
       <a th:if="${session.cliente != null}" th:href="@{/detailCliente}">
         <img class="imgIcon" src="/img/user.png" alt="userIcon">
       </a>
+      <a th:if="${session.agricoltore!=null}" th:href="@{/homeAgricoltore}">
+        <img class="imgIcon" src="/img/user.png" alt="userIcon">
+      </a>
+      <a th:if="${session.cliente == null && session.agricoltore== null}" th:href="@{/login}">
+        <button type="submit" class="buttonLogin">Login Cliente</button>
+      </a>
+      <a th:if="${session.agricoltore == null && session.cliente==null }" th:href="@{/loginAgricoltore}">
+        <button type="submit" class="buttonLogin">Login Agricoltore</button>
+      </a>
+
+      <th:block th:if="${session.agricoltore != null}">
+        <div>
+        <img class="imgIcon" src="/img/wallet.png" alt="walletIcon">
+        <p style="color: white; text-align: center"  id="portafoglio"></p>
+        </div>
+      </th:block>
     </a>
   </div>
   <div id="secondLevelNavBar" style="left: -400px">
@@ -68,6 +81,20 @@
 </footer>
 
 <script>
+  $(document).ready(function() {
+    $.ajax({
+      url: '/getSaldo',
+      type: 'POST',
+      success: function(response) {
+        if(response !=0){
+          $("#portafoglio").text(response+" $");
+        }
+      }
+    });
+  });
+</script>
+
+<script>
   function openMenu(){
     var button = document.getElementById('secondLevelNavBar')
     if(button.style.left === '-400px') {
@@ -76,6 +103,28 @@
     }else {
       button.style.left = '-400px'
       document.getElementById('menuIcon').src = '/img/menu.png'
+    }
+  }
+</script>
+
+<script>
+  function confermaCancellazione() {
+    if (confirm("Eliminare il prodotto? La cancellazione non comporterà modifiche alle fatture")) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+</script>
+
+<script>
+  function validateFileType(input) {
+    const allowedExtensions = ['png', 'jpeg', 'jpg'];
+    const fileName = input.value.toLowerCase();
+    const extension = fileName.split('.').pop();
+
+    if (!allowedExtensions.includes(extension)) {
+      input.value = ''; //
     }
   }
 </script>

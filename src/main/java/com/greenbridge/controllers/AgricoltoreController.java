@@ -1,4 +1,5 @@
 package com.greenbridge.controllers;
+import com.greenbridge.entities.Prodotto;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.ui.Model;
 import com.greenbridge.services.AgricoltoreServiceImpl;
@@ -27,6 +28,15 @@ public class AgricoltoreController {
         return "modify";
     }
 
+    @GetMapping("/homeAgricoltore")
+    public String home(HttpSession session){
+        if(session.getAttribute("agricoltore")== null) {
+            return "loginAgricoltore";
+        }
+        return "homeAgricoltore";
+
+    }
+
     @GetMapping("/registratoConSuccesso")
     public String registratoConSuccesso() {
         return "RegistrazioneConSuccesso";
@@ -39,9 +49,9 @@ public class AgricoltoreController {
     }
 
     @GetMapping("/detailAgricoltore")
-    public String detailAgricoltore(Model model, HttpSession session) {
-        model.addAttribute("agricoltore", session.getAttribute("agricoltore"));
-      return "detailAgricoltore";
+    public String DetailAgricoltore(Model model,HttpSession session){
+        model.addAttribute("agricoltore",session.getAttribute("agricoltore"));
+      return"homeAgricoltore";
     }
 
 }
