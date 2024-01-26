@@ -7,7 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +21,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 /**
+ * @author  elmehdi zitouni
  * Controller for handling operations
  * related to farmers through RESTful APIs.
  * Supported operations include
@@ -28,7 +30,8 @@ import java.util.List;
  * farmer by ID, saving a new farmer,
  * modifying an existing farmer,
  * registering a new
- * farmer user, and adding a certificate to a farmer.
+ * farmer user, and adding a
+ * certificate to a farmer.
  */
 @RestController
 @RequestMapping("/api")
@@ -69,7 +72,8 @@ public class RestUseController {
         return agricoltoreService.saveAgricoltore(agricoltore);
     }
     /**
-     * Modifies the information of an existing farmer by ID.
+     * Modifies the information
+     * of an existing farmer by ID.
      * @param id ID of the farmer to modify
      * @param agricoltore  New farmer information
      * @return ResponseEntity
@@ -87,8 +91,10 @@ public class RestUseController {
         return new ResponseEntity<>("Not found", HttpStatus.FORBIDDEN);
     }
     /**
-     * Completes the registration of a new farmer user.
-     * @param agricoltore New farmer user to register
+     * Completes the registration
+     * of a new farmer user.
+     * @param agricoltore New farmer user
+     * to register
      * @return ResponseEntity containing
      * a confirmation message
      */
@@ -103,15 +109,20 @@ public class RestUseController {
      * @param id  ID of the farmer to add the certificate to
      * @param certName    Name of the certificate
      * @param expiryDate  Expiry date of the certificate
-     * @param certScan    Certificate file in MultipartFile format
-     * @return ResponseEntity containing a success or error message
+     * @param certScan    Certificate
+     * file in MultipartFile format
+     * @return ResponseEntity containing
+     * a success or error message
      */
     @PostMapping("/Agricoltori/{id}/aggiungiCertificato")
-    public ResponseEntity<String> aggiungiCertificato(@PathVariable int id,
-                                                      @RequestParam String certName,
-                                                      @RequestParam LocalDate expiryDate,
-                                                      @RequestParam MultipartFile certScan) {
-        agricoltoreService.aggiungiCertificato(id,
+    public ResponseEntity<String>
+           aggiungiCertificato(
+            @PathVariable int id,
+            @RequestParam String certName,
+            @RequestParam LocalDate expiryDate,
+            @RequestParam MultipartFile certScan) {
+
+             agricoltoreService.aggiungiCertificato(id,
                                                certName,
                                                expiryDate,
                                                certScan);
