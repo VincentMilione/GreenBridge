@@ -15,7 +15,7 @@ import java.util.List;
 @Service
 public class ProdottoService {
     /**
-     * Controller prodotto per il service
+     * Controller prodotto per il service.
      */
     @Autowired
     private ProdottoRepository prodottoRepository;
@@ -62,11 +62,13 @@ public class ProdottoService {
     }
 
     /**
-     * Ottiene una lista di prodotti il cui nome contiene la stringa specificata,
+     * Ottiene una lista di prodotti il cui nome
+     * contiene la stringa specificata,
      * ignorando maiuscole e minuscole.
      *
      * @param nome la stringa da cercare nel nome dei prodotti
-     * @return una lista di prodotti con il nome che contiene la stringa specificata
+     * @return una lista di prodotti con il nome che
+     * contiene la stringa specificata
      */
     public List<Prodotto> getResult(final String nome) {
         return prodottoRepository.

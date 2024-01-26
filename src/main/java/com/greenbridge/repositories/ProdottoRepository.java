@@ -18,8 +18,8 @@ public interface ProdottoRepository extends JpaRepository<Prodotto, Integer> {
      * @param agricoltore l'agricoltore di cui trovare i prodotti
      * @return una lista di prodotti acquistabili
      */
-    List<Prodotto> findAllByAgricoltoreAndAcquistabileTrue
-    (Agricoltore agricoltore);
+    List<Prodotto> findAllByAgricoltoreAndAcquistabileTrue(
+            Agricoltore agricoltore);
 
     /**
      * Ottiene un prodotto dal database dato l'ID del prodotto.

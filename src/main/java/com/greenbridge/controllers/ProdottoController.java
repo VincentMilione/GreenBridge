@@ -12,7 +12,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
-import org.springframework.web.bind.annotation.*;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -21,10 +28,14 @@ import java.util.List;
 
 /**
  * Controller per la gestione dei prodotti.
- * Autore:Mauro
+ * Autore:Mauro,Giuseppe
  */
 @Controller
 public class ProdottoController {
+    /**
+     * Lunghezza massima del nome del prodotto cercato.
+     */
+    private static final int MAX_LENGHT = 50;
     /**
      * Service del prodotto.
      */
@@ -95,8 +106,8 @@ public class ProdottoController {
             System.out.println(e.getMessage());
         } catch (DataIntegrityViolationException e) {
             // Forza il lancio dell'eccezione
-            throw new DataIntegrityViolationException
-                    ("Data truncation: Data too long for column");
+            throw new DataIntegrityViolationException(
+                    "Data truncation: Data too long for column");
         } catch (Exception e) {
             handleException(e);
         }
@@ -111,8 +122,8 @@ public class ProdottoController {
      */
     @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
     @ExceptionHandler(DataIntegrityViolationException.class)
-    public void handleDataIntegrityViolationException
-    (final DataIntegrityViolationException e) {
+    public void handleDataIntegrityViolationException(
+            final DataIntegrityViolationException e) {
         System.out.println("Handling DataIntegrityViolationException: "
                 + e.getMessage());
     }
@@ -277,6 +288,7 @@ public class ProdottoController {
     }
     /**
      * Redirect alla home.
+     * @return redirect alla home
      */
     @GetMapping("/")
     public String getHome() {
@@ -296,8 +308,8 @@ public class ProdottoController {
     @PostMapping ("/ricerca")
     public String getProduct(@RequestParam final String name,
                              final Model model) {
-        int numb = 50;
-        if (name.trim().isEmpty() || name.length() > numb
+
+        if (name.trim().isEmpty() || name.length() > MAX_LENGHT
                 || !name.matches("^[A-Za-zÀ-ù ‘-]{1,50}$")) {
             return "error.html";
         }

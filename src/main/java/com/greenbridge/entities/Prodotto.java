@@ -27,31 +27,80 @@ import java.util.Base64;
 @NoArgsConstructor
 public class Prodotto {
 
+    /**
+     * Identificatore unico del prodotto.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer idProdotto;
 
+    /**
+     * Nome del prodotto.
+     */
     private String nome;
+
+    /**
+     * Origine del prodotto.
+     */
     private String origine;
 
+    /**
+     * Immagine del prodotto in formato byte[].
+     */
     @Lob
     private byte[] immagine;
 
+    /**
+     * Immagine del prodotto come file MultipartFile (transiente).
+     */
     @Transient
     private MultipartFile immagineFile;
 
+    /**
+     * Immagine del prodotto in formato Base64 (transiente).
+     */
     @Transient
     private String immagineBase64; // Immagine codificata in base64
 
+    /**
+     * Formato di vendita del prodotto.
+     */
     private float formatoVendita;
+
+    /**
+     * Prezzo al kg del prodotto.
+     */
     private float prezzoKg;
+
+    /**
+     * Prezzo di vendita del prodotto.
+     */
     private float prezzoVendita;
+
+    /**
+     * Quantità disponibile del prodotto.
+     */
     private float quantitaDisp;
+
+    /**
+     * Lotto del prodotto.
+     */
     private int lotto;
+
+    /**
+     * Descrizione del prodotto.
+     */
     private String descrizione;
+
+    /**
+     * Indica se il prodotto è acquistabile.
+     */
     private boolean acquistabile;
 
+    /**
+     * Agricoltore associato al prodotto.
+     */
     @ManyToOne
     @JoinColumn(name = "id_agricoltore")
     private Agricoltore agricoltore;
