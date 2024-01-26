@@ -1,14 +1,7 @@
 package com.greenbridge.entities;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Column;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,6 +9,9 @@ import lombok.Setter;
 
 import java.util.List;
 
+/**
+ * Entity class representing an Agricultore (farmer) in the system.
+ */
 @Getter
 @Setter
 @NoArgsConstructor
@@ -37,4 +33,8 @@ public class Agricoltore {
 
     @OneToMany(mappedBy = "agricoltore")
     List<Prodotto> prodotti;
+    @OneToMany(mappedBy = "agricoltore", cascade = CascadeType.PERSIST)
+    private List<Certificato> certificati;
+
+
 }

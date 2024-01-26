@@ -21,7 +21,7 @@ import java.sql.Date;
 public class Cliente {
     /** Identificativo univoco del cliente. */
     @Id
-    @GeneratedValue (strategy = GenerationType.AUTO)
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Integer id;
     /** Nome del cliente. */
     private String nome;
