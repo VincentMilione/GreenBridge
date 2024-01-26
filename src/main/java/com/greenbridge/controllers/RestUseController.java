@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 import java.time.LocalDate;
-
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -81,7 +81,8 @@ public class RestUseController {
      * @return ResponseEntity containing a confirmation message
      */
     @PostMapping("/RegistrazioneUtente")
-    public ResponseEntity<String> completaRegistrazione(@RequestBody Agricoltore agricoltore) {
+    public ResponseEntity<String> completaRegistrazione(@RequestBody
+                                            Agricoltore agricoltore) {
         agricoltoreService.saveAgricoltore(agricoltore);
         return ResponseEntity.ok("Tutto ok!");
     }
@@ -97,9 +98,13 @@ public class RestUseController {
     @PostMapping("/Agricoltori/{id}/aggiungiCertificato")
     public ResponseEntity<String> aggiungiCertificato(@PathVariable int id,
                                                       @RequestParam String certName,
-                                                      @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate expiryDate,
+                                                      @RequestParam LocalDate expiryDate,
                                                       @RequestParam MultipartFile certScan) {
-        agricoltoreService.aggiungiCertificato(id,certName, expiryDate);
-        return new ResponseEntity<>("Certificato aggiunto con successo", HttpStatus.OK);
+        System.out.println("Ciao mi chiamo Batman!");
+        System.out.println(expiryDate);
+        agricoltoreService.aggiungiCertificato(id, certName,
+                expiryDate, certScan);
+        return new ResponseEntity<>("Certificato aggiunto con successo",
+                HttpStatus.OK);
     }
 }

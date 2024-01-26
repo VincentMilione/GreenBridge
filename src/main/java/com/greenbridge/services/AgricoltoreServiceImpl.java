@@ -1,10 +1,15 @@
 package com.greenbridge.services;
 import com.greenbridge.entities.Agricoltore;
 
+import com.greenbridge.entities.Certificato;
 import com.greenbridge.repositories.AgricoltoreRepository;
 
+import com.greenbridge.repositories.CertificatoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -14,16 +19,10 @@ import java.util.Optional;
 @Service
 public class AgricoltoreServiceImpl implements AgricoltoreService {
 
-    private final AgricoltoreRepository agricoltoreRepository;
-    /**
-     * Constructor for AgricoltoreServiceImpl.
-     *
-     * @param agricoltoreRepository   Repository for handling Agricoltore entities
-     *
-     */
-    public AgricoltoreServiceImpl(AgricoltoreRepository agricoltoreRepository) {
-        this.agricoltoreRepository = agricoltoreRepository;
-    }
+    @Autowired
+    private CertificatoRepository certificatoRepository;
+    @Autowired
+    private AgricoltoreRepository agricoltoreRepository;
 
     /**
      * Retrieves a list of all Agricoltore entities.
@@ -71,6 +70,7 @@ public class AgricoltoreServiceImpl implements AgricoltoreService {
     @Override
     public Agricoltore getSingleAgricoltore(int id) {
         Optional<Agricoltore> agricoltoreOptional = agricoltoreRepository.findById(id);
+        // Se l'agricoltore non è presente, restituisci null
         return agricoltoreOptional.orElse(null);
     }
 
@@ -93,9 +93,18 @@ public class AgricoltoreServiceImpl implements AgricoltoreService {
      * @param dataScadenzaCertificato    Expiry date of the Certificato
      */
     @Override
-    public void aggiungiCertificato(int agricoltoreId, String nomeCertificato, LocalDate dataScadenzaCertificato) {
+    public void aggiungiCertificato(int agricoltoreId, String nomeCertificato,
+                                    LocalDate dataScadenzaCertificato, MultipartFile scansione) {
         Agricoltore agricoltore = getSingleAgricoltore(agricoltoreId);
-        agricoltoreRepository.save(agricoltore);
+
+        try {
+            Certificato certificato = new Certificato(nomeCertificato, dataScadenzaCertificato,
+                    agricoltore, scansione.getBytes());
+            certificato.setAgricoltore(agricoltore);
+            certificatoRepository.save(certificato);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 

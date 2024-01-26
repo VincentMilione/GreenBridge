@@ -33,7 +33,7 @@ public class Agricoltore {
 
     @OneToMany(mappedBy = "agricoltore")
     List<Prodotto> prodotti;
-    @OneToMany(mappedBy = "agricoltore", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "agricoltore", cascade = CascadeType.PERSIST)
     private List<Certificato> certificati;
 
 

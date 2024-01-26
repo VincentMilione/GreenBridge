@@ -1,6 +1,8 @@
 package com.greenbridge.services;
 
 import com.greenbridge.entities.Agricoltore;
+import com.greenbridge.entities.Certificato;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -54,8 +56,9 @@ public interface AgricoltoreService {
      * @param agricoltoreId              ID of the Agricoltore to add the Certificato to
      * @param nomeCertificato            Name of the Certificato
      * @param dataScadenzaCertificato    Expiry date of the Certificato
+     * @param scansione                  Scan of Certificato
      */
-    void aggiungiCertificato(int agricoltoreId, String nomeCertificato, LocalDate dataScadenzaCertificato);
+    void aggiungiCertificato(int agricoltoreId, String nomeCertificato, LocalDate dataScadenzaCertificato, MultipartFile scansione);
 
 
 }
