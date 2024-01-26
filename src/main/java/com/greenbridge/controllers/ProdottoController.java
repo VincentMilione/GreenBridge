@@ -20,7 +20,10 @@ import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
 
-
+/**
+ * Controller per la gestione dei prodotti.
+ * Autore:Mauro
+ */
 @Controller
 public class ProdottoController {
 
@@ -32,7 +35,13 @@ public class ProdottoController {
     @Autowired
     private RecensioneService recensioneService;
 
-
+    /**
+     * Mostra il form per l'inserimento di un nuovo prodotto.
+     *
+     * @param model   Modello per la gestione degli attributi nella vista.
+     * @param session Sessione HTTP.
+     * @return Nome della vista da visualizzare.
+     */
     @GetMapping("/formInserimento")
     public String getProdotto(Model model, HttpSession session) {
         if(session.getAttribute("agricoltore")!= null) {
@@ -42,6 +51,15 @@ public class ProdottoController {
         return "loginAgricoltore";
     }
 
+    /**
+     * Aggiunge un nuovo prodotto al sistema.
+     *
+     * @param prodotto       Oggetto Prodotto da aggiungere.
+     * @param immagineFile   Immagine associata al prodotto.
+     * @param model          Modello per la gestione degli attributi nella vista.
+     * @param session        Sessione HTTP.
+     * @return Nome della vista da visualizzare.
+     */
     @PostMapping("/addProdotto")
     public String addProdottoForm(@ModelAttribute("prodotto") Prodotto
               prodotto, @RequestParam("immagineFile")
@@ -83,13 +101,24 @@ public class ProdottoController {
         return "pages/user/catalogo";
     }
 
-    // Gestione dell'eccezione a livello di controller
+
+    /**
+     * Gestisce l'eccezione di violazione dell'integrità dei dati.
+     *
+     * @param e Eccezione di violazione dell'integrità dei dati.
+     */
     @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
     @ExceptionHandler(DataIntegrityViolationException.class)
     public void handleDataIntegrityViolationException(DataIntegrityViolationException e) {
         // Puoi aggiungere ulteriori log o gestione dell'errore se necessario
         System.out.println("Handling DataIntegrityViolationException: " + e.getMessage());
     }
+
+    /**
+     * Gestisce un'eccezione generica.
+     *
+     * @param e Eccezione generica.
+     */
     @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
     @ExceptionHandler(Exception.class)
     public void handleException(Exception e) {
@@ -97,6 +126,13 @@ public class ProdottoController {
         System.out.println("Handling Exception: " + e.getMessage());
     }
 
+    /**
+     * Mostra il catalogo dei prodotti.
+     *
+     * @param model   Modello per la gestione degli attributi nella vista.
+     * @param session Sessione HTTP.
+     * @return Nome della vista da visualizzare.
+     */
     @GetMapping("/catalogo")
     public String getCatalogo(Model model, HttpSession session) {
         if(session.getAttribute("agricoltore")== null) {
@@ -116,6 +152,14 @@ public class ProdottoController {
         return "pages/user/catalogo";
     }
 
+    /**
+     * Mostra il form per la modifica di un prodotto.
+     *
+     * @param id     ID del prodotto da modificare.
+     * @param model  Modello per la gestione degli attributi nella vista.
+     * @param session Sessione HTTP.
+     * @return Nome della vista da visualizzare.
+     */
     @GetMapping("/formModificaProdotto/{id}")
     public String formModificaProdotto(@PathVariable("id") int id,Model model, HttpSession session) {
         if(session.getAttribute("agricoltore")== null) {
@@ -126,6 +170,16 @@ public class ProdottoController {
         return "pages/user/formModifica";
     }
 
+
+    /**
+     * Modifica un prodotto esistente.
+     *
+     * @param prodotto      Oggetto Prodotto da modificare.
+     * @param immagineFile  Nuova immagine associata al prodotto.
+     * @param model         Modello per la gestione degli attributi nella vista.
+     * @param session       Sessione HTTP.
+     * @return Nome della vista da visualizzare.
+     */
     @PostMapping("/modProdotto")
     public String modificaProdottoForm(@ModelAttribute
                    ("prodottoMod") Prodotto prodotto,
@@ -161,6 +215,14 @@ public class ProdottoController {
         return "pages/user/catalogo";
     }
 
+    /**
+     * Cancella un prodotto esistente.
+     *
+     * @param session Sessione HTTP.
+     * @param model   Modello per la gestione degli attributi nella vista.
+     * @param id      ID del prodotto da cancellare.
+     * @return Nome della vista da visualizzare.
+     */
     @GetMapping("/cancellaProdotto/{id}")
     public String cancellaProdotto(HttpSession session,
                    Model model, @PathVariable("id") int id) {

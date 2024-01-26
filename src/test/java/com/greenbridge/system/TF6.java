@@ -1,7 +1,9 @@
+/**
+ * Classe di test per il form di inserimento nel sistema.
+ * Autore: Mauro
+ */
 package com.greenbridge.system;
-
 import io.github.bonigarcia.wdm.WebDriverManager;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -9,16 +11,18 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
 import static java.lang.Thread.sleep;
 import static org.springframework.test.util.AssertionErrors.assertFalse;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 public class TF6 {
-
   private WebDriver driver;
 
+  /**
+   * Metodo di setup eseguito prima di ogni test.
+   * @throws InterruptedException se il thread viene interrotto
+   */
   @Before
   public void setUp() throws InterruptedException {
 
@@ -34,6 +38,9 @@ public class TF6 {
     sleep(2000);
   }
 
+  /**
+   * Test per il campo 'nome' con inserimento errato.
+   */
  @org.junit.Test
   public void testNomeErrato() {
 
@@ -79,6 +86,9 @@ public class TF6 {
     }
   }
 
+  /**
+   * Test per il campo 'origine' con inserimento errato.
+   */
  @org.junit.Test
   public void testOrigineErrato() {
 
@@ -125,6 +135,10 @@ public class TF6 {
     }
   }
 
+  /**
+   * Test per il campo 'immagine' con inserimento errato.
+   * @throws InterruptedException se il thread viene interrotto
+   */
  @org.junit.Test
   public void testImmagineErrata() throws InterruptedException {
 
@@ -172,6 +186,9 @@ public class TF6 {
 
   }
 
+  /**
+   * Test per il campo 'formatoVendita' con inserimento errato.
+   */
  @org.junit.Test
   public void testFormatoErrato() {
 
@@ -218,6 +235,10 @@ public class TF6 {
     }
   }
 
+
+  /**
+   * Test per il campo 'prezzoVendita' con inserimento errato.
+   */
  @org.junit.Test
   public void testPrezzoErrato() {
 
@@ -264,6 +285,9 @@ public class TF6 {
     }
   }
 
+  /**
+   * Test per il campo 'prezzoKg' con inserimento errato.
+   */
  @org.junit.Test
   public void testPrezzoKgErrato() {
 
@@ -310,6 +334,9 @@ public class TF6 {
     }
   }
 
+  /**
+   * Test per il campo 'quantitaDisp' con inserimento errato.
+   */
  @org.junit.Test
   public void testQuantitaDispErrato() {
 
@@ -356,6 +383,9 @@ public class TF6 {
     }
   }
 
+  /**
+   * Test per il campo 'lotto' con inserimento errato.
+   */
  @org.junit.Test
   public void testLottoErrato() {
 
@@ -402,6 +432,9 @@ public class TF6 {
     }
   }
 
+  /**
+   * Test per il campo 'descrizione' con inserimento errato.
+   */
  @org.junit.Test
   public void testDescrizioneErrato() {
 
@@ -448,6 +481,9 @@ public class TF6 {
     }
   }
 
+  /**
+   * Test per un inserimento corretto nel form.
+   */
  @org.junit.Test
   public void testInsertCorretta() {
 
@@ -485,6 +521,9 @@ public class TF6 {
 
   }
 
+  /**
+   * Metodo di tearDown eseguito dopo ogni test.
+   */
   @After
   public void tearDown() {
     if (driver != null) {

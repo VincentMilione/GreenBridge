@@ -1,34 +1,43 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
 <head>
+    <!-- Definizione dei metadati della pagina -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pagina con Bottoni</title>
+
+    <!-- Inclusione del foglio di stile CSS -->
     <link rel="stylesheet" type="text/css" th:href="@{/css/homeAgricoltore.css}" />
-    <style>
-
-
-    </style>
-</head>
 </head>
 <body layout:fragment="content">
 
+<!-- Contenitore dei bottoni -->
 <div class="button-container">
+
+    <!-- Bottone per visualizzare gli ordini -->
     <a th:href="@{/ordiniAgricoltore}">
+        <!-- Testo descrittivo del bottone -->
         <p class="button-text">Fai clic per visualizzare gli ordini</p>
+        <!-- Bottone effettivo -->
         <button class="button">Visualizza Ordini</button>
     </a>
 
+    <!-- Bottone per inserire i certificati -->
     <a th:href="@{/catalogo}">
+        <!-- Testo descrittivo del bottone -->
         <p class="button-text">Fai clic per inserire i certificati</p>
+        <!-- Bottone effettivo -->
         <button class="button">Inserimento Certificati</button>
-
     </a>
 
+    <!-- Bottone per visualizzare il catalogo -->
     <a th:href="@{/catalogo}">
+        <!-- Testo descrittivo del bottone -->
         <p class="button-text">Fai clic per visualizzare il catalogo</p>
+        <!-- Bottone effettivo -->
         <button class="button">Visualizzazione catalogo</button>
     </a>
+
 </div>
 
 </body>
