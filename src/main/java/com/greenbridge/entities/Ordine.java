@@ -20,7 +20,7 @@ import java.util.Date;
 
 /**
  * Entità che rappresenta un ordine effettuato da un cliente.
- * @Author Salvatore
+ * @author Salvatore Mattiello
  */
 @Entity
 @Setter
@@ -28,29 +28,39 @@ import java.util.Date;
 @NoArgsConstructor
 public class Ordine {
 
+    /** Identificatore dell'ordine. */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
+    /** importo dell'ordine. */
     @Column(name = "importo")
     private float importo;
 
+    /** datadell'ordine. */
     @Column(name = "data_ordine")
     private Date dataOrdine;
 
+    /** Metodo pagamento dell'ordine. */
     @Column(name = "pagamento")
     private String pagamento;
 
+    /** Indirizzo da spedire dell'ordine. */
     @Column(name = "id_indirizzo")
     private int id_indirizzo;
+
+    /** cliente che ha effettuato l'ordine. */
     @ManyToOne
     @JoinColumn(name = "id_cliente")
     private Cliente cliente;
+
+    /** Agricoltore proprietario dei prodotti nell'ordine. */
     @ManyToOne
     @JoinColumn(name = "id_agricoltore")
     private Agricoltore agricoltore;
 
+    /** Stato dell'ordine. */
     @Column(name = "stato")
     private int stato;
 

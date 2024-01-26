@@ -13,7 +13,7 @@ import lombok.Setter;
 
 /**
  * Entità rappresentante la relazione tra i prodotti e gli ordini.
- * @Author Salvatore Mattiello
+ * @author Salvatore Mattiello
  */
 
 @Entity
@@ -22,24 +22,25 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ProdottiOrdine {
 
-
+    /** Identificatore del ProdottoOrdine. */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-
+    /** prodotto del ProdottoOrdine. */
     @ManyToOne
     @JoinColumn(name = "id_prodotto")
     private Prodotto prodotto;
-
+    /** ordine del ProdottoOrdine. */
     @ManyToOne
     @JoinColumn(name = "id_ordine")
     private Ordine ordine;
 
-
+    /** kgAcquistati del ProdottoOrdine. */
     @Column(name = "kg_acquistati")
     private int kgAcquistati;
 
+    /** Prezzokg del ProdottoOrdine. */
     @Column(name = "prezzo_kg")
     private float prezzoKg;
 

@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
 
 /**
  * Entità che rappresenta un indirizzo di spedizione associato a un cliente.
- * @Author Salvatore Mattiello
+ * @author Salvatore Mattiello
  */
 @Entity
 @Getter
@@ -26,29 +26,36 @@ import java.util.regex.Pattern;
 @NoArgsConstructor
 public class IndirizzoSpedizione {
 
+
+    /** Identificatore dell'indirizzo di spedizione. */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    /** cliente dell'indirizzo di spedizione. */
     @ManyToOne
     @JoinColumn(name = "id_cliente")
     private Cliente cliente;
 
+    /** civico dell'indirizzo di spedizione. */
     @Column(name = "civico")
     private Integer civico;
 
+    /** via dell'indirizzo di spedizione. */
     @Column(name = "via")
     private String via;
 
+    /** cap dell'indirizzo di spedizione. */
 
 
     @Column(name = "cap")
     private Integer cap;
 
+    /** Identificatore dell'indirizzo di sepdizione. */
     @Column(name = "citta")
     private String citta;
 
-
+    /** Identificatore dell'indirizzo di sepdizione. */
     @Column(name = "provincia")
     private String provincia;
 

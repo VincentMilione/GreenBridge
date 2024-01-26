@@ -14,6 +14,7 @@ import lombok.Setter;
 
 /**
  * Entità che rappresenta un elemento nel carrello di un cliente.
+ * @author Salvatore Mattiello
  */
 @Entity
 @Getter
@@ -21,17 +22,22 @@ import lombok.Setter;
 @NoArgsConstructor
 public class CarrelloCliente {
 
+    /** Identificatore del CarrelloCliente. */
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    /** cliente del CarrelloCliente. */
     @ManyToOne
     @JoinColumn(name = "id_cliente")
     private Cliente cliente;
 
+    /** prodotto del CarrelloCliente. */
     @ManyToOne
     @JoinColumn(name = "id_prodotto")
     private Prodotto prodotto;
 
+    /** kgRichiesti del CarrelloCliente. */
     @Column(name = "kg_richiesti")
      private int kgRichiesti;
 

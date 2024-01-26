@@ -15,12 +15,15 @@ import java.util.stream.Collectors;
 
 /**
  * Classe che rappresenta il carrello di un cliente.
- * @Author Salvatore Mattiello
+ * @author Salvatore Mattiello
  */
 public class ListCart {
 
+    /** Cliente proprietario del carrello . */
     private Cliente cliente;
+    /** lista dei prodotti del carrello . */
     List<CarrelloCliente> listCart;
+    /** totale del carrello . */
     private float totale = 0;
 
     /**

@@ -12,18 +12,18 @@ import lombok.Setter;
 
 /**
  * Entità che rappresenta il portafoglio associato a un cliente.
- * @Author Salvatore Mattiello.
+ * @author Salvatore Mattiello
  */
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 public class Portafoglio {
-
+    /** Identificatore del Portafoglio. */
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Integer id;
-    /** Nome del cliente. */
+    /** credito del Portafoglio. */
     float credito;
 
     /**
