@@ -1,6 +1,7 @@
 package com.greenbridge.controllers;
 
 import com.greenbridge.entities.Agricoltore;
+import com.greenbridge.entities.Cliente;
 import com.greenbridge.entities.Ordine;
 import com.greenbridge.entities.ProdottiOrdine;
 import com.greenbridge.services.OrdineService;
@@ -104,4 +105,32 @@ public class OrdineController {
 
         return ResponseEntity.ok("Stato dell'ordine aggiornato con successo");
     }
+
+    /**
+     * Gestisce la richiesta di visualizzazione degli ordini effettuati dal cliente in sessione.
+     *
+     * @param model Modello per la gestione degli attributi nella vista.
+     * @param session Sessione HTTP per ottenere l'agricoltore corrente.
+     * @return Stringa che rappresenta il nome della vista da visualizzare; nel caso di successo ordiniRicevuti.html, nel caso contrario loginAgricoltore.html.
+     */
+    @GetMapping("/ordiniCliente")
+    public String visualizzaOrdiniCliente(final Model model,
+                                              final HttpSession session) {
+        Cliente cliente = (Cliente)
+                session.getAttribute("cliente");
+        if (cliente != null) {
+            List<Ordine> ordini = ordineService.getOrdiniByCliente(cliente);
+            model.addAttribute("ordini", ordini);
+
+
+
+            return "ordiniRicevuti";
+        } else {
+            return "login";
+        }
+    }
+
+
+
+
 }

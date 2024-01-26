@@ -1,7 +1,7 @@
 <div class="chatbox__support">
   <div class="chatbox__header">
     <div class="chatbox__image--header">
-      <img src="/static/images/image.svg" alt="image">
+      <img src="/images/image.svg" alt="image">
     </div>
     <div class="chatbox__content--header">
       <h4 class="chatbox__heading--header">Assistente Chat</h4>
@@ -30,14 +30,14 @@
 </div>
 
 <!--th:if da modificare quando sarà integrato il login con th:if="${session['cliente'] ne null}"-->
-<script src="/static/js/chatbot.js"></script>
-<script src="/static/js/messaging.js" defer></script>
+<script src="/js/chatbot.js"></script>
+<script src="/js/messaging.js" defer></script>
 <script>
   const chatButton = document.querySelector('.chatbox__button');
   const chatContent = document.querySelector('.chatbox__support');
   const icons = {
-    isClicked: '<img src="/static/images/icons/chatbox-icon.svg" />',
-    isNotClicked: '<img src="/static/images/icons/chatbox-icon.svg" />'
+    isClicked: '<img src="/images/icons/chatbox-icon.svg" />',
+    isNotClicked: '<img src="/images/icons/chatbox-icon.svg" />'
   }
   const chatbox = new InteractiveChatbox(chatButton, chatContent, icons);
   chatbox.display();

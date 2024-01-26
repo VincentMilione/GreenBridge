@@ -1,35 +1,48 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
 <head>
-
+    <!-- Definizione del documento HTML -->
     <title>Lista Prodotti</title>
+    <!-- Inclusione del foglio di stile CSS -->
     <link rel="stylesheet" type="text/css" th:href="@{/css/catalogo.css}" />
 </head>
 <body layout:fragment="content">
 
+<!-- Titolo della pagina -->
 <h2>Lista Prodotti</h2>
+
+<!-- Pulsante per l'inserimento di un nuovo prodotto -->
 <div class="insert-button">
     <a th:href="@{/formInserimento}">
+        <!-- Testo del pulsante -->
         <button type="button">Inserisci prodotto</button>
     </a>
 </div>
 
+<!-- Contenitore dei prodotti -->
 <div class="product-container">
+    <!-- Ciclo su ogni prodotto nella lista -->
     <div th:each="prodotto : ${prodotti}" class="product-card">
+        <!-- Nome del prodotto -->
         <h3 th:text="${prodotto.nome}"></h3>
+        <!-- Immagine del prodotto, se presente -->
         <img th:if="${prodotto.immagineBase64}" th:src="'data:image/png;base64,' + ${prodotto.immagineBase64}" alt="Immagine" class="product-image"/>
+        <!-- Descrizione del prodotto -->
         <p th:text="${prodotto.descrizione}"></p>
+        <!-- Prezzo del prodotto -->
         <p>Prezzo: €<span th:text="${prodotto.prezzoVendita}"></span></p>
+
+        <!-- Pulsante per la modifica del prodotto -->
         <a th:href="@{/formModificaProdotto/{id}(id=${prodotto.idProdotto})}">
             <button type="button">Modifica</button>
         </a>
-        <a th:href="@{/cancellaProdotto/{id}(id=${prodotto.idProdotto})}"
-           onclick="return confermaCancellazione()">
+
+        <!-- Pulsante per la cancellazione del prodotto con conferma -->
+        <a th:href="@{/cancellaProdotto/{id}(id=${prodotto.idProdotto})}" onclick="return confermaCancellazione()">
             <button type="button">Cancella</button>
         </a>
     </div>
 </div>
+
 </body>
-
-
 </html>

@@ -26,9 +26,13 @@
             <th>Pagamento</th>
             <td th:text="${ordine.pagamento}"></td>
         </tr>
-        <tr>
+        <tr th:if="${session.agricoltore != null}">
             <th>Cliente</th>
             <td th:text="${ordine.cliente.nome} + ' ' + ${ordine.cliente.cognome}"></td>
+        </tr>
+        <tr th:if="${session.cliente != null}">
+            <th>Agricoltore</th>
+            <td th:text="${ordine.agricoltore.nome}"></td>
         </tr>
 
         <p th:switch="${ordine.stato}">
@@ -52,12 +56,13 @@
             <td th:text="${elemento.getProdotto().getNome()}"></td>
             <td th:text="${elemento.getKgAcquistati()}"></td>
             <td th:text="${elemento.getProdotto().getPrezzoVendita()} + '$'"></td>
+
         </tr>
         </tbody>
     </table>
 
 
-    <div class="progress-bar-container">
+    <div class="progress-bar-container"  th:if="${session.agricoltore != null}">
         <div class="status-labels">
             <div class="status-label">In Elaborazione</div>
             <div class="status-label">In Spedizione</div>
@@ -69,9 +74,13 @@
         </div>
     </div>
 
-    <button  th:onclick="'aggiornaStatoOrdine(' + ${ordine.getId()} + ')'">Prosegui</button>
-    <!-- Aggiungi script JavaScript -->
+    <button th:if="${session.agricoltore != null}" th:onclick="'aggiornaStatoOrdine(' + ${ordine.getId()} + ')'">Prosegui</button>
 
+    <a th:if="${session.cliente != null}" th:href="@{'/recensione/' + ${ordine.id}}">
+        <img class="imgIcon" src="/img/recensione.png" alt="userIcon">
+    </a>
+
+    <!-- Aggiungi script JavaScript -->
     <script>
         function aggiornaStatoOrdine(ordineId) {
             alert(ordineId);

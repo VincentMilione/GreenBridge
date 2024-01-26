@@ -1,31 +1,27 @@
 package com.greenbridge.unit;
-
 import com.greenbridge.GreenBridgeApplication;
-
 import com.greenbridge.entities.Agricoltore;
 import com.greenbridge.services.AgricoltoreService;
-import com.greenbridge.services.ProdottoService;
 import jakarta.servlet.http.HttpSession;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.mock.web.MockMultipartFile;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-
 import static org.mockito.Mockito.when;
 
-
-@ExtendWith(SpringExtension.class)
+/**
+ * Classe di test per testare l'inserimento
+ * Autore:Mauro
+ */
+@RunWith(SpringRunner.class)
 @SpringBootTest(classes = GreenBridgeApplication.class) //
 @AutoConfigureMockMvc
 public class TF6 {
@@ -36,7 +32,12 @@ public class TF6 {
     @Mock
     private AgricoltoreService agricoltoreService;
 
-    @Test
+    /**
+     * Test per il caso in cui il nome è errato.
+     *
+     * @throws Exception se si verificano errori durante il test.
+     */
+    @org.junit.Test
     public void testNomeErrato() throws Exception {
 
         // Creare un file immagine fittizio
@@ -67,7 +68,13 @@ public class TF6 {
                 .andExpect(MockMvcResultMatchers.status().isNotAcceptable());
     }
 
-    @Test
+
+    /**
+     * Test per il caso in cui l'origine è errata.
+     *
+     * @throws Exception se si verificano errori durante il test.
+     */
+    @org.junit.Test
     public void testOrigineErrata() throws Exception {
 
         // Creare un file immagine fittizio
@@ -99,7 +106,12 @@ public class TF6 {
 
     }
 
-    @Test
+    /**
+     * Test per il caso in cui il formato è errato.
+     *
+     * @throws Exception se si verificano errori durante il test.
+     */
+    @org.junit.Test
     public void testFormatoErrato() throws Exception {
 
         // Creare un file immagine fittizio
@@ -131,7 +143,12 @@ public class TF6 {
 
     }
 
-    @Test
+    /**
+     * Test per il caso in cui il prezzo di vendita è errato.
+     *
+     * @throws Exception se si verificano errori durante il test.
+     */
+    @org.junit.Test
     public void testPrezzoVenditaErrato() throws Exception {
 
         // Creare un file immagine fittizio
@@ -163,7 +180,12 @@ public class TF6 {
 
     }
 
-    @Test
+    /**
+     * Test per il caso in cui il prezzo al kg è errato.
+     *
+     * @throws Exception se si verificano errori durante il test.
+     */
+    @org.junit.Test
     public void testPrezzoKgErrato() throws Exception {
 
         // Creare un file immagine fittizio
@@ -195,7 +217,13 @@ public class TF6 {
 
     }
 
-    @Test
+
+    /**
+     * Test per il caso in cui la quantità disponibile è errata.
+     *
+     * @throws Exception se si verificano errori durante il test.
+     */
+    @org.junit.Test
     public void testQuantitaDispErrata() throws Exception {
 
         // Creare un file immagine fittizio
@@ -227,7 +255,12 @@ public class TF6 {
 
     }
 
-    @Test
+    /**
+     * Test per il caso in cui il lotto è errato.
+     *
+     * @throws Exception se si verificano errori durante il test.
+     */
+    @org.junit.Test
     public void testLottoErrato() throws Exception {
 
         // Creare un file immagine fittizio
@@ -259,7 +292,12 @@ public class TF6 {
 
     }
 
-    @Test
+    /**
+     * Test per il caso in cui la descrizione è errata.
+     *
+     * @throws Exception se si verificano errori durante il test.
+     */
+    @org.junit.Test
     public void testDescrizioneErrata() throws Exception {
 
         // Creare un file immagine fittizio
@@ -290,7 +328,12 @@ public class TF6 {
                 .andExpect(MockMvcResultMatchers.status().isNotAcceptable());
     }
 
-    @Test
+    /**
+     * Test per il caso di inserimento corretto.
+     *
+     * @throws Exception se si verificano errori durante il test.
+     */
+    @org.junit.Test
     public void testInsertCorretta() throws Exception {
 
         // Creare un file immagine fittizio
