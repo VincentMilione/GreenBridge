@@ -3,6 +3,7 @@
 /* CHATBOX
 =============== */
 .chatbox {
+    position: absolute;
     bottom: 30px;
     right: 30px;
 }
@@ -12,15 +13,16 @@
     display: flex;
     flex-direction: column;
     background: #eee;
-    height: 350px;
+    height: 400px;
     z-index: -123456;
     opacity: 0;
     transition: all .5s ease-in-out;
+    border-radius: 20px;
+    margin-bottom: 5px;
 }
 
 /* FINESTRA APERTA */
 .chatbox--active {
-    transform: translateX(1150px);
     z-index: 123456;
     opacity: 1;
     
@@ -64,7 +66,6 @@
 
 
 .chatbox__footer {
-    position: sticky;
     bottom: 0;
 }
 
