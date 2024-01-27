@@ -2,7 +2,6 @@ package com.greenbridge.unit;
 import com.greenbridge.GreenBridgeApplication;
 import com.greenbridge.controllers.RestUseController;
 import com.greenbridge.entities.Agricoltore;
-import com.greenbridge.repositories.AgricoltoreRepository;
 import com.greenbridge.services.AgricoltoreServiceImpl;
 import jakarta.servlet.http.HttpSession;
 import org.junit.Test;
@@ -16,16 +15,8 @@ import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-
-import java.util.Arrays;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.containsString;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringRunner.class)
