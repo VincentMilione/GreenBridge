@@ -60,7 +60,7 @@ public class TF1 {
     driver.findElement(By.id("citta")).click();
     driver.findElement(By.id("citta")).sendKeys("San Giuseppe Vesuviano");
     driver.findElement(By.id("provincia")).sendKeys("Na");
-    driver.findElement(By.cssSelector("button")).click();
+    driver.findElement(By.cssSelector(".container button")).click();
     assertThat(driver.switchTo().alert().getText(), is("formato cap non corretto"));
   }
 
@@ -84,7 +84,7 @@ public class TF1 {
     driver.findElement(By.cssSelector(".container")).click();
     driver.findElement(By.id("citta")).sendKeys("San Giuseppe Vesuviano");
     driver.findElement(By.id("provincia")).sendKeys("NA");
-    driver.findElement(By.cssSelector("button")).click();
+    driver.findElement(By.cssSelector(".container button")).click();
     assertThat(driver.switchTo().alert().getText(), is("formato civico non corretto"));
   }
 
@@ -107,7 +107,7 @@ public class TF1 {
     driver.findElement(By.cssSelector(".container")).click();
     driver.findElement(By.id("citta")).sendKeys("San Giuseppe Vesuviano");
     driver.findElement(By.id("provincia")).sendKeys("NA");
-    driver.findElement(By.cssSelector("button")).click();
+    driver.findElement(By.cssSelector(".container button")).click();
     assertThat(driver.switchTo().alert().getText(), is("formato via non corretto"));
   }
   @Test
@@ -131,7 +131,7 @@ public class TF1 {
     driver.findElement(By.id("citta")).click();
     driver.findElement(By.id("citta")).sendKeys("San 34ù");
     driver.findElement(By.id("provincia")).sendKeys("NA");
-    driver.findElement(By.cssSelector("button")).click();
+    driver.findElement(By.cssSelector(".container button")).click();
     assertThat(driver.switchTo().alert().getText(), is("formato citta non corretto"));
   }
   @Test
@@ -155,7 +155,7 @@ public class TF1 {
     driver.findElement(By.id("citta")).sendKeys("San Giuseppe Vesuviano");
     driver.findElement(By.id("provincia")).click();
     driver.findElement(By.id("provincia")).sendKeys("N");
-    driver.findElement(By.cssSelector("button")).click();
+    driver.findElement(By.cssSelector(".container button")).click();
     assertThat(driver.switchTo().alert().getText(), is("formato provincia non corretto"));
   }
   @Test
@@ -176,6 +176,6 @@ public class TF1 {
     driver.findElement(By.id("cap")).sendKeys("80047");
     driver.findElement(By.id("citta")).sendKeys("San Giuseppe Vesuviano");
     driver.findElement(By.id("provincia")).sendKeys("NA");
-    driver.findElement(By.cssSelector("button")).click();
+    driver.findElement(By.cssSelector(".container button")).click();
   }
 }
