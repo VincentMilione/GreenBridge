@@ -50,6 +50,8 @@ public class TF5 {
     driver.findElement(By.id("testo-recensione")).click();
     driver.findElement(By.id("testo-recensione")).sendKeys("Davvero una bella banana");
     driver.findElement(By.name("Fine")).click();
+    assertThat(driver.getCurrentUrl(), is("http://localhost:8080/saveRecensione"));
+
   }
   @Test
   public void tC2() {
