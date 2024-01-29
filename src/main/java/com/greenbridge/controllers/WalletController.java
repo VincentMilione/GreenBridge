@@ -9,28 +9,36 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 /**
- * Controller per la visualizzazione del portafoglio.
- * Autore:Mauro,Salvatore
+ * Classe controller per la gestione della visualizzazione del portafoglio.
+ * Autore: Mauro, Salvatore.
  */
 @RestController
 public class WalletController {
 
+    /**
+     * Service per il portafoglio.
+     */
     @Autowired
     private PortafoglioService portafoglioService;
+
     /**
-     * Gestisce il saldo per ogni agricoltore
+     * Gestisce il recupero del saldo per ogni agricoltore.
+     *
+     * @param session Oggetto HttpSession per
+     *                recuperare l'agricoltore autenticato.
+     * @return Il saldo attuale (credito) del
+     *                portafoglio dell'agricoltore.
      */
     @PostMapping("/getSaldo")
     public float getSaldo(final HttpSession session) {
-        Agricoltore agricoltore =
-                (Agricoltore) session.getAttribute("agricoltore");
-       if ((agricoltore) != null) {
-           Portafoglio totale =
-                   portafoglioService.
-                           getPortafoglioById(agricoltore.getPortafoglio().getId());
-           return totale.getCredito();
-       }
-       return 0;
+        Agricoltore agricoltore = (Agricoltore)
+                session.getAttribute("agricoltore");
+        if (agricoltore != null) {
+            Portafoglio totale =
+                    portafoglioService.getPortafoglioById(
+                            agricoltore.getPortafoglio().getId());
+            return totale.getCredito();
+        }
+        return 0;
     }
 }
-

@@ -28,7 +28,7 @@ import java.util.List;
 
 /**
  * Controller per la gestione dei prodotti.
- * Autore:Mauro,Giuseppe
+ * Autore:Mauro,Giuseppe.
  */
 @Controller
 public class ProdottoController {
