@@ -43,8 +43,8 @@ public class TF1 {
 
     driver.get("http://localhost:8080/login");
     driver.manage().window().setSize(new Dimension(782, 823));
-    driver.findElement(By.id("email")).sendKeys("mario.rossi@email.com");
-    driver.findElement(By.id("password")).sendKeys("1315");
+    driver.findElement(By.id("email")).sendKeys("fernandaiannuzzi@example.org");
+    driver.findElement(By.id("password")).sendKeys("yBmaNPq%Qw!v5C2r");
     driver.findElement(By.cssSelector(".inputButton")).click();
     sleep(2000);
     driver.findElement(By.cssSelector("a:nth-child(6) > .imgIcon")).click();
@@ -68,8 +68,8 @@ public class TF1 {
   public void tC12() throws InterruptedException {
     driver.get("http://localhost:8080/login");
     driver.manage().window().setSize(new Dimension(782, 823));
-    driver.findElement(By.id("email")).sendKeys("mario.rossi@email.com");
-    driver.findElement(By.id("password")).sendKeys("1315");
+    driver.findElement(By.id("email")).sendKeys("fernandaiannuzzi@example.org");
+    driver.findElement(By.id("password")).sendKeys("yBmaNPq%Qw!v5C2r");
     driver.findElement(By.cssSelector(".inputButton")).click();
     sleep(2000);
     driver.findElement(By.cssSelector("a:nth-child(6) > .imgIcon")).click();
@@ -92,8 +92,8 @@ public class TF1 {
   public void tC13() throws InterruptedException {
     driver.get("http://localhost:8080/login");
     driver.manage().window().setSize(new Dimension(782, 823));
-    driver.findElement(By.id("email")).sendKeys("mario.rossi@email.com");
-    driver.findElement(By.id("password")).sendKeys("1315");
+    driver.findElement(By.id("email")).sendKeys("fernandaiannuzzi@example.org");
+    driver.findElement(By.id("password")).sendKeys("yBmaNPq%Qw!v5C2r");
     driver.findElement(By.cssSelector(".inputButton")).click();
     sleep(2000);
     driver.findElement(By.cssSelector("a:nth-child(6) > .imgIcon")).click();
@@ -114,8 +114,8 @@ public class TF1 {
   public void tC14() throws InterruptedException {
     driver.get("http://localhost:8080/login");
     driver.manage().window().setSize(new Dimension(782, 823));
-    driver.findElement(By.id("email")).sendKeys("mario.rossi@email.com");
-    driver.findElement(By.id("password")).sendKeys("1315");
+    driver.findElement(By.id("email")).sendKeys("fernandaiannuzzi@example.org");
+    driver.findElement(By.id("password")).sendKeys("yBmaNPq%Qw!v5C2r");
     sleep(2000);
     driver.findElement(By.cssSelector(".inputButton")).click();
     sleep(2000);
@@ -138,8 +138,8 @@ public class TF1 {
   public void tC15() throws InterruptedException {
     driver.get("http://localhost:8080/login");
     driver.manage().window().setSize(new Dimension(782, 823));
-    driver.findElement(By.id("email")).sendKeys("mario.rossi@email.com");
-    driver.findElement(By.id("password")).sendKeys("1315");
+    driver.findElement(By.id("email")).sendKeys("fernandaiannuzzi@example.org");
+    driver.findElement(By.id("password")).sendKeys("yBmaNPq%Qw!v5C2r");
     driver.findElement(By.cssSelector(".inputButton")).click();
     sleep(2000);
     driver.findElement(By.cssSelector("a:nth-child(6) > .imgIcon")).click();
@@ -162,8 +162,8 @@ public class TF1 {
   public void tC16() throws InterruptedException {
     driver.get("http://localhost:8080/login");
     driver.manage().window().setSize(new Dimension(782, 823));
-    driver.findElement(By.id("email")).sendKeys("mario.rossi@email.com");
-    driver.findElement(By.id("password")).sendKeys("1315");
+    driver.findElement(By.id("email")).sendKeys("fernandaiannuzzi@example.org");
+    driver.findElement(By.id("password")).sendKeys("yBmaNPq%Qw!v5C2r");
     driver.findElement(By.cssSelector(".inputButton")).click();
     sleep(2000);
     driver.findElement(By.cssSelector("a:nth-child(6) > .imgIcon")).click();

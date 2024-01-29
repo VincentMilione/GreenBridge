@@ -27,6 +27,11 @@ public class OrdineController {
      * Servizio per la gestione dei prodotti presenti nell'ordine.
      */
     private final ProdottiOrdineService prodottiOrdineService;
+
+    /**
+     * Numero massimo di stato.
+     */
+    private static final int MAX_STATUS = 4;
     /**
      * Servizio per la gestione  degli ordini.
      */
@@ -53,7 +58,9 @@ public class OrdineController {
      * @param session Sessione HTTP per ottenere
      *               l'agricoltore corrente.
      * @return Stringa che rappresenta il nome della
-     * vista da visualizzare; nel caso di successo ordiniRicevuti.html, nel caso contrario loginAgricoltore.html.
+     * vista da visualizzare; nel caso di
+     * successo ordiniRicevuti.html, nel caso contrario
+     * loginAgricoltore.html.
      */
     @GetMapping("/ordiniAgricoltore")
     public String visualizzaOrdiniAgricoltore(final Model model,
@@ -95,7 +102,9 @@ public class OrdineController {
 
 
     /**
-     * Gestisce la richiesta di aggiornamento dello stato di un ordine ogni qual volta l'agricoltore deciderà di cambiare stato.
+     * Gestisce la richiesta di aggiornamento
+     * dello stato di un ordine ogni qual volta
+     * l'agricoltore deciderà di cambiare stato.
      *
      * @param id Identificativo dell'ordine da aggiornare.
      * @return ResponseEntity con un messaggio di successo o errore.
@@ -104,8 +113,7 @@ public class OrdineController {
     public ResponseEntity<String> aggiornaStatoOrdine(@PathVariable int id) {
         Ordine ordine = ordineService.getOrdineById(id);
         int stato = ordine.getStato();
-        int numb  = 4;
-        if (stato < numb) {
+        if (stato < MAX_STATUS) {
             stato++;
         }
         ordine.setStato(stato);

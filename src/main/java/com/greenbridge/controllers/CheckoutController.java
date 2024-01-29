@@ -38,9 +38,9 @@ public class CheckoutController {
     @Autowired
     private ProdottiOrdineService prodottiOrdineService;
     /**
-     * magic number.
+     * magic number STATUS GIUST0.
      */
-    private static final int magic = 200;
+    private static final int STATUS_OK = 200;
     /**
      * Servizio per la gestione delle
      * operazioni legate agli ordini.
@@ -256,7 +256,7 @@ public class CheckoutController {
         }
         if (listaCheckout.getListCart().size() == 0) {
             return new ResponseEntity<>("payment",
-                    HttpStatusCode.valueOf(magic));
+                    HttpStatusCode.valueOf(STATUS_OK));
 
         } else {
             session.removeAttribute("checkout");
@@ -264,7 +264,7 @@ public class CheckoutController {
             int i = (Integer) session.getAttribute("counter");
             session.setAttribute("counter", i--);
             return new ResponseEntity<>("checkout",
-                    HttpStatusCode.valueOf(magic));
+                    HttpStatusCode.valueOf(STATUS_OK));
 
 
         }
