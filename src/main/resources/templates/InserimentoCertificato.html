@@ -77,6 +77,10 @@
         var nomeCertificato = document.getElementById("certName").value;
         var expiryDateInput = document.getElementById("expiryDate").value;
         var currentDate = new Date().toISOString().split('T')[0];
+        var certScan = document.getElementById("certScan");
+        var estensione  = certScan.value.split('.')[1]
+
+        console.log(estensione)
 
         if (nomeCertificato === "" || nomeCertificato === null) {
             alert('nome del certificato non inserito');
@@ -89,6 +93,12 @@
             return false;
 
         }
+
+        else if(estensione !== ".pdf"){
+            alert('Impossibile procedere poiché il formato della scansione certificato non è valido');
+            return false;
+        }
+
         if (expiryDateInput < currentDate) {
             alert("Impossibile procedere poiché la data di scadenza inserita è precedente alla data corrente");
         } else if (expiryDateInput === currentDate) {
