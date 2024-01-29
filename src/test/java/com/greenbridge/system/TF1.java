@@ -81,7 +81,7 @@ public class TF1 {
     driver.findElement(By.id("civico")).sendKeys("33*ACV");
     driver.findElement(By.id("cap")).click();
     driver.findElement(By.id("cap")).sendKeys("80047");
-    driver.findElement(By.cssSelector(".container")).click();
+    driver.findElement(By.id("citta")).click();
     driver.findElement(By.id("citta")).sendKeys("San Giuseppe Vesuviano");
     driver.findElement(By.id("provincia")).sendKeys("NA");
     driver.findElement(By.cssSelector(".container button")).click();
