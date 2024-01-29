@@ -25,7 +25,7 @@ public class OrdineService {
  @param ordineRepository da assegnare
  * */
     @Autowired
-    public OrdineService( OrdineRepository ordineRepository) {
+    public OrdineService(OrdineRepository ordineRepository) {
         this.ordineRepository = ordineRepository;
     }
 
