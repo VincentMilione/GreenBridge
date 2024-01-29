@@ -110,6 +110,28 @@
       document.getElementById('menuIcon').src = '/img/menu.png'
     }
   }
+
+
+    function confermaCancellazione() {
+    if (confirm("Eliminare il prodotto? La cancellazione non comporterà modifiche alle fatture")) {
+    return true;
+  } else {
+    return false;
+  }
+  }
+
+
+
+  function validateFileType(input) {
+    const allowedExtensions = ['png', 'jpeg', 'jpg'];
+    const fileName = input.value.toLowerCase();
+    const extension = fileName.split('.').pop();
+
+    if (!allowedExtensions.includes(extension)) {
+      input.value = ''; //
+    }
+  }
+
 </script>
 
 <script>

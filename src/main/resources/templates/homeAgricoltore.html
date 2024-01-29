@@ -14,24 +14,34 @@
 <body layout:fragment="content">
 
 <div class="button-container">
-    <a th:href="@{/ordiniAgricoltore}">
+    <div>
         <p class="button-text">Fai clic per visualizzare gli ordini</p>
-        <button class="button">Visualizza Ordini</button>
-    </a>
+        <a th:href="@{/ordiniAgricoltore}">
+            <button class="button">Visualizza Ordini</button>
+        </a>
+    </div>
 
+<div>
+    <p class="button-text">Fai clic per inserire i certificati</p>
     <a th:href="@{/inserimento-certificato}">
-        <p class="button-text">Fai clic per inserire i certificati</p>
         <button class="button">Inserimento Certificati</button>
+    </a>
+</div>
 
-    </a>
-    <a th:href="@{/visualizzazione-certificati}">
+    <div>
         <p class="button-text">Fai clic per visualizzare la lista dei certificati</p>
-        <button class="button">Visualizzazione Certificati</button>
-    </a>
-    <a th:href="@{/catalogo}">
+        <a th:href="@{/visualizzazione-certificati}">
+            <button class="button">Visualizzazione Certificati</button>
+        </a>
+    </div>
+
+    <div>
         <p class="button-text">Fai clic per visualizzare il catalogo</p>
-        <button class="button">Visualizzazione catalogo</button>
-    </a>
+        <a th:href="@{/catalogo}">
+            <button class="button">Visualizzazione catalogo</button>
+        </a>
+    </div>
+
 </div>
 
 </body>
