@@ -60,7 +60,7 @@ public class TF6 {
 
     nomeInput.sendKeys("Fico artacarpus heterophyllus");
     origineInput.sendKeys("Regno Unito");
-    immagineFileInput.sendKeys("C:\\Users\\mauro\\Desktop\\fico.jpg");
+    immagineFileInput.sendKeys(System.getProperty("user.dir") + "/src/test/resources/fico.jpg");
     formatoVenditaInput.clear();
     formatoVenditaInput.sendKeys("2");
     prezzoVenditaInput.clear();
@@ -109,7 +109,7 @@ public class TF6 {
 
     nomeInput.sendKeys("Fico");
     origineInput.sendKeys("Regno Unito Di Gran Bretagna");
-    immagineFileInput.sendKeys("C:\\Users\\mauro\\Desktop\\fico.jpg");
+    immagineFileInput.sendKeys(System.getProperty("user.dir") + "/src/test/resources/fico.jpg");
     formatoVenditaInput.clear();
     formatoVenditaInput.sendKeys("2");
     prezzoVenditaInput.clear();
@@ -159,7 +159,7 @@ public class TF6 {
 
     nomeInput.sendKeys("Fico");
     origineInput.sendKeys("Regno Unito");
-    immagineFileInput.sendKeys("C:\\Users\\mauro\\Desktop\\DataSourceDefinition.docx");
+   immagineFileInput.sendKeys(System.getProperty("user.dir") + "/src/test/resources/prova.docx");
     formatoVenditaInput.clear();
     formatoVenditaInput.sendKeys("2");
     prezzoVenditaInput.clear();
@@ -209,7 +209,7 @@ public class TF6 {
 
     nomeInput.sendKeys("Fico");
     origineInput.sendKeys("Regno Unito");
-    immagineFileInput.sendKeys("C:\\Users\\mauro\\Desktop\\fico.jpg");
+    immagineFileInput.sendKeys(System.getProperty("user.dir") + "/src/test/resources/fico.jpg");
     formatoVenditaInput.clear();
     formatoVenditaInput.sendKeys("222");
     prezzoVenditaInput.clear();
@@ -259,7 +259,7 @@ public class TF6 {
 
     nomeInput.sendKeys("Fico");
     origineInput.sendKeys("Regno Unito");
-    immagineFileInput.sendKeys("C:\\Users\\mauro\\Desktop\\fico.jpg");
+    immagineFileInput.sendKeys(System.getProperty("user.dir") + "/src/test/resources/fico.jpg");
     formatoVenditaInput.clear();
     formatoVenditaInput.sendKeys("2");
     prezzoVenditaInput.clear();
@@ -308,7 +308,7 @@ public class TF6 {
 
     nomeInput.sendKeys("Fico");
     origineInput.sendKeys("Regno Unito");
-    immagineFileInput.sendKeys("C:\\Users\\mauro\\Desktop\\fico.jpg");
+    immagineFileInput.sendKeys(System.getProperty("user.dir") + "/src/test/resources/fico.jpg");
     formatoVenditaInput.clear();
     formatoVenditaInput.sendKeys("2");
     prezzoVenditaInput.clear();
@@ -357,7 +357,7 @@ public class TF6 {
 
     nomeInput.sendKeys("Fico");
     origineInput.sendKeys("Regno Unito");
-    immagineFileInput.sendKeys("C:\\Users\\mauro\\Desktop\\fico.jpg");
+    immagineFileInput.sendKeys(System.getProperty("user.dir") + "/src/test/resources/fico.jpg");
     formatoVenditaInput.clear();
     formatoVenditaInput.sendKeys("2");
     prezzoVenditaInput.clear();
@@ -406,7 +406,7 @@ public class TF6 {
 
     nomeInput.sendKeys("Fico");
     origineInput.sendKeys("Regno Unito");
-    immagineFileInput.sendKeys("C:\\Users\\mauro\\Desktop\\fico.jpg");
+    immagineFileInput.sendKeys(System.getProperty("user.dir") + "/src/test/resources/fico.jpg");
     formatoVenditaInput.clear();
     formatoVenditaInput.sendKeys("2");
     prezzoVenditaInput.clear();
@@ -455,7 +455,7 @@ public class TF6 {
 
     nomeInput.sendKeys("Fico");
     origineInput.sendKeys("Regno Unito");
-    immagineFileInput.sendKeys("C:\\Users\\mauro\\Desktop\\fico.jpg");
+    immagineFileInput.sendKeys(System.getProperty("user.dir") + "/src/test/resources/fico.jpg");
     formatoVenditaInput.clear();
     formatoVenditaInput.sendKeys("2");
     prezzoVenditaInput.clear();
@@ -504,7 +504,7 @@ public class TF6 {
 
     nomeInput.sendKeys("Fico");
     origineInput.sendKeys("Regno Unito");
-    immagineFileInput.sendKeys("C:\\Users\\mauro\\Desktop\\fico.jpg");
+    immagineFileInput.sendKeys(System.getProperty("user.dir") + "/src/test/resources/fico.jpg");
     formatoVenditaInput.clear();
     formatoVenditaInput.sendKeys("2");
     prezzoVenditaInput.clear();
