@@ -105,8 +105,9 @@ public class IndirizzoSpedizione {
     }
 
     /**
-     * Match tra regex e stringa
-     *
+     * Match tra regex e stringa.
+     * @param regex validità stringa
+     * @param string stringa da controllare
      * @return True se l'indirizzo  è matchato, altrimenti False.
      */
     public Boolean isMatchRegexString(String regex, String string) {
@@ -152,7 +153,8 @@ public class IndirizzoSpedizione {
     }
 
     /**
-     * Restituisce una rappresentazione in forma di stringa dell'oggetto IndirizzoSpedizione.
+     * Restituisce una rappresentazione in forma di
+     * stringa dell'oggetto IndirizzoSpedizione.
      *
      * @return Stringa rappresentante l'oggetto IndirizzoSpedizione.
      */

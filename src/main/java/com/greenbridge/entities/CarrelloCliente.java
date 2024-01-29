@@ -42,7 +42,8 @@ public class CarrelloCliente {
      private int kgRichiesti;
 
     /**
-     * Restituisce una rappresentazione in forma di stringa dell'oggetto CarrelloCliente.
+     * Restituisce una rappresentazione in forma di stringa
+     * dell'oggetto CarrelloCliente.
      *
      * @return Stringa rappresentante l'oggetto CarrelloCliente.
      */

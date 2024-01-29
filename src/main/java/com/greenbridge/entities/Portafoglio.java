@@ -24,7 +24,7 @@ public class Portafoglio {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Integer id;
     /** credito del Portafoglio. */
-    float credito;
+    private float credito;
 
     /**
      * Costruttore per creare un'istanza di Portafoglio con il credito iniziale.
@@ -49,7 +49,8 @@ public class Portafoglio {
     }
 
     /**
-     * Restituisce una rappresentazione in forma di stringa dell'oggetto Portafoglio.
+     * Restituisce una rappresentazione in
+     * forma di stringa dell'oggetto Portafoglio.
      *
      * @return Stringa rappresentante l'oggetto Portafoglio.
      */

@@ -32,11 +32,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 @Controller
 public class CheckoutController {
     /**
-     * Servizio per la gestione delle
+     * Servizio per la gestione delle.
      * operazioni legate ai prodotti ordinati.
      */
     @Autowired
     private ProdottiOrdineService prodottiOrdineService;
+    /**
+     * magic number.
+     */
+    private static final int magicNumber = 200;
     /**
      * Servizio per la gestione delle
      * operazioni legate agli ordini.
@@ -152,18 +156,22 @@ public class CheckoutController {
     }
 
     /**
-     * Metodo per gestire la richiesta POST a "/checkForm" per verificare i dati del modulo di spedizione.
+     * Metodo per gestire la richiesta POST
+     * a "/checkForm" per verificare i dati
+     * del modulo di spedizione.
      * Gestisce anche la creazione di ordine e prodotti_ordine.
      *
      * @param indirizzoSpedizione Dati del modulo di spedizione.
-     * @param model               Modello per aggiungere attributi per la visualizzazione.
-     * @param session             Sessione HTTP per mantenere lo stato del checkout.
+     * @param model               Modello per aggiungere attributi
+     *                           per la visualizzazione.
+     * @param session             Sessione HTTP per mantenere
+     *                           lo stato del checkout.
      * @return Risposta HTTP con esito del controllo.
      */
     @PostMapping ("/checkForm")
     ResponseEntity<String> checkForm(@RequestBody
-                                     IndirizzoSpedizione indirizzoSpedizione,
-                                     Model model, HttpSession session) throws Exception {
+                     IndirizzoSpedizione indirizzoSpedizione,
+                     Model model, HttpSession session) throws Exception {
         if (indirizzoSpedizione == null) {
             throw new Exception("indirizzoSpedizione non inviato");
         }
@@ -185,7 +193,7 @@ public class CheckoutController {
         session.setAttribute("counter", 2);
         indirizzoSpedizione.setCliente((Cliente)
                 session.getAttribute("cliente"));
-        IndirizzoSpedizione indirizzoSpedizione1=null;
+        IndirizzoSpedizione indirizzoSpedizione1 = null;
 
         if (!indirizzoSpedizione.isEmpty()) {
 
@@ -247,7 +255,7 @@ public class CheckoutController {
                     saveAllProdottiPerOrdine(listaAgricoltore, newOrdine);
         }
         if (listaCheckout.getListCart().size() == 0) {
-            return new ResponseEntity<>("payment", HttpStatusCode.valueOf(200));
+            return new ResponseEntity<>("payment", HttpStatusCode.valueOf(magicNumber));
 
         } else {
             session.removeAttribute("checkout");
@@ -255,7 +263,7 @@ public class CheckoutController {
             int i = (Integer) session.getAttribute("counter");
             session.setAttribute("counter", i--);
             return new ResponseEntity<>("checkout",
-                    HttpStatusCode.valueOf(200));
+                    HttpStatusCode.valueOf(magicNumber));
 
 
         }
