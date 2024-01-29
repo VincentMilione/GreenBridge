@@ -71,8 +71,7 @@ public class TF3 {
         driver.findElement(By.id("certName")).sendKeys("AB");
         driver.findElement(By.id("expiryDate")).click();
         driver.findElement(By.id("expiryDate")).sendKeys("07-12-2024");
-        //driver.findElement(By.id("certScan")).click();
-        driver.findElement(By.id("certScan")).sendKeys("C:\\Users\\degre\\Desktop\\Certificato.pdf");
+        driver.findElement(By.id("certScan")).sendKeys(System.getProperty("user.dir") + "/src/test/resources/Certificato.pdf");
         driver.findElement(By.cssSelector("button")).click();
         assertThat(driver.switchTo().alert().getText(), is("nome del certificato è troppo corto"));
     }
@@ -86,8 +85,7 @@ public class TF3 {
         driver.findElement(By.id("certName")).sendKeys("The Carbon Trust Standard for Zero Waste to Landfill rilasciato dall’ente internazionale Carbon Trust  ");
         driver.findElement(By.id("expiryDate")).click();
         driver.findElement(By.id("expiryDate")).sendKeys("07-12-2024");
-        //driver.findElement(By.id("certScan")).click();
-        driver.findElement(By.id("certScan")).sendKeys("C:\\Users\\degre\\Desktop\\Certificato.pdf");
+        driver.findElement(By.id("certScan")).sendKeys(System.getProperty("user.dir") + "/src/test/resources/Certificato.pdf");
         driver.findElement(By.cssSelector("button")).click();
         assertThat(driver.switchTo().alert().getText(), is("nome del certificato è troppo lungo"));
     }
@@ -101,8 +99,7 @@ public class TF3 {
         driver.findElement(By.id("certName")).sendKeys("The Carbon Trust Standard");
         driver.findElement(By.id("expiryDate")).click();
         driver.findElement(By.id("expiryDate")).sendKeys("14-10-2011");
-        //driver.findElement(By.id("certScan")).click();
-        driver.findElement(By.id("certScan")).sendKeys("C:\\Users\\degre\\Desktop\\Certificato.pdf");
+        driver.findElement(By.id("certScan")).sendKeys(System.getProperty("user.dir") + "/src/test/resources/Certificato.pdf");
         driver.findElement(By.cssSelector("button")).click();
         assertThat(driver.switchTo().alert().getText(), is("Impossibile procedere poiché la data di scadenza inserita è precedente alla data corrente"));
     }
@@ -120,8 +117,7 @@ public class TF3 {
         driver.findElement(By.id("certName")).sendKeys("The Carbon Trust Standard");
         driver.findElement(By.id("expiryDate")).click();
         driver.findElement(By.id("expiryDate")).sendKeys(dataFormattata);
-        //driver.findElement(By.id("certScan")).click();
-        driver.findElement(By.id("certScan")).sendKeys("C:\\Users\\degre\\Desktop\\Certificato.pdf");
+        driver.findElement(By.id("certScan")).sendKeys(System.getProperty("user.dir") + "/src/test/resources/Certificato.pdf");
         driver.findElement(By.cssSelector("button")).click();
         assertThat(driver.switchTo().alert().getText(), is("Impossibile procedere poiché la data di scadenza inserita è uguale alla data corrente"));
     }
@@ -135,8 +131,7 @@ public class TF3 {
         driver.findElement(By.id("certName")).sendKeys("The Carbon Trust Standard");
         driver.findElement(By.id("expiryDate")).click();
         driver.findElement(By.id("expiryDate")).sendKeys("07-12-2024");
-        //driver.findElement(By.id("certScan")).click();
-        driver.findElement(By.id("certScan")).sendKeys("C:\\Users\\degre\\Downloads\\portafoglio.sql");
+        driver.findElement(By.id("certScan")).sendKeys(System.getProperty("user.dir") + "/src/test/resources/CertificatoErrato.docx");
         driver.findElement(By.cssSelector("button")).click();
         assertThat(driver.switchTo().alert().getText(), is("Impossibile procedere poiché il formato della scansione certificato non è valido"));
     }
@@ -150,8 +145,7 @@ public class TF3 {
         driver.findElement(By.id("certName")).sendKeys("The Carbon Trust Standard");
         driver.findElement(By.id("expiryDate")).click();
         driver.findElement(By.id("expiryDate")).sendKeys("07-12-2024");
-        //driver.findElement(By.id("certScan")).click();
-        driver.findElement(By.id("certScan")).sendKeys("C:\\Users\\degre\\Desktop\\Certificato.pdf");
+        driver.findElement(By.id("certScan")).sendKeys(System.getProperty("user.dir") + "/src/test/resources/Certificato.pdf");
         driver.findElement(By.cssSelector("button")).click();
         try {
             Thread.sleep(3000);

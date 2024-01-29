@@ -32,9 +32,9 @@ public class TF5 {
     driver.get("http://localhost:8080/login");
     driver.manage().window().setSize(new Dimension(974, 1032));
     driver.findElement(By.id("email")).click();
-    driver.findElement(By.id("email")).sendKeys("michelmartino98.mm@gmail.com");
+    driver.findElement(By.id("email")).sendKeys("fernandaiannuzzi@example.org");
     driver.findElement(By.id("password")).click();
-    driver.findElement(By.id("password")).sendKeys("1111");
+    driver.findElement(By.id("password")).sendKeys("yBmaNPq%Qw!v5C2r");
     driver.findElement(By.cssSelector(".inputButton")).click();
     sleep(2000);
   }
