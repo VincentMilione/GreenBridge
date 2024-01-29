@@ -24,16 +24,17 @@ import java.util.List;
 @Controller
 public class OrdineController {
     /**
-     * Servizio per la gestione dei prodotti presenti nell'ordine
+     * Servizio per la gestione dei prodotti presenti nell'ordine.
      */
     private final ProdottiOrdineService prodottiOrdineService;
     /**
-     * Servizio per la gestione  degli ordini
+     * Servizio per la gestione  degli ordini.
      */
     private final OrdineService ordineService;
 
     /**
-     * Costruttore del controller che prende i servizi necessari per le operazioni.
+     * Costruttore del controller che prende
+     * i servizi necessari per le operazioni.
      *
      * @param ordineService
      * @param prodottiOrdineService
@@ -45,11 +46,14 @@ public class OrdineController {
     }
 
     /**
-     * Gestisce la richiesta di visualizzazione degli ordini ricevuti per l'agricoltore in sessione.
+     * Gestisce la richiesta di visualizzazione
+     * degli ordini ricevuti per l'agricoltore in sessione.
      *
      * @param model Modello per la gestione degli attributi nella vista.
-     * @param session Sessione HTTP per ottenere l'agricoltore corrente.
-     * @return Stringa che rappresenta il nome della vista da visualizzare; nel caso di successo ordiniRicevuti.html, nel caso contrario loginAgricoltore.html.
+     * @param session Sessione HTTP per ottenere
+     *               l'agricoltore corrente.
+     * @return Stringa che rappresenta il nome della
+     * vista da visualizzare; nel caso di successo ordiniRicevuti.html, nel caso contrario loginAgricoltore.html.
      */
     @GetMapping("/ordiniAgricoltore")
     public String visualizzaOrdiniAgricoltore(final Model model,
@@ -57,7 +61,8 @@ public class OrdineController {
         Agricoltore agricoltore = (Agricoltore)
                 session.getAttribute("agricoltore");
         if (agricoltore != null) {
-            List<Ordine> ordini = ordineService.getOrdiniByAgricoltore(agricoltore);
+            List<Ordine> ordini = ordineService.
+                    getOrdiniByAgricoltore(agricoltore);
             model.addAttribute("ordini", ordini);
 
 
@@ -69,11 +74,14 @@ public class OrdineController {
     }
 
     /**
-     * Gestisce la richiesta di visualizzazione dettagliata dell'ordine.
+     * Gestisce la richiesta di visualizzazione
+     * dettagliata dell'ordine.
      *
      * @param id Identificativo dell'ordine da visualizzare.
-     * @param model Modello per la gestione degli attributi nella vista.
-     * @return Stringa che rappresenta il nome della vista da visualizzare ovvero dettagliOrdine.html.
+     * @param model Modello per la gestione degli
+     *              attributi nella vista.
+     * @return Stringa che rappresenta il nome della
+     * vista da visualizzare ovvero dettagliOrdine.html.
      */
     @GetMapping("/visualizzaOrdine/{id}")
     public String visualizzaOrdine(@PathVariable int id, Model model) {
@@ -97,7 +105,7 @@ public class OrdineController {
         Ordine ordine = ordineService.getOrdineById(id);
         int stato = ordine.getStato();
         int numb  = 4;
-        if(stato < numb) {
+        if (stato < numb) {
             stato++;
         }
         ordine.setStato(stato);
@@ -107,11 +115,14 @@ public class OrdineController {
     }
 
     /**
-     * Gestisce la richiesta di visualizzazione degli ordini effettuati dal cliente in sessione.
+     * Gestisce la richiesta di visualizzazione degli
+     * ordini effettuati dal cliente in sessione.
      *
      * @param model Modello per la gestione degli attributi nella vista.
      * @param session Sessione HTTP per ottenere l'agricoltore corrente.
-     * @return Stringa che rappresenta il nome della vista da visualizzare; nel caso di successo ordiniRicevuti.html, nel caso contrario loginAgricoltore.html.
+     * @return Stringa che rappresenta il nome della vista da
+     * visualizzare; nel caso di successo ordiniRicevuti.html,
+     * nel caso contrario loginAgricoltore.html.
      */
     @GetMapping("/ordiniCliente")
     public String visualizzaOrdiniCliente(final Model model,

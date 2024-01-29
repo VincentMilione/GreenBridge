@@ -40,7 +40,7 @@ public class CheckoutController {
     /**
      * magic number.
      */
-    private static final int magicNumber = 200;
+    private static final int magic = 200;
     /**
      * Servizio per la gestione delle
      * operazioni legate agli ordini.
@@ -255,7 +255,8 @@ public class CheckoutController {
                     saveAllProdottiPerOrdine(listaAgricoltore, newOrdine);
         }
         if (listaCheckout.getListCart().size() == 0) {
-            return new ResponseEntity<>("payment", HttpStatusCode.valueOf(magicNumber));
+            return new ResponseEntity<>("payment",
+                    HttpStatusCode.valueOf(magic));
 
         } else {
             session.removeAttribute("checkout");
@@ -263,7 +264,7 @@ public class CheckoutController {
             int i = (Integer) session.getAttribute("counter");
             session.setAttribute("counter", i--);
             return new ResponseEntity<>("checkout",
-                    HttpStatusCode.valueOf(magicNumber));
+                    HttpStatusCode.valueOf(magic));
 
 
         }

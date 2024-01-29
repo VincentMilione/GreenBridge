@@ -21,10 +21,11 @@ public class OrdineService {
  * */
     private final OrdineRepository ordineRepository;
 /**
- Assegnamento valore alla repository
+ Assegnamento valore alla repository.
+ @param ordineRepository da assegnare
  * */
     @Autowired
-    public OrdineService(OrdineRepository ordineRepository) {
+    public OrdineService( OrdineRepository ordineRepository) {
         this.ordineRepository = ordineRepository;
     }
 

@@ -23,10 +23,10 @@ public class CarrelloClienteService {
     private CarrelloClienteRepository carrelloClienteRepository;
 
     /**
-     * Ottiene una lista CarrelloCliente dal cliente
+     * Ottiene una lista CarrelloCliente dal cliente.
      *
      * @param cliente L'ID del portafoglio da ottenere.
-     * @return lista CarrelloCliente corrispondente
+     * @return lista CarrelloCliente corrispondente.
      * all'ID specificato.
      */
     public List<CarrelloCliente> getByClientId(Cliente cliente) {
@@ -62,7 +62,7 @@ public class CarrelloClienteService {
     }
 
     /**
-     * Elemina tutte le istanze di CarrelloCLiente di un cliente
+     * Elemina tutte le istanze di CarrelloCLiente di un cliente.
      *
      * @param cliente L'ID del cliente a cui appartiene.
 

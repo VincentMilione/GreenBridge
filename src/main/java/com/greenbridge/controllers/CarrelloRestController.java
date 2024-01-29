@@ -63,7 +63,8 @@ public class CarrelloRestController {
      * @param idProdotto Identificativo del prodotto
      *                   da modificare.
      * @param edit       Tipo di modifica
-     *                   ("delete" per eliminare, altrimenti modifica la quantità).
+     *                   ("delete" per eliminare,
+     *                   altrimenti modifica la quantità).
      * @param session    Sessione HTTP per mantenere lo stato del carrello.
      * @return Array di float contenente informazioni
      * aggiornate sul carrello (nuova quantità e nuovo prezzo totale).
