@@ -2,10 +2,11 @@ package com.greenbridge.services;
 
 import com.greenbridge.entities.IndirizzoSpedizione;
 import com.greenbridge.repositories.IndirizzoSpedizioneRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jakarta.transaction.Transactional;
+
 
 @Service
 public class IndirizzoSpedizioneService {

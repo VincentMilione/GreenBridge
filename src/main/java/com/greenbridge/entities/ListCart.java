@@ -10,29 +10,30 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Setter
-@Getter
-
 /**
  * Classe che rappresenta il carrello di un cliente.
  * @author Salvatore Mattiello
  */
+@Setter
+@Getter
 public class ListCart {
 
     /** Cliente proprietario del carrello . */
     private Cliente cliente;
     /** lista dei prodotti del carrello . */
-    List<CarrelloCliente> listCart;
+    private List<CarrelloCliente> listCart;
     /** totale del carrello . */
     private float totale = 0;
 
     /**
-     * Costruttore per creare un'istanza di ListCart con un cliente e una lista di CarrelloCliente.
+     * Costruttore per creare un'istanza di ListCart con
+     * un cliente e una lista di CarrelloCliente.
      *
      * @param cliente     Cliente associato al carrello.
      * @param list_cart   Lista di prodotti nel carrello.
      */
-    public ListCart(Cliente cliente, List<CarrelloCliente> list_cart) {
+    public ListCart(Cliente cliente,
+                    List<CarrelloCliente> list_cart) {
         this.cliente = cliente;
         this.listCart = list_cart;
         aggiornoTotale();
@@ -51,7 +52,8 @@ public class ListCart {
     }
 
     /**
-     * Costruttore per creare un'istanza di ListCart con un cliente e una lista vuota di CarrelloCliente.
+     * Costruttore per creare un'istanza di ListCart con
+     * un cliente e una lista vuota di CarrelloCliente.
      *
      * @param cliente Cliente associato al carrello.
      */
@@ -104,10 +106,12 @@ public class ListCart {
     }
 
     /**
-     * Metodo per ottenere un oggetto CarrelloCliente dato l'identificativo del prodotto.
+     * Metodo per ottenere un oggetto CarrelloCliente
+     * dato l'identificativo del prodotto.
      *
      * @param idProdotto Identificativo del prodotto.
-     * @return Oggetto CarrelloCliente associato al prodotto, o null se non trovato.
+     * @return Oggetto CarrelloCliente associato al
+     * prodotto, o null se non trovato.
      */
     public CarrelloCliente getProdottoById(Integer idProdotto) {
         for (CarrelloCliente itemCart : listCart) {
@@ -123,7 +127,8 @@ public class ListCart {
      * Metodo per eliminare un prodotto dal carrello.
      *
      * @param idProdotto Identificativo del prodotto da eliminare.
-     * @return Un array di float con il primo elemento -1 e il secondo elemento rappresentante il totale aggiornato.
+     * @return Un array di float con il primo elemento -1 e
+     * il secondo elemento rappresentante il totale aggiornato.
      */
 public float[] delete(Integer idProdotto) {
     Iterator<CarrelloCliente> iterator = listCart.iterator();
@@ -141,9 +146,10 @@ public float[] delete(Integer idProdotto) {
     /**
      * Metodo per modificare la quantità di un prodotto nel carrello.
      *
-     * @param idProdotto Identificativo del prodotto da modificare.
+     * @param idProdtto Identificativo del prodotto da modificare.
      * @param edit       Tipo di modifica ("add" o "sott").
-     * @return Un array di float con il primo elemento rappresentante la nuova quantità e il secondo elemento il totale aggiornato.
+     * @return Un array di float con il primo elemento rappresentante
+     * la nuova quantità e il secondo elemento il totale aggiornato.
      */
     public float[] editProdotto(Integer idProdtto, String edit) {
         int quantita = 0;
@@ -152,7 +158,8 @@ public float[] delete(Integer idProdotto) {
             if (itemCart.getProdotto().getIdProdotto() == idProdtto) {
                 if (edit.equals("add")) {
                     quantita = (itemCart.getKgRichiesti() + 1);
-                    if (quantita <= itemCart.getProdotto().getQuantitaDisp()) {
+                    if (quantita <= itemCart.getProdotto().
+                            getQuantitaDisp()) {
                         itemCart.setKgRichiesti(quantita);
 
                     } else {
@@ -162,8 +169,7 @@ public float[] delete(Integer idProdotto) {
                     quantita = itemCart.getKgRichiesti() - 1;
                     if (quantita >= 1) {
                         itemCart.setKgRichiesti(quantita);
-                    }
-                    else {
+                    } else {
                         quantita++;
                     }
                 }
@@ -177,7 +183,8 @@ public float[] delete(Integer idProdotto) {
     }
 
     /**
-     * Metodo per ottenere una mappa di prodotti ordinati per nome dell'agricoltore.
+     * Metodo per ottenere una mappa di prodotti ordinati
+     * per nome dell'agricoltore.
      *
      * @return Mappa di prodotti ordinati per nome dell'agricoltore.
      */
@@ -194,7 +201,8 @@ public float[] delete(Integer idProdotto) {
 
 
     /**
-     * Metodo per riordinare la lista di prodotti nel carrello per identificativo dell'agricoltore.
+     * Metodo per riordinare la lista di prodotti nel carrello
+     * per identificativo dell'agricoltore.
      */
     public void riordinaLista() {
         listCart.sort(Comparator.comparing(p -> p.getProdotto().
@@ -204,7 +212,8 @@ public float[] delete(Integer idProdotto) {
 
 
     /**
-     * Restituisce una rappresentazione in forma di stringa dell'oggetto ListCart.
+     * Restituisce una rappresentazione in forma di
+     * stringa dell'oggetto ListCart.
      *
      * @return Stringa rappresentante l'oggetto ListCart.
      */

@@ -19,7 +19,8 @@ import java.util.Date;
 
 
 /**
- * Entità che rappresenta un ordine effettuato da un cliente.
+ * Entità che rappresenta un ordine effettuato
+ * da un cliente.
  * @author Salvatore Mattiello
  */
 @Entity
@@ -48,7 +49,7 @@ public class Ordine {
 
     /** Indirizzo da spedire dell'ordine. */
     @Column(name = "id_indirizzo")
-    private int id_indirizzo;
+    private int indirizzo;
 
     /** cliente che ha effettuato l'ordine. */
     @ManyToOne
@@ -69,11 +70,11 @@ public class Ordine {
      *
      * @param importo     Importo totale dell'ordine.
      * @param pagamento   Metodo di pagamento utilizzato.
-     * @param id_indirizzo Identificativo dell'indirizzo di spedizione.
+     * @param indirizzo Identificativo dell'indirizzo di spedizione.
      * @param cliente     Cliente che ha effettuato l'ordine.
      * @param agricoltore Agricoltore associato all'ordine.
      */
-    public Ordine(float importo,  String pagamento, int id_indirizzo,
+    public Ordine(float importo,  String pagamento, int indirizzo,
                   Cliente cliente, Agricoltore agricoltore) {
         this.importo = importo;
         Calendar cal = Calendar.getInstance();
@@ -82,22 +83,22 @@ public class Ordine {
         Date dataOrdine = new Date(cal.getTimeInMillis());
         this.dataOrdine = dataOrdine;
         this.pagamento = pagamento;
-        this.id_indirizzo = id_indirizzo;
+        this.indirizzo = indirizzo;
         this.cliente = cliente;
         this.agricoltore = agricoltore;
-        this.stato=1;
+        this.stato = 1;
     }
 
     @Override
     public String toString() {
-        return "Ordine{" +
-                "id=" + id +
-                ", importo=" + importo +
-                ", dataOrdine=" + dataOrdine +
-                ", pagamento='" + pagamento + '\'' +
-                ", cliente=" + cliente +
-                ", agricoltore=" + agricoltore +
-                '}';
+        return "Ordine{"
+                + "id=" + id
+                + ", importo=" + importo
+                + ", dataOrdine=" + dataOrdine
+                + ", pagamento='" + pagamento + '\''
+                + ", cliente=" + cliente
+                + ", agricoltore=" + agricoltore
+                + '}';
     }
 }
 

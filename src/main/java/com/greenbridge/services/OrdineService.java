@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+
 
 
 /**
@@ -16,9 +16,13 @@ import java.util.Optional;
  */
 @Service
 public class OrdineService {
-
+/**
+ * repository di ordine.
+ * */
     private final OrdineRepository ordineRepository;
-
+/**
+ Assegnamento valore alla repository
+ * */
     @Autowired
     public OrdineService(OrdineRepository ordineRepository) {
         this.ordineRepository = ordineRepository;
