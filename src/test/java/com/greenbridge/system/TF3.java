@@ -30,6 +30,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.util.*;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -66,7 +67,7 @@ public class TF3 {
         driver.get("http://localhost:8080/home");
         driver.manage().window().setSize(new Dimension(1936, 1048));
         driver.findElement(By.cssSelector("a > .imgIcon")).click();
-        driver.findElement(By.cssSelector("a:nth-child(2) > .button")).click();
+        driver.findElement(By.cssSelector("div:nth-child(2) > a > .button")).click();
         driver.findElement(By.id("certName")).click();
         driver.findElement(By.id("certName")).sendKeys("AB");
         driver.findElement(By.id("expiryDate")).click();
@@ -80,7 +81,7 @@ public class TF3 {
         driver.get("http://localhost:8080/home");
         driver.manage().window().setSize(new Dimension(1936, 1048));
         driver.findElement(By.cssSelector("a > .imgIcon")).click();
-        driver.findElement(By.cssSelector("a:nth-child(2) > .button")).click();
+        driver.findElement(By.cssSelector("div:nth-child(2) > a > .button")).click();
         driver.findElement(By.id("certName")).click();
         driver.findElement(By.id("certName")).sendKeys("The Carbon Trust Standard for Zero Waste to Landfill rilasciato dall’ente internazionale Carbon Trust  ");
         driver.findElement(By.id("expiryDate")).click();
@@ -94,7 +95,7 @@ public class TF3 {
         driver.get("http://localhost:8080/home");
         driver.manage().window().setSize(new Dimension(1936, 1048));
         driver.findElement(By.cssSelector("a > .imgIcon")).click();
-        driver.findElement(By.cssSelector("a:nth-child(2) > .button")).click();
+        driver.findElement(By.cssSelector("div:nth-child(2) > a > .button")).click();
         driver.findElement(By.id("certName")).click();
         driver.findElement(By.id("certName")).sendKeys("The Carbon Trust Standard");
         driver.findElement(By.id("expiryDate")).click();
@@ -112,7 +113,7 @@ public class TF3 {
         driver.get("http://localhost:8080/home");
         driver.manage().window().setSize(new Dimension(1936, 1048));
         driver.findElement(By.cssSelector("a > .imgIcon")).click();
-        driver.findElement(By.cssSelector("a:nth-child(2) > .button")).click();
+        driver.findElement(By.cssSelector("div:nth-child(2) > a > .button")).click();
         driver.findElement(By.id("certName")).click();
         driver.findElement(By.id("certName")).sendKeys("The Carbon Trust Standard");
         driver.findElement(By.id("expiryDate")).click();
@@ -126,13 +127,16 @@ public class TF3 {
         driver.get("http://localhost:8080/home");
         driver.manage().window().setSize(new Dimension(1936, 1048));
         driver.findElement(By.cssSelector("a > .imgIcon")).click();
-        driver.findElement(By.cssSelector("a:nth-child(2) > .button")).click();
+        driver.findElement(By.cssSelector("div:nth-child(2) > a > .button")).click();
         driver.findElement(By.id("certName")).click();
         driver.findElement(By.id("certName")).sendKeys("The Carbon Trust Standard");
         driver.findElement(By.id("expiryDate")).click();
         driver.findElement(By.id("expiryDate")).sendKeys("07-12-2024");
         driver.findElement(By.id("certScan")).sendKeys(System.getProperty("user.dir") + "/src/test/resources/CertificatoErrato.docx");
         driver.findElement(By.cssSelector("button")).click();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.alertIsPresent());
+
         assertThat(driver.switchTo().alert().getText(), is("Impossibile procedere poiché il formato della scansione certificato non è valido"));
     }
     @Test
@@ -140,18 +144,16 @@ public class TF3 {
         driver.get("http://localhost:8080/home");
         driver.manage().window().setSize(new Dimension(1936, 1048));
         driver.findElement(By.cssSelector("a > .imgIcon")).click();
-        driver.findElement(By.cssSelector("a:nth-child(2) > .button")).click();
+        driver.findElement(By.cssSelector("div:nth-child(2) > a > .button")).click();
         driver.findElement(By.id("certName")).click();
         driver.findElement(By.id("certName")).sendKeys("The Carbon Trust Standard");
         driver.findElement(By.id("expiryDate")).click();
         driver.findElement(By.id("expiryDate")).sendKeys("07-12-2024");
         driver.findElement(By.id("certScan")).sendKeys(System.getProperty("user.dir") + "/src/test/resources/Certificato.pdf");
         driver.findElement(By.cssSelector("button")).click();
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.alertIsPresent());
+
         assertThat(driver.switchTo().alert().getText(), is("Passa al passo successivo"));
     }
 }
