@@ -30,7 +30,7 @@
       <a th:if="${session.agricoltore == null}" th:href="@{/carrello}">
         <img class="imgIcon" src="/img/cart.png" alt="chartIcon">
       </a>
-      <a th:if="${session.cliente != null}" th:href="@{/detailCliente}">
+      <a th:if="${session.cliente != null}" th:href="@{/ordiniCliente}">
         <img class="imgIcon" src="/img/user.png" alt="userIcon">
       </a>
       <a th:if="${session.agricoltore!=null}" th:href="@{/homeAgricoltore}">
