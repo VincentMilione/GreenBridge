@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/dettagliOrdine.css">
+</head>
+<body>
+
+<div layout:fragment="content">
+    <h2>Dettagli dell'Ordine</h2>
+
+    <table>
+        <tr>
+            <th>ID Ordine</th>
+            <td th:text="${ordine.id}"></td>
+        </tr>
+        <tr>
+            <th>Importo</th>
+            <td th:text="${ordine.importo}"></td>
+        </tr>
+        <tr>
+            <th>Data Ordine</th>
+            <td th:text="${#dates.format(ordine.dataOrdine, 'dd/MM/yyyy')}"></td>
+        </tr>
+        <tr>
+            <th>Pagamento</th>
+            <td th:text="${ordine.pagamento}"></td>
+        </tr>
+        <tr th:if="${session.agricoltore != null}">
+            <th>Cliente</th>
+            <td th:text="${ordine.cliente.nome} + ' ' + ${ordine.cliente.cognome}"></td>
+        </tr>
+        <tr th:if="${session.cliente != null}">
+            <th>Agricoltore</th>
+            <td th:text="${ordine.agricoltore.nome}"></td>
+        </tr>
+
+        <p th:switch="${ordine.stato}">
+
+        </p>
+
+    </table>
+
+    <h2>Elementi dell'Ordine</h2>
+
+    <table class="elementi-ordine">
+        <thead>
+        <tr>
+            <th>Nome Prodotto</th>
+            <th>Quantità</th>
+            <th>Prezzo</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="elemento : ${listOrdine}">
+            <td th:text="${elemento.getProdotto().getNome()}"></td>
+            <td th:text="${elemento.getKgAcquistati()}"></td>
+            <td th:text="${elemento.getProdotto().getPrezzoVendita()} + '$'"></td>
+
+        </tr>
+        </tbody>
+    </table>
+
+
+    <div class="progress-bar-container"  th:if="${session.agricoltore != null}">
+        <div class="status-labels">
+            <div class="status-label">In Elaborazione</div>
+            <div class="status-label">In Spedizione</div>
+            <div class="status-label">Consegnato</div>
+        </div>
+        <div class="progress-bar" th:style="'width: ' + ${ordine.stato * (100 / 3)} + '%'">
+            <div class="progress-text" th:text="${'Stato: ' + ordine.stato}"></div>
+            <div class="progress-percent"></div>
+        </div>
+    </div>
+
+    <button th:if="${session.agricoltore != null}" th:onclick="'aggiornaStatoOrdine(' + ${ordine.getId()} + ')'">Prosegui</button>
+
+    <a th:if="${session.cliente != null}" th:href="@{'/recensione/' + ${ordine.id}}">
+        <img class="imgIcon" src="/img/recensione.png" alt="userIcon">
+    </a>
+
+    <!-- Aggiungi script JavaScript -->
+    <script>
+        function aggiornaStatoOrdine(ordineId) {
+            alert(ordineId);
+            // Invia una richiesta asincrona (AJAX) per aggiornare lo stato dell'ordine
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/aggiornaStatoOrdine/" + ordineId, true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        // Aggiorna dinamicamente la barra di avanzamento
+                        var progressBar = document.querySelector('.progress-bar');
+                        var newWidth = parseFloat(progressBar.style.width) - (100/3);
+                        progressBar.style.width = newWidth + '%';
+
+                        // Aggiorna la pagina senza ricaricarla completamente
+                        location.reload();
+                    } else {
+                        console.error("Errore durante l'aggiornamento dello stato dell'ordine.");
+                    }
+                }
+            };
+
+            xhr.send();
+        }
+       </script>
+    </div>
+
+</body>
+</html>

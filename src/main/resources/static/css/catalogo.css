@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    padding: 20px;
+    padding: 0px;
     text-align: center;
 }
 
@@ -25,8 +25,8 @@ h2 {
 }
 
 .product-image {
-    max-width: 100%;
-    height: auto;
+    width: 103%;
+    height: 233px;
     border-radius: 5px;
     margin-bottom: 10px;
 }

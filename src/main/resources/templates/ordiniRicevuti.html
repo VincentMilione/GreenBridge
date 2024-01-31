@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/ordiniRicevuti.css">
+</head>
+<body>
+
+<div layout:fragment="content">
+    <h2 th:if="${session.agricoltore != null}">Ordini ricevuti</h2>
+    <h2 th:if="${session.cliente != null}">Ordini Effettuati</h2>
+
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID Ordine</th>
+            <th>Importo</th>
+            <th>Data Ordine</th>
+            <th>Pagamento</th>
+            <th th:if="${session.agricoltore != null}" >Cliente</th>
+            <th th:if="${session.cliente != null}" >Agricoltore</th>
+            <th>Visualizza ordine</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="ordine : ${ordini}">
+            <td th:text="${ordine.id}"></td>
+            <td th:text="${ordine.importo}"></td>
+            <td th:text="${#dates.format(ordine.dataOrdine, 'dd/MM/yyyy')}"></td>
+            <td th:text="${ordine.pagamento}"></td>
+            <td th:if="${session.agricoltore != null}" th:text="${ordine.cliente.nome} + ' ' + ${ordine.cliente.cognome}"></td>
+            <td th:if="${session.cliente != null}" th:text="${ordine.agricoltore.nome}"></td>
+            <td><a th:href="@{'/visualizzaOrdine/' + ${ordine.id}}">Visualizza dettagli</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

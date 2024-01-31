@@ -3,13 +3,13 @@
 
 <head>
   <link rel="stylesheet" type="text/css" href="/css/footerStyle.css">
-  <link rel="stylesheet" href="css/headerStyle.css">
+  <link rel="stylesheet" href="/css/headerStyle.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-    crossorigin="anonymous"></script>
+          integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+          crossorigin="anonymous"></script>
   <title>Layout page</title>
 </head>
 
@@ -18,17 +18,37 @@
   <div id="firstLevelNavBar">
     <img id="menuIcon" onclick="openMenu()"  src="/img/menu.png">
     <img id="logo" src="/img/logo.png" alt="logo">
-    <input  placeholder="Cerca..." type="text" id="searchBar">
+    <form action="/ricerca" method="post" onsubmit = "return validateForm()">
+      <input  name="name" placeholder="Cerca..." type="text" id="searchBar">
+      <button type="submit" id="searchButton">Cerca</button>
+    </form>
 
-    </input>
-    <a th:href="@{/carrello}">
-      <img class="imgIcon" src="/img/cart.png" alt="chartIcon">
-    </a>
-    <a th:if="${session.cliente == null}" th:href="@{/login}">
-      <img class="imgIcon" src="/img/user.png" alt="userIcon">
-    </a>
-    <a th:if="${session.cliente != null}" th:href="@{/detailCliente}">
-      <img class="imgIcon" src="/img/user.png" alt="userIcon">
+    <div id="responseContainer"></div>
+
+    <a href="#">
+      </input>
+      <a th:if="${session.agricoltore == null}" th:href="@{/carrello}">
+        <img class="imgIcon" src="/img/cart.png" alt="chartIcon">
+      </a>
+      <a th:if="${session.cliente != null}" th:href="@{/ordiniCliente}">
+        <img class="imgIcon" src="/img/user.png" alt="userIcon">
+      </a>
+      <a th:if="${session.agricoltore!=null}" th:href="@{/homeAgricoltore}">
+        <img class="imgIcon" src="/img/user.png" alt="userIcon">
+      </a>
+      <a th:if="${session.cliente == null && session.agricoltore== null}" th:href="@{/login}">
+        <button type="submit" class="buttonLogin">Login Cliente</button>
+      </a>
+      <a th:if="${session.agricoltore == null && session.cliente==null }" th:href="@{/loginAgricoltore}">
+        <button type="submit" class="buttonLogin">Login Agricoltore</button>
+      </a>
+
+      <th:block th:if="${session.agricoltore != null}">
+        <div>
+        <img class="imgIcon" src="/img/wallet.png" alt="walletIcon">
+        <p style="color: white; text-align: center"  id="portafoglio"></p>
+        </div>
+      </th:block>
     </a>
   </div>
   <div id="secondLevelNavBar" style="left: -400px">
@@ -37,45 +57,106 @@
   </div>
 </div>
 
-  <!--SECTION-->
-  <div id="page-content">
-    <section layout:fragment="content" >
+<!--SECTION-->
+<div id="page-content">
+  <section layout:fragment="content" >
 
-    </section>
+  </section>
+</div>
+<!--footer-->
+<footer class="footerContainer" >
+  <div class="footerContainer">
+    <div class="socialIcons">
+      <a href="#"><i class="fa-brands fa-facebook"></i></a>
+      <a href=""><i class="fa-brands fa-instagram"></i></a>
+      <a href=""> <i class="fa-brands fa-github"></i></a>
+      <a href=""><i class="fa-brands fa-youtube"></i></a>
+    </div>
+
+    <div class="footerNav">
+      <ul>
+        <li><a href="">ASSISTENZA CLIENTI</a> </li>
+        <li><a href="">Contattaci</a> </li>
+        <li><a href="">INFORMAZIONI LEGALI</a> </li>
+        <li><a href="">Privacy Policy</a> </li>
+        <li><a href="">Termini e Condizioni</a> </li>
+      </ul>
+    </div>
   </div>
-  <!--footer-->
-  <footer class="footerContainer" >
-      <div class="footerContainer">
-        <div class="socialIcons">
-          <a href="#"><i class="fa-brands fa-facebook"></i></a>
-          <a href=""><i class="fa-brands fa-instagram"></i></a>
-          <a href=""> <i class="fa-brands fa-github"></i></a>
-          <a href=""><i class="fa-brands fa-youtube"></i></a>
-        </div>
+</footer>
 
-        <div class="footerNav">
-          <ul>
-            <li><a href="">ASSISTENZA CLIENTI</a> </li>
-            <li><a href="">Contattaci</a> </li>
-            <li><a href="">INFORMAZIONI LEGALI</a> </li>
-            <li><a href="">Privacy Policy</a> </li>
-            <li><a href="">Termini e Condizioni</a> </li>
-          </ul>
-        </div>
-      </div>
-  </footer>
-
-  <script>
-    function openMenu(){
-      var button = document.getElementById('secondLevelNavBar')
-      if(button.style.left === '-400px') {
-        button.style.left = '0px'
-        document.getElementById('menuIcon').src = '/img/close.png'
-      }else {
-        button.style.left = '-400px'
-        document.getElementById('menuIcon').src = '/img/menu.png'
+<script>
+  $(document).ready(function() {
+    $.ajax({
+      url: '/getSaldo',
+      type: 'POST',
+      success: function(response) {
+        if(response !=0){
+          $("#portafoglio").text(response+" $");
+        }
       }
+    });
+  });
+</script>
+
+<script>
+  function openMenu(){
+    var button = document.getElementById('secondLevelNavBar')
+    if(button.style.left === '-400px') {
+      button.style.left = '0px'
+      document.getElementById('menuIcon').src = '/img/close.png'
+    }else {
+      button.style.left = '-400px'
+      document.getElementById('menuIcon').src = '/img/menu.png'
     }
-  </script>
+  }
+
+
+    function confermaCancellazione() {
+    if (confirm("Eliminare il prodotto? La cancellazione non comporterà modifiche alle fatture")) {
+    return true;
+  } else {
+    return false;
+  }
+  }
+
+
+
+  function validateFileType(input) {
+    const allowedExtensions = ['png', 'jpeg', 'jpg'];
+    const fileName = input.value.toLowerCase();
+    const extension = fileName.split('.').pop();
+
+    if (!allowedExtensions.includes(extension)) {
+      input.value = ''; //
+    }
+  }
+
+</script>
+
+<script>
+  function validateForm() {
+    var searchBar = document.getElementById("searchBar");
+    var searchText = searchBar.value.trim();
+
+    if (searchText.length === 0) {
+      alert("Il campo di ricerca non può essere vuoto");
+      return false;
+    }
+
+    if (searchText.length > 50) {
+      alert("Il prodotto inserito è troppo lungo");
+      return false;
+    }
+
+    var regex = /^[A-Za-zÀ-ù ‘-]{1,50}$/;
+    if (!regex.test(searchText)) {
+      alert("Il formato dell'input non è valido. Utilizza solo lettere, spazi, apostrofi e trattini, da 1 a 50 caratteri.");
+      return false; // Impedisce l'invio del modulo
+    }
+
+    return true;
+  }
+</script>
 </body>
 </html>

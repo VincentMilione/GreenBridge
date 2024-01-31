@@ -1,16 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
 <head>
-    <meta charset="UTF-8">
-    <title>Andata</title>
+    <title>GreenBridge - Home</title>
+    <link rel="stylesheet" href="/css/chatbot.css">
+    <link rel="stylesheet" href="/css/chat.css">
+    <style>
+        section {
+            position: relative;
+            margin: 0;
+            padding: 0;
+            background-image: url('/img/agricoltore.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+        }
+
+        .overlay-box {
+            position: absolute;
+            background-color: #0c660a;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .overlay-box h1 {
+            margin-bottom: 5px;
+            font-family: "Roboto Black", serif;
+            font-size: xxx-large;
+        }
+
+        .overlay-box h2 {
+            margin-bottom: 10px;
+            font-family: "Roboto Black", serif;
+            font-size: xx-large;
+        }
+    </style>
 </head>
-<body>
-    <div th:each="cliente: ${clienti}">
-        <p th:text="${cliente.nome +' '+ cliente.cognome}">
-
-
-        </p>
+<body >
+<section layout:fragment="content">
+    <div class="overlay-box">
+        <h1>Benvenuto su GreenBridge</h1>
+        <h2>Green together!</h2>
     </div>
+
+    <!--Assicurarsi che nella sessione sia presente l'attributo cliente per poter utilizzare il chatbot-->
+    <div class="chatbox" th:if="${session['cliente'] ne null}" th:include="pages/user/fragments/chatbot-fragment"></div>
+</section>
 
 </body>
 </html>

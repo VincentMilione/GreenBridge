@@ -1,39 +1,77 @@
 package com.greenbridge.services;
 
 import com.greenbridge.entities.Agricoltore;
-
 import com.greenbridge.entities.Prodotto;
 import com.greenbridge.repositories.ProdottoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
-
+/**
+ * Servizio per la gestione dei prodotti.
+ * Autore: Mauro
+ */
 @Service
 public class ProdottoService {
+    /**
+     * Controller prodotto per il service.
+     */
     @Autowired
     private ProdottoRepository prodottoRepository;
 
+    /**
+     * Salva un prodotto nel database.
+     *
+     * @param prodotto il prodotto da salvare
+     */
+    public void saveProdotto(final Prodotto prodotto) {
 
-    public void saveProdotto(Prodotto prodotto){
         prodottoRepository.save(prodotto);
     }
 
-    public List<Prodotto> getAllProdotti(int idAgricoltore) {
-        return prodottoRepository.findAllByIdAgricoltoreAndAcquistabileTrue(idAgricoltore);
-    }
-    public Prodotto getProdottoById(int idProdotto){
-        return prodottoRepository.getProdottoByIdProdotto(idProdotto);
+    /**
+     * Ottiene tutti i prodotti acquistabili di un agricoltore.
+     *
+     * @param agricoltore l'agricoltore di cui trovare i prodotti
+     * @return una lista di prodotti acquistabili
+     */
+    public List<Prodotto> getAllProdotti(final Agricoltore agricoltore) {
+        return prodottoRepository.
+                findAllByAgricoltoreAndAcquistabileTrue(agricoltore);
     }
 
-    public void saveAndFlushProdotto(Prodotto prodotto) {
+    /**
+     * Ottiene un prodotto dato l'ID del prodotto.
+     *
+     * @param idProdotto l'ID del prodotto da ottenere
+     * @return il prodotto corrispondente all'ID specificato
+     */
+    public Prodotto getProdottoById(final int idProdotto) {
+        return prodottoRepository.
+                getProdottoByIdProdotto(idProdotto);
+    }
+
+    /**
+     * Salva e effettua un flush immediato nel database.
+     *
+     * @param prodotto il prodotto da salvare e fare flush
+     */
+    public void saveAndFlushProdotto(final Prodotto prodotto) {
         prodottoRepository.saveAndFlush(prodotto);
     }
 
-    public List<Prodotto> getResult(String Nome) {return prodottoRepository.findByNomeContainingIgnoreCase(Nome);
+    /**
+     * Ottiene una lista di prodotti il cui nome
+     * contiene la stringa specificata,
+     * ignorando maiuscole e minuscole.
+     *
+     * @param nome la stringa da cercare nel nome dei prodotti
+     * @return una lista di prodotti con il nome che
+     * contiene la stringa specificata
+     */
+    public List<Prodotto> getResult(final String nome) {
+        return prodottoRepository.
+                findByNomeContainingIgnoreCase(nome);
     }
-
-
 }

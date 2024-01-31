@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina con Bottoni</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/homeAgricoltore.css}" />
+    <style>
+
+
+    </style>
+</head>
+</head>
+<body layout:fragment="content">
+
+<div class="button-container">
+    <div>
+        <p class="button-text">Fai clic per visualizzare gli ordini</p>
+        <a th:href="@{/ordiniAgricoltore}">
+            <button class="button">Visualizza Ordini</button>
+        </a>
+    </div>
+
+<div>
+    <p class="button-text">Fai clic per inserire i certificati</p>
+    <a th:href="@{/inserimento-certificato}">
+        <button class="button">Inserimento Certificati</button>
+    </a>
+</div>
+
+    <div>
+        <p class="button-text">Fai clic per visualizzare la lista dei certificati</p>
+        <a th:href="@{/visualizzazione-certificati}">
+            <button class="button">Visualizzazione Certificati</button>
+        </a>
+    </div>
+
+    <div>
+        <p class="button-text">Fai clic per visualizzare il catalogo</p>
+        <a th:href="@{/catalogo}">
+            <button class="button">Visualizzazione catalogo</button>
+        </a>
+    </div>
+
+</div>
+
+</body>
+</html>

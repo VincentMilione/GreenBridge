@@ -1,75 +1,166 @@
 package com.greenbridge.controllers;
 
+import com.greenbridge.entities.Agricoltore;
 import com.greenbridge.entities.Prodotto;
+import com.greenbridge.entities.RecensioneProdotti;
 import com.greenbridge.services.ProdottoService;
+import com.greenbridge.services.RecensioneService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
 
-
+/**
+ * Controller per la gestione dei prodotti.
+ * Autore:Mauro,Giuseppe.
+ */
 @Controller
 public class ProdottoController {
-
+    /**
+     * Lunghezza massima del nome del prodotto cercato.
+     */
+    private static final int MAX_LENGHT = 50;
+    /**
+     * Service del prodotto.
+     */
     @Autowired
     private ProdottoService prodottoService;
+    /**
+     * Service per le recensioni del prodotto.
+     */
+    @Autowired
+    private RecensioneService recensioneService;
 
+    /**
+     * Mostra il form per l'inserimento di un nuovo prodotto.
+     * @param model   Modello per la gestione degli attributi nella vista.
+     * @param session Sessione HTTP.
+     * @return Nome della vista da visualizzare.
+     */
     @GetMapping("/formInserimento")
-    public String getProdotto(Model model, HttpSession session) {
-        int idAgricoltore = 1;
-        session.setAttribute("idAgricoltore", idAgricoltore);
-        model.addAttribute("prodotto", new Prodotto());
-        return "pages/user/formInserimento";
+    public String getProdotto(final Model model, final HttpSession session) {
+        if (session.getAttribute("agricoltore") != null) {
+            model.addAttribute("prodotto", new Prodotto());
+            return "pages/user/formInserimento";
+        }
+        return "loginAgricoltore";
     }
 
+    /**
+     * Aggiunge un nuovo prodotto al sistema.
+     *
+     * @param prodotto       Oggetto Prodotto da aggiungere.
+     * @param immagineFile   Immagine associata al prodotto.
+     * @param model          Modello per la gestione
+     *                       degli attributi nella vista.
+     * @param session        Sessione HTTP.
+     * @return Nome della vista da visualizzare.
+     */
     @PostMapping("/addProdotto")
-    public String addProdottoForm(@ModelAttribute("prodotto") Prodotto prodotto,
-                                  @RequestParam("immagineFile") MultipartFile immagineFile, Model model,
-                                  HttpSession session) {
+    public String addProdottoForm(@ModelAttribute("prodotto") final Prodotto
+              prodotto, @RequestParam("immagineFile")
+                       final MultipartFile immagineFile,
+                       final Model model, final HttpSession session) {
         try {
             if (!immagineFile.isEmpty()) {
                 byte[] bytes = immagineFile.getBytes();
                 prodotto.setImmagine(bytes);
             }
-
-            prodotto.setIdAgricoltore((Integer)
-                    session.getAttribute("idAgricoltore"));
+            Agricoltore agricoltore = (Agricoltore)
+                    session.getAttribute("agricoltore");
+            prodotto.setAgricoltore(agricoltore);
 
             prodotto.setAcquistabile(true);
 
             prodottoService.saveProdotto(prodotto);
 
             // Aggiorna la lista di prodotti nel model
-            List<Prodotto> prodotti = prodottoService.getAllProdotti((Integer)
-                    session.getAttribute("idAgricoltore"));
+            List<Prodotto> prodotti = prodottoService.
+                    getAllProdotti((Agricoltore)
+                    session.getAttribute("agricoltore"));
             for (Prodotto p : prodotti) {
                 if (p.getImmagine() != null) {
-                    String immagineBase64 = Base64.getEncoder().encodeToString(p.getImmagine());
+                    String immagineBase64 = Base64.getEncoder().
+                            encodeToString(p.getImmagine());
                     p.setImmagineBase64(immagineBase64);
                 }
             }
             model.addAttribute("prodotti", prodotti);
         } catch (IOException e) {
             System.out.println(e.getMessage());
+        } catch (DataIntegrityViolationException e) {
+            // Forza il lancio dell'eccezione
+            throw new DataIntegrityViolationException(
+                    "Data truncation: Data too long for column");
+        } catch (Exception e) {
+            handleException(e);
         }
         return "pages/user/catalogo";
     }
 
+
+    /**
+     * Gestisce l'eccezione di violazione dell'integrità dei dati.
+     *
+     * @param e Eccezione di violazione dell'integrità dei dati.
+     */
+    @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public void handleDataIntegrityViolationException(
+            final DataIntegrityViolationException e) {
+        System.out.println("Handling DataIntegrityViolationException: "
+                + e.getMessage());
+    }
+
+    /**
+     * Gestisce un'eccezione generica.
+     *
+     * @param e Eccezione generica.
+     */
+    @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
+    @ExceptionHandler(Exception.class)
+    public void handleException(final Exception e) {
+        System.out.println("Handling Exception: " + e.getMessage());
+    }
+
+    /**
+     * Mostra il catalogo dei prodotti.
+     *
+     * @param model   Modello per la gestione degli attributi nella vista.
+     * @param session Sessione HTTP.
+     * @return Nome della vista da visualizzare.
+     */
     @GetMapping("/catalogo")
-    public String getCatalogo(Model model, HttpSession session) {
-        int idAgricoltore = 1;
-        session.setAttribute("idAgricoltore", idAgricoltore);
-        List<Prodotto> prodotti = prodottoService.getAllProdotti((Integer) session.getAttribute("idAgricoltore"));
+    public String getCatalogo(final Model model,
+                              final HttpSession session) {
+        if (session.getAttribute("agricoltore") == null) {
+            return "loginAgricoltore";
+        }
+
+        List<Prodotto> prodotti =
+                prodottoService.getAllProdotti((Agricoltore)
+                session.getAttribute("agricoltore"));
 
         for (Prodotto prodotto : prodotti) {
             if (prodotto.getImmagine() != null) {
-                String immagineBase64 = Base64.getEncoder().encodeToString(prodotto.getImmagine());
+                String immagineBase64 = Base64.getEncoder().
+                        encodeToString(prodotto.getImmagine());
                 prodotto.setImmagineBase64(immagineBase64);
             }
         }
@@ -77,34 +168,62 @@ public class ProdottoController {
         return "pages/user/catalogo";
     }
 
+    /**
+     * Mostra il form per la modifica di un prodotto.
+     *
+     * @param id     ID del prodotto da modificare.
+     * @param model  Modello per la gestione degli attributi nella vista.
+     * @param session Sessione HTTP.
+     * @return Nome della vista da visualizzare.
+     */
     @GetMapping("/formModificaProdotto/{id}")
-    public String formModificaProdotto(@PathVariable("id") int id,Model model) {
+    public String formModificaProdotto(@PathVariable("id") final int id,
+                                       final Model model,
+                                       final HttpSession session) {
+        if (session.getAttribute("agricoltore") == null) {
+            return "loginAgricoltore";
+        }
         Prodotto prodotto = prodottoService.getProdottoById(id);
         model.addAttribute("prodottoMod", prodotto);
         return "pages/user/formModifica";
     }
 
+
+    /**
+     * Modifica un prodotto esistente.
+     *
+     * @param prodotto      Oggetto Prodotto da modificare.
+     * @param immagineFile  Nuova immagine associata al prodotto.
+     * @param model         Modello per la gestione degli attributi nella vista.
+     * @param session       Sessione HTTP.
+     * @return Nome della vista da visualizzare.
+     */
     @PostMapping("/modProdotto")
-    public String modificaProdottoForm(@ModelAttribute("prodottoMod") Prodotto prodotto,
-                                       @RequestParam("immagineFile") MultipartFile immagineFile,
-                                       Model model, HttpSession session) {
+    public String modificaProdottoForm(@ModelAttribute
+                   ("prodottoMod") final Prodotto prodotto,
+                   @RequestParam("immagineFile")
+                   final MultipartFile immagineFile,
+                   final Model model, final HttpSession session) {
         try {
             if (!immagineFile.isEmpty()) {
                 byte[] bytes = immagineFile.getBytes();
                 prodotto.setImmagine(bytes);
             }
 
-            prodotto.setIdAgricoltore((Integer) session.getAttribute("idAgricoltore"));
+            prodotto.setAgricoltore((Agricoltore) session.
+                    getAttribute("agricoltore"));
             prodotto.setAcquistabile(true);
 
             prodottoService.saveAndFlushProdotto(prodotto);
 
             // Aggiorna la lista di prodotti nel model
-            List<Prodotto> prodotti = prodottoService.getAllProdotti((Integer)
-                    session.getAttribute("idAgricoltore"));
+            List<Prodotto> prodotti = prodottoService.
+                    getAllProdotti((Agricoltore) session.
+                            getAttribute("agricoltore"));
             for (Prodotto p : prodotti) {
                 if (p.getImmagine() != null) {
-                    String immagineBase64 = Base64.getEncoder().encodeToString(p.getImmagine());
+                    String immagineBase64 = Base64.
+                            getEncoder().encodeToString(p.getImmagine());
                     p.setImmagineBase64(immagineBase64);
                 }
             }
@@ -115,17 +234,30 @@ public class ProdottoController {
         return "pages/user/catalogo";
     }
 
+    /**
+     * Cancella un prodotto esistente.
+     *
+     * @param session Sessione HTTP.
+     * @param model   Modello per la gestione
+     *                degli attributi nella vista.
+     * @param id      ID del prodotto da cancellare.
+     * @return Nome della vista da visualizzare.
+     */
     @GetMapping("/cancellaProdotto/{id}")
-    public String cancellaProdotto(HttpSession session,Model model,@PathVariable("id") int id){
-        Prodotto prodotto=prodottoService.getProdottoById(id);
+    public String cancellaProdotto(final HttpSession session,
+                   final Model model, @PathVariable("id")
+                                       final int id) {
+        Prodotto prodotto = prodottoService.getProdottoById(id);
         prodotto.setAcquistabile(false);
         prodottoService.saveAndFlushProdotto(prodotto);
 
-        List<Prodotto> prodotti = prodottoService.getAllProdotti((Integer)
-                session.getAttribute("idAgricoltore"));
+        List<Prodotto> prodotti =
+                prodottoService.getAllProdotti((Agricoltore)
+                session.getAttribute("agricoltore"));
         for (Prodotto p : prodotti) {
             if (p.getImmagine() != null) {
-                String immagineBase64 = Base64.getEncoder().encodeToString(p.getImmagine());
+                String immagineBase64 = Base64.getEncoder().
+                        encodeToString(p.getImmagine());
                 p.setImmagineBase64(immagineBase64);
             }
         }
@@ -134,31 +266,60 @@ public class ProdottoController {
         return "pages/user/catalogo";
     }
 
-  @GetMapping("/prodotto/{idProdotto}")
-    String getProdotto(Model model, @PathVariable int idProdotto){
+    /**
+     * Gestisce la richiesta di visualizzazione
+     * di un singolo prodotto identificato dall'id associato.
+     *
+     * @param model Modello per la gestione
+     *              degli attributi nella vista.
+     * @param idProdotto Identificativo del
+     *                   prodotto da visualizzare.
+     * @return Stringa che rappresenta il nome
+     *         della vista da visualizzare ovvero prodotto.html
+     */
+    @GetMapping("/prodotto/{idProdotto}")
+    String getProdotto(final Model model, @PathVariable final int idProdotto) {
         Prodotto prodotto = prodottoService.getProdottoById(idProdotto);
-        System.out.println(idProdotto);
         model.addAttribute("prodotto", prodotto);
-        return "pages/user/prodotto";
+        List<RecensioneProdotti> recensioni = recensioneService.
+                getRecensioniByIdProdotto(prodotto.getIdProdotto());
+        model.addAttribute("recensioni", recensioni);
+        return "prodotto";
     }
-
+    /**
+     * Redirect alla home.
+     * @return redirect alla home
+     */
     @GetMapping("/")
-    public String getHome(){
+    public String getHome() {
         return "pages/user/home";
     }
 
 
+    /**
+     * Gestisce la richiesta di ricerca dei prodotti in base al nome.
+     *
+     * @param name Nome del prodotto da cercare
+     * @param model Modello per la gestione degli attributi nella vista.
+     * @return Stringa che rappresenta il nome della vista da visualizzare;
+     * nel caso di successo ricercaProdotto.html,
+     * nel caso contrario errrore.html
+     */
     @PostMapping ("/ricerca")
-    public String getProduct(@RequestParam String name, Model model) {
+    public String getProduct(@RequestParam final String name,
+                             final Model model) {
+
+        if (name.trim().isEmpty() || name.length() > MAX_LENGHT
+                || !name.matches("^[A-Za-zÀ-ù ‘-]{1,50}$")) {
+            return "error.html";
+        }
+
         List<Prodotto> risultatiRicerca = prodottoService.getResult(name);
-        model.addAttribute("ricerca", risultatiRicerca);
+        if (!risultatiRicerca.isEmpty()) {
+            model.addAttribute("ricerca", risultatiRicerca);
+        }
         return "pages/user/ricercaProdotto";
     }
-
-
-
-
-
 
 }
 
