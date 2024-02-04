@@ -60,6 +60,7 @@ public class RestUseController {
      * @param id ID dell'agricoltore da recuperare
      * @return Agricoltore corrispondente all'ID fornito
      */
+
     @GetMapping("/Agricoltori/{id}")
     public Agricoltore getAgricoltore(@PathVariable int id) {
         return agricoltoreService.getSingleAgricoltore(id);
@@ -69,6 +70,7 @@ public class RestUseController {
      * @param agricoltore Oggetto Agricoltore da salvare
      * @return Agricoltore appena salvato
      */
+
     @PostMapping("/Agricoltori")
     public Agricoltore saveAgricoltore(
             @RequestBody Agricoltore agricoltore) {
@@ -102,6 +104,7 @@ public class RestUseController {
      * @return ResponseEntity contenente
      * un messaggio di conferma
      */
+
     @PostMapping("/RegistrazioneUtente")
     public ResponseEntity<String> completaRegistrazione(@RequestBody
                                             Agricoltore agricoltore) {
