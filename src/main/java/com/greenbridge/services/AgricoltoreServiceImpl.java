@@ -16,19 +16,23 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 /**
- * Implementation of the AgricoltoreService interface for managing
- * Agricoltore entities and related operations.
+ * Implementazione dell'interfaccia
+ * AgricoltoreService per la gestione
+ * delle entità di Agricoltore e
+ * delle operazioni correlate.
  */
 @Service
 public class AgricoltoreServiceImpl implements AgricoltoreService {
 
     /**
-     * Repository per gestire le operazioni CRUD sui certificati.
+     * Repository per gestire
+     * le operazioni CRUD sui certificati.
      */
     @Autowired
     private CertificatoRepository certificatoRepository;
     /**
-     * Repository per gestire le operazioni CRUD sugli agricoltori.
+     * Repository per gestire
+     * le operazioni CRUD sugli agricoltori.
      */
     @Autowired
     private AgricoltoreRepository agricoltoreRepository;
@@ -39,9 +43,10 @@ public class AgricoltoreServiceImpl implements AgricoltoreService {
     private PortafoglioRepository portafoglioRepository;
 
     /**
-     * Retrieves a list of all Agricoltore entities.
+     * Recupera una lista di tutte
+     * le entità di Agricoltore.
      *
-     * @return List of Agricoltore entities
+     * @return Lista delle entità di Agricoltore
      */
     @Override
     public List<Agricoltore> getAgricoltori() {
@@ -49,12 +54,12 @@ public class AgricoltoreServiceImpl implements AgricoltoreService {
     }
 
     /**
-     * Saves a new Agricoltore entity.
+     * Salva una nuova entità di Agricoltore.
      *
-     * @param agricoltore Agricoltore entity to be saved
-     * @return Saved Agricoltore entity
-     * @throws RuntimeException if the Agricoltore with
-     *                          the same ID already exists
+     * @param agricoltore Entità di Agricoltore da salvare
+     * @return Entità di Agricoltore appena salvata
+     * @throws RuntimeException se esiste già un Agricoltore
+     *                           con lo stesso ID
      */
     @Override
     public Agricoltore saveAgricoltore(Agricoltore agricoltore) {
@@ -70,11 +75,11 @@ public class AgricoltoreServiceImpl implements AgricoltoreService {
     }
 
     /**
-     * Modifies an existing Agricoltore entity.
+     * Modifica un'entità di Agricoltore esistente.
      *
-     * @param agricoltore Modified Agricoltore entity
-     * @throws RuntimeException if the Agricoltore with the
-     *                          specified ID does not exist
+     * @param agricoltore Entità di Agricoltore modificata
+     * @throws RuntimeException se non esiste un Agricoltore
+     * con l'ID specificato
      */
     @Override
     public void modificaAgricoltore(Agricoltore agricoltore) {
@@ -85,11 +90,11 @@ public class AgricoltoreServiceImpl implements AgricoltoreService {
     }
 
     /**
-     * Retrieves a single Agricoltore entity by ID.
+     * Recupera una singola entità di Agricoltore tramite ID.
      *
-     * @param id ID of the Agricoltore entity to retrieve
-     * @return Agricoltore entity corresponding to the
-     *         provided ID, or null if not found
+     * @param id ID dell'entità di Agricoltore da recuperare
+     * @return Entità di Agricoltore corrispondente all'ID fornito,
+     *         o null se non trovato
      */
     @Override
     public Agricoltore getSingleAgricoltore(int id) {
@@ -100,10 +105,11 @@ public class AgricoltoreServiceImpl implements AgricoltoreService {
     }
 
     /**
-     * Retrieves an Agricoltore entity by email.
+     * Recupera un'entità di Agricoltore tramite email.
      *
-     * @param email Email of the Agricoltore to retrieve
-     * @return Agricoltore entity corresponding to the provided email
+     * @param email Email dell'Agricoltore da recuperare
+     * @return Entità di Agricoltore
+     * corrispondente all'email fornita
      */
     @Override
     public Agricoltore getAgricoltoreByEmail(String email) {
@@ -111,12 +117,12 @@ public class AgricoltoreServiceImpl implements AgricoltoreService {
     }
 
     /**
-     * Adds a Certificato to an existing Agricoltore entity.
+     * Aggiunge un Certificato a un'entità di Agricoltore esistente.
      *
-     * @param agricoltoreId              ID of the Agricoltore to
-     *                                   add the Certificato to
-     * @param nomeCertificato            Name of the Certificato
-     * @param dataScadenzaCertificato    Expiry date of the Certificato
+     * @param agricoltoreId              ID dell'Agricoltore a cui
+     *                                   aggiungere il Certificato
+     * @param nomeCertificato            Nome del Certificato
+     * @param dataScadenzaCertificato    Data di scadenza del Certificato
      */
     @Override
     public void aggiungiCertificato(int agricoltoreId, String nomeCertificato,
@@ -134,10 +140,11 @@ public class AgricoltoreServiceImpl implements AgricoltoreService {
         }
     }
     /**
-     * Retrieves the list of Certificato associated
-     * to an existing Agricoltore entity.
+     * Recupera la lista di Certificati associati
+     * a un'entità di Agricoltore esistente.
      *
-     * @param agricoltore   Agricoltore to retrieve the list of certificates
+     * @param agricoltore   Agricoltore per recuperare
+     *                      la lista dei certificati
      */
     @Override
     public List<Certificato> getCertificati(Agricoltore agricoltore) {

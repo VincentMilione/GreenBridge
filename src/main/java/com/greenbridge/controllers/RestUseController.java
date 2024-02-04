@@ -22,17 +22,19 @@ import java.util.List;
 
 /**
  * @author  elmehdi zitouni
- * Controller for handling operations
- * related to farmers through RESTful APIs.
- * Supported operations include
- * retrieving the list of farmers,
- * retrieving a single
- * farmer by ID, saving a new farmer,
- * modifying an existing farmer,
- * registering a new
- * farmer user, and adding a
- * certificate to a farmer.
+ * Controller per gestire le operazioni
+ * relative agli agricoltori attraverso API RESTful.
+ * Le operazioni supportate includono
+ * il recupero della lista degli agricoltori,
+ * il recupero di un singolo
+ * agricoltore tramite ID,
+ * il salvataggio di un nuovo agricoltore,
+ * la modifica di un agricoltore esistente,
+ * la registrazione di un nuovo
+ * utente agricoltore e l'aggiunta di un
+ * certificato a un agricoltore.
  */
+
 @RestController
 @RequestMapping("/api")
 public class RestUseController {
@@ -45,26 +47,27 @@ public class RestUseController {
     @Autowired
     private AgricoltoreServiceImpl agricoltoreService;
     /**
-     * Retrieves the list of all farmers.
-     * @return List of farmers
+     * Recupera la lista di tutti gli agricoltori.
+     * @return Lista degli agricoltori
      */
+
     @GetMapping("/Agricoltori")
     public List<Agricoltore> getAgricoltori() {
         return agricoltoreService.getAgricoltori();
     }
     /**
-     * Retrieves a single farmer by ID.
-     * @param id ID of the farmer to retrieve
-     * @return Farmer corresponding to the provided ID
+     * Recupera un singolo agricoltore tramite ID.
+     * @param id ID dell'agricoltore da recuperare
+     * @return Agricoltore corrispondente all'ID fornito
      */
     @GetMapping("/Agricoltori/{id}")
     public Agricoltore getAgricoltore(@PathVariable int id) {
         return agricoltoreService.getSingleAgricoltore(id);
     }
     /**
-     * Saves a new farmer.
-     * @param agricoltore Farmer object to save
-     * @return Newly saved farmer
+     * Salva un nuovo agricoltore.
+     * @param agricoltore Oggetto Agricoltore da salvare
+     * @return Agricoltore appena salvato
      */
     @PostMapping("/Agricoltori")
     public Agricoltore saveAgricoltore(
@@ -72,13 +75,14 @@ public class RestUseController {
         return agricoltoreService.saveAgricoltore(agricoltore);
     }
     /**
-     * Modifies the information
-     * of an existing farmer by ID.
-     * @param id ID of the farmer to modify
-     * @param agricoltore  New farmer information
+     * Modifica le informazioni
+     * di un agricoltore esistente tramite ID.
+     * @param id ID dell'agricoltore da modificare
+     * @param agricoltore Nuove informazioni dell'agricoltore
      * @return ResponseEntity
-     * containing a success or error message
+     * contenente un messaggio di successo o errore
      */
+
     @PostMapping("/modify/{id}")
     public ResponseEntity<String> modifyUserById(@PathVariable int id,
                          @RequestBody Agricoltore agricoltore) {
@@ -91,12 +95,12 @@ public class RestUseController {
         return new ResponseEntity<>("Not found", HttpStatus.FORBIDDEN);
     }
     /**
-     * Completes the registration
-     * of a new farmer user.
-     * @param agricoltore New farmer user
-     * to register
-     * @return ResponseEntity containing
-     * a confirmation message
+     * Completa la registrazione
+     * di un nuovo utente agricoltore.
+     * @param agricoltore Nuovo utente agricoltore
+     * da registrare
+     * @return ResponseEntity contenente
+     * un messaggio di conferma
      */
     @PostMapping("/RegistrazioneUtente")
     public ResponseEntity<String> completaRegistrazione(@RequestBody
@@ -105,15 +109,17 @@ public class RestUseController {
         return ResponseEntity.ok("Tutto ok!");
     }
     /**
-     * Adds a certificate to an existing farmer by ID.
-     * @param id  ID of the farmer to add the certificate to
-     * @param certName    Name of the certificate
-     * @param expiryDate  Expiry date of the certificate
-     * @param certScan    Certificate
-     * file in MultipartFile format
-     * @return ResponseEntity containing
-     * a success or error message
+     * Aggiunge un certificato a un agricoltore
+     * esistente tramite ID.
+     * @param id  ID dell'agricoltore a cui aggiungere il certificato
+     * @param certName    Nome del certificato
+     * @param expiryDate  Data di scadenza del certificato
+     * @param certScan    File del certificato
+     * in formato MultipartFile
+     * @return ResponseEntity contenente
+     * un messaggio di successo o errore
      */
+
     @PostMapping("/Agricoltori/{id}/aggiungiCertificato")
     public ResponseEntity<String>
            aggiungiCertificato(
