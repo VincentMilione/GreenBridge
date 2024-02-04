@@ -73,11 +73,12 @@
     border: none; /* Removed border for a cleaner button */
     margin-top: 20px; /* Increased margin for better separation */
     border-radius: 20px;
-    font-size: 20px;
+    font-size: 24px;
     color: white;
     height: 40px; /* Reduced height for a more compact button */
     background-image: linear-gradient(93.12deg, #0c5e0a 0.52%, #0a9e07 100%);
     cursor: pointer; /* Added cursor style on hover */
+    padding: 10px;
 }
 
 #esito {
@@ -133,8 +134,15 @@ h2{
     padding-top: 10px;
 
 }
-
+button {
+    background-color: green;
+    color: white;
+    padding: 10px 20px; /* Puoi regolare i valori di padding a tuo piacimento */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
 button:hover {
-    background-color: #45a049;
+    background-image: linear-gradient(93.12deg, #0c5e0a 0.52%, #0a9e07 100%);
 }
