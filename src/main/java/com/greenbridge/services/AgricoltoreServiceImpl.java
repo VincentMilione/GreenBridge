@@ -21,7 +21,6 @@ import java.util.Optional;
  * delle entità di Agricoltore e
  * delle operazioni correlate.
  */
-
 @Service
 public class AgricoltoreServiceImpl implements AgricoltoreService {
 
@@ -29,20 +28,17 @@ public class AgricoltoreServiceImpl implements AgricoltoreService {
      * Repository per gestire
      * le operazioni CRUD sui certificati.
      */
-
     @Autowired
     private CertificatoRepository certificatoRepository;
     /**
      * Repository per gestire
      * le operazioni CRUD sugli agricoltori.
      */
-
     @Autowired
     private AgricoltoreRepository agricoltoreRepository;
     /**
      * Repository per gestire le operazioni CRUD sui portafogli.
      */
-
     @Autowired
     private PortafoglioRepository portafoglioRepository;
 
@@ -52,7 +48,6 @@ public class AgricoltoreServiceImpl implements AgricoltoreService {
      *
      * @return Lista delle entità di Agricoltore
      */
-
     @Override
     public List<Agricoltore> getAgricoltori() {
         return agricoltoreRepository.findAll();
@@ -66,7 +61,6 @@ public class AgricoltoreServiceImpl implements AgricoltoreService {
      * @throws RuntimeException se esiste già un Agricoltore
      *                           con lo stesso ID
      */
-
     @Override
     public Agricoltore saveAgricoltore(Agricoltore agricoltore) {
         if (agricoltoreRepository.existsById(agricoltore.getId())) {
@@ -87,7 +81,6 @@ public class AgricoltoreServiceImpl implements AgricoltoreService {
      * @throws RuntimeException se non esiste un Agricoltore
      * con l'ID specificato
      */
-
     @Override
     public void modificaAgricoltore(Agricoltore agricoltore) {
         if (!agricoltoreRepository.existsById(agricoltore.getId())) {
@@ -103,7 +96,6 @@ public class AgricoltoreServiceImpl implements AgricoltoreService {
      * @return Entità di Agricoltore corrispondente all'ID fornito,
      *         o null se non trovato
      */
-
     @Override
     public Agricoltore getSingleAgricoltore(int id) {
         Optional<Agricoltore> agricoltoreOptional =
@@ -119,7 +111,6 @@ public class AgricoltoreServiceImpl implements AgricoltoreService {
      * @return Entità di Agricoltore
      * corrispondente all'email fornita
      */
-
     @Override
     public Agricoltore getAgricoltoreByEmail(String email) {
         return agricoltoreRepository.findByEmail(email);
@@ -133,7 +124,6 @@ public class AgricoltoreServiceImpl implements AgricoltoreService {
      * @param nomeCertificato            Nome del Certificato
      * @param dataScadenzaCertificato    Data di scadenza del Certificato
      */
-
     @Override
     public void aggiungiCertificato(int agricoltoreId, String nomeCertificato,
                                     LocalDate dataScadenzaCertificato,
@@ -153,9 +143,9 @@ public class AgricoltoreServiceImpl implements AgricoltoreService {
      * Recupera la lista di Certificati associati
      * a un'entità di Agricoltore esistente.
      *
-     * @param agricoltore   Agricoltore per recuperare la lista dei certificati
+     * @param agricoltore   Agricoltore per recuperare
+     *                      la lista dei certificati
      */
-
     @Override
     public List<Certificato> getCertificati(Agricoltore agricoltore) {
         return certificatoRepository

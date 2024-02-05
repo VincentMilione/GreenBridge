@@ -112,15 +112,17 @@ public class RestUseController {
         return ResponseEntity.ok("Tutto ok!");
     }
     /**
-     * Adds a certificate to an existing farmer by ID.
-     * @param id  ID of the farmer to add the certificate to
-     * @param certName    Name of the certificate
-     * @param expiryDate  Expiry date of the certificate
-     * @param certScan    Certificate
-     * file in MultipartFile format
-     * @return ResponseEntity containing
-     * a success or error message
+     * Aggiunge un certificato a un agricoltore
+     * esistente tramite ID.
+     * @param id  ID dell'agricoltore a cui aggiungere il certificato
+     * @param certName    Nome del certificato
+     * @param expiryDate  Data di scadenza del certificato
+     * @param certScan    File del certificato
+     * in formato MultipartFile
+     * @return ResponseEntity contenente
+     * un messaggio di successo o errore
      */
+
     @PostMapping("/Agricoltori/{id}/aggiungiCertificato")
     public ResponseEntity<String>
            aggiungiCertificato(
