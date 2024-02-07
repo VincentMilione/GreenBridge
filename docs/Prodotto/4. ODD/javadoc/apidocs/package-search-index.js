@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.greenbridge"},{"l":"com.greenbridge.configurations"},{"l":"com.greenbridge.controllers"},{"l":"com.greenbridge.entities"},{"l":"com.greenbridge.repositories"},{"l":"com.greenbridge.services"}];updateSearchResults();
