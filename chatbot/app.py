@@ -17,9 +17,9 @@ Returns:
     flask.Response: Risposta JSON contenente l'elenco casuale di ID agricoltori generato.
 """
     # Genera una lista casuale di ID agricoltori
-    #idList = random.sample(range(1, 20), 5)
-    solutions = main()
-    idList = solutions.tolist()
+    idList = random.sample(range(1, 20), 5)
+    #solutions = main()
+    #idList = solutions.tolist()
 
     # Crea una risposta JSON contenente l'elenco casuale di ID agricoltori
     dati = jsonify({'id_list': list(idList)})
