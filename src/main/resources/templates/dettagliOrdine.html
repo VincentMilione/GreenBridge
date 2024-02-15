@@ -74,16 +74,15 @@
         </div>
     </div>
 
-    <button th:if="${session.agricoltore != null}" th:onclick="'aggiornaStatoOrdine(' + ${ordine.getId()} + ')'">Prosegui</button>
+    <button class="StatoButton" th:if="${session.agricoltore != null}" th:onclick="'aggiornaStatoOrdine(' + ${ordine.getId()} + ')'">Prosegui</button>
 
-    <a th:if="${session.cliente != null}" th:href="@{'/recensione/' + ${ordine.id}}">
+    <a class="StatoButton" th:if="${session.cliente != null}" th:href="@{'/recensione/' + ${ordine.id}}">
         <img class="imgIcon" src="/img/recensione.png" alt="userIcon">
     </a>
 
     <!-- Aggiungi script JavaScript -->
     <script>
         function aggiornaStatoOrdine(ordineId) {
-            alert(ordineId);
             // Invia una richiesta asincrona (AJAX) per aggiornare lo stato dell'ordine
             var xhr = new XMLHttpRequest();
             xhr.open("POST", "/aggiornaStatoOrdine/" + ordineId, true);

@@ -34,6 +34,7 @@
     border-radius: 20px;
     width: 356px;
     height: 54%;
+    top: 50px;
     margin: auto;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -69,15 +70,17 @@
     margin-bottom: 10px;
 }
 
-#loginFormAgricoltore button {
+.buttonClass{
     border: none; /* Removed border for a cleaner button */
     margin-top: 20px; /* Increased margin for better separation */
     border-radius: 20px;
-    font-size: 20px;
+    font-size: 24px;
     color: white;
     height: 40px; /* Reduced height for a more compact button */
     background-image: linear-gradient(93.12deg, #0c5e0a 0.52%, #0a9e07 100%);
     cursor: pointer; /* Added cursor style on hover */
+
+    width: 100%;
 }
 
 #esito {
@@ -132,9 +135,4 @@ h2{
     text-align:center;
     padding-top: 10px;
 
-}
-
-
-button:hover {
-    background-color: #45a049;
 }

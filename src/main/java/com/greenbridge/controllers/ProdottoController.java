@@ -286,14 +286,6 @@ public class ProdottoController {
         model.addAttribute("recensioni", recensioni);
         return "prodotto";
     }
-    /**
-     * Redirect alla home.
-     * @return redirect alla home
-     */
-    @GetMapping("/")
-    public String getHome() {
-        return "pages/user/home";
-    }
 
 
     /**

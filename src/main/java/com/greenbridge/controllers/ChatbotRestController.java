@@ -55,7 +55,6 @@ public class ChatbotRestController {
 
         // Controllo sul comando ricevuto
         if ("{\"command\":\"/start\"}".equals(command)) {
-
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
             HttpEntity<String> entity = new HttpEntity<>(headers);
@@ -78,10 +77,10 @@ public class ChatbotRestController {
                 List<Integer> idList = (List<Integer>) idListObject;
 
                 for (Integer intValue : idList) {
-                    System.out.println("Valore intero: " + intValue);
-                    agricoltoreServiceImpl.getSingleAgricoltore(intValue);
+                    System.out.println("Valore intero: " + (intValue+1));
+                    agricoltoreServiceImpl.getSingleAgricoltore(intValue+1);
                     Agricoltore agricoltore =
-                        agricoltoreServiceImpl.getSingleAgricoltore(intValue);
+                        agricoltoreServiceImpl.getSingleAgricoltore(intValue+1);
                     // Aggiungi l'agricoltore alla lista
                     agricoltoriList.add(agricoltore.getNomeBottega());
 
@@ -90,7 +89,6 @@ public class ChatbotRestController {
                 // Gestire il caso in cui l'oggetto non è un array
                 System.err.println("idList non contiene un array di interi.");
             }
-
 
             return agricoltoriList;
         } else {

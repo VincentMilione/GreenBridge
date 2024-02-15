@@ -1,4 +1,4 @@
-
+from genetic_algorithm import *
 import random
 from flask import Flask, jsonify
 
@@ -17,10 +17,12 @@ Returns:
     flask.Response: Risposta JSON contenente l'elenco casuale di ID agricoltori generato.
 """
     # Genera una lista casuale di ID agricoltori
-    idList = random.sample(range(1, 20), 5)
+    #idList = random.sample(range(1, 20), 5)
+    solutions = main()
+    idList = solutions.tolist()
 
     # Crea una risposta JSON contenente l'elenco casuale di ID agricoltori
-    dati=jsonify({'id_list': idList})
+    dati = jsonify({'id_list': list(idList)})
     return dati
 
 

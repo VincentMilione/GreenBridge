@@ -114,7 +114,7 @@ public class RecensioneController {
                 session.getAttribute("prodottiOrdine");
         rec.setIdCliente(idCliente);
         int indice = (int) session.getAttribute("indiceRecensioni");
-        rec.setIdProdotto(prodottiOrdine.get(indice).getId());
+        rec.setIdProdotto(prodottiOrdine.get(indice).getProdotto().getIdProdotto());
         recensioneService.saveRecensioneProdotto(rec);
         indice++;
         if (indice == prodottiOrdine.size()) {

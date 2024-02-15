@@ -15,19 +15,22 @@
 <body layout:fragment="content">
 <div id="loginFormAgricoltore">
 
-<form action="#" method="post">
-    <input type="email" id="email" placeholder="email" required>
-    <input type="password" id="password" placeholder="password" required>
-    <button type="button" onclick="submitForm()">Login</button>
-    <a th:href="@{/registrazione-Agricoltore}">
-        <button type="button">Registrazione</button>
-    </a>
+    <form action="#" method="post">
+        <input type="email" id="email" placeholder="email" required>
+        <input type="password" id="password" placeholder="password" required>
+        <button class="buttonClass" type="button" onclick="submitForm()">Login</button>
+        <a th:href="@{/registrazione-Agricoltore}">
+            <button class="buttonClass" type="button">Registrazione</button>
+        </a>
 
-</form>
+    </form>
     <p id="esito"></p>
+    <div style="height: 100px;">
+
+    </div>
 </div>
 
-    <script th:inline="javascript">
+<script th:inline="javascript">
     function submitForm() {
         var data = {
             email: document.getElementById('email').value,

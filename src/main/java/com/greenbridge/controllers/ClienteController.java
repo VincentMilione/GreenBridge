@@ -36,7 +36,7 @@ public class ClienteController {
      *              nella view di ritorno
      *  @return nome del template HTML
      * */
-    @GetMapping("/home")
+    @GetMapping("/")
     public String homeView(Model model) {
         model.addAttribute("clienti", clienteService.getAllClienti());
         return "home";
